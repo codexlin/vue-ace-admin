@@ -1,3 +1,21 @@
+<script lang="ts" setup>
+import { SettingOutlined } from '@ant-design/icons-vue'
+import { h, ref } from 'vue'
+import SettingView from '@/components/setting/SettingView.vue'
+
+defineOptions({
+  name: 'SettingVue'
+})
+const open = ref<boolean>(false)
+
+const afterOpenChange = (bool: boolean) => {
+  console.log('open', bool)
+}
+
+const showDrawer = () => {
+  open.value = true
+}
+</script>
 <template>
   <a-button
     @click="showDrawer"
@@ -19,24 +37,7 @@
     <SettingView />
   </a-drawer>
 </template>
-<script lang="ts" setup>
-import { SettingOutlined } from '@ant-design/icons-vue'
-import { h, ref } from 'vue'
-import SettingView from '@/components/Setting/SettingView.vue'
 
-defineOptions({
-  name: 'SettingVue'
-})
-const open = ref<boolean>(false)
-
-const afterOpenChange = (bool: boolean) => {
-  console.log('open', bool)
-}
-
-const showDrawer = () => {
-  open.value = true
-}
-</script>
 <style lang="scss" scoped>
 .setting-fixed {
   position: fixed;
