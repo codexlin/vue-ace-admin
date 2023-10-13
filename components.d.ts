@@ -25,10 +25,11 @@ declare module 'vue' {
     ASelectOption: (typeof import('ant-design-vue/es'))['SelectOption']
     AStatistic: (typeof import('ant-design-vue/es'))['Statistic']
     ATooltip: (typeof import('ant-design-vue/es'))['Tooltip']
+    Button: (typeof import('./src/components/button/index.vue'))['default']
     RouterLink: (typeof import('vue-router'))['RouterLink']
     RouterView: (typeof import('vue-router'))['RouterView']
-    Setting: (typeof import('./src/components/Setting/index.vue'))['default']
-    SettingView: (typeof import('./src/components/Setting/SettingView.vue'))['default']
+    Setting: (typeof import('./src/layout/setting/index.vue'))['default']
+    SettingView: (typeof import('./src/layout/setting/SettingView.vue'))['default']
     StatisticCard: (typeof import('./src/components/statistic/StatisticCard.vue'))['default']
   }
 }

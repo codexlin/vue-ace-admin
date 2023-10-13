@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import SettingVue from '@/components/setting/index.vue'
+import SettingVue from '@/layout/setting/index.vue'
 import { RouterView } from 'vue-router'
 import SidebarView from './sidebar/index.vue'
 import HeaderView from './header/index.vue'
