@@ -1,5 +1,6 @@
 import sysGlobalConfig from '@/app'
 import variables from '@/styles/variables.module.scss'
+import type { MenuTheme } from 'ant-design-vue'
 import { theme } from 'ant-design-vue'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
@@ -12,7 +13,7 @@ export const useAppStore = defineStore('app', () => {
     ...sysGlobalConfig
   })
   const themeName = ref('red') // 主题名称
-  const darkMode = ref('light') // 颜色模式
+  const darkMode = ref<MenuTheme>('light') // 颜色模式
   const darkModeComp = computed(() => {
     document.documentElement.setAttribute('data-dark', darkMode.value)
     return darkMode.value
@@ -22,11 +23,11 @@ export const useAppStore = defineStore('app', () => {
     // 主题配置
     return {
       token: {
-        colorPrimary: variables[themeName.value] || '#27ba9b',
+        colorPrimary: variables[themeName.value] || themeName.value || '#27ba9b',
         colorSuccess: '#1dc779',
         colorWarning: '#ffb302',
         colorError: '#cf4444',
-        colorInfo: variables[themeName.value] || '#27ba9b',
+        colorInfo: variables[themeName.value] || themeName.value || '#27ba9b',
         wireframe: true
       },
       algorithm: darkMode.value === 'light' ? theme.defaultAlgorithm : theme.darkAlgorithm

@@ -1,7 +1,7 @@
-import { fileURLToPath, URL } from 'node:url'
+// import { fileURLToPath, URL } from 'node:url'
 
-const alias = {
-  '@': fileURLToPath(new URL('./src', import.meta.url))
-}
+// const alias = {
+//   '@': fileURLToPath(new URL('./src', import.meta.url))
+// }
 
-export default alias
+// export default alias

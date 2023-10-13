@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useAppStore } from '@/stores/app'
-import variables from '../../styles/variables.module.scss'
+import variables from '@/styles/variables.module.scss'
 
 const app = useAppStore()
 const color = ref(app.themeName)

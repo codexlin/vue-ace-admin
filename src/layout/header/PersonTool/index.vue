@@ -16,7 +16,7 @@ defineOptions({
       <DownOutlined />
     </div>
     <template #overlay>
-      <a-menu @click="onClick">
+      <a-menu>
         <a-menu-item key="1">个人信息</a-menu-item>
         <a-menu-item key="2">修改密码</a-menu-item>
         <a-menu-item key="logout">

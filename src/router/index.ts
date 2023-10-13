@@ -16,27 +16,30 @@ export const constantRoutes = [
     component: () => import('@/views/dashboard/DashboardView.vue')
   },
   {
-    path: '"/retail"
-    name: '"retail"
+    path: '/retail',
+    name: 'retail',
     meta: {
-      title: '"零售管理"
-      icon: '"House"    },
-    component: () => import('"@/views/management/retail/RetailView.vue"
+      title: '零售管理',
+      icon: 'House'
+    },
+    component: () => import('@/views/management/retail/RetailView.vue')
   },
   {
-    path: '"/inventory"
-    name: '"inventory"
+    path: '/inventory',
+    name: 'inventory',
     meta: {
-      title: '"库存管理"
-      icon: '"House"    },
-    component: () => import('"@/views/management/inventory/InventoryView.vue"
+      title: '库存管理',
+      icon: 'House'
+    },
+    component: () => import('@/views/management/inventory/InventoryView.vue')
   },
   {
-    path: '"/login"
-    name: '"Login"
+    path: '/login',
+    name: 'Login',
     meta: {
-      title: '"登录"    },
-    component: () => import('"@/views/user/login/LoginView.vue",
+      title: '登录'
+    },
+    component: () => import('@/views/user/login/LoginView.vue'),
     hidden: true
   }
   // {
