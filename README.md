@@ -6,7 +6,7 @@
 
 ## ⚡ 简介
 
-Ace Admin 是一个免费开源的中后台管理系统基础解决方案，基于 Vue3.3、TypeScript5.x、Antd-Vue4.0、Pinia 和 Vite4 等主流技术实现
+Ace Admin 是一个免费开源的中后台管理系统基础解决方案，基于 Vue3.3、TypeScript5.x、Antd-Vue4.x、Pinia2.x 和 Vite4.x 等主流技术实现
 
 
 ## 📚 文档
