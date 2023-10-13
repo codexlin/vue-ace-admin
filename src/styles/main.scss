@@ -1,0 +1,12 @@
+@import '@/styles/theme.scss';
+body {
+  position: relative;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  // 样式规则，使用混合应用当前模式和主题的样式
+  @include useTheme {
+    background-color: getModeVar('bgColor');
+    color: getModeVar('infoColor');
+  }
+}

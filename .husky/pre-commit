@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "---ts检查开始---"
+npx lint-staged
+echo "---ts检查结束---"

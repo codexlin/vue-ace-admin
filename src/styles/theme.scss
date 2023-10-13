@@ -1,0 +1,76 @@
+@import './variables.module.scss';
+
+// 定义不同的模式和主题
+$modes: (
+  light: (
+    // 亮模式背景颜色
+    bgColor: #fff,
+    // 亮模式信息颜色
+    infoColor: #000
+  ),
+  dark: (
+    bgColor: #000,
+    infoColor: #fff
+  )
+);
+
+// 定义颜色主题
+$colors: (
+  red: (
+    primary: $red,
+    info: $red
+  ),
+  orange: (
+    primary: $orange,
+    info: $orange
+  ),
+  yellow: (
+    primary: $yellow,
+    info: $yellow
+  ),
+  cyan: (
+    primary: $cyan,
+    info: $cyan
+  ),
+  green: (
+    primary: $green,
+    info: $green
+  ),
+  blue: (
+    primary: $blue,
+    info: $blue
+  ),
+  purple: (
+    primary: $purple,
+    info: $purple
+  )
+);
+
+// 设置当前模式和主题
+$curMode: light;
+$curTheme: 'red';
+
+// 函数用于获取当前模式的变量值
+@function getModeVar($key) {
+  $modeMap: map-get($modes, $curMode);
+  @return map-get($modeMap, $key);
+}
+
+// 函数用于获取当前主题的颜色值
+@function getColor($key) {
+  $themeMap: map-get($colors, $curTheme);
+  @return map-get($themeMap, $key);
+}
+
+// 混合用于应用主题样式
+@mixin useTheme() {
+  @each $key1, $value1 in $modes {
+    $curMode: $key1 !global;
+    @each $key2, $value2 in $colors {
+      $curTheme: $key2 !global;
+      html[data-dark='#{$key1}'][data-theme='#{"" + $key2}'] & {
+        @content;
+      }
+    }
+  }
+}
