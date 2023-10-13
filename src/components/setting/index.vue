@@ -22,7 +22,7 @@
 <script lang="ts" setup>
 import { SettingOutlined } from '@ant-design/icons-vue'
 import { h, ref } from 'vue'
-import SettingView from './SettingView.vue'
+import SettingView from '@/components/Setting/SettingView.vue'
 
 defineOptions({
   name: 'SettingVue'
