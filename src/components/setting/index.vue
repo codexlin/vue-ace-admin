@@ -1,8 +1,3 @@
-<!--
- * @Author: LinRenJie xoxosos666@gmail.com
- * @Date: 2023-10-09 21:24:22
- * @Description: 
--->
 <template>
   <a-button
     @click="showDrawer"
@@ -25,9 +20,13 @@
   </a-drawer>
 </template>
 <script lang="ts" setup>
-import SettingView from '@/components/setting/SettingView.vue'
 import { SettingOutlined } from '@ant-design/icons-vue'
 import { h, ref } from 'vue'
+import SettingView from './SettingView.vue'
+
+defineOptions({
+  name: 'SettingVue'
+})
 const open = ref<boolean>(false)
 
 const afterOpenChange = (bool: boolean) => {

@@ -3,15 +3,17 @@
  * @Date: 2023-10-09 21:03:39
  * @Description:
  */
-import Antd from 'ant-design-vue'
-import 'ant-design-vue/dist/reset.css'
-import 'normalize.css/normalize.css'
-import { createPinia } from 'pinia'
-import { createPersistedState } from 'pinia-plugin-persistedstate'
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import './styles/main.scss'
+import Antd from "ant-design-vue";
+import "ant-design-vue/dist/reset.css";
+import "normalize.css/normalize.css";
+import { createPinia } from "pinia";
+import { createPersistedState } from "pinia-plugin-persistedstate";
+import { createApp } from "vue";
+import App from "./App.vue";
+import setupI18n from "./locales/index";
+import router from "./router";
+import "./styles/main.scss";
+
 const app = createApp(App)
 const pinia = createPinia()
 pinia.use(
@@ -25,4 +27,6 @@ pinia.use(
 app.use(router)
 app.use(Antd)
 app.use(pinia)
-app.mount('#app')
+setupI18n(app)
+;app.mount('"#app"
+;

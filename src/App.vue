@@ -1,12 +1,8 @@
-<!--
- * @Author: LinRenJie xoxosos666@gmail.com
- * @Date: 2023-10-09 21:03:39
- * @Description: 
--->
 <script setup lang="ts">
-import LayoutVue from './layout/LayoutView.vue'
+import LayoutView from './layout/index.vue'
 
 import { useAppStore } from '@/stores/app'
+
 const app = useAppStore()
 // 需要调用一下以设置主题
 ;(() => app.darkModeComp)()
@@ -14,6 +10,6 @@ const app = useAppStore()
 
 <template>
   <a-config-provider :theme="app.themeConfig">
-    <LayoutVue />
+    <LayoutView />
   </a-config-provider>
 </template>

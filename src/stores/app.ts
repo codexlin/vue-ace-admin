@@ -1,11 +1,16 @@
+import sysGlobalConfig from '@/app'
 import variables from '@/styles/variables.module.scss'
 import { theme } from 'ant-design-vue'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
+
 /**
  * app 配置 开启持久化
  */
 export const useAppStore = defineStore('app', () => {
+  const appConfig = ref({
+    ...sysGlobalConfig
+  })
   const themeName = ref('red') // 主题名称
   const darkMode = ref('light') // 颜色模式
   const darkModeComp = computed(() => {
@@ -27,11 +32,24 @@ export const useAppStore = defineStore('app', () => {
       algorithm: darkMode.value === 'light' ? theme.defaultAlgorithm : theme.darkAlgorithm
     }
   })
+
+  const getLanguage = computed(() => {
+    return appConfig.value.defaultLanguage
+  })
   const setThemeName = (value: string) => {
     themeName.value = value
   }
   const toggleDarkMode = () => {
     darkMode.value = darkMode.value === 'light' ? 'dark' : 'light'
   }
-  return { themeName, themeConfig, darkMode, darkModeComp, setThemeName, toggleDarkMode }
+  return {
+    getLanguage,
+    themeName,
+    themeConfig,
+    darkMode,
+    darkModeComp,
+    setThemeName,
+    appConfig,
+    toggleDarkMode
+  }
 })

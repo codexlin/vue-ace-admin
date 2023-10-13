@@ -7,10 +7,13 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AAvatar: (typeof import('ant-design-vue/es'))['Avatar']
     AButton: (typeof import('ant-design-vue/es'))['Button']
     AButtonGroup: (typeof import('ant-design-vue/es'))['ButtonGroup']
-    AConfigProvider: (typeof import('ant-design-vue/es'))['ConfigProvider']
+    ACard: (typeof import('"ant-design-vue/es")['"Card"
+;    AConfigProvider: (typeof import('ant-design-vue/es'))['ConfigProvider']
     ADrawer: (typeof import('ant-design-vue/es'))['Drawer']
+    ADropdown: (typeof import("ant-design-vue/es"))["Dropdown"];
     ALayout: (typeof import('ant-design-vue/es'))['Layout']
     ALayoutContent: (typeof import('ant-design-vue/es'))['LayoutContent']
     ALayoutFooter: (typeof import('ant-design-vue/es'))['LayoutFooter']
@@ -20,18 +23,12 @@ declare module 'vue' {
     AMenuItem: (typeof import('ant-design-vue/es'))['MenuItem']
     ASelect: (typeof import('ant-design-vue/es'))['Select']
     ASelectOption: (typeof import('ant-design-vue/es'))['SelectOption']
-    HelloWorld: (typeof import('./src/components/HelloWorld.vue'))['default']
-    IconCommunity: (typeof import('./src/components/icons/IconCommunity.vue'))['default']
-    IconDocumentation: (typeof import('./src/components/icons/IconDocumentation.vue'))['default']
-    IconEcosystem: (typeof import('./src/components/icons/IconEcosystem.vue'))['default']
-    IconSupport: (typeof import('./src/components/icons/IconSupport.vue'))['default']
-    IconTooling: (typeof import('./src/components/icons/IconTooling.vue'))['default']
+    AStatistic: (typeof import("ant-design-vue/es"))["Statistic"];
+    ATooltip: (typeof import("ant-design-vue/es"))["Tooltip"];
     RouterLink: (typeof import('vue-router'))['RouterLink']
     RouterView: (typeof import('vue-router'))['RouterView']
-    Setting: (typeof import('./src/components/setting/index.vue'))['default']
-    SettingView: (typeof import('./src/components/setting/SettingView.vue'))['default']
-    SettingWrapper: (typeof import('./src/components/setting/SettingWrapper.vue'))['default']
-    TheWelcome: (typeof import('./src/components/TheWelcome.vue'))['default']
-    WelcomeItem: (typeof import('./src/components/WelcomeItem.vue'))['default']
+    Setting: (typeof import("./src/components/Setting/index.vue"))["default"];
+    SettingView: (typeof import("./src/components/Setting/SettingView.vue"))["default"];
+    StatisticCard: (typeof import("./src/components/statistic/StatisticCard.vue"))["default"];
   }
 }
