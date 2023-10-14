@@ -1,3 +1,7 @@
+:root{
+  --primary:#ff5733;
+  --info:#ff5733
+}
 $red: #f5222d;
 $orange: #fa541c;
 $yellow: #faad14;
@@ -5,7 +9,8 @@ $cyan: #13c2c2;
 $green: #52c41a;
 $blue: #2f54eb;
 $purple: #722ed1;
-
+$primary:var(--primary);
+$info:var(--info);
 :export {
   red: $red;
   orange: $orange;

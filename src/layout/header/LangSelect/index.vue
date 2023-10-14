@@ -1,8 +1,13 @@
+<!--
+ * @Author: LinRenJie xoxosos666@gmail.com
+ * @Date: 2023-10-14 21:29:57
+ * @Description: 
+-->
 <script lang="ts" setup>
+import { useAppStore } from '@/stores/app'
 import { TranslationOutlined } from '@ant-design/icons-vue'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useAppStore } from '@/stores/app'
 
 defineOptions({
   name: 'LangSelect'
@@ -18,7 +23,7 @@ function handleSetLanguage(item: any) {
 }
 </script>
 <template>
-  <a-dropdown>
+  <a-dropdown placement="bottom" arrow>
     <div class="header-avatar">
       <TranslationOutlined />
     </div>

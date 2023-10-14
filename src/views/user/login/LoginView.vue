@@ -8,8 +8,8 @@
 </template>
 
 <script lang="ts" setup>
-import { SearchOutlined } from '@ant-design/icons-vue'
 import CustomButton from '@/components/button/index.vue'
+import { SearchOutlined } from '@ant-design/icons-vue'
 import { h } from 'vue'
 
 const handleClick = () => {

@@ -1,8 +1,13 @@
+<!--
+ * @Author: LinRenJie xoxosos666@gmail.com
+ * @Date: 2023-10-14 21:29:57
+ * @Description: 
+-->
 <script lang="ts" setup>
 import SettingVue from '@/layout/setting/index.vue'
 import { RouterView } from 'vue-router'
-import SidebarView from './sidebar/index.vue'
 import HeaderView from './header/index.vue'
+import SidebarView from './sidebar/index.vue'
 
 defineOptions({
   name: 'LayoutView'
@@ -10,9 +15,9 @@ defineOptions({
 </script>
 <template>
   <a-layout style="height: 100vh; min-width: 375px">
-    <SidebarView />
+    <SidebarView class="custom-layout" />
     <a-layout>
-      <a-layout-header :style="{ padding: 0 }">
+      <a-layout-header class="custom-layout" :style="{ padding: 0 }">
         <HeaderView />
       </a-layout-header>
       <a-layout-content :style="{ margin: '24px 16px 0' }">
@@ -28,6 +33,7 @@ defineOptions({
   </a-layout>
 </template>
 <style lang="scss" scoped>
+@import '@/styles/theme.scss';
 .site-layout-sub-header-background {
   background: #fff;
 }
@@ -38,5 +44,10 @@ defineOptions({
 
 [data-theme='dark'] .site-layout-sub-header-background {
   background: #141414;
+}
+.custom-layout {
+  @include useTheme {
+    background: getModeVar('bgColor') !important;
+  }
 }
 </style>

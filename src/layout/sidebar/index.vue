@@ -29,7 +29,12 @@ const { tt } = useLocalI18n()
     @collapse="onCollapse"
   >
     <div class="logo">logo</div>
-    <a-menu v-model:selectedKeys="selectedKeys" :theme="app.darkMode" mode="inline">
+    <a-menu
+      class="custom-layout"
+      v-model:selectedKeys="selectedKeys"
+      :theme="app.darkMode"
+      mode="inline"
+    >
       <a-menu-item key="1">
         <RouterLink to="/dashboard">
           <user-outlined />
@@ -58,6 +63,13 @@ const { tt } = useLocalI18n()
   </a-layout-sider>
 </template>
 <style lang="scss" scoped>
+@import '@/styles/theme.scss';
+
+.custom-layout {
+  @include useTheme {
+    background: getModeVar('bgColor') !important;
+  }
+}
 .logo {
   height: 32px;
   background: rgba(255, 255, 255, 0.2);

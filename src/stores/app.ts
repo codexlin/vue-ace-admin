@@ -1,5 +1,9 @@
+/*
+ * @Author: LinRenJie xoxosos666@gmail.com
+ * @Date: 2023-10-14 21:29:57
+ * @Description:
+ */
 import sysGlobalConfig from '@/app'
-import variables from '@/styles/variables.module.scss'
 import type { MenuTheme } from 'ant-design-vue'
 import { theme } from 'ant-design-vue'
 import { defineStore } from 'pinia'
@@ -12,22 +16,23 @@ export const useAppStore = defineStore('app', () => {
   const appConfig = ref({
     ...sysGlobalConfig
   })
-  const themeName = ref('red') // 主题名称
+  const themeName = ref('#27ba9b') // 主题名称
   const darkMode = ref<MenuTheme>('light') // 颜色模式
   const darkModeComp = computed(() => {
-    document.documentElement.setAttribute('data-dark', darkMode.value)
+    document.documentElement.setAttribute('data-theme', darkMode.value)
     return darkMode.value
   })
   const themeConfig = computed(() => {
-    document.documentElement.setAttribute('data-theme', themeName.value)
+    document.documentElement.style.setProperty('--primary', themeName.value)
+    console.log('app', themeName.value)
     // 主题配置
     return {
       token: {
-        colorPrimary: variables[themeName.value] || themeName.value || '#27ba9b',
+        colorPrimary: themeName.value || '#27ba9b',
         colorSuccess: '#1dc779',
         colorWarning: '#ffb302',
         colorError: '#cf4444',
-        colorInfo: variables[themeName.value] || themeName.value || '#27ba9b',
+        colorInfo: themeName.value || '#27ba9b',
         wireframe: true
       },
       algorithm: darkMode.value === 'light' ? theme.defaultAlgorithm : theme.darkAlgorithm
