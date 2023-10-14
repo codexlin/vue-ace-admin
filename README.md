@@ -17,7 +17,7 @@ Ace Admin 是一个免费开源的中后台管理系统基础解决方案，基�
 
 | 位置         | 账号            | 链接                                            |
 | ------------ | --------------- | ----------------------------------------------- |
-| vercel | admin 或 editor | [链接]((https://vue-ace-admin.vercel.app/dashboard)) |
+| vercel | admin 或 editor | [链接](https://vue-ace-admin.vercel.app/dashboard) |
 
 ## ❤️ 用爱发电
 
