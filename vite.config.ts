@@ -1,18 +1,18 @@
 /*
  * @Author: LinRenJie xoxosos666@gmail.com
  * @Date: 2023-10-09 21:03:39
- * @Description:
+ * @Description: Vite配置
  */
-import { fileURLToPath, URL } from 'node:url'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import { fileURLToPath, URL } from 'node:url'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig, loadEnv } from 'vite'
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd())
-  console.log(mode, env)
+  console.log(mode, env, command)
   return {
     plugins: [
       vue(),
@@ -31,11 +31,19 @@ export default defineConfig(({ command, mode }) => {
       }
     },
     server: {
+      // 服务器主机名，如果允许外部访问，可设置为"0.0.0.0"
+      host: '0.0.0.0',
+      // 服务器端口号
+      port: env.VITE_APP_PORT as unknown as number,
+      // 是否自动打开浏览器
+      // open: true,
       proxy: {
-        '/proxy': {
-          target: env.VITE_APP_API_BASEURL,
-          changeOrigin: command === 'serve' && env.VITE_OPEN_PROXY === 'true',
-          rewrite: (path) => path.replace(/\/proxy/, '')
+        // '/api'
+        [env.VITE_APP_BASE_API]: {
+          target: env.VITE_API_URL, //  代理的请求地址：即服务器地址
+          logLevel: 'debug',
+          changeOrigin: true, // 跨域
+          rewrite: (path: string) => path.replace(new RegExp('^' + env.VITE_APP_BASE_API), '')
         }
       }
     },

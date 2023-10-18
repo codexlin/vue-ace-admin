@@ -2,6 +2,9 @@
 import StatisticCard from '@/components/statistic/StatisticCard.vue'
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons-vue'
 import { h } from 'vue'
+import { getUserList } from './api/index'
+
+getUserList().then((res) => console.log(res))
 </script>
 <template>
   <div class="flex-container">
