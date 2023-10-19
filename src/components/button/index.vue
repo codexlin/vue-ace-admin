@@ -1,14 +1,24 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { isFunction } from '@/utils/checkUtils'
+import { isFunction } from '@/utils/common/checkUtils'
+import { omit } from 'lodash-es'
+import { computed, ref } from 'vue'
 import type { Props } from './type'
 
 defineOptions({
   name: 'CustomButton'
 })
 const props = withDefaults(defineProps<Props>(), {
-  autoLoading: false // 自动loading
+  autoLoading: false, // 自动loading
+  enableConfirm: false,
+  popConfig: () => ({
+    title: '提示',
+    description: '确定删除吗？',
+    okText: '确定',
+    cancelText: '取消'
+  })
 })
+const propsCache = computed(() => (props.enableConfirm ? omit(props, 'popConfig') : props))
+
 const loadingStatus = ref(false)
 const handleClick = async (e: Event) => {
   if (props.autoLoading) {
@@ -45,9 +55,28 @@ const handlePromiseCallBack = async (res: Promise<void> | undefined) => {
 </script>
 
 <template>
-  <a-button v-bind="{ ...props, loading: loadingStatus, onClick: handleClick }">
-    <slot></slot>
-  </a-button>
+  <template v-if="enableConfirm">
+    <a-popconfirm v-bind="props.popConfig">
+      <a-button v-bind="{ ...propsCache, loading: loadingStatus, onClick: handleClick }">
+        <template #icon>
+          <slot name="icon"></slot>
+        </template>
+        <template #default="data">
+          <slot v-bind="data || {}"></slot>
+        </template>
+      </a-button>
+    </a-popconfirm>
+  </template>
+  <template v-else>
+    <a-button v-bind="{ ...propsCache, loading: loadingStatus, onClick: handleClick }">
+      <template #icon>
+        <slot name="icon"></slot>
+      </template>
+      <template #default="data">
+        <slot v-bind="data || {}"></slot>
+      </template>
+    </a-button>
+  </template>
 </template>
 
 <style scoped></style>

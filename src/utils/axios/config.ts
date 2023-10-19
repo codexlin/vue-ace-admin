@@ -93,7 +93,9 @@ export const handleAuthError = (errno: string) => {
  * @param errMsg
  */
 export const handleGeneralError = (errno: any, errMsg: any) => {
-  if (errno) {
+  console.log(errno)
+
+  if (errno !== 200) {
     message.error(errMsg)
     return false
   }

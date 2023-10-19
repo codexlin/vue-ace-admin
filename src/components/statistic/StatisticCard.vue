@@ -10,6 +10,6 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 <template>
   <a-card>
-    <a-statistic v-bind="props" />
+    <a-statistic v-bind="props"> </a-statistic>
   </a-card>
 </template>

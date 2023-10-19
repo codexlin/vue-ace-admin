@@ -20,9 +20,9 @@ dependencies:
   husky:
     specifier: ^8.0.3
     version: registry.npmmirror.com/husky@8.0.3
-  lodash:
+  lodash-es:
     specifier: ^4.17.21
-    version: registry.npmmirror.com/lodash@4.17.21
+    version: registry.npmmirror.com/lodash-es@4.17.21
   normalize.css:
     specifier: ^8.0.1
     version: registry.npmmirror.com/normalize.css@8.0.1

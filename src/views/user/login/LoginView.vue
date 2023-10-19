@@ -1,9 +1,13 @@
 <template>
   <div class="test">login</div>
   <div>
-    <CustomButton :icon="h(SearchOutlined)" auto-loading @click="handleClick"
-      >自定义按钮</CustomButton
-    >
+    <CustomButton :icon="h(SearchOutlined)" auto-loading @click="handleClick">自定义按钮</CustomButton>
+    <CustomButton auto-loading enable-confirm @click="handleClick">
+      自定义按钮2
+      <template #icon>
+        <SearchOutlined />
+      </template>
+    </CustomButton>
   </div>
 </template>
 
