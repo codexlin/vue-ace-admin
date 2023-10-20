@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useAppStore } from '@/stores/app'
-import LayoutView from './layout/index.vue'
+
 const app = useAppStore()
 
 ;(() =>
@@ -13,6 +13,6 @@ const app = useAppStore()
 
 <template>
   <a-config-provider :theme="app.themeConfig">
-    <LayoutView />
+    <RouterView />
   </a-config-provider>
 </template>

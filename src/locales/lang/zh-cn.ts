@@ -39,11 +39,25 @@ export default {
   },
   login: {
     title: '用户登录',
-    account: '账号',
+    username: '用户名',
     password: '密码',
-    loginBtn: '登录',
+    email: '邮箱',
     accountRule: '用户名为必填项',
-    passwordRule: '密码不能少于6位'
+    passwordRule: '密码不能少于6位',
+    createAccount: '创建账户',
+    orUseEmail: '或者使用你的电子邮件进行注册',
+    namePlaceholder: '用户名',
+    emailPlaceholder: '电子邮件',
+    passwordPlaceholder: '密码',
+    signUp: '注册',
+    logIn: '登录',
+    orUseAccount: '或者使用你的账户',
+    forgotPassword: '忘记密码？',
+    welcomeBack: '欢迎回来！',
+    keepConnected: '请使用你的个人信息登录以保持与我们的联系',
+    helloFriend: '你好，朋友！',
+    enterDetails: '输入你的个人信息并开始你的旅程',
+    footerText: '由 Florin Pop 创建 - 阅读我如何创建这个以及你如何加入挑战'
   },
   personal: {
     personal: '个人设置',

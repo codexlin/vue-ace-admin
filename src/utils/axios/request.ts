@@ -75,8 +75,8 @@ class Request {
     return response.data
   }
 
-  public async post<T = object, R = object>(url: string, data: T, config?: AxiosRequestConfig): Promise<IResponse<R>> {
-    const response = await this.instance.post<IResponse<R>>(url, data, config)
+  public async post<T = object>(url: string, data: T, config?: AxiosRequestConfig): Promise<IResponse<T>> {
+    const response = await this.instance.post<IResponse<T>>(url, data, config)
     return response.data
   }
 
