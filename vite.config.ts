@@ -48,6 +48,7 @@ export default defineConfig(({ command, mode }) => {
       }
     },
     build: {
+      target: ['esnext'],
       outDir: mode === 'production' ? 'dist' : `dist-${mode}`,
       assetsDir: 'assets',
       minify: 'terser',
