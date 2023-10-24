@@ -1,13 +1,19 @@
+import { useIndexedDB } from '@/hooks/useIndexedDB'
+import router from '@/router'
+import { transformBackendRoutes } from '@/utils/common/handleRoutes'
+import { loginApi } from '@/views/user/login/api'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
-import { loginApi } from '@/views/user/login/api'
+import type { RouteRecordRaw } from 'vue-router'
 
-export const useUserStore = defineStore('app', () => {
+export const useUserStore = defineStore('user', () => {
   const token = ref('')
   const userInfo = ref(null)
   const permissions = ref<string[]>([])
-
+  const backendRoutes = ref<RouteRecordRaw[]>([])
   const getToken = computed(() => token.value)
+  const getRoutes = computed(() => backendRoutes.value)
+  const { openDB, get, put } = useIndexedDB()
 
   // 初始化
   function init() {
@@ -21,9 +27,23 @@ export const useUserStore = defineStore('app', () => {
 
   // 登录
   function login(form: any) {
-    return loginApi(form).then((res) => {
-      token.value = res.result.token
-      userInfo.value = res.result
+    return loginApi(form).then(async (res) => {
+      token.value = res.data.token
+      userInfo.value = res.data
+      backendRoutes.value = res.data.menus
+      // 转换函数，将后端路由信息转换为 Vue Router 可以理解的格式
+      // 转换后端路由信息并添加到路由实例
+      const routes = transformBackendRoutes(backendRoutes.value)
+      routes.forEach((route: any) => {
+        router.addRoute(route)
+      })
+      console.log('routes', routes)
+
+      // 打开数据库并保存路由信息到 IndexedDB
+      await openDB('my-database', 1, 'routes')
+      await put('routes', 'backendRoutes', backendRoutes.value)
+
+      router.push('/')
     })
   }
 
@@ -50,5 +70,16 @@ export const useUserStore = defineStore('app', () => {
     })
   }
 
-  return { token, userInfo, getToken, permissions, login, logout, getPermissions, getBackendRoutes }
+  return {
+    token,
+    userInfo,
+    getRoutes,
+    getToken,
+    permissions,
+    login,
+    logout,
+    getPermissions,
+    getBackendRoutes,
+    backendRoutes
+  }
 })

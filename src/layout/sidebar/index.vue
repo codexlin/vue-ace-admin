@@ -1,6 +1,7 @@
 <script lang="ts" setup>
+import RecursiveMenuVue from '@/components/sidermenu/RecursiveMenu.vue'
 import { useAppStore } from '@/stores/app'
-import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons-vue'
+import { useUserStore } from '@/stores/user'
 import { ref } from 'vue'
 import useLocalI18n from '../../hooks/useLocalI18n'
 
@@ -19,6 +20,8 @@ const onBreakpoint = (broken: boolean) => {
 }
 const selectedKeys = ref<string[]>(['1'])
 const { tt } = useLocalI18n()
+const routes = useUserStore().getRoutes
+console.log(routes[0].children)
 </script>
 <template>
   <a-layout-sider
@@ -29,47 +32,10 @@ const { tt } = useLocalI18n()
     @collapse="onCollapse"
   >
     <div class="logo">logo</div>
-    <a-menu
-      class="custom-layout"
-      v-model:selectedKeys="selectedKeys"
-      :theme="app.darkMode"
-      mode="inline"
-    >
-      <a-menu-item key="1">
-        <RouterLink to="/dashboard">
-          <user-outlined />
-          <span class="nav-text">{{ tt('sidebar.index') }}</span>
-        </RouterLink>
-      </a-menu-item>
-      <a-menu-item key="2">
-        <RouterLink to="/retail">
-          <video-camera-outlined />
-          <span class="nav-text">零售管理</span>
-        </RouterLink>
-      </a-menu-item>
-      <a-menu-item key="3">
-        <RouterLink to="/inventory">
-          <upload-outlined />
-          <span class="nav-text">库存管理</span>
-        </RouterLink>
-      </a-menu-item>
-      <a-menu-item key="4">
-        <RouterLink to="/login">
-          <user-outlined />
-          <span class="nav-text">nav 4</span>
-        </RouterLink>
-      </a-menu-item>
-    </a-menu>
+    <RecursiveMenuVue :menus="routes[0].children" :theme="app.darkMode" class="custom-layout"> </RecursiveMenuVue>
   </a-layout-sider>
 </template>
 <style lang="scss" scoped>
-@import '@/styles/theme.scss';
-
-.custom-layout {
-  @include useTheme {
-    background: getModeVar('bgColor') !important;
-  }
-}
 .logo {
   height: 32px;
   background: rgba(255, 255, 255, 0.2);

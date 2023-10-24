@@ -1,10 +1,11 @@
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
 import useLocalI18n from '@/hooks/useLocalI18n'
+import { useUserStore } from '@/stores/user'
+import { registerApi } from '@/views/user/login/api'
 import { GithubOutlined, GoogleOutlined, WechatOutlined } from '@ant-design/icons-vue'
-import { loginApi, registerApi } from '@/views/user/login/api'
-import { message } from 'ant-design-vue'
+import { reactive, ref } from 'vue'
 
+const user = useUserStore()
 const rightPanelActive = ref(false)
 
 const toggleRightPanel = () => {
@@ -24,8 +25,7 @@ const formState = reactive<FormState>({
 })
 const onFinish = async (values: any) => {
   console.log('Success:', values)
-  const res = Object.values(values).length === 2 ? await loginApi(values) : await registerApi(values)
-  res.code === 0 && message.success(res.message)
+  Object.values(values).length === 2 ? await user.login(values) : await registerApi(values)
 }
 
 const onFinishFailed = (errorInfo: any) => {
