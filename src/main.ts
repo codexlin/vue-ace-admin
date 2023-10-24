@@ -47,7 +47,7 @@ async function initApp() {
   // return app
 }
 
-const app = await initApp()
+initApp()
 // console.log(store)
 
 // app.use(router)
