@@ -1,11 +1,8 @@
 <script lang="ts" setup>
-import RecursiveMenuVue from '@/components/sidermenu/RecursiveMenu.vue'
-import { useAppStore } from '@/stores/app'
 import { useUserStore } from '@/stores/user'
 import { ref } from 'vue'
-import useLocalI18n from '../../hooks/useLocalI18n'
+import RecursiveMenuVue from './components/RecursiveMenu.vue'
 
-const app = useAppStore()
 defineOptions({
   name: 'SidebarView'
 })
@@ -18,10 +15,7 @@ const onBreakpoint = (broken: boolean) => {
   isOpenSide.value = broken
   console.log(broken)
 }
-const selectedKeys = ref<string[]>(['1'])
-const { tt } = useLocalI18n()
 const routes = useUserStore().getRoutes
-console.log(routes[0].children)
 </script>
 <template>
   <a-layout-sider
@@ -32,7 +26,7 @@ console.log(routes[0].children)
     @collapse="onCollapse"
   >
     <div class="logo">logo</div>
-    <RecursiveMenuVue :menus="routes[0].children" :theme="app.darkMode" class="custom-layout"> </RecursiveMenuVue>
+    <RecursiveMenuVue :menus="routes[0].children" />
   </a-layout-sider>
 </template>
 <style lang="scss" scoped>

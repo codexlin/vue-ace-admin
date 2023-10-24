@@ -5,6 +5,9 @@ import { registerApi } from '@/views/user/login/api'
 import { GithubOutlined, GoogleOutlined, WechatOutlined } from '@ant-design/icons-vue'
 import { reactive, ref } from 'vue'
 
+defineOptions({
+  name: 'LoginView'
+})
 const user = useUserStore()
 const rightPanelActive = ref(false)
 

@@ -6,25 +6,15 @@
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/reset.css'
 import 'normalize.css/normalize.css'
-import { createPinia } from 'pinia'
-import { createPersistedState } from 'pinia-plugin-persistedstate'
 import { createApp } from 'vue'
 import App from './App.vue'
 import { useIndexedDB } from './hooks/useIndexedDB'
 import setupI18n from './locales/index'
 import router from './router'
+import pinia from './stores/index'
 import './styles/main.scss'
 import { transformBackendRoutes } from './utils/common/handleRoutes'
 
-const pinia = createPinia()
-pinia.use(
-  createPersistedState({
-    // 全局 key 配置接受传入 Store key 的函数，并返回一个新的 storage 密钥。
-    key: (id) => `__persist__${id}`,
-    //  该配置将会使所有 Store 持久化存储，且必须配置 persist: false 显式禁用持久化。
-    auto: true
-  })
-)
 const { openDB, get } = useIndexedDB()
 
 async function initApp() {
@@ -41,16 +31,8 @@ async function initApp() {
   }
   const app = createApp(App)
   // 启动应用
-  app.use(router).use(Antd).use(pinia).mount('#app')
+  app.use(router).use(Antd).use(pinia)
   setupI18n(app)
-
-  // return app
+  app.mount('#app')
 }
-
 initApp()
-// console.log(store)
-
-// app.use(router)
-// app.use(Antd)
-// app.use(pinia)
-// app.mount('#app')

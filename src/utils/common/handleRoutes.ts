@@ -11,7 +11,6 @@ const resolveComponent = (name: any) => {
   console.log('importPage', importPage)
 
   if (!importPage) {
-    return
     throw new Error(`Unknown page ${name}. Is it located under Pages with a .vue extension?`)
   }
 
@@ -25,7 +24,7 @@ export function transformBackendRoutes(backendRoutes: RouteRecordRaw[]): RouteRe
     if (route.component === 'Layout') {
       component = LayoutView
     } else {
-      component = resolveComponent(route.component)
+      component = route.component && resolveComponent(route.component)
     }
     return {
       path: route.path,

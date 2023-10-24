@@ -9,12 +9,20 @@ export const routes: Array<RouteRecordRaw> = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('@/views/user/login/LoginView.vue')
+    component: () => import('@/views/user/login/index.vue')
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    component: () => import('@/views/NotFound.vue'),
+    meta: {
+      title: '404'
+    }
   }
 ]
 export const notFound = [
   {
-    path: '/notfound',
+    path: '/404',
     name: 'NoFound',
     component: () => import('@/views/NotFound.vue'),
     meta: {
