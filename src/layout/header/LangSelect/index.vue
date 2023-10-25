@@ -4,7 +4,7 @@
  * @Description: 
 -->
 <script lang="ts" setup>
-import { useAppStore } from '@/stores/app'
+import { useAppStore } from '@/stores/modules/app'
 import { TranslationOutlined } from '@ant-design/icons-vue'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -35,3 +35,4 @@ function handleSetLanguage(item: any) {
     </template>
   </a-dropdown>
 </template>
+@/stores/modules/app

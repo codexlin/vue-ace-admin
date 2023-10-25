@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useAppStore } from '@/stores/app'
+import { useAppStore } from '@/stores/modules/app'
 
 const app = useAppStore()
 
@@ -16,3 +16,4 @@ const app = useAppStore()
     <RouterView />
   </a-config-provider>
 </template>
+@/stores/modules/app

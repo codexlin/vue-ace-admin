@@ -3,24 +3,18 @@
  * @Date: 2023-04-20 17:41:06
  * @Description: 配置处理
  */
-import router from '@/router'
-// import { useAuthStore } from '@/stores/useAuthStore'
+import { useUserStore } from '@/stores/modules/user'
 import { message } from 'ant-design-vue'
 
-const logout = () => {
-  localStorage.clear()
-  return router.push('/login')
-}
 /**
  * 请求的调整 可以给请求头带上token等
  * config.headers.token / config.headers.Authorization
  * @param config
  */
 export const handleChangeRequestHeader = (config: any) => {
-  console.log(config)
   // api mock用
   config.headers.apifoxToken = 'dROD5webTSINtKEixUxWWBYNnjoRsSXn'
-  //   config.headers.token = useAuthStore().getToken || ''
+  config.headers.token = useUserStore().getToken || ''
   return config
 }
 /**
@@ -54,7 +48,7 @@ const errObj = new Map([
 export const handleNetworkError = (errStatus: number) => {
   let errMessage = '未知错误'
   if (errStatus) {
-    errMessage = errObj.get(errStatus) || `其他连接错误 --${errStatus}`
+    errMessage = errObj.get(errStatus) ?? `其他连接错误 --${errStatus}`
   } else {
     errMessage = `无法连接到服务器！`
   }
@@ -77,11 +71,10 @@ export const handleAuthError = (errno: string) => {
     '10038': '账号未找到'
   }
 
-  if (Object.prototype.hasOwnProperty.call(authErrMap, errno)) {
+  if (Object.hasOwn(authErrMap, errno)) {
     message.error(authErrMap[errno])
-    // message.error(authErrMap[errno])
     // 授权错误，登出账户
-    logout()
+    useUserStore().logout()
     return false
   }
 
@@ -93,9 +86,8 @@ export const handleAuthError = (errno: string) => {
  * @param errMsg
  */
 export const handleGeneralError = (errno: any, errMsg: any) => {
-  console.log(errno)
-
   if (errno !== 0) {
+    console.log('handleGeneralError', errno)
     message.error(errMsg)
     return false
   }

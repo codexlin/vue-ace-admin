@@ -69,8 +69,12 @@ export function useIndexedDB(): UseIndexedDBReturn {
 
   function deleteData(objectStoreName: string, key: string): Promise<any> {
     return new Promise((resolve, reject) => {
+      console.log(objectStoreName, key, db.value)
       const transaction = db.value!.transaction(objectStoreName, 'readwrite')
+      console.log(transaction)
       const store = transaction.objectStore(objectStoreName)
+      console.log(store)
+
       const deleteRequest = store.delete(key)
 
       deleteRequest.onsuccess = function (e: Event) {

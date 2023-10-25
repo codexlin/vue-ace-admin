@@ -4,7 +4,7 @@
  * @Description: 
 -->
 <script lang="ts" setup>
-import { useAppStore } from '@/stores/app'
+import { useAppStore } from '@/stores/modules/app'
 import variables from '@/styles/variables.module.scss'
 import { ref } from 'vue'
 
@@ -50,3 +50,4 @@ function handleChange(value: string) {
 </template>
 
 <style lang="scss" scoped></style>
+@/stores/modules/app

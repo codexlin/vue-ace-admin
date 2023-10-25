@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useUserStore } from '@/stores/user'
+import { useMenuStoreWithOut } from '@/stores/modules/menu'
 import { ref } from 'vue'
 import RecursiveMenuVue from './components/RecursiveMenu.vue'
 
@@ -15,7 +15,8 @@ const onBreakpoint = (broken: boolean) => {
   isOpenSide.value = broken
   console.log(broken)
 }
-const routes = useUserStore().getRoutes
+const routes = useMenuStoreWithOut().getMenuList || []
+console.log(routes)
 </script>
 <template>
   <a-layout-sider
@@ -26,7 +27,7 @@ const routes = useUserStore().getRoutes
     @collapse="onCollapse"
   >
     <div class="logo">logo</div>
-    <RecursiveMenuVue :menus="routes[0].children" />
+    <RecursiveMenuVue :menus="routes" />
   </a-layout-sider>
 </template>
 <style lang="scss" scoped>
@@ -41,3 +42,4 @@ const routes = useUserStore().getRoutes
   z-index: 999;
 }
 </style>
+@/stores/modules/user

@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 import useLocalI18n from '@/hooks/useLocalI18n'
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@/stores/modules/user'
 import { registerApi } from '@/views/user/login/api'
 import { GithubOutlined, GoogleOutlined, WechatOutlined } from '@ant-design/icons-vue'
 import { reactive, ref } from 'vue'
 
+const user = useUserStore()
 defineOptions({
   name: 'LoginView'
 })
-const user = useUserStore()
 const rightPanelActive = ref(false)
 
 const toggleRightPanel = () => {
@@ -377,3 +377,4 @@ footer a {
   text-decoration: none;
 }
 </style>
+@/stores/modules/user

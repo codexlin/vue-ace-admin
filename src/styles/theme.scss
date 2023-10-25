@@ -1,4 +1,17 @@
 @import './variables.module.scss';
+// 定义字体
+@font-face {
+  font-family: 'Lato';
+  src: url('../assets/fonts/Lato-Regular.ttf');
+  /* 可以包括更多字体格式和字体描述 */
+  font-weight: normal;
+  font-style: normal;
+}
+$font-family:
+  'Lato',
+  -apple-system,
+  'Microsoft YaHei',
+  'sans-serif';
 // 定义不同的模式和主题
 $modes: (
   light: (

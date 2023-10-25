@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import router from '@/router'
+import { useAppStore } from '@/stores/modules/app'
 import { MailOutlined } from '@ant-design/icons-vue'
 import type { ItemType } from 'ant-design-vue'
 import { h, ref, VueElement, watch } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
-import { useAppStore } from '@/stores/app'
 
 const app = useAppStore()
 const props = defineProps({
@@ -43,7 +43,7 @@ function generateItems(data: RouteRecordRaw[]): ItemType[] {
   return data.map((item) => {
     const icon = item.meta?.icon || h(MailOutlined)
     let children
-    if (item.children) {
+    if (item.children && item.children.length > 0) {
       children = generateItems(item.children)
       rootSubmenuKeys.value.push(item.path)
     }
@@ -105,3 +105,4 @@ watch(
   }
 }
 </style>
+@/stores/modules/app

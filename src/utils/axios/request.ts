@@ -32,11 +32,10 @@ class Request {
      */
     this.instance.interceptors.request.use(
       (config: InternalAxiosRequestConfig) => {
-        console.log('请求前拦截器：', config)
         config = handleChangeRequestHeader(config)
         // if (!useAuthStore().getToken) return config
         config = handleConfigureAuth(config)
-        console.log(config)
+        console.log('请求前拦截器：', config)
         return config
       },
       (error: unknown) => {

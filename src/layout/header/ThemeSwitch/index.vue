@@ -4,9 +4,10 @@
  * @Description: 
 -->
 <script lang="ts" setup>
-import { useAppStore } from '@/stores/app'
+import { useAppStore } from '@/stores/modules/app'
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons-vue'
 import { ref, watch } from 'vue'
+
 defineOptions({
   name: 'ThemeSwitch'
 })
@@ -31,3 +32,4 @@ const handleChange = () => {
 </template>
 
 <style lang="scss" scoped></style>
+@/stores/modules/app

@@ -1,16 +1,4 @@
 @import './theme.scss';
-@font-face {
-  font-family: 'Lato';
-  src: url('~@/assets/fonts/Lato-Regular.ttf');
-  /* 可以包括更多字体格式和字体描述 */
-  font-weight: normal;
-  font-style: normal;
-}
-$font-family:
-  'Lato',
-  -apple-system,
-  'Microsoft YaHei',
-  'sans-serif';
 body {
   font-family: $font-family;
   position: relative;
@@ -22,4 +10,10 @@ body {
     background-color: getModeVar('bgColor');
     color: getModeVar('infoColor');
   }
+}
+#nprogress .bar {
+  background: $primary !important; //自定义颜色
+}
+.ant-layout {
+  font-family: $font-family;
 }

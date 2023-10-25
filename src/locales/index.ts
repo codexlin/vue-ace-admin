@@ -1,8 +1,8 @@
-import { createI18n } from 'vue-i18n'
+import { useAppStore } from '@/stores/modules/app'
 import type { App } from 'vue'
-import mZhCnLocale from './lang/zh-cn'
+import { createI18n } from 'vue-i18n'
 import mEnCnLocale from './lang/en'
-import { useAppStore } from '@/stores/app'
+import mZhCnLocale from './lang/zh-cn'
 
 const messages = {
   en: {
