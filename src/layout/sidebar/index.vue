@@ -1,6 +1,11 @@
+<!--
+ * @Author: LinRenJie xoxosos666@gmail.com
+ * @Date: 2023-10-25 21:53:39
+ * @Description: 
+-->
 <script lang="ts" setup>
-import { useMenuStoreWithOut } from '@/stores/modules/menu'
-import { ref } from 'vue'
+import type { LayoutProviderData } from '@/layout/type'
+import { inject, ref } from 'vue'
 import RecursiveMenuVue from './components/RecursiveMenu.vue'
 
 defineOptions({
@@ -15,8 +20,7 @@ const onBreakpoint = (broken: boolean) => {
   isOpenSide.value = broken
   console.log(broken)
 }
-const routes = useMenuStoreWithOut().getMenuList || []
-console.log(routes)
+const { menus } = inject<LayoutProviderData>('layoutProvider')
 </script>
 <template>
   <a-layout-sider
@@ -27,7 +31,7 @@ console.log(routes)
     @collapse="onCollapse"
   >
     <div class="logo">logo</div>
-    <RecursiveMenuVue :menus="routes" />
+    <RecursiveMenuVue :menus="menus" />
   </a-layout-sider>
 </template>
 <style lang="scss" scoped>

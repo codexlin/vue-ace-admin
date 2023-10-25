@@ -14,9 +14,12 @@ const props = defineProps({
   }
 })
 const rootSubmenuKeys = ref<string[]>([])
-const openKeys = ref(['sub1'])
-const selectedKeys = ref(['/dashboard'])
+const openKeys = ref<string[]>([])
+const selectedKeys = ref([])
 const items = ref<ItemType[]>([])
+
+const handleClick = (item: ItemType) => item?.key && router.push(item.key as string)
+
 const onOpenChange = (keys: any[]) => {
   const latestOpenKey = keys.find((key) => openKeys.value.indexOf(key) === -1)
   if (rootSubmenuKeys.value.indexOf(latestOpenKey) === -1) {
@@ -39,7 +42,8 @@ const getItem = (
   label,
   type
 })
-function generateItems(data: RouteRecordRaw[]): ItemType[] {
+
+const generateItems = (data: RouteRecordRaw[]): ItemType[] => {
   return data.map((item) => {
     const icon = item.meta?.icon || h(MailOutlined)
     let children
@@ -50,18 +54,25 @@ function generateItems(data: RouteRecordRaw[]): ItemType[] {
     return getItem(item.name as string, item.path, icon, children)
   })
 }
-const handleClick = (item: ItemType) => item?.key && router.push(item.key as string)
 
 watch(
   () => props.menus,
   (menus) => {
-    if (menus.length > 0) {
-      items.value = generateItems(menus)
-    }
+    items.value = menus.length > 0 ? generateItems(menus) : []
   },
   {
     immediate: true
   }
+)
+watch(
+  () => router.currentRoute.value.path,
+  (path) => {
+    const pathSegments = path.split('/').filter(Boolean)
+
+    selectedKeys.value = [path]
+    openKeys.value = [`/${pathSegments[0]}`]
+  },
+  { immediate: true }
 )
 </script>
 
@@ -105,4 +116,3 @@ watch(
   }
 }
 </style>
-@/stores/modules/app

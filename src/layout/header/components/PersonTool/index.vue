@@ -1,5 +1,9 @@
+<!--
+ * @Author: LinRenJie xoxosos666@gmail.com
+ * @Date: 2023-10-25 21:53:39
+ * @Description: 
+-->
 <script lang="ts" setup>
-import router from '@/router'
 import { useUserStore } from '@/stores/modules/user'
 import { DownOutlined, LogoutOutlined } from '@ant-design/icons-vue'
 
@@ -10,7 +14,7 @@ defineOptions({
 })
 const user = useUserStore()
 const handleClick = (item: any) => {
-  item.key === 'logout' && router.push('/login')
+  item.key === 'logout' && user.logout()
 }
 </script>
 

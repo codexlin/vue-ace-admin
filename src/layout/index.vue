@@ -5,12 +5,23 @@
 -->
 <script lang="ts" setup>
 import SettingVue from '@/layout/setting/index.vue'
+import router from '@/router'
+import { useMenuStoreWithOut } from '@/stores/modules/menu'
+import { provide } from 'vue'
 import { RouterView } from 'vue-router'
 import HeaderView from './header/index.vue'
 import SidebarView from './sidebar/index.vue'
+import type { LayoutProviderData } from './type' // 引入上面定义的类型
 
 defineOptions({
   name: 'LayoutView'
+})
+const menus = useMenuStoreWithOut().getMenuList || []
+const routes = router.getRoutes()
+provide<LayoutProviderData>('layoutProvider', {
+  currentRoute: router.currentRoute.value,
+  routes,
+  menus
 })
 </script>
 <template>
@@ -25,9 +36,7 @@ defineOptions({
           <RouterView />
         </div>
       </a-layout-content>
-      <a-layout-footer style="text-align: center">
-        Ant Design ©2018 Created by Ant UED
-      </a-layout-footer>
+      <a-layout-footer style="text-align: center"> Ant Design ©2018 Created by Ant UED </a-layout-footer>
     </a-layout>
     <SettingVue />
   </a-layout>
