@@ -15,7 +15,7 @@ const props = defineProps({
 })
 const rootSubmenuKeys = ref<string[]>([])
 const openKeys = ref<string[]>([])
-const selectedKeys = ref([])
+const selectedKeys = ref<string[]>([])
 const items = ref<ItemType[]>([])
 
 const handleClick = (item: ItemType) => item?.key && router.push(item.key as string)

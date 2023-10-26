@@ -9,6 +9,7 @@ import { useUserStore } from '@/stores/modules/user'
 import Nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
 import type { RouteRecordRaw } from 'vue-router'
+
 export function setupRouterHooks() {
   let flag = true // 定义标识，记录路由是否添加
   router.beforeEach(async (to, from, next) => {

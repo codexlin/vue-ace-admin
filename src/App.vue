@@ -16,4 +16,3 @@ const app = useAppStore()
     <RouterView />
   </a-config-provider>
 </template>
-@/stores/modules/app
