@@ -11,14 +11,14 @@ import { provide } from 'vue'
 import { RouterView } from 'vue-router'
 import HeaderView from './header/index.vue'
 import SidebarView from './sidebar/index.vue'
-import type { LayoutProviderData } from './type' // 引入上面定义的类型
+import { layoutProviderKey } from './type' // 引入上面定义的类型
 
 defineOptions({
   name: 'LayoutView'
 })
 const menus = useMenuStoreWithOut().getMenuList || []
 const routes = router.getRoutes()
-provide<LayoutProviderData>('layoutProvider', {
+provide(layoutProviderKey, {
   currentRoute: router.currentRoute.value,
   routes,
   menus
@@ -34,7 +34,7 @@ provide<LayoutProviderData>('layoutProvider', {
       <a-layout-content :style="{ margin: '24px 16px 0' }">
         <div :style="{ padding: '24px', minHeight: '360px' }">
           <router-view v-slot="{ Component }">
-            <transition name="scale-slide">
+            <transition name="fade">
               <component :is="Component" />
             </transition>
           </router-view>

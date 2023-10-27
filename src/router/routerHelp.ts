@@ -47,16 +47,17 @@ const loadView = import.meta.glob('../views/**/*.vue')
 export function addRoutes(menu: RouteRecordRaw[]) {
   console.log('addRoutes')
   menu.forEach((e) => {
+    const { name, path, meta, children, component } = e
     // 只将页面信息添加到路由中
-    if (!e.children || e.children.length === 0) {
+    if (!children || children.length === 0) {
       router.addRoute('layout', {
-        name: e.name,
-        path: e.path,
-        meta: { title: e.name },
-        component: loadView[`../views${e.component}.vue`]
+        name,
+        path,
+        meta,
+        component: loadView[`../views${component}.vue`]
       })
     } else {
-      addRoutes(e.children)
+      addRoutes(children)
     }
   })
   console.log(router.getRoutes())

@@ -3,15 +3,15 @@ export default {
     login: '登录',
     dashboard: '首页',
     personal: '个人设置',
-    multimenu: {
-      root: '多级导航缓存',
-      page1: '导航1',
-      page2: '导航2',
-      level2: {
-        page1: '导航1-1',
-        page2: '导航1-2',
+    form: '表单设置',
+    about: '关于',
+    table: {
+      root: '表格设置',
+      children: {
+        editable: '可编辑表格',
+        universal: '通用表格',
         level3: {
-          page: '导航1-1-1'
+          page: 'navigation1-1-1'
         }
       }
     },
@@ -22,7 +22,13 @@ export default {
       detail1: '用户详情',
       detail2: '商品详情'
     },
-    permission: '权限',
+    permission: {
+      root: '权限设置',
+      children: {
+        user: '用户管理',
+        role: '角色管理'
+      }
+    },
     tabbar: '标签栏',
     directives: {
       root: '自定义指令',

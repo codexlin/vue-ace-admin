@@ -4,19 +4,24 @@ import { HomeOutlined, UserOutlined } from '@ant-design/icons-vue';
  * @Description: 
 -->
 <script lang="ts" setup>
+import useLocalI18n from '@/hooks/useLocalI18n'
+import { type LayoutProviderData, layoutProviderKey } from '@/layout/type'
+
 import router from '@/router'
-import { HomeOutlined, UserOutlined } from '@ant-design/icons-vue'
+import { HomeOutlined } from '@ant-design/icons-vue'
 import { inject, ref, watch } from 'vue'
-import type { LayoutProviderData } from '@/layout/type'
+import { type RouteRecordRaw } from 'vue-router'
+
 defineOptions({
   name: 'BreadcrumbView'
 })
-const { menus } = inject<LayoutProviderData>('layoutProvider')
-console.log(flattenRoutes(menus))
-function flattenRoutes(routes) {
-  const flattenedRoutes = []
+const { menus } = inject(layoutProviderKey) as LayoutProviderData
+const { tt } = useLocalI18n()
 
-  function flatten(route) {
+function flattenRoutes(routes: RouteRecordRaw[]) {
+  const flattenedRoutes: RouteRecordRaw[] = []
+
+  function flatten(route: RouteRecordRaw[]) {
     route.forEach((r) => {
       const flattenedRoute = { ...r }
       flattenedRoutes.push(flattenedRoute)
@@ -29,18 +34,21 @@ function flattenRoutes(routes) {
   flatten(routes)
   return flattenedRoutes
 }
-const list = ref([])
-const initList = (path) => {
+const list = ref<RouteRecordRaw[]>([])
+const initList = (path: string) => {
   const routes = flattenRoutes(menus)
-  const paths = path.split('/').filter(Boolean)
+  const paths = path
+    .split('/')
+    .filter(Boolean)
+    .map((i) => `/${i}`)
   if (paths.length === 1) {
     return routes.filter((i) => i.path === path)
   } else if (paths.length > 1) {
-    const array = []
-    paths.forEach((p, index) => {
-      console.log(p)
-
-      index === 0 ? array.push(routes.find((i) => i.path === `/${p}`)) : array.push(routes.find((i) => i.path === path))
+    paths[paths.length - 1] = path
+    const array: RouteRecordRaw[] = []
+    paths.forEach((p) => {
+      const output = routes.find((i) => i.path === p) as RouteRecordRaw
+      array.push(output)
     })
     return array
   } else {
@@ -64,11 +72,8 @@ watch(
     </a-breadcrumb-item>
     <template v-if="list.length > 0">
       <a-breadcrumb-item href="" v-for="item in list" :key="item.path">
-        <user-outlined />
-        <span>{{ item.name }}</span>
+        <span>{{ tt(`${item.meta?.title}`) }}</span>
       </a-breadcrumb-item>
     </template>
   </a-breadcrumb>
 </template>
-
-<style lang="scss" scoped></style>

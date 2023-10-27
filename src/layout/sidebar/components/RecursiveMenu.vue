@@ -1,12 +1,16 @@
 <script lang="ts" setup>
+import SvgIconVue from '@/components/svgicon/SvgIcon.vue'
+import useLocalI18n from '@/hooks/useLocalI18n'
 import router from '@/router'
 import { useAppStore } from '@/stores/modules/app'
 import { MailOutlined } from '@ant-design/icons-vue'
 import type { ItemType } from 'ant-design-vue'
-import { h, ref, VueElement, watch } from 'vue'
+import { h, ref, type VNode, VueElement, watch } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 
 const app = useAppStore()
+const { tt } = useLocalI18n()
+
 const props = defineProps({
   menus: {
     type: Array as () => RouteRecordRaw[],
@@ -19,7 +23,6 @@ const selectedKeys = ref<string[]>([])
 const items = ref<ItemType[]>([])
 
 const handleClick = (item: ItemType) => item?.key && router.push(item.key as string)
-
 const onOpenChange = (keys: any[]) => {
   const latestOpenKey = keys.find((key) => openKeys.value.indexOf(key) === -1)
   if (rootSubmenuKeys.value.indexOf(latestOpenKey) === -1) {
@@ -42,16 +45,15 @@ const getItem = (
   label,
   type
 })
-
 const generateItems = (data: RouteRecordRaw[]): ItemType[] => {
   return data.map((item) => {
-    const icon = item.meta?.icon || h(MailOutlined)
+    const icon = item.meta?.icon ? h(SvgIconVue as unknown as VNode, { name: item.meta?.icon }) : h(MailOutlined)
     let children
     if (item.children && item.children.length > 0) {
       children = generateItems(item.children)
       rootSubmenuKeys.value.push(item.path)
     }
-    return getItem(item.name as string, item.path, icon, children)
+    return getItem(tt(item.meta?.title as string), item.path, icon, children)
   })
 }
 
@@ -68,7 +70,6 @@ watch(
   () => router.currentRoute.value.path,
   (path) => {
     const pathSegments = path.split('/').filter(Boolean)
-
     selectedKeys.value = [path]
     openKeys.value = [`/${pathSegments[0]}`]
   },
@@ -87,23 +88,6 @@ watch(
     @click="handleClick"
     @openChange="onOpenChange"
   >
-    <!-- <template v-for="menu in menus">
-      <a-menu-item v-if="!menu.children || menu.children.length === 0" :key="menu.path">
-        <router-link :to="menu.path">
-          <span>{{ menu.name }}</span>
-        </router-link>
-      </a-menu-item>
-      <a-sub-menu v-else :key="menu.name">
-        <template #title>
-          <span>{{ menu.name }}</span>
-        </template>
-        <a-menu-item v-for="child in menu.children" :key="child.path">
-          <router-link :to="child.path">
-            <recursive-menu :menus="[child]" />
-          </router-link>
-        </a-menu-item>
-      </a-sub-menu>
-    </template> -->
   </a-menu>
 </template>
 

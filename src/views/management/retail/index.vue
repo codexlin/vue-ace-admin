@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import CustomButton from '@/components/button/index.vue'
+import SvgIconVue from '@/components/svgicon/SvgIcon.vue'
 import { SearchOutlined } from '@ant-design/icons-vue'
 import { h } from 'vue'
 
@@ -22,10 +23,14 @@ const handleClick1 = () => {
   <div class="test">retail</div>
   <div>
     <CustomButton :icon="h(SearchOutlined)" auto-loading @click="handleClick">自定义按钮</CustomButton>
+    <CustomButton :icon="h(SvgIconVue, { name: 'mdi:account-cog-outline' })" auto-loading @click="handleClick"
+      >自定义按钮1</CustomButton
+    >
+
     <CustomButton auto-loading enable-confirm @click="handleClick">
       自定义按钮2
       <template #icon>
-        <SearchOutlined />
+        <SvgIconVue name="mdi:account-cog-outline"></SvgIconVue>
       </template>
     </CustomButton>
   </div>

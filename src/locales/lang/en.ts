@@ -3,13 +3,13 @@ export default {
     login: 'Login',
     personal: 'Personal Setting',
     dashboard: 'Dashboard',
-    multimenu: {
-      root: 'Multi-level navigation',
-      page1: 'navigation1',
-      page2: 'navigation2',
-      level2: {
-        page1: 'navigation1-1',
-        page2: 'navigation1-2',
+    form: 'Form',
+    about: 'About',
+    table: {
+      root: 'Table Setting',
+      children: {
+        editable: 'Editable Table',
+        universal: 'Universal Table',
         level3: {
           page: 'navigation1-1-1'
         }
@@ -22,7 +22,13 @@ export default {
       detail1: 'user detail',
       detail2: 'goods detail'
     },
-    permission: 'permission',
+    permission: {
+      root: 'Permission Setting',
+      children: {
+        user: 'User Setting',
+        role: 'Role Setting'
+      }
+    },
     tabbar: 'tabbar',
     directives: {
       root: 'directives',

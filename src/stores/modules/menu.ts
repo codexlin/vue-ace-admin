@@ -5,14 +5,13 @@
  */
 import { addRoutes } from '@/router/routerHelp'
 import { backendRoutesApi } from '@/views/user/login/api'
-import type { RouteRecordRaw } from 'vue-router'
-
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
+import type { RouteRecordRaw } from 'vue-router'
 
-export const useMenuStoreWithOut = defineStore('counter', () => {
+export const useMenuStoreWithOut = defineStore('menu', () => {
   const menuList = ref<any[]>([])
-  const getMenuList = computed(() => menuList.value)
+  const getMenuList = computed<RouteRecordRaw[]>(() => menuList.value)
   async function setMenuList() {
     console.log('setMenuList')
     const res = await backendRoutesApi()

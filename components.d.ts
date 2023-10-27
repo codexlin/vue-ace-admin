@@ -7,29 +7,6 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    AAvatar: typeof import('ant-design-vue/es')['Avatar']
-    ABreadcrumb: typeof import('ant-design-vue/es')['Breadcrumb']
-    ABreadcrumbItem: typeof import('ant-design-vue/es')['BreadcrumbItem']
-    AButton: typeof import('ant-design-vue/es')['Button']
-    AButtonGroup: typeof import('ant-design-vue/es')['ButtonGroup']
-    ACard: typeof import('ant-design-vue/es')['Card']
-    AConfigProvider: typeof import('ant-design-vue/es')['ConfigProvider']
-    ADrawer: typeof import('ant-design-vue/es')['Drawer']
-    ADropdown: typeof import('ant-design-vue/es')['Dropdown']
-    ALayout: typeof import('ant-design-vue/es')['Layout']
-    ALayoutContent: typeof import('ant-design-vue/es')['LayoutContent']
-    ALayoutFooter: typeof import('ant-design-vue/es')['LayoutFooter']
-    ALayoutHeader: typeof import('ant-design-vue/es')['LayoutHeader']
-    ALayoutSider: typeof import('ant-design-vue/es')['LayoutSider']
-    AMenu: typeof import('ant-design-vue/es')['Menu']
-    AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
-    APopconfirm: typeof import('ant-design-vue/es')['Popconfirm']
-    ASelect: typeof import('ant-design-vue/es')['Select']
-    ASelectOption: typeof import('ant-design-vue/es')['SelectOption']
-    AStatistic: typeof import('ant-design-vue/es')['Statistic']
-    ASwitch: typeof import('ant-design-vue/es')['Switch']
-    ATable: typeof import('ant-design-vue/es')['Table']
-    ATooltip: typeof import('ant-design-vue/es')['Tooltip']
     BasicButton: typeof import('./src/components/button/components/BasicButton.vue')['default']
     Button: typeof import('./src/components/button/index.vue')['default']
     CommonTable: typeof import('./src/components/table/CommonTable.vue')['default']
@@ -37,5 +14,6 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     StatisticCard: typeof import('./src/components/statistic/StatisticCard.vue')['default']
+    SvgIcon: typeof import('./src/components/svgicon/SvgIcon.vue')['default']
   }
 }

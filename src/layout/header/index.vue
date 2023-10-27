@@ -8,6 +8,7 @@ import BreadcrumbView from '@/layout/header/components/Breadcrumb/index.vue'
 import FullScreen from '@/layout/header/components/FullScreen/index.vue'
 import LangSelect from '@/layout/header/components/LangSelect/index.vue'
 import PersonTool from '@/layout/header/components/PersonTool/index.vue'
+import TabsView from '@/layout/header/components/Tabs/index.vue'
 import ThemeSwitch from '@/layout/header/components/ThemeSwitch/index.vue'
 
 defineOptions({
@@ -37,6 +38,9 @@ defineOptions({
         <PersonTool />
       </div>
     </div>
+  </div>
+  <div>
+    <TabsView></TabsView>
   </div>
 </template>
 

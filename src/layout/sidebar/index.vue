@@ -4,7 +4,7 @@
  * @Description: 
 -->
 <script lang="ts" setup>
-import type { LayoutProviderData } from '@/layout/type'
+import { type LayoutProviderData, layoutProviderKey } from '@/layout/type'
 import { inject, ref } from 'vue'
 import RecursiveMenuVue from './components/RecursiveMenu.vue'
 
@@ -20,7 +20,7 @@ const onBreakpoint = (broken: boolean) => {
   isOpenSide.value = broken
   console.log(broken)
 }
-const { menus } = inject<LayoutProviderData>('layoutProvider')
+const { menus } = inject(layoutProviderKey) as LayoutProviderData
 </script>
 <template>
   <a-layout-sider
