@@ -9,18 +9,18 @@ import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 
-export const useMenuStoreWithOut = defineStore('menu', () => {
-  const menuList = ref<any[]>([])
-  const getMenuList = computed<RouteRecordRaw[]>(() => menuList.value)
-  async function setMenuList() {
-    console.log('setMenuList')
+export const useRouteStore = defineStore('route', () => {
+  const routes = ref<any[]>([])
+  const getRoutes = computed<RouteRecordRaw[]>(() => routes.value)
+  async function setRoutes() {
+    console.log('setRoutes')
     const res = await backendRoutesApi()
-    menuList.value = res.data as RouteRecordRaw[]
-    addRoutes(menuList.value)
+    routes.value = res.data as RouteRecordRaw[]
+    addRoutes(routes.value)
   }
   function init() {
-    menuList.value = []
+    routes.value = []
   }
 
-  return { menuList, setMenuList, getMenuList, init }
+  return { routes, setRoutes, getRoutes, init }
 })

@@ -4,7 +4,7 @@
  * @Description: 
 -->
 <script lang="ts" setup>
-import { type LayoutProviderData, layoutProviderKey } from '@/layout/type'
+import { layoutProviderKey, type LayoutProviderData } from '@/layout/type'
 import { inject, ref } from 'vue'
 import RecursiveMenuVue from './components/RecursiveMenu.vue'
 
@@ -46,4 +46,3 @@ const { menus } = inject(layoutProviderKey) as LayoutProviderData
   z-index: 999;
 }
 </style>
-@/stores/modules/user

@@ -1,3 +1,8 @@
+/*
+ * @Author: LinRenJie xoxosos666@gmail.com
+ * @Date: 2023-10-25 21:53:39
+ * @Description:
+ */
 import { basicRoutes } from '@/router/router'
 import type { App } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'

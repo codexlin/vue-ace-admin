@@ -5,18 +5,20 @@ import { HomeOutlined, UserOutlined } from '@ant-design/icons-vue';
 -->
 <script lang="ts" setup>
 import useLocalI18n from '@/hooks/useLocalI18n'
-import { type LayoutProviderData, layoutProviderKey } from '@/layout/type'
-
+import { layoutProviderKey, type LayoutProviderData } from '@/layout/type'
 import router from '@/router'
+import { getLevelPaths } from '@/utils/common/routeUtil'
+import { HomeOutlined } from '@ant-design/icons-vue'
 import { inject, ref, watch } from 'vue'
-import { type RouteRecordRaw } from 'vue-router'
+import { useRoute, type RouteRecordRaw } from 'vue-router'
 
 defineOptions({
   name: 'BreadcrumbView'
 })
 const { menus } = inject(layoutProviderKey) as LayoutProviderData
 const { tt } = useLocalI18n()
-
+const route = useRoute()
+console.log(route)
 function flattenRoutes(routes: RouteRecordRaw[]) {
   const flattenedRoutes: RouteRecordRaw[] = []
 
@@ -36,11 +38,7 @@ function flattenRoutes(routes: RouteRecordRaw[]) {
 const list = ref<RouteRecordRaw[]>([])
 const initList = (path: string) => {
   const routes = flattenRoutes(menus)
-  const paths = path
-    .split('/')
-    .filter(Boolean)
-    .map((i) => `/${i}`)
-  console.log(paths)
+  const paths = getLevelPaths(path)
 
   if (paths.length === 1) {
     return routes.filter((i) => i.path === path)
@@ -60,21 +58,20 @@ watch(
   () => router.currentRoute.value.path,
   (path) => {
     list.value = initList(path)
-    console.log(list.value)
   },
   { immediate: true, deep: true }
 )
 </script>
 
 <template>
-  <!-- <a-breadcrumb>
+  <a-breadcrumb>
     <a-breadcrumb-item href="">
       <home-outlined />
     </a-breadcrumb-item>
     <template v-if="list.length > 0">
-      <a-breadcrumb-item href="" v-for="item in list" :key="item.path">
+      <a-breadcrumb-item v-for="item in list" :key="item.path" href="">
         <span>{{ tt(`${item.meta?.title}`) }}</span>
       </a-breadcrumb-item>
     </template>
-  </a-breadcrumb> -->
+  </a-breadcrumb>
 </template>

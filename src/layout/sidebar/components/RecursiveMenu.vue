@@ -1,12 +1,18 @@
+<!--
+ * @Author: LinRenJie xoxosos666@gmail.com
+ * @Date: 2023-10-30 20:49:23
+ * @Description: 
+-->
 <script lang="ts" setup>
 import SvgIconVue from '@/components/svgicon/SvgIcon.vue'
 import useLocalI18n from '@/hooks/useLocalI18n'
 import router from '@/router'
 import { useAppStore } from '@/stores/modules/app'
+import { getLevelPaths } from '@/utils/common/routeUtil'
 import { MailOutlined } from '@ant-design/icons-vue'
 import type { ItemType } from 'ant-design-vue'
-import { h, ref, type VNode, VueElement, watch } from 'vue'
-import type { RouteRecordRaw } from 'vue-router'
+import { VueElement, h, ref, watch, type VNode } from 'vue'
+import { type RouteRecordRaw } from 'vue-router'
 
 const app = useAppStore()
 const { tt } = useLocalI18n()
@@ -17,22 +23,14 @@ const props = defineProps({
     required: true
   }
 })
+
+// 根节点keys
 const rootSubmenuKeys = ref<string[]>([])
 const openKeys = ref<string[]>([])
 const selectedKeys = ref<string[]>([])
 const items = ref<ItemType[]>([])
 
 const handleClick = (item: ItemType) => item?.key && router.push(item.key as string)
-const onOpenChange = (keys: any[]) => {
-  console.log(keys, rootSubmenuKeys.value)
-
-  const latestOpenKey = keys.find((key) => openKeys.value.indexOf(key) === -1)
-  if (rootSubmenuKeys.value.indexOf(latestOpenKey) === -1) {
-    openKeys.value = keys
-  } else {
-    openKeys.value = latestOpenKey ? [latestOpenKey] : []
-  }
-}
 
 const getItem = (
   label: VueElement | string,
@@ -71,9 +69,10 @@ watch(
 watch(
   () => router.currentRoute.value.path,
   (path) => {
-    const pathSegments = path.split('/').filter(Boolean)
     selectedKeys.value = [path]
-    openKeys.value = [`/${pathSegments[0]}`]
+    const paths = getLevelPaths(path)
+    if (paths.length > 2) paths.pop()
+    openKeys.value = paths
   },
   { immediate: true }
 )
@@ -83,11 +82,11 @@ watch(
   <a-menu
     v-model:selectedKeys="selectedKeys"
     :items="items"
+    :openKeys="openKeys"
     :theme="app.darkMode"
     class="custom-layout"
     mode="inline"
     @click="handleClick"
-    @openChange="onOpenChange"
   >
   </a-menu>
 </template>

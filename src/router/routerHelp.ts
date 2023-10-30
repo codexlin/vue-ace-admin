@@ -5,7 +5,7 @@
  */
 import { i18n } from '@/locales'
 import { router } from '@/router/index'
-import { useMenuStoreWithOut } from '@/stores/modules/menu'
+import { useRouteStore } from '@/stores/modules/route'
 import { useUserStore } from '@/stores/modules/user'
 import Nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
@@ -20,18 +20,18 @@ export function setupRouterHooks() {
   let flag = true // 定义标识，记录路由是否添加
   router.beforeEach(async (to, from, next) => {
     Nprogress.start()
-    const menuStore = useMenuStoreWithOut()
+    const routerStore = useRouteStore()
     const user = useUserStore()
 
     if (user.getToken) {
-      if (flag && menuStore.getMenuList.length > 0) {
-        addRoutes(menuStore.getMenuList)
+      if (flag && routerStore.getRoutes.length > 0) {
+        addRoutes(routerStore.getRoutes)
         flag = false
         next({ path: to.path })
       }
       // 页面刷新时，重新加载路由
-      if (menuStore.getMenuList.length === 0) {
-        await menuStore.setMenuList()
+      if (routerStore.getRoutes.length === 0) {
+        await routerStore.setRoutes()
         next({ path: to.path })
       } else {
         next()

@@ -7,6 +7,7 @@
 import { useAppStore } from '@/stores/modules/app'
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons-vue'
 import { ref, watch } from 'vue'
+import SvgIcon from '@/components/svgicon/SvgIcon.vue'
 
 defineOptions({
   name: 'ThemeSwitch'
@@ -17,6 +18,9 @@ watch(
   () => app.darkModeComp,
   (val) => {
     check.value = val === 'dark'
+  },
+  {
+    immediate: true
   }
 )
 const handleChange = () => {
@@ -26,8 +30,12 @@ const handleChange = () => {
 
 <template>
   <a-switch v-model:checked="check" @change="handleChange">
-    <template #checkedChildren><check-outlined /></template>
-    <template #unCheckedChildren><close-outlined /></template>
+    <template #checkedChildren>
+      <SvgIcon name="radix-icons:moon" />
+    </template>
+    <template #unCheckedChildren>
+      <SvgIcon name="humbleicons:sun" />
+    </template>
   </a-switch>
 </template>
 

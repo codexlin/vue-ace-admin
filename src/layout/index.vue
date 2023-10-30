@@ -6,7 +6,7 @@
 <script lang="ts" setup>
 import SettingVue from '@/layout/setting/index.vue'
 import router from '@/router'
-import { useMenuStoreWithOut } from '@/stores/modules/menu'
+import { useRouteStore } from '@/stores/modules/route'
 import { provide } from 'vue'
 import { RouterView } from 'vue-router'
 import HeaderView from './header/index.vue'
@@ -16,7 +16,7 @@ import { layoutProviderKey } from './type' // 引入上面定义的类型
 defineOptions({
   name: 'LayoutView'
 })
-const menus = useMenuStoreWithOut().getMenuList || []
+const menus = useRouteStore().getRoutes || []
 const routes = router.getRoutes()
 provide(layoutProviderKey, {
   currentRoute: router.currentRoute.value,
@@ -28,7 +28,7 @@ provide(layoutProviderKey, {
   <a-layout style="height: 100vh; min-width: 375px">
     <SidebarView class="custom-layout" />
     <a-layout>
-      <a-layout-header class="custom-layout" :style="{ padding: 0 }">
+      <a-layout-header :style="{ padding: 0 }" class="custom-layout">
         <HeaderView />
       </a-layout-header>
       <a-layout-content :style="{ margin: '24px 16px 0' }">
@@ -67,3 +67,4 @@ provide(layoutProviderKey, {
   }
 }
 </style>
+@/stores/modules/router
