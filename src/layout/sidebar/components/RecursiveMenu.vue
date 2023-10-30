@@ -24,6 +24,8 @@ const items = ref<ItemType[]>([])
 
 const handleClick = (item: ItemType) => item?.key && router.push(item.key as string)
 const onOpenChange = (keys: any[]) => {
+  console.log(keys, rootSubmenuKeys.value)
+
   const latestOpenKey = keys.find((key) => openKeys.value.indexOf(key) === -1)
   if (rootSubmenuKeys.value.indexOf(latestOpenKey) === -1) {
     openKeys.value = keys
@@ -81,7 +83,6 @@ watch(
   <a-menu
     v-model:selectedKeys="selectedKeys"
     :items="items"
-    :open-keys="openKeys"
     :theme="app.darkMode"
     class="custom-layout"
     mode="inline"

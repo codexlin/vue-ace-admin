@@ -8,7 +8,6 @@ import useLocalI18n from '@/hooks/useLocalI18n'
 import { type LayoutProviderData, layoutProviderKey } from '@/layout/type'
 
 import router from '@/router'
-import { HomeOutlined } from '@ant-design/icons-vue'
 import { inject, ref, watch } from 'vue'
 import { type RouteRecordRaw } from 'vue-router'
 
@@ -41,6 +40,8 @@ const initList = (path: string) => {
     .split('/')
     .filter(Boolean)
     .map((i) => `/${i}`)
+  console.log(paths)
+
   if (paths.length === 1) {
     return routes.filter((i) => i.path === path)
   } else if (paths.length > 1) {
@@ -66,7 +67,7 @@ watch(
 </script>
 
 <template>
-  <a-breadcrumb>
+  <!-- <a-breadcrumb>
     <a-breadcrumb-item href="">
       <home-outlined />
     </a-breadcrumb-item>
@@ -75,5 +76,5 @@ watch(
         <span>{{ tt(`${item.meta?.title}`) }}</span>
       </a-breadcrumb-item>
     </template>
-  </a-breadcrumb>
+  </a-breadcrumb> -->
 </template>

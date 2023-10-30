@@ -33,9 +33,11 @@ provide(layoutProviderKey, {
       </a-layout-header>
       <a-layout-content :style="{ margin: '24px 16px 0' }">
         <div :style="{ padding: '24px', minHeight: '360px' }">
-          <router-view v-slot="{ Component }">
+          <router-view v-slot="{ Component, route }">
             <transition name="fade">
-              <component :is="Component" />
+              <KeepAlive>
+                <component :is="Component" :key="route.name" />
+              </KeepAlive>
             </transition>
           </router-view>
         </div>
