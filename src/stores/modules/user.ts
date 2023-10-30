@@ -4,6 +4,7 @@ import { loginApi } from '@/views/user/login/api'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import { useMenuStoreWithOut } from './menu'
+import { useTabsStore } from './tabs'
 
 export const useUserStore = defineStore('user', () => {
   const token = ref('')
@@ -16,6 +17,7 @@ export const useUserStore = defineStore('user', () => {
     token.value = ''
     userInfo.value = null
     useMenuStoreWithOut().init()
+    useTabsStore().init()
     await openDB('my-database', 1, 'routes')
     await deleteData('routes', 'backendRoutes')
   }
@@ -36,9 +38,9 @@ export const useUserStore = defineStore('user', () => {
 
   // 退出登录
   async function logout() {
+    await router.push({ name: 'login', replace: true })
     await init()
     console.log('logout', router.getRoutes())
-    router.push({ name: 'login', replace: true })
   }
 
   return {

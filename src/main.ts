@@ -14,9 +14,8 @@ import pinia from './stores/index'
 import './styles/main.scss'
 
 const app = createApp(App)
-
 app.use(pinia)
+setupI18n(app)
 app.use(Antd)
 setupRouter(app)
-setupI18n(app)
 app.mount('#app')

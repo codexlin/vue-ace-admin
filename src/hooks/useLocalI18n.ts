@@ -6,7 +6,6 @@ export default function useLocalI18n() {
   // 根据当前的语言环境来翻译
   function tt(text: string) {
     if (!text) return ''
-
     const i18n = useI18n()
     // 如果找不到对应的翻译，则返回原始的 text
     return i18n.te(text) ? i18n.t(text) : text
