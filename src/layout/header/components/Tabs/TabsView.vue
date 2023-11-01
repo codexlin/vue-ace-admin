@@ -1,17 +1,3 @@
-<template>
-  <div>
-    <a-tabs
-      v-model:activeKey="activeKey"
-      :tab-position="mode"
-      type="editable-card"
-      @tabScroll="callback"
-      @edit="onEdit"
-      @tabClick="clickTab"
-    >
-      <a-tab-pane v-for="i in tabList" :key="i.key" :closable="i.closable" :tab="tt(i.title)"></a-tab-pane>
-    </a-tabs>
-  </div>
-</template>
 <script lang="ts" setup>
 import useLocalI18n from '@/hooks/useLocalI18n'
 import { useTabsStore } from '@/stores/modules/tabs'
@@ -26,9 +12,7 @@ interface Props {
   closable?: boolean
   content?: string
 }
-defineOptions({
-  name: 'TabsView'
-})
+
 const mode = ref<TabsProps['tabPosition']>('top')
 const callback: TabsProps['onTabScroll'] = (val) => {
   console.log(val)
@@ -58,3 +42,17 @@ watch(
   { immediate: true }
 )
 </script>
+<template>
+  <div>
+    <a-tabs
+      v-model:activeKey="activeKey"
+      :tab-position="mode"
+      type="editable-card"
+      @edit="onEdit"
+      @tabClick="clickTab"
+      @tabScroll="callback"
+    >
+      <a-tab-pane v-for="i in tabList" :key="i.key" :closable="i.closable" :tab="tt(i.title)"></a-tab-pane>
+    </a-tabs>
+  </div>
+</template>

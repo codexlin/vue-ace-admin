@@ -1,8 +1,8 @@
 import type { RouteRecordRaw } from 'vue-router'
 
-const Login = () => import('@/views/user/login/index.vue')
+const Login = () => import('@/views/user/login/LoginView.vue')
 // const Home = () => import('@/views/dashboard/index.vue')
-const Layout = () => import('@/layout/index.vue')
+const Layout = () => import('@/layout/LayoutView.vue')
 const Page404 = () => import('@/views/NotFound.vue')
 
 // 基础路由，不需要设置权限

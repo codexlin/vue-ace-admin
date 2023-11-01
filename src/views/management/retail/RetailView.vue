@@ -1,12 +1,9 @@
 <script lang="ts" setup>
-import CustomButton from '@/components/button/index.vue'
+import CustomButton from '@/components/button/CustomButton.vue'
 import SvgIconVue from '@/components/svgicon/SvgIcon.vue'
 import { SearchOutlined } from '@ant-design/icons-vue'
 import { h, ref } from 'vue'
 
-defineOptions({
-  name: 'RetailView'
-})
 const handleClick = () => {
   return new Promise((resolve, reject) => {
     console.log('11')

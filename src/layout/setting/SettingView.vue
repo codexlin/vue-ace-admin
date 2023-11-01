@@ -1,53 +1,39 @@
-<!--
- * @Author: LinRenJie xoxosos666@gmail.com
- * @Date: 2023-10-14 21:29:57
- * @Description: 
--->
 <script lang="ts" setup>
-import { useAppStore } from '@/stores/modules/app'
-import variables from '@/styles/variables.module.scss'
-import { ref } from 'vue'
+import { SettingOutlined } from '@ant-design/icons-vue'
+import { h, ref } from 'vue'
+import SettingVue from '@/layout/setting/components/SettingVue.vue'
 
-const app = useAppStore()
-const color = ref(app.themeName)
-function handleChange(value: string) {
-  console.log(value)
-  app.setThemeName(value)
-  color.value = value
+const open = ref<boolean>(false)
+
+const afterOpenChange = (bool: boolean) => {
+  console.log('open', bool)
+}
+
+const showDrawer = () => {
+  open.value = true
 }
 </script>
-
 <template>
-  <div>
-    <section>
-      <h2>主题设置</h2>
-      <form>
-        <label>主要颜色</label>
-        <input v-model="color" type="color" @change="handleChange(color)" />
-      </form>
-      <a-select v-model:value="app.themeName" style="width: 240px">
-        <a-select-option v-for="(color, name) in variables" :key="name" :value="name">
-          {{ name }}:{{ color }}
-        </a-select-option>
-      </a-select>
-      <h1>预设主题</h1>
-      <template v-for="(color, name) in variables" :key="name">
-        <a-button :style="{ background: color }" @click="handleChange(color)">
-          {{ name }}
-        </a-button>
-      </template>
-
-      <a-select v-model:value="app.darkMode" style="width: 120px">
-        <a-select-option value="dark">dark</a-select-option>
-        <a-select-option value="light">light</a-select-option>
-      </a-select>
-      <a-button-group>
-        <a-button type="primary">切换主题- {{ app.themeName }}</a-button>
-        <a-button @click="app.toggleDarkMode">切换模式{{ app.darkModeComp }}</a-button>
-      </a-button-group>
-    </section>
-  </div>
+  <a-button :icon="h(SettingOutlined)" class="setting-fixed" shape="circle" type="primary" @click="showDrawer" />
+  <a-drawer
+    v-model:open="open"
+    :root-style="{ color: 'blue' }"
+    class="custom-class"
+    placement="right"
+    root-class-name="root-class-name"
+    style="color: red"
+    title="Basic Drawer"
+    @after-open-change="afterOpenChange"
+  >
+    <SettingVue />
+  </a-drawer>
 </template>
 
-<style lang="scss" scoped></style>
-@/stores/modules/app
+<style lang="scss" scoped>
+.setting-fixed {
+  position: fixed;
+  z-index: 2;
+  right: 0;
+  top: 50%;
+}
+</style>

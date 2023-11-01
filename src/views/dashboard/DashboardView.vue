@@ -4,9 +4,6 @@ import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons-vue'
 import { h } from 'vue'
 import { getUserList } from './api/index'
 
-defineOptions({
-  name: 'DashboardView'
-})
 getUserList().then((res) => console.log(res))
 </script>
 <template>

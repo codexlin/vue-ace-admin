@@ -4,16 +4,12 @@
  * @Description: 
 -->
 <script lang="ts" setup>
-import BreadcrumbView from '@/layout/header/components/Breadcrumb/index.vue'
-import FullScreen from '@/layout/header/components/FullScreen/index.vue'
-import LangSelect from '@/layout/header/components/LangSelect/index.vue'
-import PersonTool from '@/layout/header/components/PersonTool/index.vue'
-import TabsView from '@/layout/header/components/Tabs/index.vue'
-import ThemeSwitch from '@/layout/header/components/ThemeSwitch/index.vue'
-
-defineOptions({
-  name: 'HeaderView'
-})
+import BreadcrumbView from '@/layout/header/components/Breadcrumb/BreadCrumb.vue'
+import FullScreen from '@/layout/header/components/FullScreen/FullScreen.vue'
+import LangSelect from '@/layout/header/components/LangSelect/LangSelect.vue'
+import PersonTool from '@/layout/header/components/PersonTool/PersonTool.vue'
+import TabsView from '@/layout/header/components/Tabs/TabsView.vue'
+import ThemeSwitch from '@/layout/header/components/ThemeSwitch/ThemeSwitch.vue'
 </script>
 
 <template>

@@ -5,13 +5,9 @@
 -->
 <script lang="ts" setup>
 import { useAppStore } from '@/stores/modules/app'
-import { CheckOutlined, CloseOutlined } from '@ant-design/icons-vue'
 import { ref, watch } from 'vue'
 import SvgIcon from '@/components/svgicon/SvgIcon.vue'
 
-defineOptions({
-  name: 'ThemeSwitch'
-})
 const app = useAppStore()
 const check = ref(false)
 watch(
@@ -40,4 +36,3 @@ const handleChange = () => {
 </template>
 
 <style lang="scss" scoped></style>
-@/stores/modules/app

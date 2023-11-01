@@ -1,16 +1,11 @@
 <template>
-  <div>通用子</div>
-  <div>
-    <a-input v-model:value="value"></a-input>
-  </div>
+  <div>通用</div>
+  <a-input v-model:value="value"></a-input>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-defineOptions({
-  name: 'UniversalSub'
-})
 const value = ref('')
 </script>
 

@@ -9,9 +9,6 @@ import { TranslationOutlined } from '@ant-design/icons-vue'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-defineOptions({
-  name: 'LangSelect'
-})
 const useAppConfig = useAppStore()
 const language = computed(() => useAppConfig.getLanguage)
 
@@ -35,4 +32,3 @@ function handleSetLanguage(item: any) {
     </template>
   </a-dropdown>
 </template>
-@/stores/modules/app

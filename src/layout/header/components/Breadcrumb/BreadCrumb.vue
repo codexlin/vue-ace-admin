@@ -7,9 +7,6 @@ import { HomeOutlined } from '@ant-design/icons-vue'
 import type { Route, Routes } from 'types/common'
 import { inject, ref, watch } from 'vue'
 
-defineOptions({
-  name: 'BreadcrumbView'
-})
 const { menus } = inject(layoutProviderKey) as LayoutProviderData
 const { tt } = useLocalI18n()
 

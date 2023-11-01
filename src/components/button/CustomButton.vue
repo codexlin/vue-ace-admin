@@ -4,9 +4,6 @@ import { omit } from 'lodash-es'
 import { computed, ref } from 'vue'
 import type { Props } from './type'
 
-defineOptions({
-  name: 'CustomButton'
-})
 const props = withDefaults(defineProps<Props>(), {
   autoLoading: false, // 自动loading
   enableConfirm: false,

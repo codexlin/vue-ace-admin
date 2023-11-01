@@ -4,18 +4,15 @@
  * @Description: 
 -->
 <script lang="ts" setup>
-import SettingVue from '@/layout/setting/index.vue'
+import SettingVue from '@/layout/setting/SettingView.vue'
 import router from '@/router'
 import { useRouteStore } from '@/stores/modules/route'
 import { provide } from 'vue'
 import { RouterView } from 'vue-router'
-import HeaderView from './header/index.vue'
-import SidebarView from './sidebar/index.vue'
+import HeaderView from './header/HeaderView.vue'
+import SidebarView from './sidebar/SidebarView.vue'
 import { layoutProviderKey } from './type' // 引入上面定义的类型
 
-defineOptions({
-  name: 'LayoutView'
-})
 const menus = useRouteStore().getRoutes || []
 const routes = router.getRoutes()
 provide(layoutProviderKey, {
@@ -67,4 +64,3 @@ provide(layoutProviderKey, {
   }
 }
 </style>
-@/stores/modules/router

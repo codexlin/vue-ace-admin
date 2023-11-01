@@ -3,15 +3,12 @@ import { isFunction } from '@/utils/common/checkUtils'
 import { ref } from 'vue'
 import type { Props } from '../type'
 
-defineOptions({
-  name: 'CustomButton'
-})
 const props = withDefaults(defineProps<Props>(), {
   autoLoading: false // 自动loading
 })
 const loadingStatus = ref(false)
 const handleClick = async (e: Event) => {
-  if (props.autoLoading) {
+  if (props.autoLoading && props.onClick) {
     loadingStatus.value = true
     return emitClick(e)
   }

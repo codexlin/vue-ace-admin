@@ -4,9 +4,6 @@ import useList from '@/hooks/useList'
 import { computed, onMounted } from 'vue'
 import { getListWithPage } from '../api/index'
 
-defineOptions({
-  name: 'InventoryView'
-})
 type Props = {
   pageNum: number
   pageSize: number
