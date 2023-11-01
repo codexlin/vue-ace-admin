@@ -1,7 +1,7 @@
 <div align="center">
   <img alt="Ace Admin" width="120" height="120" src="./src/assets/logo.svg">
   <h1>Ace Admin</h1>
-  <span><a href="./README.md">English</a> | 中文</span>
+  <span><a href="./README.md">中文</a> | English</span>
 </div>
 
 ## ⚡ 简介
