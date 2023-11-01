@@ -39,7 +39,9 @@ provide(layoutProviderKey, {
           </router-view>
         </div>
       </a-layout-content>
-      <a-layout-footer style="text-align: center"> Ant Design ©2018 Created by Ant UED</a-layout-footer>
+      <a-layout-footer style="text-align: center">
+        Ace Admin ©2023 Created by <a href="https://github.com/xoxosos">Ace Lin</a></a-layout-footer
+      >
     </a-layout>
     <SettingVue />
   </a-layout>
