@@ -26,7 +26,9 @@
     "pinia-plugin-persistedstate": "^3.2.0",
     "vue": "^3.3.4",
     "vue-i18n": "^9.4.0",
-    "vue-router": "^4.2.4"
+    "vue-router": "^4.2.4",
+    "vue-echarts": "latest",
+    "echarts": "^5.4.3"
   },
   "devDependencies": {
     "@iconify-json/ep": "^1.1.11",

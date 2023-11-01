@@ -6,6 +6,7 @@
 
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 interface Props {
   title: string
@@ -17,13 +18,16 @@ export const useTabsStore = defineStore('tabs', () => {
   const tabList = ref<Props[]>([])
   const activeKey = ref('/dashboard')
   const getTabList = computed<Props[]>(() => tabList.value)
+  const router = useRouter()
+
   function addTab(tab: Props) {
     tabList.value.push(tab)
   }
-  function deleteTab(key: string) {
+  async function deleteTab(key: string) {
     tabList.value = tabList.value.filter((i) => i.key !== key)
     if (activeKey.value === key) {
       activeKey.value = tabList.value?.at(-1)?.key as string
+      await router.push(activeKey.value)
     }
   }
   function init() {

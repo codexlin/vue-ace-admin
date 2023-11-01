@@ -43,7 +43,7 @@ watch(
 )
 </script>
 <template>
-  <div>
+  <div class="tabs">
     <a-tabs
       v-model:activeKey="activeKey"
       :tab-position="mode"
@@ -56,3 +56,20 @@ watch(
     </a-tabs>
   </div>
 </template>
+<style lang="scss">
+.tabs {
+  height: 40px;
+  .ant-tabs-nav {
+    margin: 0;
+    padding: 4px;
+    height: 40px;
+    & .ant-tabs-nav-list .ant-tabs-tab,
+    .ant-tabs-nav-add {
+      border-radius: 8px;
+      & button {
+        margin: 0 -8px 0 0px;
+      }
+    }
+  }
+}
+</style>

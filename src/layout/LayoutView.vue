@@ -28,7 +28,7 @@ provide(layoutProviderKey, {
       <a-layout-header :style="{ padding: 0 }" class="custom-layout">
         <HeaderView />
       </a-layout-header>
-      <a-layout-content :style="{ margin: '24px 16px 0' }">
+      <a-layout-content class="layout-content">
         <div :style="{ padding: '24px', minHeight: '360px' }">
           <router-view v-slot="{ Component, route }">
             <transition name="fade">
@@ -39,7 +39,7 @@ provide(layoutProviderKey, {
           </router-view>
         </div>
       </a-layout-content>
-      <a-layout-footer style="text-align: center"> Ant Design ©2018 Created by Ant UED </a-layout-footer>
+      <a-layout-footer style="text-align: center"> Ant Design ©2018 Created by Ant UED</a-layout-footer>
     </a-layout>
     <SettingVue />
   </a-layout>
@@ -58,9 +58,48 @@ provide(layoutProviderKey, {
 [data-theme='dark'] .site-layout-sub-header-background {
   background: #141414;
 }
+
 .custom-layout {
   @include useTheme {
-    background: getModeVar('bgColor') !important;
+    background: getModeVar('bgColor');
+  }
+}
+
+.layout-content {
+  overflow-y: auto;
+  margin: 44px 16px 0;
+  /* ---滚动条公共样式--- */
+
+  /*定义滚动条宽高及背景，宽高分别对应横竖滚动条的尺寸*/
+  // 滚动条整体部分
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 8px;
+  }
+
+  // 滚动条的轨道的两端按钮，允许通过点击微调小方块的位置。
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  // 滚动条里面的小方块，能向上向下移动（或往左往右移动，取决于是垂直滚动条还是水平滚动条）
+  &::-webkit-scrollbar-thumb {
+    @include useTheme {
+      background: getColor('primary');
+    }
+    //background: rgba(144, 147, 153, 0.3);
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  // 边角，即两个滚动条的交汇处
+  &::-webkit-scrollbar-corner {
+    display: none;
+  }
+
+  // 两个滚动条的交汇处上用于通过拖动调整元素大小的小控件
+  &::-webkit-resizer {
+    display: none;
   }
 }
 </style>
