@@ -135,4 +135,4 @@ pnpm lint
 
 [MIT](./LICENSE)
 
-Copyright (c) 2022-present [AceLin](https://github.com/xoxosos)
+Copyright (c) 2023-present [AceLin](https://github.com/xoxosos)
