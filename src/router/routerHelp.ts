@@ -11,7 +11,7 @@ import Nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
 import type { RouteRecordRaw } from 'vue-router'
 
-const setPageTitleTxt = (meta: any) => {
+export const setPageTitleTxt = (meta: any) => {
   const { title } = meta
   if (title) window.document.title = i18n.global.t(title)
 }

@@ -6,23 +6,18 @@
 <script lang="ts" setup>
 import SvgIconVue from '@/components/svgicon/SvgIcon.vue'
 import useLocalI18n from '@/hooks/useLocalI18n'
+import { type LayoutProviderData, layoutProviderKey } from '@/layout/type'
 import router from '@/router'
+import { setPageTitleTxt } from '@/router/routerHelp'
 import { useAppStore } from '@/stores/modules/app'
 import { getLevelPaths } from '@/utils/common/routeUtil'
-import { MailOutlined } from '@ant-design/icons-vue'
 import type { ItemType } from 'ant-design-vue'
-import { VueElement, h, ref, watch, type VNode } from 'vue'
+import { h, inject, onMounted, ref, type VNode, VueElement, watch } from 'vue'
 import { type RouteRecordRaw } from 'vue-router'
 
 const app = useAppStore()
-const { tt } = useLocalI18n()
-
-const props = defineProps({
-  menus: {
-    type: Array as () => RouteRecordRaw[],
-    required: true
-  }
-})
+const { tt, watchSwitchLang } = useLocalI18n()
+const { menus } = inject(layoutProviderKey) as LayoutProviderData
 
 // 根节点keys
 const rootSubmenuKeys = ref<string[]>([])
@@ -47,7 +42,7 @@ const getItem = (
 })
 const generateItems = (data: RouteRecordRaw[]): ItemType[] => {
   return data.map((item) => {
-    const icon = item.meta?.icon ? h(SvgIconVue as unknown as VNode, { name: item.meta?.icon }) : h(MailOutlined)
+    const icon = item.meta?.icon && h(SvgIconVue as unknown as VNode, { name: item.meta?.icon })
     let children
     if (item.children && item.children.length > 0) {
       children = generateItems(item.children)
@@ -56,21 +51,17 @@ const generateItems = (data: RouteRecordRaw[]): ItemType[] => {
     return getItem(tt(item.meta?.title as string), item.path, icon, children)
   })
 }
+const setItems = () => (items.value = generateItems(menus))
 
-watch(
-  () => props.menus,
-  (menus) => {
-    items.value = menus.length > 0 ? generateItems(menus) : []
-  },
-  {
-    immediate: true
-  }
-)
+onMounted(() => setItems())
+
+watchSwitchLang(setItems, () => setPageTitleTxt(router.currentRoute.value.meta))
 watch(
   () => router.currentRoute.value.path,
   (path) => {
     selectedKeys.value = [path]
     const paths = getLevelPaths(path)
+    // 2级以上：删除最后一个多余的路径
     if (paths.length > 2) paths.pop()
     openKeys.value = paths
   },

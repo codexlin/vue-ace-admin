@@ -11,7 +11,6 @@ import { useI18n } from 'vue-i18n'
 
 const useAppConfig = useAppStore()
 const language = computed(() => useAppConfig.getLanguage)
-
 const i18n = useI18n()
 
 function handleSetLanguage(item: any) {
