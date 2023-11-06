@@ -72,34 +72,3 @@ export function addRoutes(menu: RouteRecordRaw[]) {
   })
   console.log(router.getRoutes())
 }
-// 异步
-// export function addRoutes(menu: RouteRecordRaw[]): Promise<void> {
-//   return new Promise<void>((resolve) => {
-//     console.log('addRoutes')
-//     const promises: Promise<void>[] = []
-
-//     menu.forEach((e) => {
-//       const { name, path, meta, children, component } = e
-
-//       if (!children || children.length === 0) {
-//         const promise = new Promise<void>((resolve) => {
-//           router.addRoute('layout', {
-//             name,
-//             path,
-//             meta,
-//             component: loadView[`../views${component}.vue`]
-//           })
-//           resolve()
-//         })
-//         promises.push(promise)
-//       } else {
-//         promises.push(addRoutes(children))
-//       }
-//     })
-
-//     Promise.all(promises).then(() => {
-//       console.log(router.getRoutes())
-//       resolve()
-//     })
-//   })
-// }
