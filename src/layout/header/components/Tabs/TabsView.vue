@@ -27,7 +27,10 @@ const { activeKey, tabList } = storeToRefs(tabStore)
 const clickTab = (key: string) => router.push(key)
 
 const onEdit = (targetKey: string | MouseEvent, action: string) => {
-  if (action !== 'add') tabStore.deleteTab(targetKey as string)
+  if (action !== 'add') tabStore.deleteTab('current', targetKey as string)
+}
+const rightClick = (type: string, key: string) => {
+  tabStore.deleteTab(type, key)
 }
 watch(
   route,
@@ -52,7 +55,20 @@ watch(
       @tabClick="clickTab"
       @tabScroll="callback"
     >
-      <a-tab-pane v-for="i in tabList" :key="i.key" :closable="i.closable" :tab="tt(i.title)"></a-tab-pane>
+      <a-tab-pane v-for="i in tabList" :key="i.key" :closable="i.closable">
+        <template #tab>
+          <a-dropdown :trigger="['contextmenu']">
+            <span class="tab-name">{{ tt(i.title) }}</span>
+            <template #overlay>
+              <a-menu>
+                <a-menu-item key="1" @click="rightClick('current', i.key)">关闭当前</a-menu-item>
+                <a-menu-item key="2" @click="rightClick('other', i.key)">关闭其他</a-menu-item>
+                <a-menu-item key="3" @click="rightClick('all', i.key)">关闭所有</a-menu-item>
+              </a-menu>
+            </template>
+          </a-dropdown>
+        </template>
+      </a-tab-pane>
     </a-tabs>
   </div>
 </template>

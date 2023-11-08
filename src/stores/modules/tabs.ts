@@ -23,8 +23,18 @@ export const useTabsStore = defineStore('tabs', () => {
   function addTab(tab: Props) {
     tabList.value.push(tab)
   }
-  async function deleteTab(key: string) {
-    tabList.value = tabList.value.filter((i) => i.key !== key)
+  async function deleteTab(type = 'current', key: string) {
+    switch (type) {
+      case 'all':
+        tabList.value = tabList.value.filter((i) => i.key === '/dashboard')
+        break
+      case 'other':
+        tabList.value = tabList.value.filter((i) => i.key === '/dashboard' || i.key === key)
+        break
+      default:
+        tabList.value = tabList.value.filter((i) => i.key !== key)
+        break
+    }
     if (activeKey.value === key) {
       activeKey.value = tabList.value?.at(-1)?.key as string
       await router.push(activeKey.value)

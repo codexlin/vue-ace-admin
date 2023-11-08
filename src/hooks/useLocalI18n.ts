@@ -14,10 +14,10 @@ export default function useLocalI18n() {
   // 监听语言切换
   function watchSwitchLang(...cbs: any[]) {
     const useAppConfig = useAppStore()
-
     watch(
       () => useAppConfig.getLanguage,
       () => {
+        // 根据当前语言做点什么
         cbs.forEach((cb) => cb(useAppConfig.getLanguage))
       }
     )

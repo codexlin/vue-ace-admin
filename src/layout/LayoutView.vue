@@ -9,6 +9,7 @@ import router from '@/router'
 import { useRouteStore } from '@/stores/modules/route'
 import { provide } from 'vue'
 import { RouterView } from 'vue-router'
+import FooterView from './footer/FooterView.vue'
 import HeaderView from './header/HeaderView.vue'
 import SidebarView from './sidebar/SidebarView.vue'
 import { layoutProviderKey } from './type' // 引入上面定义的类型
@@ -39,9 +40,7 @@ provide(layoutProviderKey, {
           </router-view>
         </div>
       </a-layout-content>
-      <a-layout-footer style="text-align: center">
-        Ace Admin ©2023 Created by <a href="https://github.com/xoxosos">Ace Lin</a></a-layout-footer
-      >
+      <FooterView />
     </a-layout>
     <SettingVue />
   </a-layout>
