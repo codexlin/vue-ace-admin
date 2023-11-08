@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import StatisticCard from '@/components/statistic/StatisticCard.vue'
-import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons-vue'
+import { ArrowDownOutlined, ArrowUpOutlined, HomeOutlined } from '@ant-design/icons-vue'
 import { h } from 'vue'
 import { BarChart, LineChart, PieChart } from 'echarts/charts'
 import { GridComponent, LegendComponent, TitleComponent, TooltipComponent } from 'echarts/components'
@@ -206,7 +206,7 @@ const tableData = [
 ]
 </script>
 <template>
-  <div class="flex-container">
+  <div class="flex-cards">
     <div class="flex-card">
       <StatisticCard :prefix="h(ArrowUpOutlined)" :value-style="{ color: 'green' }" />
     </div>
@@ -238,14 +238,14 @@ const tableData = [
         <a href="#">More</a>
       </template>
       <template v-if="key === 'tab1'">
-        <v-chart :option="option" autoresize class="chart" style="height: 320px; position: relative" />
+        <v-chart :option="option" autoresize class="chart" />
       </template>
       <template v-if="key === 'tab2'">
-        <v-chart :option="barOption" autoresize class="chart" style="height: 320px; position: relative" />
+        <v-chart :option="barOption" autoresize class="chart" />
       </template>
     </a-card>
     <a-card class="flex-cards_right">
-      <v-chart :option="tab1Option" autoresize class="chart" style="height: 320px; position: relative" />
+      <v-chart :option="tab1Option" autoresize class="chart" />
     </a-card>
   </div>
   <div class="flex-cards">
@@ -280,49 +280,4 @@ const tableData = [
     </a-card>
   </div>
 </template>
-<style lang="scss" scoped>
-$gap: 8px;
-.flex-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; // 在大屏幕上居中显示
-}
-
-.flex-card {
-  flex: 0 0 calc(25% - 2 * #{$gap}); // 使用#{}插值
-  margin: $gap;
-  box-sizing: border-box;
-}
-
-@media (768px< width < 1024px) {
-  .flex-container {
-    justify-content: flex-start; // 在中等屏幕上靠左显示
-  }
-  .flex-card {
-    flex: 0 0 calc(50% - 2 * #{$gap}); // 在中等屏幕上每行显示2个
-  }
-}
-
-@media (width < 768px) {
-  .flex-container {
-    justify-content: flex-start; // 在小屏幕上靠左显示
-  }
-  .flex-card {
-    flex: 0 0 calc(100% - 2 * #{$gap}); // 在小屏幕上每行只显示1个
-  }
-}
-
-.flex-cards {
-  display: flex;
-  padding: 8px;
-  gap: 16px;
-
-  &_left {
-    width: 60%;
-  }
-
-  &_right {
-    width: 40%;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

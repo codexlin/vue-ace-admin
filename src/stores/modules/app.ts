@@ -10,12 +10,14 @@ import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
 /**
- * app 配置 开启持久化
+ * app 配置
  */
 export const useAppStore = defineStore('app', () => {
   const appConfig = ref({
     ...sysGlobalConfig
   })
+  const collapsed = ref<boolean>(false)
+
   const themeName = ref('#27ba9b') // 主题名称
   const darkMode = ref<MenuTheme>('light') // 颜色模式
   const darkModeComp = computed(() => {
@@ -48,7 +50,14 @@ export const useAppStore = defineStore('app', () => {
   const toggleDarkMode = () => {
     darkMode.value = darkMode.value === 'light' ? 'dark' : 'light'
   }
+
+  function toggleCollapsed() {
+    collapsed.value = !collapsed.value
+  }
+
   return {
+    toggleCollapsed,
+    collapsed,
     getLanguage,
     themeName,
     themeConfig,

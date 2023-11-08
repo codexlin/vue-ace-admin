@@ -87,7 +87,7 @@ watch(
 
 .custom-layout {
   @include useTheme {
-    background: getModeVar('bgColor') !important;
+    background: getModeVar('bgColor');
   }
 }
 </style>

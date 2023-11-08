@@ -4,18 +4,90 @@
 body {
   font-family: $font-family;
   position: relative;
-  transition:
-    background-color 0.3s,
-    color 0.3s;
+  transition: background-color 0.3s,
+  color 0.3s;
   // 样式规则，使用混合应用当前模式和主题的样式
   @include useTheme {
     background-color: getModeVar('bgColor');
     color: getModeVar('infoColor');
   }
 }
+
 #nprogress .bar {
-  background: $primary !important; //自定义颜色
+  background: $primary; //自定义颜色
 }
+
 .ant-layout {
   font-family: $font-family;
+}
+
+$padding: 8px;
+
+.flex-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2 * $padding;
+  padding: $padding;
+
+  &_left {
+    width: calc(60% - $padding);
+  }
+
+  &_right {
+    width: calc(40% - $padding);
+  }
+
+  .chart {
+    height: 320px;
+  }
+}
+
+.flex-card {
+  flex: 0 0 calc(25% - 2 * $padding); // 使用#{}插值
+}
+
+/* 2xl */
+@media (max-width: 1536px) {
+}
+
+/* xl */
+@media (max-width: 1280px) {
+}
+
+/* lg */
+@media (max-width: 1024px) {
+  .flex-card {
+    flex: 0 0 calc(50% - #{$padding}); // 在中等屏幕上每行显示2个
+  }
+  .flex-cards {
+    &_left,
+    &_right {
+      width: 100%;
+    }
+  }
+}
+
+/* md */
+@media (max-width: 768px) {
+  .custom-layout.ant-layout-sider {
+    position: fixed;
+    height: 100%;
+    z-index: 9;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, .6);;
+  }
+  .flex-cards {
+    flex-direction: column;
+  }
+  .flex-card {
+    flex: 0 0 calc(100% - #{$padding}); // 在小屏幕上每行只显示1个
+  }
+}
+
+/* sm */
+@media (max-width: 640px) {
+}
+
+/* xs */
+@media (max-width: 475px) {
 }

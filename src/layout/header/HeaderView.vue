@@ -15,6 +15,7 @@ import ThemeSwitch from '@/layout/header/components/ThemeSwitch/ThemeSwitch.vue'
 <template>
   <div class="header-view">
     <div class="left-tools">
+      <slot></slot>
       <div class="header-tool-item">
         <BreadcrumbView />
       </div>
@@ -46,16 +47,19 @@ import ThemeSwitch from '@/layout/header/components/ThemeSwitch/ThemeSwitch.vue'
   justify-content: space-between;
 
   .left-tools {
+    gap: 10px;
     padding-left: 10px;
     display: flex;
     align-items: center;
   }
+
   .right-tools {
     padding-right: 10px;
     gap: 15px;
     display: flex;
   }
 }
+
 .header-tool-item {
   cursor: pointer;
 }

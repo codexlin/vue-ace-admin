@@ -7,15 +7,19 @@
 import SettingVue from '@/layout/setting/SettingView.vue'
 import router from '@/router'
 import { useRouteStore } from '@/stores/modules/route'
-import { provide } from 'vue'
+import { provide, ref } from 'vue'
 import { RouterView } from 'vue-router'
 import FooterView from './footer/FooterView.vue'
 import HeaderView from './header/HeaderView.vue'
 import SidebarView from './sidebar/SidebarView.vue'
-import { layoutProviderKey } from './type' // 引入上面定义的类型
+import { layoutProviderKey } from './type'
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue'
+import { useAppStore } from '@/stores/modules/app'
 
 const menus = useRouteStore().getRoutes || []
 const routes = router.getRoutes()
+const app = useAppStore()
+
 provide(layoutProviderKey, {
   currentRoute: router.currentRoute.value,
   routes,
@@ -24,10 +28,17 @@ provide(layoutProviderKey, {
 </script>
 <template>
   <a-layout style="height: 100vh; min-width: 375px">
-    <SidebarView class="custom-layout" />
+    <a-layout-sider v-model:collapsed="app.collapsed" :trigger="null" class="custom-layout" collapsible>
+      <SidebarView class="custom-layout" />
+    </a-layout-sider>
     <a-layout>
       <a-layout-header :style="{ padding: 0 }" class="custom-layout">
-        <HeaderView />
+        <HeaderView>
+          <div class="header-tool-item">
+            <menu-unfold-outlined v-if="app.collapsed" class="trigger" @click="app.toggleCollapsed" />
+            <menu-fold-outlined v-else class="trigger" @click="app.toggleCollapsed" />
+          </div>
+        </HeaderView>
       </a-layout-header>
       <a-layout-content class="layout-content">
         <div :style="{ padding: '24px', minHeight: '360px' }">

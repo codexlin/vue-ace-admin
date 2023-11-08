@@ -4,42 +4,31 @@
  * @Description: 
 -->
 <script lang="ts" setup>
-import { ref } from 'vue'
 import RecursiveMenuVue from './components/RecursiveMenu.vue'
+import { useAppStore } from '@/stores/modules/app'
+import { computed } from 'vue'
 
-const isOpenSide = ref(false)
-const onCollapse = (collapsed: boolean, type: string) => {
-  console.log(collapsed, type)
-}
-
-const onBreakpoint = (broken: boolean) => {
-  isOpenSide.value = broken
-  console.log(broken)
-}
+const app = useAppStore()
+const width = computed(() => (app.collapsed ? '80px' : '200px'))
 </script>
 <template>
-  <a-layout-sider
-    :class="isOpenSide && 'fixed-side'"
-    breakpoint="lg"
-    collapsed-width="0"
-    @breakpoint="onBreakpoint"
-    @collapse="onCollapse"
-  >
-    <div class="logo">
-      <img alt="logo" height="32" src="../../assets/logo.svg" width="32" />
-      <span>Vue Ace Admin</span>
-    </div>
-    <RecursiveMenuVue />
-  </a-layout-sider>
+  <div class="logo">
+    <img alt="logo" height="32" src="../../assets/logo.svg" width="32" />
+    <span v-if="!app.collapsed">Vue Ace Admin</span>
+  </div>
+  <RecursiveMenuVue />
 </template>
 <style lang="scss" scoped>
 .logo {
   height: 32px;
-  margin: 16px;
+  margin: 16px 0;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  width: v-bind(width);
+
   span {
+    transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
     font-weight: bold;
   }
 }
