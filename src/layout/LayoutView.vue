@@ -59,17 +59,17 @@ provide(layoutProviderKey, {
 <style lang="scss" scoped>
 @import '@/styles/theme.scss';
 
-.site-layout-sub-header-background {
-  background: #fff;
-}
-
-.site-layout-background {
-  background: #fff;
-}
-
-[data-theme='dark'] .site-layout-sub-header-background {
-  background: #141414;
-}
+//.site-layout-sub-header-background {
+//  background: #fff;
+//}
+//
+//.site-layout-background {
+//  background: #fff;
+//}
+//
+//[data-theme='dark'] .site-layout-sub-header-background {
+//  background: #141414;
+//}
 
 .custom-layout {
   @include useTheme {

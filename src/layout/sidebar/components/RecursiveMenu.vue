@@ -74,20 +74,11 @@ watch(
     v-model:selectedKeys="selectedKeys"
     :items="items"
     :openKeys="openKeys"
-    :theme="app.darkMode"
-    class="custom-layout"
+    :theme="undefined"
     mode="inline"
     @click="handleClick"
   >
   </a-menu>
 </template>
 
-<style lang="scss">
-@import '@/styles/theme.scss';
-
-.custom-layout {
-  @include useTheme {
-    background: getModeVar('bgColor');
-  }
-}
-</style>
+<style lang="scss"></style>
