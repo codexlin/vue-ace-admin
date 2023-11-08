@@ -117,7 +117,9 @@ Git 提交规范，包含了常见的提交类型，方便开发者追踪和管�
 - `wip` 开发中
 
 ## 项目预览图
-
+<div>
+   <img src="https://pic.imgdb.cn/item/654b506fc458853aef84d579.jpg" alt="blob">
+</div>
 ## 💕 贡献者
 
 感谢所有贡献者的付出！
