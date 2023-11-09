@@ -1,5 +1,6 @@
 @import './theme.scss';
 @import './animation.scss';
+$padding: 8px;
 
 body {
   font-family: $font-family;
@@ -33,8 +34,6 @@ body {
 .ant-layout {
   font-family: $font-family;
 }
-
-$padding: 8px;
 
 .flex-cards {
   display: flex;

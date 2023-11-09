@@ -1,6 +1,12 @@
-<script setup lang="ts"></script>
+<script lang="ts" setup></script>
 <template>
   <a-layout-footer style="text-align: center">
-    Ace Admin ©2023 Created by <a href="https://github.com/xoxosos/vue-ace-admin">Ace Lin</a></a-layout-footer
-  >
+    <p>
+      © 2023 Ace Admin. All Rights Reserved. Made with love by<a
+        href="https://github.com/xoxosos/vue-ace-admin"
+        style="margin-inline: 2px"
+        >Ace Lin!</a
+      >
+    </p>
+  </a-layout-footer>
 </template>
