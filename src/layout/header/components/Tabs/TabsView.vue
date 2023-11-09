@@ -4,7 +4,7 @@ import { useTabsStore } from '@/stores/modules/tabs'
 import type { TabsProps } from 'ant-design-vue'
 import { storeToRefs } from 'pinia'
 import { ref, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 
 interface Props {
   title: string
@@ -18,23 +18,18 @@ const callback: TabsProps['onTabScroll'] = (val) => {
   console.log(val)
 }
 const { tt } = useLocalI18n()
-
 const route = useRoute()
-const router = useRouter()
-
 const tabStore = useTabsStore()
+const { deleteTab, clickTab } = tabStore
 const { activeKey, tabList } = storeToRefs(tabStore)
-const clickTab = (key: string) => router.push(key)
 
 const onEdit = (targetKey: string | MouseEvent, action: string) => {
-  if (action !== 'add') tabStore.deleteTab('current', targetKey as string)
+  if (action !== 'add') deleteTab('cur', targetKey as string)
 }
-const rightClick = (type: string, key: string) => {
-  tabStore.deleteTab(type, key)
-}
+
 watch(
   route,
-  (to, from) => {
+  (to) => {
     const { meta, name, fullPath } = to
     const closable = fullPath !== '/dashboard'
     const item = { title: meta.title, key: fullPath, closable, content: name } as Props
@@ -61,9 +56,9 @@ watch(
             <span class="tab-name">{{ tt(i.title) }}</span>
             <template #overlay>
               <a-menu>
-                <a-menu-item key="1" @click="rightClick('current', i.key)">关闭当前</a-menu-item>
-                <a-menu-item key="2" @click="rightClick('other', i.key)">关闭其他</a-menu-item>
-                <a-menu-item key="3" @click="rightClick('all', i.key)">关闭所有</a-menu-item>
+                <a-menu-item key="1" @click="deleteTab('cur', i.key)">关闭当前</a-menu-item>
+                <a-menu-item key="2" @click="deleteTab('other', i.key)">关闭其他</a-menu-item>
+                <a-menu-item key="3" @click="deleteTab('all', i.key)">关闭所有</a-menu-item>
               </a-menu>
             </template>
           </a-dropdown>

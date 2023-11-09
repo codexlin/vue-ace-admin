@@ -1,15 +1,14 @@
 <script lang="ts" setup>
 import useLocalI18n from '@/hooks/useLocalI18n'
-import { type LayoutProviderData, layoutProviderKey } from '@/layout/type'
 import router from '@/router'
+import { useRouteStore } from '@/stores/modules/route'
 import { flattenRoutes, getLevelPaths } from '@/utils/common/routeUtil'
 import { HomeOutlined } from '@ant-design/icons-vue'
 import type { Route, Routes } from 'types/common'
-import { inject, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 
-const { menus } = inject(layoutProviderKey) as LayoutProviderData
 const { tt } = useLocalI18n()
-
+const menus = useRouteStore().getRoutes || []
 const breadcrumbs = ref<Routes>([])
 const initBreadcrumb = (path: string) => {
   const routes = flattenRoutes(menus)

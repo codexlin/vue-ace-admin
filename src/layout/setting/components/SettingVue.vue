@@ -11,7 +11,6 @@ import { ref } from 'vue'
 const app = useAppStore()
 const color = ref(app.themeName)
 function handleChange(value: string) {
-  console.log(value)
   app.setThemeName(value)
   color.value = value
 }
@@ -50,4 +49,3 @@ function handleChange(value: string) {
 </template>
 
 <style lang="scss" scoped></style>
-@/stores/modules/app

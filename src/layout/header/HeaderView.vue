@@ -10,35 +10,44 @@ import LangSelect from '@/layout/header/components/LangSelect/LangSelect.vue'
 import PersonTool from '@/layout/header/components/PersonTool/PersonTool.vue'
 import TabsView from '@/layout/header/components/Tabs/TabsView.vue'
 import ThemeSwitch from '@/layout/header/components/ThemeSwitch/ThemeSwitch.vue'
+import { useAppStore } from '@/stores/modules/app'
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
+
+const app = useAppStore()
 </script>
 
 <template>
-  <div class="header-view">
-    <div class="left-tools">
-      <slot></slot>
-      <div class="header-tool-item">
-        <BreadcrumbView />
+  <a-layout-header :style="{ padding: 0 }" class="custom-layout">
+    <div class="header-view">
+      <div class="header-view-left">
+        <div class="header-view-item" style="display: flex">
+          <menu-unfold-outlined v-if="app.collapsed" class="trigger" @click="app.toggleCollapsed" />
+          <menu-fold-outlined v-else class="trigger" @click="app.toggleCollapsed" />
+        </div>
+        <div class="header-view-item">
+          <BreadcrumbView />
+        </div>
+      </div>
+      <div class="header-view-right">
+        <!-- 全屏 -->
+        <div class="header-view-item">
+          <FullScreen />
+        </div>
+        <div class="header-view-item">
+          <LangSelect />
+        </div>
+        <div class="header-view-item">
+          <ThemeSwitch />
+        </div>
+        <div class="header-view-item">
+          <PersonTool />
+        </div>
       </div>
     </div>
-    <div class="right-tools">
-      <!-- 全屏 -->
-      <div class="header-tool-item">
-        <FullScreen />
-      </div>
-      <div class="header-tool-item">
-        <LangSelect />
-      </div>
-      <div class="header-tool-item">
-        <ThemeSwitch />
-      </div>
-      <div class="header-tool-item">
-        <PersonTool />
-      </div>
+    <div>
+      <TabsView></TabsView>
     </div>
-  </div>
-  <div>
-    <TabsView></TabsView>
-  </div>
+  </a-layout-header>
 </template>
 
 <style lang="scss" scoped>
@@ -46,21 +55,21 @@ import ThemeSwitch from '@/layout/header/components/ThemeSwitch/ThemeSwitch.vue'
   display: flex;
   justify-content: space-between;
 
-  .left-tools {
+  &-left {
     gap: 10px;
     padding-left: 10px;
     display: flex;
     align-items: center;
   }
 
-  .right-tools {
+  &-right {
     padding-right: 10px;
     gap: 15px;
     display: flex;
   }
-}
 
-.header-tool-item {
-  cursor: pointer;
+  &-item {
+    cursor: pointer;
+  }
 }
 </style>

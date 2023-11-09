@@ -4,15 +4,28 @@
 body {
   font-family: $font-family;
   position: relative;
-  transition: background-color 0.3s,
-  color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
   // 样式规则，使用混合应用当前模式和主题的样式
   @include useTheme {
     background-color: getModeVar('bgColor');
     color: getModeVar('infoColor');
   }
 }
+.ant-drawer:has(.ant-layout-sider) {
+  display: none;
+}
 
+.custom-layout {
+  @include useTheme {
+    background: getModeVar('bgColor');
+  }
+  .ant-drawer-body {
+    background: getModeVar('bgColor');
+    padding: 0;
+  }
+}
 #nprogress .bar {
   background: $primary; //自定义颜色
 }
@@ -70,11 +83,11 @@ $padding: 8px;
 
 /* md */
 @media (max-width: 768px) {
-  .custom-layout.ant-layout-sider {
-    position: fixed;
-    height: 100%;
-    z-index: 9;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, .6);;
+  .ant-drawer:has(.ant-layout-sider) {
+    display: inline-block;
+  }
+  .default-sidebar {
+    display: none;
   }
   .flex-cards {
     flex-direction: column;

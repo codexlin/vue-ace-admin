@@ -9,7 +9,6 @@ import { DownOutlined, LogoutOutlined } from '@ant-design/icons-vue'
 
 const username = 'username'
 const avatar = 'https://xsgames.co/randomusers/avatar.php?g=pixel&key=1'
-
 const user = useUserStore()
 const handleClick = (item: any) => {
   item.key === 'logout' && user.logout()

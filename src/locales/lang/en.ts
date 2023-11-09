@@ -10,6 +10,9 @@ export default {
       children: {
         editable: 'Editable Table',
         universal: 'Universal Table',
+        children: {
+          universal: 'Universal Child Table'
+        },
         level3: {
           page: 'navigation1-1-1'
         }

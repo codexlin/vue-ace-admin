@@ -14,16 +14,19 @@ interface Props {
   closable?: boolean
   content?: string
 }
+type TypeProps = 'all' | 'other' | 'cur'
 export const useTabsStore = defineStore('tabs', () => {
   const tabList = ref<Props[]>([])
   const activeKey = ref('/dashboard')
   const getTabList = computed<Props[]>(() => tabList.value)
   const router = useRouter()
-
+  function clickTab(key: string) {
+    router.push(key)
+  }
   function addTab(tab: Props) {
     tabList.value.push(tab)
   }
-  async function deleteTab(type = 'current', key: string) {
+  async function deleteTab(type: TypeProps, key: string) {
     switch (type) {
       case 'all':
         tabList.value = tabList.value.filter((i) => i.key === '/dashboard')
@@ -43,5 +46,5 @@ export const useTabsStore = defineStore('tabs', () => {
   function init() {
     tabList.value = []
   }
-  return { tabList, addTab, getTabList, deleteTab, init, activeKey }
+  return { tabList, addTab, getTabList, deleteTab, init, activeKey, clickTab }
 })

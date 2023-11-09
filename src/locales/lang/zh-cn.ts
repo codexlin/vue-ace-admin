@@ -10,6 +10,9 @@ export default {
       children: {
         editable: '可编辑表格',
         universal: '通用表格',
+        children: {
+          universal: '通用子表格'
+        },
         level3: {
           page: 'navigation1-1-1'
         }
