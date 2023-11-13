@@ -6,7 +6,7 @@
 
 ## ⚡ 简介
 
-Ace Admin 是一个基于 Vue3.3、TypeScript5.x、Antd-Vue4.x、Pinia2.x 及 Vite4.x 等前沿技术栈构建的免费开源中后台管理系统解决方案。该方案模拟数据通过 ApiFox 实现。(: 开箱即用、无复制封装、支持二次开发.)
+Ace Admin 是一个基于 Vue3.3、TypeScript5.x、Antd-Vue4.x、Pinia2.x 及 Vite4.x 等前沿技术栈构建的免费开源中后台管理系统解决方案。该方案模拟数据通过 ApiFox 实现。(: 开箱即用、无复杂封装、支持二次开发.)
 
 ## 📚 文档
 
