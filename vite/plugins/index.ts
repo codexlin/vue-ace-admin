@@ -13,7 +13,10 @@ export default function setupVitePlugins(viteEnv: Record<string, string>, isBuil
   const plugins: PluginOption[] = [
     vue(),
     vueJsx(),
+    // 按需导入组件库
     Components({
+      // 配置type文件生成位置
+      dts: 'types/components.d.ts',
       resolvers: [
         AntDesignVueResolver({
           importStyle: false // css in js

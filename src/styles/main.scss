@@ -23,7 +23,9 @@ body {
     background: getModeVar('bgColor');
   }
   .ant-drawer-body {
-    background: getModeVar('bgColor');
+    @include useTheme {
+      background: getModeVar('bgColor');
+    }
     padding: 0;
   }
 }
