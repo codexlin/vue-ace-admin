@@ -11,8 +11,7 @@ import { setPageTitleTxt } from '@/router/routerHelp'
 import { useRouteStore } from '@/stores/modules/route'
 import { getLevelPaths } from '@/utils/common/routeUtil'
 import type { ItemType } from 'ant-design-vue'
-import { h, onMounted, ref, type VNode, VueElement, watch } from 'vue'
-import { type RouteRecordRaw } from 'vue-router'
+import type { Routes } from 'types/common'
 
 const { tt, watchSwitchLang } = useLocalI18n()
 const menus = useRouteStore().getRoutes || []
@@ -23,13 +22,7 @@ const items = ref<ItemType[]>([])
 
 const handleClick = (item: ItemType) => item?.key && router.push(item.key as string)
 
-const getItem = (
-  label: VueElement | string,
-  key: string,
-  icon?: any,
-  children?: ItemType[],
-  type?: 'group'
-): ItemType => ({
+const getItem = (label: VNode | string, key: string, icon?: any, children?: ItemType[], type?: 'group'): ItemType => ({
   key,
   icon,
   children,
@@ -37,7 +30,7 @@ const getItem = (
   type
 })
 
-const generateItems = (data: RouteRecordRaw[]): ItemType[] => {
+const generateItems = (data: Routes): ItemType[] => {
   return data.map((item) => {
     const icon = item.meta?.icon && h(SvgIconVue as unknown as VNode, { name: item.meta?.icon })
     let children

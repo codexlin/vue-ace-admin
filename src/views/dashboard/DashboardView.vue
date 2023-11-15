@@ -1,12 +1,11 @@
 <script lang="ts" setup>
 import StatisticCard from '@/components/statistic/StatisticCard.vue'
 import { ArrowDownOutlined, ArrowUpOutlined, HomeOutlined } from '@ant-design/icons-vue'
-import { h } from 'vue'
 import { BarChart, LineChart, PieChart } from 'echarts/charts'
 import { GridComponent, LegendComponent, TitleComponent, TooltipComponent } from 'echarts/components'
 import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
-import { ref } from 'vue'
+import { h } from 'vue'
 import VChart from 'vue-echarts'
 
 use([CanvasRenderer, BarChart, LineChart, PieChart, TitleComponent, TooltipComponent, GridComponent, LegendComponent])

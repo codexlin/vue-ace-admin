@@ -4,9 +4,8 @@
  * @Description: 
 -->
 <script lang="ts" setup>
-import { useAppStore } from '@/stores/modules/app'
-import { ref, watch } from 'vue'
 import SvgIcon from '@/components/svgicon/SvgIcon.vue'
+import { useAppStore } from '@/stores/modules/app'
 
 const app = useAppStore()
 const check = ref(false)
@@ -34,5 +33,3 @@ const handleChange = () => {
     </template>
   </a-switch>
 </template>
-
-<style lang="scss" scoped></style>

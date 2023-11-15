@@ -3,6 +3,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import type { PluginOption } from 'vite'
+import setupAutoImport from './autoImport'
 import setupComponents from './components'
 import setupIcons from './icon'
 import setupSvgIcon from './svg-icon'
@@ -20,6 +21,7 @@ export default function setupVitePlugins(viteEnv: Record<string, string>, isBuil
       ]
     })
   ]
+  plugins.push(setupAutoImport())
   plugins.push(setupComponents())
   plugins.push(setupIcons())
   plugins.push(setupSvgIcon(isBuild))

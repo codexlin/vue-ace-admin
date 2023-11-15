@@ -5,7 +5,6 @@ import { useRouteStore } from '@/stores/modules/route'
 import { flattenRoutes, getLevelPaths } from '@/utils/common/routeUtil'
 import { HomeOutlined } from '@ant-design/icons-vue'
 import type { Route, Routes } from 'types/common'
-import { ref, watch } from 'vue'
 
 const { tt } = useLocalI18n()
 const menus = useRouteStore().getRoutes || []

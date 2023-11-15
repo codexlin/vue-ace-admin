@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { isFunction } from '@/utils/common/checkUtils'
-import { ref } from 'vue'
 import type { Props } from '../type'
 
 const props = withDefaults(defineProps<Props>(), {

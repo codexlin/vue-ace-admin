@@ -2,7 +2,7 @@
 import CustomButton from '@/components/button/CustomButton.vue'
 import SvgIconVue from '@/components/svgicon/SvgIcon.vue'
 import { SearchOutlined } from '@ant-design/icons-vue'
-import { h, ref } from 'vue'
+import { h } from 'vue'
 
 const handleClick = () => {
   return new Promise((resolve, reject) => {

@@ -1,7 +1,6 @@
 <script lang="tsx" setup>
 import CommonTableVue from '@/components/table/CommonTable.vue'
 import useList from '@/hooks/useList'
-import { computed, onMounted } from 'vue'
 import { getListWithPage } from '../api/index'
 
 type Props = {

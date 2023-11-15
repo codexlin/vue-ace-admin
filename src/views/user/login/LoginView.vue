@@ -1,10 +1,9 @@
 <script lang="ts" setup>
+import BasicButton from '@/components/button/components/BasicButton.vue'
 import useLocalI18n from '@/hooks/useLocalI18n'
 import { useUserStore } from '@/stores/modules/user'
 import { registerApi } from '@/views/user/login/api'
 import { GithubOutlined, GoogleOutlined, WechatOutlined } from '@ant-design/icons-vue'
-import { reactive, ref } from 'vue'
-import BasicButton from '@/components/button/components/BasicButton.vue'
 
 const user = useUserStore()
 

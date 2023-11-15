@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue'
-import { computed } from 'vue'
 
 interface IProps {
   name: string
