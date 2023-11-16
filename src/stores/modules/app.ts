@@ -59,7 +59,8 @@ export const useAppStore = defineStore('app', () => {
   }
 
   function resetDefault() {
-    appConfig.value.token = systemConfig.token
+    appConfig.value.token = {}
+    appConfig.value.token = cloneDeep(systemConfig.token)
     appConfig.value.compactAlgorithm = systemConfig.compactAlgorithm
     console.log(appConfig.value)
   }

@@ -6,7 +6,6 @@
 <script lang="ts" setup>
 import { useAppStore } from '@/stores/modules/app'
 import variables from '@/styles/variables.module.scss'
-import systemConfig from '@/config/system'
 
 const app = useAppStore()
 const color = ref(app.appConfig.token.colorPrimary)
@@ -18,6 +17,7 @@ function handleChange(value: string) {
 
 const reset = () => {
   app.resetDefault()
+  color.value = app.appConfig.token.colorPrimary
 }
 </script>
 
@@ -28,7 +28,7 @@ const reset = () => {
     <div>
       <h3>自定义主题颜色</h3>
       <input v-model="color" type="color" @change="handleChange(color)" />
-      <a-select v-model:value="app.themeName" style="width: 240px">
+      <a-select v-model:value="app.appConfig.token.colorPrimary" style="width: 240px">
         <a-select-option v-for="(color, name) in variables" :key="name" :value="name">
           {{ name }}:{{ color }}
         </a-select-option>
