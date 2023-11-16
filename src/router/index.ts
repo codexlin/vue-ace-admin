@@ -8,7 +8,7 @@ import type { App } from 'vue'
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 import { setupRouterHooks } from './routerHelp'
 
-const history = import.meta.env.VITE_HASH_ROUTE === false ? createWebHashHistory : createWebHistory
+const history = import.meta.env.VITE_HASH_ROUTE === 'true' ? createWebHashHistory : createWebHistory
 export const router = createRouter({
   routes: basicRoutes,
   scrollBehavior(to, from, savedPosition) {
