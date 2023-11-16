@@ -3,41 +3,40 @@
  * @Date: 2023-10-14 21:29:57
  * @Description:
  */
-import sysGlobalConfig from '@/app'
+import systemConfig from '@/config/system/index'
 import type { MenuTheme } from 'ant-design-vue'
 import { theme } from 'ant-design-vue'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
+import { cloneDeep } from 'lodash-es'
 
 /**
  * app 配置
  */
 export const useAppStore = defineStore('app', () => {
+  const { darkAlgorithm, compactAlgorithm, defaultAlgorithm } = theme
   const appConfig = ref({
-    ...sysGlobalConfig
+    ...cloneDeep(systemConfig)
   })
   const collapsed = ref<boolean>(false)
 
-  const themeName = ref('#27ba9b') // 主题名称
   const darkMode = ref<MenuTheme>('light') // 颜色模式
   const darkModeComp = computed(() => {
     document.documentElement.setAttribute('data-theme', darkMode.value)
     return darkMode.value
   })
   const themeConfig = computed(() => {
-    document.documentElement.style.setProperty('--primary', themeName.value)
-    console.log('app', themeName.value)
+    document.documentElement.style.setProperty('--primary', appConfig.value.token.colorPrimary)
+    let algorithm = []
+    if (appConfig.value.compactAlgorithm) {
+      algorithm = darkMode.value === 'light' ? [defaultAlgorithm, compactAlgorithm] : [darkAlgorithm, compactAlgorithm]
+    } else {
+      algorithm = darkMode.value === 'light' ? [defaultAlgorithm] : [darkAlgorithm]
+    }
     // 主题配置
     return {
-      token: {
-        colorPrimary: themeName.value || '#27ba9b',
-        colorSuccess: '#1dc779',
-        colorWarning: '#ffb302',
-        colorError: '#cf4444',
-        colorInfo: themeName.value || '#27ba9b',
-        wireframe: true
-      },
-      algorithm: darkMode.value === 'light' ? theme.defaultAlgorithm : theme.darkAlgorithm
+      token: { ...appConfig.value.token, colorInfo: appConfig.value.token.colorPrimary || '#27ba9b' },
+      algorithm
     }
   })
 
@@ -45,7 +44,11 @@ export const useAppStore = defineStore('app', () => {
     return appConfig.value.defaultLanguage
   })
   const setThemeName = (value: string) => {
-    themeName.value = value
+    appConfig.value.token.colorPrimary = value
+  }
+
+  const setFontSize = (value: number) => {
+    appConfig.value.token.fontSize = value
   }
   const toggleDarkMode = () => {
     darkMode.value = darkMode.value === 'light' ? 'dark' : 'light'
@@ -55,16 +58,23 @@ export const useAppStore = defineStore('app', () => {
     collapsed.value = !collapsed.value
   }
 
+  function resetDefault() {
+    appConfig.value.token = systemConfig.token
+    appConfig.value.compactAlgorithm = systemConfig.compactAlgorithm
+    console.log(appConfig.value)
+  }
+
   return {
     toggleCollapsed,
     collapsed,
     getLanguage,
-    themeName,
     themeConfig,
     darkMode,
     darkModeComp,
     setThemeName,
     appConfig,
-    toggleDarkMode
+    setFontSize,
+    toggleDarkMode,
+    resetDefault
   }
 })

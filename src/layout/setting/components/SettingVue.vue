@@ -6,17 +6,25 @@
 <script lang="ts" setup>
 import { useAppStore } from '@/stores/modules/app'
 import variables from '@/styles/variables.module.scss'
+import systemConfig from '@/config/system'
 
 const app = useAppStore()
-const color = ref(app.themeName)
+const color = ref(app.appConfig.token.colorPrimary)
+
 function handleChange(value: string) {
   app.setThemeName(value)
   color.value = value
+}
+
+const reset = () => {
+  app.resetDefault()
 }
 </script>
 
 <template>
   <div class="setting-drawer">
+    <a-button @click="reset">重置全部</a-button>
+
     <div>
       <h3>自定义主题颜色</h3>
       <input v-model="color" type="color" @change="handleChange(color)" />
@@ -48,6 +56,20 @@ function handleChange(value: string) {
       <a-button-group>
         <a-button @click="app.toggleDarkMode">切换模式{{ app.darkModeComp }}</a-button>
       </a-button-group>
+      <a-form>
+        <a-form-item label="文字大小">
+          <a-input-number v-model:value="app.appConfig.token.fontSize"></a-input-number>
+        </a-form-item>
+        <a-form-item label="圆角设置">
+          <a-input-number v-model:value="app.appConfig.token.borderRadius"></a-input-number>
+        </a-form-item>
+        <a-form-item label="线框风格">
+          <a-switch v-model:checked="app.appConfig.token.wireframe" checked-children="开" un-checked-children="关" />
+        </a-form-item>
+        <a-form-item label="紧凑模式">
+          <a-switch v-model:checked="app.appConfig.compactAlgorithm" checked-children="开" un-checked-children="关" />
+        </a-form-item>
+      </a-form>
     </div>
   </div>
 </template>
@@ -56,6 +78,7 @@ function handleChange(value: string) {
 .setting-drawer {
   display: flex;
   flex-direction: column;
+
   div {
     margin-bottom: 20px;
   }
