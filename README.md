@@ -16,7 +16,7 @@ Ace Admin 是一个基于 Vue3.3、TypeScript5.x、Antd-Vue4.x、Pinia2.x 及 Vi
 
 | 位置   | 账号            | 链接                                               |
 | ------ | --------------- | -------------------------------------------------- |
-| vercel | admin@qq.com 或 user@qq.com | [链接](https://www.look4u.top) |
+| vercel | admin@qq.com 或 user@qq.com | [链接](vue-ace-admin.vercel.app) |
 
 ## ❤️ 用爱发电
 
