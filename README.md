@@ -10,7 +10,7 @@ Ace Admin 是一个基于 Vue3.3、TypeScript5.x、Antd-Vue4.x、Pinia2.x 及 Vi
 
 ## 📚 文档
 
-- 中文文档：开发中
+- 多语言文档：开发中
 
 ## 📺 在线预览
 
@@ -122,17 +122,11 @@ Git 提交规范，包含了常见的提交类型，方便开发者追踪和管�
    <img src="https://pic.imgdb.cn/item/654b506fc458853aef84d579.jpg" alt="blob">
 </div>
 
-## 💕 贡献者
-
-感谢所有贡献者的付出！
 
 ## 💕 感谢 Star
 
 若您喜欢这个项目，请不吝赐予 star 支持，这是维护者持续更新的动力。（小声：毕竟是免费的）
 
-## ☕ Donate
-
-捐赠
 
 ## 📄 License
 
