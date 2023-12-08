@@ -6,9 +6,9 @@
 import systemConfig from '@/config/system/index'
 import type { MenuTheme } from 'ant-design-vue'
 import { theme } from 'ant-design-vue'
+import { cloneDeep } from 'lodash-es'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
-import { cloneDeep } from 'lodash-es'
 
 /**
  * app 配置
@@ -59,10 +59,9 @@ export const useAppStore = defineStore('app', () => {
   }
 
   function resetDefault() {
-    appConfig.value.token = {}
     appConfig.value.token = cloneDeep(systemConfig.token)
     appConfig.value.compactAlgorithm = systemConfig.compactAlgorithm
-    console.log(appConfig.value)
+    console.log('resetDefault', appConfig.value)
   }
 
   return {
