@@ -13,3 +13,7 @@ export interface LayoutProviderData {
 }
 export type InjectType = InjectionKey<LayoutProviderData>
 export const layoutProviderKey = Symbol() as InjectType
+// 页面局部刷新
+export type RefreshFn = () => void
+export const refreshKey: InjectionKey<RefreshFn> = Symbol('refresh')
+export type MatchPattern = string | RegExp | (string | RegExp)[]

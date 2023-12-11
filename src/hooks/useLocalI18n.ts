@@ -1,5 +1,4 @@
 import { useAppStore } from '@/stores/modules/app'
-import { watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 export default function useLocalI18n() {

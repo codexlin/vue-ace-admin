@@ -1,11 +1,8 @@
 <script lang="ts" setup>
 import useLocalI18n from '@/hooks/useLocalI18n'
+import { refreshKey } from '@/layout/type'
 import { useTabsStore } from '@/stores/modules/tabs'
 import type { TabsProps } from 'ant-design-vue'
-import { storeToRefs } from 'pinia'
-import { ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
-
 interface Props {
   title: string
   key: string
@@ -26,7 +23,8 @@ const { activeKey, tabList } = storeToRefs(tabStore)
 const onEdit = (targetKey: string | MouseEvent, action: string) => {
   if (action !== 'add') deleteTab('cur', targetKey as string)
 }
-
+const refresh = inject(refreshKey)
+const onRefresh = () => refresh!()
 watch(
   route,
   (to) => {
@@ -56,6 +54,7 @@ watch(
             <span class="tab-name">{{ tt(i.title) }}</span>
             <template #overlay>
               <a-menu>
+                <a-menu-item key="1" @click="onRefresh">刷新</a-menu-item>
                 <a-menu-item key="1" @click="deleteTab('cur', i.key)">关闭当前</a-menu-item>
                 <a-menu-item key="2" @click="deleteTab('other', i.key)">关闭其他</a-menu-item>
                 <a-menu-item key="3" @click="deleteTab('all', i.key)">关闭所有</a-menu-item>

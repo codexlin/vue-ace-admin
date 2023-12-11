@@ -1,7 +1,9 @@
 <template>
-  <div>可编辑</div>
+  <div><a-input v-model:value="test"></a-input></div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const test = ref('')
+</script>
 
 <style scoped></style>

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { SettingOutlined } from '@ant-design/icons-vue'
-import { h, ref } from 'vue'
 import SettingVue from '@/layout/setting/components/SettingVue.vue'
+import { SettingOutlined } from '@ant-design/icons-vue'
+import { h } from 'vue'
 
 const open = ref<boolean>(false)
 

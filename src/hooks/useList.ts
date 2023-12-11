@@ -1,5 +1,5 @@
 import { message as AntMessage } from 'ant-design-vue'
-import { ref, type Ref, watch } from 'vue'
+import type { Ref } from 'vue'
 
 export interface MessageType {
   GET_DATA_IF_FAILED?: string

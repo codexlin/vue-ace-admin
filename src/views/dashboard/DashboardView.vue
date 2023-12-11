@@ -205,78 +205,80 @@ const tableData = [
 ]
 </script>
 <template>
-  <div class="flex-cards">
-    <div class="flex-card">
-      <StatisticCard :prefix="h(ArrowUpOutlined)" :value-style="{ color: 'green' }" />
+  <div>
+    <div class="flex-cards">
+      <div class="flex-card">
+        <StatisticCard :prefix="h(ArrowUpOutlined)" :value-style="{ color: 'green' }" />
+      </div>
+      <div class="flex-card">
+        <StatisticCard :prefix="h(ArrowDownOutlined)" :value-style="{ color: 'red' }" />
+      </div>
+      <div class="flex-card">
+        <StatisticCard :prefix="h(ArrowUpOutlined)" :value-style="{ color: 'green' }" />
+      </div>
+      <div class="flex-card">
+        <StatisticCard :prefix="h(ArrowUpOutlined)" :value-style="{ color: 'green' }" />
+      </div>
     </div>
-    <div class="flex-card">
-      <StatisticCard :prefix="h(ArrowDownOutlined)" :value-style="{ color: 'red' }" />
-    </div>
-    <div class="flex-card">
-      <StatisticCard :prefix="h(ArrowUpOutlined)" :value-style="{ color: 'green' }" />
-    </div>
-    <div class="flex-card">
-      <StatisticCard :prefix="h(ArrowUpOutlined)" :value-style="{ color: 'green' }" />
-    </div>
-  </div>
-  <div class="flex-cards">
-    <a-card
-      :active-tab-key="key"
-      :tab-list="tabList"
-      class="flex-cards_left"
-      title="Card title"
-      @tabChange="(key) => onTabChange(key, 'key')"
-    >
-      <template #customTab="item">
-        <span v-if="item.key === 'tab1'">
-          <home-outlined />
-          {{ item.key }}
-        </span>
-      </template>
-      <template #extra>
-        <a href="#">More</a>
-      </template>
-      <template v-if="key === 'tab1'">
-        <v-chart :option="option" autoresize class="chart" />
-      </template>
-      <template v-if="key === 'tab2'">
-        <v-chart :option="barOption" autoresize class="chart" />
-      </template>
-    </a-card>
-    <a-card class="flex-cards_right">
-      <v-chart :option="tab1Option" autoresize class="chart" />
-    </a-card>
-  </div>
-  <div class="flex-cards">
-    <a-card class="flex-cards_right">
-      <a-list :data-source="data" item-layout="horizontal">
-        <template #renderItem="{ item }">
-          <a-list-item>
-            <a-list-item-meta
-              description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-            >
-              <template #title>
-                <a href="https://www.antdv.com/">{{ item.title }}</a>
-              </template>
-              <template #avatar>
-                <a-avatar src="https://joeschmoe.io/api/v1/random" />
-              </template>
-            </a-list-item-meta>
-          </a-list-item>
+    <div class="flex-cards">
+      <a-card
+        :active-tab-key="key"
+        :tab-list="tabList"
+        class="flex-cards_left"
+        title="Card title"
+        @tabChange="(key) => onTabChange(key, 'key')"
+      >
+        <template #customTab="item">
+          <span v-if="item.key === 'tab1'">
+            <home-outlined />
+            {{ item.key }}
+          </span>
         </template>
-      </a-list>
-    </a-card>
-    <a-card class="flex-cards_left">
-      <a-table :columns="columns" :data-source="tableData" :pagination="false" bordered>
-        <template #bodyCell="{ column, text }">
-          <template v-if="column.dataIndex === 'name'">
-            <a>{{ text }}</a>
+        <template #extra>
+          <a href="#">More</a>
+        </template>
+        <template v-if="key === 'tab1'">
+          <v-chart :option="option" autoresize class="chart" />
+        </template>
+        <template v-if="key === 'tab2'">
+          <v-chart :option="barOption" autoresize class="chart" />
+        </template>
+      </a-card>
+      <a-card class="flex-cards_right">
+        <v-chart :option="tab1Option" autoresize class="chart" />
+      </a-card>
+    </div>
+    <div class="flex-cards">
+      <a-card class="flex-cards_right">
+        <a-list :data-source="data" item-layout="horizontal">
+          <template #renderItem="{ item }">
+            <a-list-item>
+              <a-list-item-meta
+                description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+              >
+                <template #title>
+                  <a href="https://www.antdv.com/">{{ item.title }}</a>
+                </template>
+                <template #avatar>
+                  <a-avatar src="https://joeschmoe.io/api/v1/random" />
+                </template>
+              </a-list-item-meta>
+            </a-list-item>
           </template>
-        </template>
-        <template #title>Header</template>
-        <template #footer>Footer</template>
-      </a-table>
-    </a-card>
+        </a-list>
+      </a-card>
+      <a-card class="flex-cards_left">
+        <a-table :columns="columns" :data-source="tableData" :pagination="false" bordered>
+          <template #bodyCell="{ column, text }">
+            <template v-if="column.dataIndex === 'name'">
+              <a>{{ text }}</a>
+            </template>
+          </template>
+          <template #title>Header</template>
+          <template #footer>Footer</template>
+        </a-table>
+      </a-card>
+    </div>
   </div>
 </template>
 <style lang="scss" scoped></style>

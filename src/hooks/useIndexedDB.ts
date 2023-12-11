@@ -1,4 +1,4 @@
-import { ref, type Ref } from 'vue'
+import { type Ref } from 'vue'
 
 interface UseIndexedDBReturn {
   openDB: (name: string, version: number, objectStoreName: string) => Promise<IDBDatabase>

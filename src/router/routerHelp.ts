@@ -55,7 +55,6 @@ const loadView = import.meta.glob('../views/**/*.vue')
 
 // 动态添加路由
 export function addRoutes(menu: RouteRecordRaw[]) {
-  console.log('addRoutes')
   menu.forEach((e) => {
     const { name, path, meta, children, component } = e
     // 只将页面信息添加到路由中
@@ -70,5 +69,5 @@ export function addRoutes(menu: RouteRecordRaw[]) {
       addRoutes(children)
     }
   })
-  console.log(router.getRoutes())
+  console.log('addRoutes完毕', router.getRoutes())
 }

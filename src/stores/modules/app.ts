@@ -7,8 +7,6 @@ import systemConfig from '@/config/system/index'
 import type { MenuTheme } from 'ant-design-vue'
 import { theme } from 'ant-design-vue'
 import { cloneDeep } from 'lodash-es'
-import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
 
 /**
  * app 配置

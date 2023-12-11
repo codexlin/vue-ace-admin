@@ -5,9 +5,6 @@
  */
 import { addRoutes } from '@/router/routerHelp'
 import { backendRoutesApi } from '@/views/user/login/api'
-import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
-import type { RouteRecordRaw } from 'vue-router'
 
 export const useRouteStore = defineStore('route', () => {
   const routes = ref<any[]>([])

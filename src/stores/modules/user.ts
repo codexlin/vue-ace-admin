@@ -6,8 +6,6 @@
 import { useIndexedDB } from '@/hooks/useIndexedDB'
 import router from '@/router'
 import { loginApi } from '@/views/user/login/api'
-import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
 import { useRouteStore } from './route'
 import { useTabsStore } from './tabs'
 

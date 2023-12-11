@@ -5,10 +5,18 @@
 -->
 <script lang="ts" setup>
 import SettingVue from '@/layout/setting/SettingView.vue'
-import { RouterView } from 'vue-router'
+import { useTabsStore } from '@/stores/modules/tabs'
 import FooterView from './footer/FooterView.vue'
 import HeaderView from './header/HeaderView.vue'
 import SidebarView from './sidebar/SidebarView.vue'
+import { refreshKey, type MatchPattern } from './type'
+const { getCacheTabs } = useTabsStore()
+const isAlive = ref(true)
+provide(refreshKey, async () => {
+  isAlive.value = false
+  await nextTick()
+  isAlive.value = true
+})
 </script>
 <template>
   <a-layout style="height: 100vh; min-width: 375px">
@@ -17,11 +25,11 @@ import SidebarView from './sidebar/SidebarView.vue'
       <HeaderView> </HeaderView>
       <a-layout-content class="layout-content">
         <div :style="{ padding: '24px', minHeight: '360px' }">
-          <router-view v-slot="{ Component, route }">
-            <transition name="fade">
-              <KeepAlive>
-                <component :is="Component" :key="route.name" />
-              </KeepAlive>
+          <router-view v-slot="{ Component, route }" v-if="isAlive">
+            <transition name="scale" mode="out-in">
+              <keep-alive :include="getCacheTabs() as MatchPattern">
+                <component :is="Component" :key="route.path" />
+              </keep-alive>
             </transition>
           </router-view>
         </div>
@@ -52,7 +60,7 @@ import SidebarView from './sidebar/SidebarView.vue'
 
 .layout-content {
   overflow-y: auto;
-  margin: 44px 16px 0;
+  margin: 41px 0 0;
   /* ---滚动条公共样式--- */
 
   /*定义滚动条宽高及背景，宽高分别对应横竖滚动条的尺寸*/

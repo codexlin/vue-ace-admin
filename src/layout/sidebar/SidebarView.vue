@@ -5,9 +5,8 @@
 -->
 <script lang="ts" setup>
 import { useAppStore } from '@/stores/modules/app'
-import { computed, ref } from 'vue'
-import RecursiveMenuVue from './components/RecursiveMenu.vue'
 import type { DrawerProps } from 'ant-design-vue'
+import RecursiveMenuVue from './components/RecursiveMenu.vue'
 
 const app = useAppStore()
 const width = computed(() => (app.collapsed ? '80px' : '200px'))

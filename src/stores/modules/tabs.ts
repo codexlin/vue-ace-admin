@@ -4,10 +4,6 @@
  * @Description:
  */
 
-import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
-import { useRouter } from 'vue-router'
-
 interface Props {
   title: string
   key: string
@@ -20,6 +16,13 @@ export const useTabsStore = defineStore('tabs', () => {
   const activeKey = ref('/dashboard')
   const getTabList = computed<Props[]>(() => tabList.value)
   const router = useRouter()
+  const cacheTabs = ref<Array<String>>([])
+  function getCacheTabs() {
+    cacheTabs.value = []
+    router.getRoutes().forEach((i) => i.meta.isCache && cacheTabs.value.push(i.name as string))
+    return cacheTabs.value
+  }
+
   function clickTab(key: string) {
     router.push(key)
   }
@@ -46,5 +49,5 @@ export const useTabsStore = defineStore('tabs', () => {
   function init() {
     tabList.value = []
   }
-  return { tabList, addTab, getTabList, deleteTab, init, activeKey, clickTab }
+  return { cacheTabs, tabList, addTab, getTabList, deleteTab, init, activeKey, clickTab, getCacheTabs }
 })
