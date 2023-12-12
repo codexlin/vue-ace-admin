@@ -1,7 +1,7 @@
 <!--
  * @Author: LinRenJie xoxosos666@gmail.com
  * @Date: 2023-10-14 21:29:57
- * @Description: 
+ * @Description:
 -->
 <script lang="ts" setup>
 import SettingVue from '@/layout/setting/SettingView.vue'
@@ -9,8 +9,12 @@ import { useTabsStore } from '@/stores/modules/tabs'
 import FooterView from './footer/FooterView.vue'
 import HeaderView from './header/HeaderView.vue'
 import SidebarView from './sidebar/SidebarView.vue'
-import { refreshKey, type MatchPattern } from './type'
-const { getCacheTabs } = useTabsStore()
+import { type MatchPattern, refreshKey } from './type'
+
+const store = useTabsStore()
+;(() => {
+  store.setCacheTabs()
+})()
 const isAlive = ref(true)
 provide(refreshKey, async () => {
   isAlive.value = false
@@ -22,13 +26,13 @@ provide(refreshKey, async () => {
   <a-layout style="height: 100vh; min-width: 375px">
     <SidebarView />
     <a-layout>
-      <HeaderView> </HeaderView>
+      <HeaderView />
       <a-layout-content class="layout-content">
         <div :style="{ padding: '24px', minHeight: '360px' }">
-          <router-view v-slot="{ Component, route }" v-if="isAlive">
+          <router-view v-slot="{ Component, route }">
             <transition name="scale" mode="out-in">
-              <keep-alive :include="getCacheTabs() as MatchPattern">
-                <component :is="Component" :key="route.path" />
+              <keep-alive :include="store.getCacheTabs as MatchPattern">
+                <component :is="Component" v-if="isAlive" :key="route.path" />
               </keep-alive>
             </transition>
           </router-view>

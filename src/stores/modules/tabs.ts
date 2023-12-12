@@ -12,15 +12,26 @@ interface Props {
 }
 type TypeProps = 'all' | 'other' | 'cur'
 export const useTabsStore = defineStore('tabs', () => {
+  // 所有的标签页
   const tabList = ref<Props[]>([])
+  // 当前标签页
   const activeKey = ref('/dashboard')
   const getTabList = computed<Props[]>(() => tabList.value)
   const router = useRouter()
+  // 存放组件name用于缓存
   const cacheTabs = ref<Array<String>>([])
-  function getCacheTabs() {
+  const getCacheTabs = computed(() => cacheTabs.value)
+  // 刷新tab时先清除后添加
+  async function refreshTab(name, cb) {
+    const index = cacheTabs.value.findIndex((i) => i === name)
+    cacheTabs.value.splice(index, 1)
+    await cb()
+    cacheTabs.value.push(name)
+  }
+  // 初始化时设置需要缓存的Tabs
+  function setCacheTabs() {
     cacheTabs.value = []
     router.getRoutes().forEach((i) => i.meta.isCache && cacheTabs.value.push(i.name as string))
-    return cacheTabs.value
   }
 
   function clickTab(key: string) {
@@ -49,5 +60,17 @@ export const useTabsStore = defineStore('tabs', () => {
   function init() {
     tabList.value = []
   }
-  return { cacheTabs, tabList, addTab, getTabList, deleteTab, init, activeKey, clickTab, getCacheTabs }
+  return {
+    refreshTab,
+    cacheTabs,
+    tabList,
+    addTab,
+    getTabList,
+    deleteTab,
+    init,
+    activeKey,
+    clickTab,
+    getCacheTabs,
+    setCacheTabs
+  }
 })

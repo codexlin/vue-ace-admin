@@ -4,7 +4,7 @@
  * @Description:
  */
 import { i18n } from '@/locales'
-import { router } from '@/router/index'
+import { router } from '@/router'
 import { useRouteStore } from '@/stores/modules/route'
 import { useUserStore } from '@/stores/modules/user'
 import Nprogress from 'nprogress'
@@ -16,6 +16,7 @@ export const setPageTitleTxt = (meta: any) => {
   if (title) window.document.title = i18n.global.t(title)
 }
 
+// 设置路由守卫
 export function setupRouterHooks() {
   let flag = true // 定义标识，记录路由是否添加
   router.beforeEach(async (to, from, next) => {
@@ -55,8 +56,8 @@ const loadView = import.meta.glob('../views/**/*.vue')
 
 // 动态添加路由
 export function addRoutes(menu: RouteRecordRaw[]) {
-  menu.forEach((e) => {
-    const { name, path, meta, children, component } = e
+  menu.forEach((m) => {
+    const { name, path, meta, children, component } = m
     // 只将页面信息添加到路由中
     if (!children || children.length === 0) {
       router.addRoute('layout', {
@@ -69,5 +70,4 @@ export function addRoutes(menu: RouteRecordRaw[]) {
       addRoutes(children)
     }
   })
-  console.log('addRoutes完毕', router.getRoutes())
 }
