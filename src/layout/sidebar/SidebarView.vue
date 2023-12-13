@@ -9,7 +9,7 @@ import type { DrawerProps } from 'ant-design-vue'
 import { gsap } from 'gsap'
 import RecursiveMenuVue from './components/RecursiveMenu.vue'
 onMounted(() => {
-  gsap.to('.logo-img', { rotation: 360, duration: 2, ease: 'bounce.out' })
+  gsap.to('.logo-img', { rotation: 360, duration: 2, ease: 'bounce.out', repeat: Infinity })
 })
 const app = useAppStore()
 const width = computed(() => (app.collapsed ? '80px' : '200px'))

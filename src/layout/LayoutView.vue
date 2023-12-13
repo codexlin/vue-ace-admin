@@ -9,7 +9,7 @@ import { useTabsStore } from '@/stores/modules/tabs'
 import FooterView from './footer/FooterView.vue'
 import HeaderView from './header/HeaderView.vue'
 import SidebarView from './sidebar/SidebarView.vue'
-import { type MatchPattern, refreshKey } from './type'
+import { refreshKey, type MatchPattern } from './type'
 
 const store = useTabsStore()
 ;(() => {
@@ -64,7 +64,7 @@ provide(refreshKey, async () => {
 
 .layout-content {
   overflow-y: auto;
-  margin: 41px 0 0;
+  // margin: 41px 0 0;
   /* ---滚动条公共样式--- */
 
   /*定义滚动条宽高及背景，宽高分别对应横竖滚动条的尺寸*/

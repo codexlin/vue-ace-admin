@@ -17,7 +17,7 @@ const app = useAppStore()
 </script>
 
 <template>
-  <a-layout-header :style="{ padding: 0 }" class="custom-layout">
+  <a-layout-header class="custom-layout layout-header">
     <div class="header-view">
       <div class="header-view-left">
         <div class="header-view-item" style="display: flex">
@@ -51,6 +51,10 @@ const app = useAppStore()
 </template>
 
 <style lang="scss" scoped>
+.layout-header {
+  margin-bottom: 40px;
+  padding: 0;
+}
 .header-view {
   display: flex;
   justify-content: space-between;

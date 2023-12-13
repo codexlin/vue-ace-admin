@@ -77,20 +77,23 @@ onMounted(async () => {
   <section>
     <h2>分页列表</h2>
     <div>
-      <CommonTableVue
-        :columns="columns"
-        :data-source="list"
-        :loading="loading"
-        :pagination="pagination"
-        row-key="id"
-        @change="handleTableChange"
-      >
-        <template #bodyCell="{ text }">
-          <a>
-            {{ text }}
-          </a>
-        </template>
-      </CommonTableVue>
+      <a-card>
+        <CommonTableVue
+          is-zebra="even"
+          :columns="columns"
+          :data-source="list"
+          :loading="loading"
+          :pagination="pagination"
+          row-key="id"
+          @change="handleTableChange"
+        >
+          <template #bodyCell="{ text }">
+            <a>
+              {{ text }}
+            </a>
+          </template>
+        </CommonTableVue>
+      </a-card>
     </div>
   </section>
 </template>

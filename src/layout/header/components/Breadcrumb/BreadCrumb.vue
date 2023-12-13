@@ -4,21 +4,8 @@ import router from '@/router'
 import { useRouteStore } from '@/stores/modules/route'
 import { flattenRoutes, getLevelPaths } from '@/utils/common/routeUtil'
 import { HomeOutlined } from '@ant-design/icons-vue'
-import { gsap } from 'gsap'
 import type { Route, Routes } from 'types/common'
-onMounted(() => {
-  gsap.fromTo(
-    '.breadcrumb-title',
-    { opacity: 0, visibility: 'hidden' }, // 初始设置为透明，上移50像素，隐藏
-    {
-      opacity: 1,
-      y: 0,
-      visibility: 'visible', // 设置为可见
-      duration: 0.5,
-      ease: 'power3.inOut'
-    }
-  )
-})
+
 const { tt } = useLocalI18n()
 const menus = useRouteStore().getRoutes || []
 const breadcrumbs = ref<Routes>([])
