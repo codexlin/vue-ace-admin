@@ -11,12 +11,16 @@ export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd())
   console.log(mode, env, command)
   return {
+    // 插件配置
     plugins: setupVitePlugins(env, command === 'build'),
+    // 解析配置:配置模块解析规则
     resolve: {
+      // 别名配置
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url))
       }
     },
+    // 开发服务器配置
     server: {
       // 服务器主机名，如果允许外部访问，可设置为"0.0.0.0"
       host: '0.0.0.0',
@@ -27,13 +31,14 @@ export default defineConfig(({ command, mode }) => {
       proxy: {
         // '/api'
         [env.VITE_APP_BASE_API]: {
-          target: env.VITE_API_URL, //  代理的请求地址：即服务器地址
+          target: env.VITE_API_URL, //  代理的请求服务器地址
           logLevel: 'debug',
           changeOrigin: true, // 跨域
           rewrite: (path: string) => path.replace(new RegExp('^' + env.VITE_APP_BASE_API), '')
         }
       }
     },
+    // 构建配置
     build: {
       target: ['esnext'],
       outDir: mode === 'production' ? 'dist' : `dist-${mode}`,

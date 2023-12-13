@@ -3,7 +3,7 @@
  * @Date: 2023-10-25 21:53:39
  * @Description:
  */
-
+import { gsap } from 'gsap'
 interface Props {
   title: string
   key: string
@@ -19,10 +19,10 @@ export const useTabsStore = defineStore('tabs', () => {
   const getTabList = computed<Props[]>(() => tabList.value)
   const router = useRouter()
   // 存放组件name用于缓存
-  const cacheTabs = ref<Array<String>>([])
+  const cacheTabs = ref<Array<string>>([])
   const getCacheTabs = computed(() => cacheTabs.value)
   // 刷新tab时先清除后添加
-  async function refreshTab(name, cb) {
+  async function refreshTab(name: string, cb: () => Promise<void>) {
     const index = cacheTabs.value.findIndex((i) => i === name)
     cacheTabs.value.splice(index, 1)
     await cb()
@@ -36,6 +36,16 @@ export const useTabsStore = defineStore('tabs', () => {
 
   function clickTab(key: string) {
     router.push(key)
+    gsap.fromTo(
+      '.breadcrumb-title',
+      { opacity: 0.5 }, // 初始设置为透明，上移50像素，隐藏
+      {
+        opacity: 1,
+        stagger: 0.2,
+        duration: 0.5,
+        ease: 'power3.inOut'
+      }
+    )
   }
   function addTab(tab: Props) {
     tabList.value.push(tab)

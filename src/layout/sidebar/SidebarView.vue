@@ -6,8 +6,11 @@
 <script lang="ts" setup>
 import { useAppStore } from '@/stores/modules/app'
 import type { DrawerProps } from 'ant-design-vue'
+import { gsap } from 'gsap'
 import RecursiveMenuVue from './components/RecursiveMenu.vue'
-
+onMounted(() => {
+  gsap.to('.logo-img', { rotation: 360, duration: 2, ease: 'bounce.out' })
+})
 const app = useAppStore()
 const width = computed(() => (app.collapsed ? '80px' : '200px'))
 const placement = ref<DrawerProps['placement']>('left')
@@ -23,7 +26,7 @@ const placement = ref<DrawerProps['placement']>('left')
   >
     <a-layout-sider v-model:collapsed="app.collapsed" :trigger="null" class="custom-layout">
       <div class="logo">
-        <img alt="logo" height="32" src="../../assets/logo.svg" width="32" />
+        <img class="logo-img" alt="logo" height="32" src="../../assets/logo.svg" width="32" />
         <span v-if="!app.collapsed">Vue Ace Admin</span>
       </div>
       <RecursiveMenuVue />
@@ -31,7 +34,7 @@ const placement = ref<DrawerProps['placement']>('left')
   </a-drawer>
   <a-layout-sider v-model:collapsed="app.collapsed" :trigger="null" class="custom-layout default-sidebar">
     <div class="logo">
-      <img alt="logo" height="32" src="../../assets/logo.svg" width="32" />
+      <img class="logo-img" alt="logo" height="32" src="../../assets/logo.svg" width="32" />
       <span v-if="!app.collapsed">Vue Ace Admin</span>
     </div>
     <RecursiveMenuVue />

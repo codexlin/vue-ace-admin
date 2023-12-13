@@ -19,6 +19,8 @@
     "@vueuse/core": "^10.5.0",
     "ant-design-vue": "4.x",
     "axios": "^1.4.0",
+    "echarts": "^5.4.3",
+    "gsap": "^3.12.3",
     "husky": "^8.0.3",
     "lodash-es": "^4.17.21",
     "normalize.css": "^8.0.1",
@@ -26,10 +28,9 @@
     "pinia": "^2.1.6",
     "pinia-plugin-persistedstate": "^3.2.0",
     "vue": "^3.3.4",
-    "vue-i18n": "^9.4.0",
-    "vue-router": "^4.2.4",
     "vue-echarts": "latest",
-    "echarts": "^5.4.3"
+    "vue-i18n": "^9.4.0",
+    "vue-router": "^4.2.4"
   },
   "devDependencies": {
     "@iconify-json/ep": "^1.1.11",
@@ -51,15 +52,15 @@
     "lint-staged": "^14.0.1",
     "npm-run-all2": "^6.0.6",
     "prettier": "^3.0.3",
-    "vite-plugin-svg-icons": "^2.0.1",
-    "unplugin-icons": "^0.16.5",
-    "unplugin-auto-import": "^0.16.6",
-    "unplugin-vue-components": "^0.25.2",
     "sass": "^1.64.2",
     "terser": "^5.19.4",
     "typescript": "~5.1.6",
+    "unplugin-auto-import": "^0.16.6",
+    "unplugin-icons": "^0.16.5",
+    "unplugin-vue-components": "^0.25.2",
     "vite": "^4.4.9",
     "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-svg-icons": "^2.0.1",
     "vue-tsc": "^1.8.11"
   },
   "lint-staged": {

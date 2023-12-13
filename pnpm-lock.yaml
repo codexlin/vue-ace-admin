@@ -20,6 +20,9 @@ dependencies:
   echarts:
     specifier: ^5.4.3
     version: registry.npmmirror.com/echarts@5.4.3
+  gsap:
+    specifier: ^3.12.3
+    version: registry.npmmirror.com/gsap@3.12.3
   husky:
     specifier: ^8.0.3
     version: registry.npmmirror.com/husky@8.0.3
@@ -3164,6 +3167,12 @@ packages:
     name: graphemer
     version: 1.4.0
     dev: true
+
+  registry.npmmirror.com/gsap@3.12.3:
+    resolution: {integrity: sha512-TySXTE+ABiAVa61W+h5wv2p5GkJT1Uj//4nWpK8EjmhcDqwH++35IvtbQlVVFj+rdcJdFCdCt0SKgb+SwdPq/A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/gsap/-/gsap-3.12.3.tgz}
+    name: gsap
+    version: 3.12.3
+    dev: false
 
   registry.npmmirror.com/has-ansi@2.0.0:
     resolution: {integrity: sha512-C8vBJ8DwUCx19vhm7urhTuUsr4/IyP6l4VzNQDv+ryHQObW3TTTp9yB68WpYgRe2bbaGuZ/se74IqFeVnMnLZg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/has-ansi/-/has-ansi-2.0.0.tgz}

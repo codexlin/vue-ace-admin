@@ -20,13 +20,9 @@ const route = useRoute()
 const tabStore = useTabsStore()
 const { deleteTab, clickTab, refreshTab } = tabStore
 const { activeKey, tabList } = storeToRefs(tabStore)
-const refresh = inject(refreshKey)
-const onRefresh = (name: string) => {
-  console.log(name)
-  refreshTab(name, refresh)
-  // await refresh!()
-  // addCacheTab(name)
-}
+const refresh = inject<() => Promise<void>>(refreshKey)
+const onRefresh = (name: string) => refreshTab(name, refresh!)
+
 const onEdit = (targetKey: string | MouseEvent, action: string) => {
   if (action !== 'add') deleteTab('cur', targetKey as string)
 }
@@ -59,7 +55,7 @@ watch(
             <span class="tab-name">{{ tt(i.title) }}</span>
             <template #overlay>
               <a-menu>
-                <a-menu-item key="1" @click="onRefresh(i.content)">刷新</a-menu-item>
+                <a-menu-item key="1" @click="onRefresh(i.content!)">刷新</a-menu-item>
                 <a-menu-item key="2" @click="deleteTab('cur', i.key)">关闭当前</a-menu-item>
                 <a-menu-item key="3" @click="deleteTab('other', i.key)">关闭其他</a-menu-item>
                 <a-menu-item key="4" @click="deleteTab('all', i.key)">关闭所有</a-menu-item>
