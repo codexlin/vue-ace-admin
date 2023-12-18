@@ -10,7 +10,7 @@ interface Props {
   closable?: boolean
   content?: string
 }
-
+type Key = string | number
 const mode = ref<TabsProps['tabPosition']>('top')
 const callback: TabsProps['onTabScroll'] = (val) => {
   console.log(val)
@@ -23,7 +23,7 @@ const { activeKey, tabList } = storeToRefs(tabStore)
 const refresh = inject<() => Promise<void>>(refreshKey)
 const onRefresh = (name: string) => refreshTab(name, refresh!)
 
-const onEdit = (targetKey: string | MouseEvent, action: string) => {
+const onEdit = (targetKey: KeyboardEvent | MouseEvent | Key, action: 'add' | 'remove') => {
   if (action !== 'add') deleteTab('cur', targetKey as string)
 }
 watch(

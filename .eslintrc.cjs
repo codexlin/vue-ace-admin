@@ -26,7 +26,7 @@ module.exports = {
     // 优先使用 interface 而不是 type
     // '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
     eqeqeq: 2, //必须使用全等
-    'max-lines': ['error', 500], //限制行数 请勿修改 请优化你的代码
+    'max-lines': ['error', 500], // 限制行数 请勿修改 请优化你的代码
     complexity: ['error', 15], // 限制复杂度
     'require-await': 'error'
   }

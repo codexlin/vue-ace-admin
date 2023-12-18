@@ -10,6 +10,7 @@ interface Props {
   content?: string
 }
 type TypeProps = 'all' | 'other' | 'cur'
+type Key = string | number
 export const useTabsStore = defineStore('tabs', () => {
   // 所有的标签页
   const tabList = ref<Props[]>([])
@@ -33,8 +34,8 @@ export const useTabsStore = defineStore('tabs', () => {
     router.getRoutes().forEach((i) => i.meta.isCache && cacheTabs.value.push(i.name as string))
   }
 
-  function clickTab(key: string) {
-    router.push(key)
+  function clickTab(key: Key) {
+    router.push(key as string)
   }
   function addTab(tab: Props) {
     tabList.value.push(tab)
