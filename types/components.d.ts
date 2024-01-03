@@ -30,7 +30,6 @@ declare module 'vue' {
     AListItemMeta: (typeof import('ant-design-vue/es'))['ListItemMeta']
     AMenu: (typeof import('ant-design-vue/es'))['Menu']
     AMenuItem: (typeof import('ant-design-vue/es'))['MenuItem']
-    APopconfirm: (typeof import('ant-design-vue/es'))['Popconfirm']
     ASelect: (typeof import('ant-design-vue/es'))['Select']
     ASelectOption: (typeof import('ant-design-vue/es'))['SelectOption']
     ASpace: (typeof import('ant-design-vue/es'))['Space']

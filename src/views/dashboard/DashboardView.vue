@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 import StatisticCard from '@/components/statistic/StatisticCard.vue'
 import { ArrowDownOutlined, ArrowUpOutlined, HomeOutlined } from '@ant-design/icons-vue'
+import type { EChartsOption } from 'echarts'
 import { BarChart, LineChart, PieChart } from 'echarts/charts'
 import { GridComponent, LegendComponent, TitleComponent, TooltipComponent } from 'echarts/components'
 import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
 import { h } from 'vue'
 import VChart from 'vue-echarts'
-
 use([CanvasRenderer, BarChart, LineChart, PieChart, TitleComponent, TooltipComponent, GridComponent, LegendComponent])
 
 const option = ref({
@@ -238,14 +238,14 @@ const tableData = [
           <a href="#">More</a>
         </template>
         <template v-if="key === 'tab1'">
-          <v-chart :option="option" autoresize class="chart" />
+          <v-chart :option="option as EChartsOption" autoresize class="chart" />
         </template>
         <template v-if="key === 'tab2'">
-          <v-chart :option="barOption" autoresize class="chart" />
+          <v-chart :option="barOption as EChartsOption" autoresize class="chart" />
         </template>
       </a-card>
       <a-card class="flex-cards_right">
-        <v-chart :option="tab1Option" autoresize class="chart" />
+        <v-chart :option="tab1Option as EChartsOption" autoresize class="chart" />
       </a-card>
     </div>
     <div class="flex-cards">
