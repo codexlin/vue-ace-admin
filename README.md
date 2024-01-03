@@ -21,15 +21,15 @@ Ace Admin 是一个基于 Vue3.3、TypeScript5.x、Antd-Vue4.x、Pinia2.x 及 Vi
 
 ## ❤️ 用爱发电
 
-- **完全免费**：但希望你点一个 star ！！！
+- **完全免费**：但希望你点一个 star⭐ ！！！
 - **非常简洁**：没有复杂的封装，没有复杂的类型体操，开箱即用
 - **详细的注释**：各个配置项都写有尽可能详细的注释
 - **最新的依赖**: 定期更新所有三方依赖至最新版
 - **有一点规整**: 代码风格统一，命名风格统一，注释风格统一
 
-## 项目亮点
+## 📖 项目亮点
 
-- **最新技术栈**：Vue 3.3、TypeScript 5.x 等新技术和 script setup API。
+- **最新技术栈**：Vue 3.3、TypeScript 5.x 等新技术和 Composition API。
 - **Antd Vue**：使用Ant-Design-Vue 4.x 版本。
 - **Pinia**: 被视为 Vuex 的继任者,传说中的 Vuex5。
 - **Vite**：以快速著称的现代化构建工具。
@@ -41,7 +41,7 @@ Ace Admin 是一个基于 Vue3.3、TypeScript5.x、Antd-Vue4.x、Pinia2.x 及 Vi
 - **Axios**：网络请求库（已封装好）。
 - **兼容移动端**: 布局兼容移动端页面分辨率(开发中)。
 
-## 功能特色
+## 📔 功能特色
 
 - **用户管理**：登录、登出演示
 - **权限管理**：内置页面权限（动态路由）、指令权限、权限函数、路由守卫(coding)
@@ -54,23 +54,37 @@ Ace Admin 是一个基于 Vue3.3、TypeScript5.x、Antd-Vue4.x、Pinia2.x 及 Vi
 
 ## 🚀 开发
 
-```js
-# 开发前配置
-1. 全面安装一键配置
+### 开发前配置
+1. 开发环境准备
 2. node 版本 16+
 3. pnpm 版本 8.x+
 
+```js
 # 克隆项目
 git clone https://github.com/xoxosos/vue-ace-admin.git
-
+```
+```js
 # 进入项目目录
 cd vue-ace-admin
-
+```
+```js
+# 安装 pnpm (如已安装可跳过)
+npm install pnpm -g
+````
+```js
 # 安装依赖
 pnpm i
-
+```
+```js
 # 启动服务
 pnpm dev
+```
+## 🔧 代码检查
+
+```shell
+# 代码检查与格式化，只需执行相应的命令。
+pnpm lint
+
 ```
 
 ## ✔️ 预览
@@ -93,29 +107,25 @@ pnpm build:stage
 pnpm build:prod
 ```
 
-## 🔧 代码检查
-
-```shell
-# 代码检查与格式化，只需执行相应的命令。
-pnpm lint
-
-```
-
 ## Git 提交规范参考
 Git 提交规范，包含了常见的提交类型，方便开发者追踪和管理变更。
-- `feat` 增加新的业务功能
-- `fix` 修复业务问题/BUG
-- `perf` 优化性能
-- `style` 更改代码风格, 不影响运行结果
-- `refactor` 重构代码
-- `revert` 撤销更改
-- `test` 测试相关, 不涉及业务代码的更改
-- `docs` 文档和注释相关
-- `chore` 更新依赖/修改脚手架配置等琐事
-- `workflow` 工作流改进
-- `ci` 持续集成相关
-- `types` 类型定义文件更改
-- `wip` 开发中
+- 参考 [vue](https://github.com/vuejs/vue/blob/dev/.github/COMMIT_CONVENTION.md)
+  规范 ([Angular](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular))
+
+    - `feat` 增加新功能
+    - `fix` 修复问题/BUG
+    - `style` 代码风格相关无影响运行结果的
+    - `perf` 优化/性能提升
+    - `refactor` 重构
+    - `revert` 撤销修改
+    - `test` 测试相关
+    - `docs` 文档/注释
+    - `chore` 依赖更新/脚手架配置修改等
+    - `workflow` 工作流改进
+    - `ci` 持续集成
+    - `types` 类型定义文件更改
+    - `wip` 开发中
+  
 
 ## 项目预览图
 
@@ -123,11 +133,15 @@ Git 提交规范，包含了常见的提交类型，方便开发者追踪和管�
    <img src="https://pic.imgdb.cn/item/654b506fc458853aef84d579.jpg" alt="blob">
 </div>
 
+## 浏览器支持
+
+本地开发推荐使用`Chrome 80+` 浏览器
+
+支持现代浏览器, 不支持 IE
 
 ## 💕 感谢 Star
 
-若您喜欢这个项目，请不吝赐予 star 支持，这是维护者持续更新的动力。（小声：毕竟是免费的）
-
+若您喜欢这个项目，请不吝赐予 ⭐star 支持，这是维护者持续更新的动力。（小声：毕竟是免费的）
 
 ## 📄 License
 
