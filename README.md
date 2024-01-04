@@ -111,7 +111,7 @@ pnpm build:stage
 pnpm build:prod
 ```
 
-## Git 提交规范参考
+## ✒️ Git 提交规范参考
 Git 提交规范，包含了常见的提交类型，方便开发者追踪和管理变更。
 - 参考 [vue](https://github.com/vuejs/vue/blob/dev/.github/COMMIT_CONVENTION.md)
   规范 ([Angular](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular))
@@ -131,13 +131,13 @@ Git 提交规范，包含了常见的提交类型，方便开发者追踪和管�
     - `wip` 开发中
   
 
-## 项目预览图
+## 🖥️ 项目预览图
 
 <div>
    <img src="https://pic.imgdb.cn/item/654b506fc458853aef84d579.jpg" alt="blob">
 </div>
 
-## 浏览器支持
+## 🌏 浏览器支持
 
 本地开发推荐使用`Chrome 80+` 浏览器
 
