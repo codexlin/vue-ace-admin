@@ -5,6 +5,7 @@
  */
 import { i18n } from '@/locales'
 import { router } from '@/router'
+import { useAppStore } from '@/stores/modules/app'
 import { useRouteStore } from '@/stores/modules/route'
 import { useUserStore } from '@/stores/modules/user'
 import Nprogress from 'nprogress'
@@ -12,8 +13,9 @@ import 'nprogress/nprogress.css'
 import type { RouteRecordRaw } from 'vue-router'
 
 export const setPageTitleTxt = (meta: any) => {
+  const appTitle = useAppStore().appConfig.appTitle
   const { title } = meta
-  if (title) window.document.title = i18n.global.t(title)
+  if (title) window.document.title = `${i18n.global.t(title)} | ${appTitle}`
 }
 
 // 设置路由守卫

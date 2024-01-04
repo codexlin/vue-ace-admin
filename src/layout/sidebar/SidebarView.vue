@@ -41,6 +41,8 @@ const placement = ref<DrawerProps['placement']>('left')
   </a-layout-sider>
 </template>
 <style lang="scss" scoped>
+@import '@/styles/theme.scss';
+
 .logo {
   height: 32px;
   margin: 16px 0;
@@ -52,6 +54,8 @@ const placement = ref<DrawerProps['placement']>('left')
   span {
     transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
     font-weight: bold;
+    font-size: 16px;
+    color: getColor('primary');
   }
 }
 </style>

@@ -17,12 +17,10 @@ const showDrawer = () => {
   <a-button :icon="h(SettingOutlined)" class="setting-fixed" shape="circle" type="primary" @click="showDrawer" />
   <a-drawer
     v-model:open="open"
-    :root-style="{ color: 'blue' }"
     class="custom-class"
     placement="right"
     root-class-name="root-class-name"
-    style="color: red"
-    title="Basic Drawer"
+    title="全局配置"
     @after-open-change="afterOpenChange"
   >
     <SettingVue />

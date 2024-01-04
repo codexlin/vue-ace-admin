@@ -73,7 +73,12 @@ provide(refreshKey, async () => {
     width: 6px;
     height: 8px;
   }
-
+  &::-webkit-scrollbar-track {
+    width: 6px;
+    height: 6px;
+    // background: rgb(239, 239, 239);
+    border-radius: 2px;
+  }
   // 滚动条的轨道的两端按钮，允许通过点击微调小方块的位置。
   &::-webkit-scrollbar-button {
     display: none;
@@ -81,12 +86,16 @@ provide(refreshKey, async () => {
 
   // 滚动条里面的小方块，能向上向下移动（或往左往右移动，取决于是垂直滚动条还是水平滚动条）
   &::-webkit-scrollbar-thumb {
-    @include useTheme {
-      background: getColor('primary');
-    }
-    //background: rgba(144, 147, 153, 0.3);
+    // @include useTheme {
+    //   background: getColor('primary');
+    // }
+    background-color: rgba(144, 147, 153, 0.3);
     cursor: pointer;
     border-radius: 4px;
+    transition: 0.3s background-color;
+    &:hover {
+      background-color: rgba(144, 147, 153, 0.5);
+    }
   }
 
   // 边角，即两个滚动条的交汇处

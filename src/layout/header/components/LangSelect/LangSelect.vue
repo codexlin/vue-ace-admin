@@ -4,18 +4,10 @@
  * @Description: 
 -->
 <script lang="ts" setup>
-import { useAppStore } from '@/stores/modules/app'
+import useLocalI18n from '@/hooks/useLocalI18n'
 import { TranslationOutlined } from '@ant-design/icons-vue'
-import { useI18n } from 'vue-i18n'
-
-const useAppConfig = useAppStore()
-const language = computed(() => useAppConfig.getLanguage)
-const i18n = useI18n()
-
-function handleSetLanguage(item: any) {
-  i18n.locale.value = item.key
-  useAppConfig.appConfig.defaultLanguage = item.key
-}
+const { changeLanguage, getLanguage } = useLocalI18n()
+const language = getLanguage()
 </script>
 <template>
   <a-dropdown placement="bottom" arrow>
@@ -23,7 +15,7 @@ function handleSetLanguage(item: any) {
       <TranslationOutlined />
     </div>
     <template #overlay>
-      <a-menu @click="handleSetLanguage">
+      <a-menu @click="(item) => changeLanguage(item.key as string)">
         <a-menu-item key="zh-cn" :disabled="language === 'zh-cn'">简体中文</a-menu-item>
         <a-menu-item key="en" :disabled="language === 'en'">English</a-menu-item>
       </a-menu>

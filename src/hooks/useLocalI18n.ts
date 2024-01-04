@@ -9,7 +9,6 @@ export default function useLocalI18n() {
     // 如果找不到对应的翻译，则返回原始的 text
     return i18n.te(text) ? i18n.t(text) : text
   }
-
   // 监听语言切换
   function watchSwitchLang(...cbs: any[]) {
     const useAppConfig = useAppStore()
@@ -22,8 +21,21 @@ export default function useLocalI18n() {
     )
   }
 
+  function changeLanguage(lang: string) {
+    const useAppConfig = useAppStore()
+    i18n.locale.value = lang
+    useAppConfig.appConfig.defaultLanguage = lang
+  }
+
+  function getLanguage() {
+    const useAppConfig = useAppStore()
+    return computed(() => useAppConfig.getLanguage)
+  }
+
   return {
     tt,
-    watchSwitchLang
+    watchSwitchLang,
+    changeLanguage,
+    getLanguage
   }
 }
