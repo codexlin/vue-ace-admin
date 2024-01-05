@@ -12,8 +12,9 @@ import setupI18n from './locales'
 import { setupRouter } from './router'
 import pinia from './stores/index'
 import './styles/main.scss'
-
+import directives from './directives/index'
 const app = createApp(App)
+directives(app)
 app.use(pinia)
 setupI18n(app)
 app.use(Antd)
