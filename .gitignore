@@ -26,4 +26,5 @@ node_modules
 *.njsproj
 *.sln
 *.sw?
+*.yaml
 /.vscode/extensions.json
