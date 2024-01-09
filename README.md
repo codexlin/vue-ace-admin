@@ -56,7 +56,7 @@ Ace Admin 是一个基于 Vue3.3、TypeScript5.x、Antd-Vue4.x、Pinia2.x 及 Vi
 
 ### 开发前配置
 1. 开发环境准备
-2. node 版本推荐 16+
+2. node 版本推荐 18+/20+
 3. pnpm 版本推荐 8.x+
 
 ```js
