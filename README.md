@@ -10,8 +10,7 @@ Ace Admin 是一个基于 Vue3.4、TypeScript5.x、Antd-Vue4.x、Pinia2.x 及 Vi
 
 ## 📚 文档
 
-- 多语言文档：开发ing
-- 使用文档：编写ing
+- 使用文档：[doc](https://ace-admin-doc.vercel.app/)
 
 ## 📺 在线预览
 
