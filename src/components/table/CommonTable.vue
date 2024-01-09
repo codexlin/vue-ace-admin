@@ -15,11 +15,13 @@ const setRowClassName = (_record: any, index: number) => {
       return undefined
   }
 }
+const slots = useSlots()
+const slotNames = Object.keys(slots) as []
 </script>
 <template>
   <a-table v-bind="props" class="ant-table-striped" :row-class-name="setRowClassName">
-    <template v-for="(_, name) in $slots" #[name]="data:Data">
-      <slot :name="name" v-bind="data" />
+    <template v-for="(slot, index) of slotNames" :key="index" #[slot]="data:Data">
+      <slot :name="slot" v-bind="data" />
     </template>
   </a-table>
 </template>

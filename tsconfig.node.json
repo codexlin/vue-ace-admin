@@ -8,10 +8,12 @@
     "playwright.config.*",
     "vite/**/*.ts"
   ],
-  "compilerOptions": {
+    "compilerOptions": {
+    "types": ["node"],
     "composite": true,
+    "skipLibCheck": true,
     "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "types": ["node"]
-  }
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true
+  },
 }

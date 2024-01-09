@@ -8,6 +8,7 @@ import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
 import { h } from 'vue'
 import VChart from 'vue-echarts'
+
 use([CanvasRenderer, BarChart, LineChart, PieChart, TitleComponent, TooltipComponent, GridComponent, LegendComponent])
 
 const option = ref({
@@ -269,7 +270,7 @@ const tableData = [
       </a-card>
       <a-card class="flex-cards_left">
         <a-table :columns="columns" :data-source="tableData" :pagination="false" bordered>
-          <template #bodyCell="{ column, text }">
+          <template #bodyCell="{ text, column }: any">
             <template v-if="column.dataIndex === 'name'">
               <a>{{ text }}</a>
             </template>
