@@ -24,7 +24,7 @@ export default function permission(app: App) {
     const hasPermission = value.filter((role: string) => roles.includes(role))
 
     if (all ? value.length !== hasPermission.length : !hasPermission.length) {
-      el.parentNode && el.parentNode.removeChild(el)
+      el.parentNode?.removeChild(el)
     }
   })
 }

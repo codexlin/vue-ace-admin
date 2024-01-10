@@ -25,15 +25,15 @@ export function setupRouterHooks() {
     Nprogress.start()
     const routerStore = useRouteStore()
     const user = useUserStore()
-
+    const routes = routerStore.getRoutes
     if (user.getToken) {
-      if (flag && routerStore.getRoutes.length > 0) {
-        addRoutes(routerStore.getRoutes)
+      if (flag && routes.length > 0) {
+        addRoutes(routes)
         flag = false
         next({ path: to.path })
       }
       // 页面刷新时，重新加载路由
-      if (routerStore.getRoutes.length === 0) {
+      if (routes.length === 0) {
         await routerStore.setRoutes()
         next({ path: to.path })
       } else {
