@@ -1,8 +1,8 @@
 import type { TableProps } from 'ant-design-vue'
-export interface Props extends TableProps {
+export interface IProps extends TableProps {
   isZebra: 'even' | 'odd' | 'none'
 }
-export interface Data {
+export interface IData {
   text: any
   record: any
   index: number

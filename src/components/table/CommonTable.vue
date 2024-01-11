@@ -1,7 +1,7 @@
 <script lang="tsx" setup>
-import type { Data, Props } from './type'
+import type { IData, IProps } from './type'
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<IProps>(), {
   showHeader: true,
   isZebra: undefined
 })
@@ -20,7 +20,7 @@ const slotNames = Object.keys(slots) as []
 </script>
 <template>
   <a-table v-bind="props" class="ant-table-striped" :row-class-name="setRowClassName">
-    <template v-for="(slot, index) of slotNames" :key="index" #[slot]="data:Data">
+    <template v-for="(slot, index) of slotNames" :key="index" #[slot]="data:IData">
       <slot :name="slot" v-bind="data" />
     </template>
   </a-table>
