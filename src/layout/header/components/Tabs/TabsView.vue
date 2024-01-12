@@ -2,8 +2,9 @@
 import useLocalI18n from '@/hooks/useLocalI18n'
 import { refreshKey } from '@/layout/type'
 import { useTabsStore } from '@/stores/modules/tabs'
+import { ReloadOutlined } from '@ant-design/icons-vue'
 import type { TabsProps } from 'ant-design-vue'
-
+import { h } from 'vue'
 interface Props {
   title: string
   key: string
@@ -20,6 +21,7 @@ const route = useRoute()
 const tabStore = useTabsStore()
 const { deleteTab, clickTab, refreshTab } = tabStore
 const { activeKey, tabList } = storeToRefs(tabStore)
+const curTab = ref<Props>()
 const refresh = inject<() => Promise<void>>(refreshKey)
 const onRefresh = (name: string) => refreshTab(name, refresh!)
 
@@ -29,12 +31,14 @@ const onEdit = (targetKey: KeyboardEvent | MouseEvent | Key, action: 'add' | 're
 watch(
   route,
   (to) => {
+    console.log(11)
     const { meta, name, fullPath } = to
     const closable = fullPath !== '/dashboard'
     const item = { title: meta.title, key: fullPath, closable, content: name } as Props
     const hasFind = tabList.value.find((i) => i.key === fullPath)
     activeKey.value = fullPath
     if (!hasFind) tabStore.addTab(item)
+    curTab.value = tabList.value.filter((item) => item.key === activeKey.value)[0]
   },
   { immediate: true }
 )
@@ -45,6 +49,7 @@ watch(
       v-model:activeKey="activeKey"
       :tab-position="mode"
       type="editable-card"
+      hide-add
       @edit="onEdit"
       @tabClick="clickTab"
       @tabScroll="callback"
@@ -64,6 +69,9 @@ watch(
           </a-dropdown>
         </template>
       </a-tab-pane>
+      <template #rightExtra>
+        <a-button :icon="h(ReloadOutlined)" @click="onRefresh(curTab?.content!)"></a-button>
+      </template>
     </a-tabs>
   </div>
 </template>
@@ -72,8 +80,9 @@ watch(
   height: 40px;
   .ant-tabs-nav {
     margin: 0;
-    padding: 4px;
+    padding: 5px;
     height: 40px;
+    padding-right: 6px;
     & .ant-tabs-nav-list .ant-tabs-tab,
     .ant-tabs-nav-add {
       border-radius: 8px;

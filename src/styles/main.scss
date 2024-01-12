@@ -8,7 +8,7 @@ body {
   position: relative;
   // 样式规则，使用混合应用当前模式和主题的样式
   @include useTheme {
-    background-color: getModeVar('bgColor');
+    background: getModeVar('bgColor');
     color: getModeVar('infoColor');
   }
 }
