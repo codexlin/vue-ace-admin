@@ -23,25 +23,27 @@ provide(refreshKey, async () => {
 })
 </script>
 <template>
-  <a-layout style="height: 100vh; min-width: 375px">
-    <SidebarView />
-    <a-layout>
-      <HeaderView />
-      <a-layout-content class="layout-content">
-        <div :style="{ padding: '24px', minHeight: '360px' }">
-          <router-view v-slot="{ Component, route }">
-            <transition name="scale" mode="out-in">
-              <keep-alive :include="store.getCacheTabs as MatchPattern">
-                <component :is="Component" v-if="isAlive" :key="route.path" />
-              </keep-alive>
-            </transition>
-          </router-view>
-        </div>
-      </a-layout-content>
-      <FooterView />
+  <a-watermark content="Ant Design Vue">
+    <a-layout style="height: 100vh; min-width: 375px">
+      <SidebarView />
+      <a-layout>
+        <HeaderView />
+        <a-layout-content class="layout-content">
+          <div :style="{ padding: '24px', minHeight: '360px' }">
+            <router-view v-slot="{ Component, route }">
+              <transition name="scale" mode="out-in">
+                <keep-alive :include="store.getCacheTabs as MatchPattern">
+                  <component :is="Component" v-if="isAlive" :key="route.path" />
+                </keep-alive>
+              </transition>
+            </router-view>
+          </div>
+        </a-layout-content>
+        <FooterView />
+      </a-layout>
+      <SettingVue />
     </a-layout>
-    <SettingVue />
-  </a-layout>
+  </a-watermark>
 </template>
 <style lang="scss" scoped>
 @import '@/styles/theme.scss';
