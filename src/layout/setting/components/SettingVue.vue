@@ -72,6 +72,10 @@ const reset = () => {
         <label> 紧凑模式 </label>
         <a-switch v-model:checked="app.appConfig.compactAlgorithm" checked-children="开" un-checked-children="关" />
       </div>
+      <div class="setting-item">
+        <label> 水印开关 </label>
+        <a-switch v-model:checked="app.appConfig.watermark.isShow" checked-children="开" un-checked-children="关" />
+      </div>
     </div>
   </div>
 </template>

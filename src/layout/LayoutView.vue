@@ -5,12 +5,13 @@
 -->
 <script lang="ts" setup>
 import SettingVue from '@/layout/setting/SettingView.vue'
+import { useAppStore } from '@/stores/modules/app'
 import { useTabsStore } from '@/stores/modules/tabs'
 import FooterView from './footer/FooterView.vue'
 import HeaderView from './header/HeaderView.vue'
 import SidebarView from './sidebar/SidebarView.vue'
 import { refreshKey, type MatchPattern } from './type'
-
+const app = useAppStore()
 const store = useTabsStore()
 ;(() => {
   store.setCacheTabs()
@@ -21,9 +22,10 @@ provide(refreshKey, async () => {
   await nextTick()
   isAlive.value = true
 })
+const fontSize = computed(() => (app.appConfig.watermark.isShow ? app.appConfig.watermark.font.fontSize : 0))
 </script>
 <template>
-  <a-watermark content="Ant Design Vue">
+  <a-watermark v-bind="app.appConfig.watermark" :font="{ fontSize }">
     <a-layout style="height: 100vh; min-width: 375px">
       <SidebarView />
       <a-layout>
