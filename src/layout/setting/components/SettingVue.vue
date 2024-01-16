@@ -27,11 +27,6 @@ const reset = () => {
     <div>
       <p class="setting-title" data-label="自定义主题颜色" />
       <input class="color-picker" v-model="color" type="color" @change="handleChange(color)" />
-      <a-select v-model:value="app.appConfig.token.colorPrimary" style="width: 240px">
-        <a-select-option v-for="(color, name) in variables" :key="name" :value="name">
-          {{ name }}:{{ color }}
-        </a-select-option>
-      </a-select>
     </div>
     <div>
       <p class="setting-title" data-label="预设主题颜色" />
