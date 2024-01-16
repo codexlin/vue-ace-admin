@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import useLocalI18n from '@/hooks/useLocalI18n'
 import { useUserStore } from '@/stores/modules/user'
 import { gsap } from 'gsap'
 import { registerApi } from './api'
@@ -28,17 +27,17 @@ onMounted(() => {
       <div class="login-box_show">
         <a-avatar style="background: transparent" :size="{ xs: 200, sm: 200, md: 250, lg: 300, xl: 350, xxl: 350 }">
           <template #icon>
-            <img class="img" src="@/assets/logo.svg" />
+            <img alt="logo" class="img" src="@/assets/logo.svg" />
           </template>
         </a-avatar>
       </div>
       <div class="login-box_form">
-        <h3>Welcome to Ace Admin</h3>
+        <h2 class="title">Welcome to Ace Admin</h2>
         <a-form autocomplete="off" @finish="onFinish" class="custom-form" :model="state">
-          <a-form-item name="email" placeholder="用户名">
+          <a-form-item name="email" placeholder="用户名:如 admin@qq.com">
             <a-input v-model:value="state.email"></a-input>
           </a-form-item>
-          <a-form-item name="password" placeholder="密码">
+          <a-form-item name="password" placeholder="密码:任意填">
             <a-input-password v-model:value="state.password" />
           </a-form-item>
           <a-form-item>
@@ -54,6 +53,28 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
+.title {
+  color: #0000ff; /*设置文字颜色*/
+  text-decoration: none;
+  font-family: '微软雅黑'; /*设置字体*/
+  animation: shine 2.4s infinite; /*设置动画*/
+}
+@keyframes shine {
+  /*创建动画*/
+  0%,
+  100% {
+    color: #fff;
+    text-shadow:
+      0 0 10px #0000ff,
+      0 0 10px #0000ff;
+  }
+  50% {
+    text-shadow:
+      0 0 10px #0000ff,
+      0 0 40px #0000ff;
+  }
+}
+
 .login {
   display: flex;
   height: 100vh;
