@@ -31,7 +31,7 @@ Ace Admin 是一个基于 Vue3.4、TypeScript5.x、Antd-Vue4.x、Pinia2.x 及 Vi
 ## 📖 项目亮点
 
 - **最新技术栈**：Vue 3.4、TypeScript 5.x 等新技术和 Composition API。
-- **Antd Vue**：使用Ant-Design-Vue 4.x 版本。
+- **Antd Vue**：使用更精美的Ant-Design-Vue 4.x 版本。
 - **Pinia**: 被视为 Vuex 的继任者,传说中的 Vuex5。
 - **Vite**：以快速著称的现代化构建工具。
 - **Vue Router**：Vue Router 管理路由。
