@@ -23,9 +23,10 @@ provide(refreshKey, async () => {
   isAlive.value = true
 })
 const fontSize = computed(() => (app.appConfig.watermark.isShow ? app.appConfig.watermark.font.fontSize : 0))
+const watermark = computed(() => app.appConfig.watermark)
 </script>
 <template>
-  <a-watermark v-bind="app.appConfig.watermark" :font="{ fontSize }">
+  <a-watermark v-bind="watermark" :font="{ ...watermark.font, fontSize }">
     <a-layout style="height: 100vh; min-width: 375px">
       <SidebarView />
       <a-layout>
@@ -61,10 +62,6 @@ const fontSize = computed(() => (app.appConfig.watermark.isShow ? app.appConfig.
 //[data-theme='dark'] .site-layout-sub-header-background {
 //  background: #141414;
 //}
-.trigger {
-  font-size: 2em;
-  line-height: 2em;
-}
 
 .layout-content {
   overflow-y: auto;

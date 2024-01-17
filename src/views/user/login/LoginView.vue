@@ -56,7 +56,6 @@ onMounted(() => {
 .title {
   color: #0000ff; /*设置文字颜色*/
   text-decoration: none;
-  font-family: '微软雅黑'; /*设置字体*/
   animation: shine 2.4s infinite; /*设置动画*/
 }
 @keyframes shine {

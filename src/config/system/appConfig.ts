@@ -6,9 +6,11 @@ const globalConfig: any = {
   watermark: {
     isShow: true,
     font: {
-      fontSize: 16
+      fontSize: 16,
+      color: 'rgba(0,0,0,.15)',
+      fontWeight: 'bold'
     },
-    content: 'Ace Admin',
+    content: ['Ace Admin', 'By AceLin'],
     zIndex: 11,
     rotate: -22,
     gap: [100, 100] as [number, number],

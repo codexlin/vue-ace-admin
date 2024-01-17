@@ -51,6 +51,10 @@ const app = useAppStore()
 </template>
 
 <style lang="scss" scoped>
+.trigger {
+  font-size: 1.3em;
+  line-height: 1.3em;
+}
 .layout-header {
   margin-bottom: 40px;
   padding: 0;
@@ -58,7 +62,7 @@ const app = useAppStore()
 .header-view {
   display: flex;
   justify-content: space-between;
-
+  align-items: center;
   &-left {
     gap: 10px;
     padding-left: 10px;
@@ -70,9 +74,13 @@ const app = useAppStore()
     padding-right: 10px;
     gap: 15px;
     display: flex;
+    align-items: center;
   }
 
   &-item {
+    // :deep(.anticon) {
+    //   font-size: 18px;
+    // }
     cursor: pointer;
   }
 }
