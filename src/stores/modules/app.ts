@@ -33,7 +33,7 @@ export const useAppStore = defineStore('app', () => {
     }
     // 主题配置
     return {
-      token: { ...appConfig.value.token, colorInfo: appConfig.value.token.colorPrimary || '#27ba9b' },
+      token: { ...appConfig.value.token, colorInfo: appConfig.value.token.colorPrimary || '#8E56B7' },
       algorithm
     }
   })

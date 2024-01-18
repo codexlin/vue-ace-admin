@@ -4,6 +4,7 @@
  * @Description:
 -->
 <script lang="ts" setup>
+import globalConfig from '@/config/system/appConfig'
 import SettingVue from '@/layout/setting/SettingView.vue'
 import { useAppStore } from '@/stores/modules/app'
 import { useTabsStore } from '@/stores/modules/tabs'
@@ -11,6 +12,7 @@ import FooterView from './footer/FooterView.vue'
 import HeaderView from './header/HeaderView.vue'
 import SidebarView from './sidebar/SidebarView.vue'
 import { refreshKey, type MatchPattern } from './type'
+
 const app = useAppStore()
 const store = useTabsStore()
 ;(() => {
@@ -23,10 +25,9 @@ provide(refreshKey, async () => {
   isAlive.value = true
 })
 const fontSize = computed(() => (app.appConfig.watermark.isShow ? app.appConfig.watermark.font.fontSize : 0))
-const watermark = computed(() => app.appConfig.watermark)
 </script>
 <template>
-  <a-watermark v-bind="watermark" :font="{ ...watermark.font, fontSize }">
+  <a-watermark v-bind="globalConfig.watermark" :font="{ ...globalConfig.watermark.font, fontSize }">
     <a-layout style="height: 100vh; min-width: 375px">
       <SidebarView />
       <a-layout>

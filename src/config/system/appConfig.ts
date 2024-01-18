@@ -7,7 +7,7 @@ const globalConfig: any = {
     isShow: true,
     font: {
       fontSize: 16,
-      color: 'rgba(0,0,0,.15)',
+      // color: 'rgba(0,0,0,.15)',
       fontWeight: 'bold'
     },
     content: ['Ace Admin', 'By AceLin'],
