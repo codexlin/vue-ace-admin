@@ -24,14 +24,14 @@ onMounted(() => {
 <template>
   <div class="login">
     <div class="login-box">
-      <div class="login-box_show">
+      <div class="login-box_left">
         <a-avatar style="background: transparent" :size="{ xs: 200, sm: 200, md: 250, lg: 300, xl: 350, xxl: 350 }">
           <template #icon>
             <img alt="logo" class="img" src="@/assets/logo.svg" />
           </template>
         </a-avatar>
       </div>
-      <div class="login-box_form">
+      <div class="login-box_right">
         <h2 class="title">Welcome to Ace Admin</h2>
         <a-form autocomplete="off" @finish="onFinish" class="custom-form" :model="state">
           <a-form-item name="email" placeholder="用户名:如 admin@qq.com">
@@ -99,7 +99,7 @@ onMounted(() => {
       41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
       100px 100px 80px rgba(0, 0, 0, 0.07);
 
-    &_form {
+    &_right {
       :deep(.ant-btn-primary) {
         height: 35px;
         font-size: 15px;
