@@ -5,6 +5,7 @@ const globalConfig: any = {
   // 水印相关
   watermark: {
     isShow: true,
+
     font: {
       fontSize: 16,
       // color: 'rgba(0,0,0,.15)',
