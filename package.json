@@ -81,6 +81,7 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx,jsx,vue}": [
+      "eslint --fix",
       "prettier --write"
     ],
     "package.json": [
