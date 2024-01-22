@@ -7,6 +7,12 @@
     "npm": ">=9.0.0",
     "node": ">=18.0.0"
   },
+  "keywords": [
+    "vue3",
+    "typescript",
+    "pinia",
+    "vite"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
