@@ -17,16 +17,14 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "cz": "cz",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "postinstall": "npx simple-git-hooks"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
     "@vueuse/core": "^10.7.1",
     "ant-design-vue": "~4.1.0",
     "axios": "^1.6.5",
-    "commitizen": "^4.3.0",
-    "cz-conventional-changelog": "^3.3.0",
     "echarts": "^5.4.3",
     "gsap": "^3.12.4",
     "lodash-es": "^4.17.21",
@@ -76,7 +74,6 @@
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged",
-    "prepare-commit-msg": "exec <  node_modules/.bin/cz --hook || true",
     "commit-msg": "npx commitlint -e $1"
   },
   "lint-staged": {
@@ -90,10 +87,5 @@
     "*.md": [
       "prettier --write"
     ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
   }
 }
