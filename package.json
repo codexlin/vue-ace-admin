@@ -71,7 +71,7 @@
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged",
-    "commit-msg": "commitlint",
+    "commit-msg": "commitlint.config.js",
     "pre-push": "cd ../../ && pnpm format",
     "preserveUnused": true
   },
