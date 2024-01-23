@@ -28,7 +28,7 @@ Ace Admin 是一个基于 Vue3.4、TypeScript5.x、Antd-Vue4.x、Pinia2.x 及 Vi
 - **最新的依赖**: 定期更新所有三方依赖至最新版
 - **有一点规整**: 代码风格统一，命名风格统一，注释风格统一
 
-## 📖 技术亮点
+## 📖 项目亮点
 
 - **前沿技术**：Vue 3.4 最新周边以及 scrpit setup 。
 - **Simple git hooks**：尤大都在用(可代替husky)。
