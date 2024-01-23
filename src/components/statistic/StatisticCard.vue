@@ -4,8 +4,7 @@ import type { Props } from './type'
 const props = withDefaults(defineProps<Props>(), {
   title: 'Feedback',
   value: 3,
-  precision: 2,
-  suffix: '%'
+  suffix: ''
 })
 </script>
 <template>

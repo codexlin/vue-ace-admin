@@ -1,10 +1,5 @@
-// .ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn::before {
-//   content: '';
-//   display: inline-block;
-//   width: 8px;
-//   height: 8px;
-//   border-radius: 50%;
-//   position: relative;
-//   margin-right: 2px;
-//   background: #fff;
-// }
+// 设置ant样式
+.ant-layout .ant-layout-header {
+  height: var(--header-height);
+  line-height: var(--header-height);
+}

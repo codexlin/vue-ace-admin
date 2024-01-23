@@ -1,22 +1,23 @@
-:root{
-  --primary:#ff5733;
-  --info:#ff5733
+:root {
+  --primary: #ff5733;
+  --info: #ff5733;
+  --header-height: 64px;
 }
-$red: #f5222d;
-$orange: #fa541c;
-$yellow: #faad14;
-$cyan: #13c2c2;
-$green: #52c41a;
-$blue: #2f54eb;
-$purple: #722ed1;
-$primary:var(--primary);
-$info:var(--info);
+$jalapenoRed: #b71540;
+$pumpkin: #d35400;
+$sunFlower: #f1c40f;
+$turquoise: #1abc9c;
+$pureApple: #6ab04c;
+$royalBlue: #3742fa;
+$gloomyPurple: #5f27cd;
+$primary: var(--primary);
+$info: var(--info);
 :export {
-  red: $red;
-  orange: $orange;
-  yellow: $yellow;
-  cyan: $cyan;
-  green: $green;
-  blue: $blue;
-  purple: $purple;
+  jalapenoRed: $jalapenoRed;
+  pumpkin: $pumpkin;
+  sunFlower: $sunFlower;
+  turquoise: $turquoise;
+  pureApple: $pureApple;
+  royalBlue: $royalBlue;
+  gloomyPurple: $gloomyPurple;
 }

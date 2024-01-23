@@ -104,5 +104,14 @@ export default {
   },
   sidebar: {
     index: 'dashboard'
+  },
+  colors: {
+    jalapenoRed: 'Jalapeno Red',
+    pumpkin: 'Pumpkin',
+    sunFlower: 'Sun Flower',
+    turquoise: 'Turquoise',
+    pureApple: 'Pure Apple',
+    royalBlue: 'Royal Blue',
+    gloomyPurple: 'Gloomy Purple'
   }
 }

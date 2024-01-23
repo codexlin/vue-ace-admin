@@ -33,7 +33,7 @@ const fontSize = computed(() => (app.appConfig.watermark.isShow ? app.appConfig.
       <a-layout>
         <HeaderView />
         <a-layout-content class="layout-content">
-          <div :style="{ padding: '24px', minHeight: '360px' }">
+          <div :style="{ padding: '20px', minHeight: '360px' }">
             <router-view v-slot="{ Component, route }">
               <transition name="scale" mode="out-in">
                 <keep-alive :include="store.getCacheTabs as MatchPattern">

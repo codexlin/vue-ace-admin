@@ -98,6 +98,9 @@ body {
 
 /* sm */
 @media (max-width: 640px) {
+  .breadcrumb {
+    display: none;
+  }
 }
 
 /* xs */

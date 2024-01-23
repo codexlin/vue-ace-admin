@@ -44,8 +44,7 @@ const placement = ref<DrawerProps['placement']>('left')
 @import '@/styles/theme.scss';
 
 .logo {
-  height: 32px;
-  margin: 16px 0;
+  height: var(--header-height);
   display: flex;
   justify-content: space-evenly;
   align-items: center;

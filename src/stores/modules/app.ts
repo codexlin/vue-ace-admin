@@ -38,9 +38,8 @@ export const useAppStore = defineStore('app', () => {
     }
   })
 
-  const getLanguage = computed(() => {
-    return appConfig.value.defaultLanguage
-  })
+  const getLanguage = computed(() => appConfig.value.defaultLanguage)
+  const getDirection = computed(() => appConfig.value.direction)
   const setThemeName = (value: string) => {
     appConfig.value.token.colorPrimary = value
   }
@@ -57,12 +56,16 @@ export const useAppStore = defineStore('app', () => {
   }
 
   function resetDefault() {
-    appConfig.value.token = cloneDeep(systemConfig.token)
-    appConfig.value.compactAlgorithm = systemConfig.compactAlgorithm
+    // appConfig.value.token = cloneDeep(systemConfig.token)
+    // appConfig.value.compactAlgorithm = systemConfig.compactAlgorithm
+    appConfig.value = {
+      ...cloneDeep(systemConfig)
+    }
     console.log('resetDefault', appConfig.value)
   }
 
   return {
+    getDirection,
     toggleCollapsed,
     collapsed,
     getLanguage,

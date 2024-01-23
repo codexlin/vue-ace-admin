@@ -4,17 +4,19 @@
  * @Description: 
 -->
 <script lang="ts" setup>
+import useLocalI18n from '@/hooks/useLocalI18n'
 import { useAppStore } from '@/stores/modules/app'
 import variables from '@/styles/variables.module.scss'
 
 const app = useAppStore()
 const color = ref(app.appConfig.token.colorPrimary)
-
+Reflect.deleteProperty(variables, 'primary')
+Reflect.deleteProperty(variables, 'info')
 function handleChange(value: string) {
   app.setThemeName(value)
   color.value = value
 }
-
+const { tt } = useLocalI18n()
 const reset = () => {
   app.resetDefault()
   color.value = app.appConfig.token.colorPrimary
@@ -33,17 +35,20 @@ const reset = () => {
       <a-space wrap>
         <template v-for="(color, name) in variables" :key="name">
           <a-button :style="{ background: color }" @click="handleChange(color)">
-            {{ name }}
+            {{ tt(`colors.${name}`) }}
           </a-button>
         </template>
       </a-space>
     </div>
     <div>
       <p class="setting-title" data-label="布局设置" />
-      <a-select v-model:value="app.darkMode" style="width: 120px">
-        <a-select-option value="dark">dark</a-select-option>
-        <a-select-option value="light">light</a-select-option>
-      </a-select>
+      <div class="setting-item">
+        <label> 组件方向 </label>
+        <a-radio-group v-model:value="app.appConfig.direction">
+          <a-radio-button value="ltr">LTR</a-radio-button>
+          <a-radio-button value="rtl">RTL</a-radio-button>
+        </a-radio-group>
+      </div>
     </div>
     <div>
       <p class="setting-title" data-label="Layout" />

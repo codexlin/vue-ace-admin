@@ -103,5 +103,14 @@ export default {
   },
   sidebar: {
     index: '首页'
+  },
+  colors: {
+    jalapenoRed: '红辣椒',
+    pumpkin: '南瓜橙',
+    sunFlower: '向日葵',
+    turquoise: '绿松石',
+    pureApple: '青苹果',
+    royalBlue: '皇家蓝',
+    gloomyPurple: '忧郁紫'
   }
 }

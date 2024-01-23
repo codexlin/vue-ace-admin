@@ -26,7 +26,7 @@ const option = ref({
     }
   ]
 })
-const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30
+// const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30
 const tabList = [
   {
     key: 'tab1',
@@ -209,16 +209,32 @@ const tableData = [
   <div>
     <div class="flex-cards">
       <div class="flex-card">
-        <StatisticCard :prefix="h(ArrowUpOutlined)" :value-style="{ color: 'green' }" />
+        <StatisticCard
+          :title="h('span', { class: ['statistic-tile'] }, 'Feedback')"
+          :prefix="h(ArrowUpOutlined)"
+          suffix="%"
+          :precision="2"
+          :value-style="{ color: 'green' }"
+        />
       </div>
       <div class="flex-card">
-        <StatisticCard :prefix="h(ArrowDownOutlined)" :value-style="{ color: 'red' }" />
+        <StatisticCard :title="h('span', { class: ['statistic-tile'] }, 'Active Users')" :value="6969" />
       </div>
       <div class="flex-card">
-        <StatisticCard :prefix="h(ArrowUpOutlined)" :value-style="{ color: 'green' }" />
+        <StatisticCard
+          :title="h('span', { class: ['statistic-tile'] }, 'Idle')"
+          :prefix="h(ArrowDownOutlined)"
+          :precision="2"
+          suffix="%"
+          :value-style="{ color: 'red' }"
+        />
       </div>
       <div class="flex-card">
-        <StatisticCard :prefix="h(ArrowUpOutlined)" :value-style="{ color: 'green' }" />
+        <StatisticCard
+          :title="h('span', { class: ['statistic-tile'] }, 'Account Balance (CNY)')"
+          :value="112893"
+          :precision="2"
+        />
       </div>
     </div>
     <div class="flex-cards">
@@ -282,4 +298,8 @@ const tableData = [
     </div>
   </div>
 </template>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.statistic-tile {
+  color: var(--primary);
+}
+</style>

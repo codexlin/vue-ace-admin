@@ -24,7 +24,7 @@ const app = useAppStore()
           <menu-unfold-outlined v-if="app.collapsed" class="trigger" @click="app.toggleCollapsed" />
           <menu-fold-outlined v-else class="trigger" @click="app.toggleCollapsed" />
         </div>
-        <div class="header-view-item">
+        <div class="header-view-item breadcrumb">
           <BreadcrumbView />
         </div>
       </div>
