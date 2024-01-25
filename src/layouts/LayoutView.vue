@@ -5,7 +5,7 @@
 -->
 <script lang="ts" setup>
 import globalConfig from '@/config/system/appConfig'
-import SettingVue from '@/layout/setting/SettingView.vue'
+import SettingVue from '@/layouts/setting/SettingView.vue'
 import { useAppStore } from '@/stores/modules/app'
 import { useTabsStore } from '@/stores/modules/tabs'
 import FooterView from './footer/FooterView.vue'

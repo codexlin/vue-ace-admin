@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import useLocalI18n from '@/hooks/useLocalI18n'
-import { refreshKey } from '@/layout/type'
+import { refreshKey } from '@/layouts/type'
 import { useTabsStore } from '@/stores/modules/tabs'
 import { ReloadOutlined } from '@ant-design/icons-vue'
 import type { TabsProps } from 'ant-design-vue'
