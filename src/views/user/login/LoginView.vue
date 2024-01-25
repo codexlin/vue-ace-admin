@@ -27,7 +27,7 @@ onMounted(() => {
       <div class="login-box_left">
         <a-avatar style="background: transparent" :size="{ xs: 200, sm: 200, md: 250, lg: 300, xl: 350, xxl: 350 }">
           <template #icon>
-            <img alt="logo" class="img" src="@/assets/logo.svg" />
+            <img alt="logo" class="img" src="../../../assets/images/logo.svg" />
           </template>
         </a-avatar>
       </div>
