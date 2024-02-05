@@ -10,9 +10,10 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import setupI18n from './locales'
 import { setupRouter } from './router'
-import pinia from './stores/index'
+import pinia from './stores'
 import './styles/main.scss'
-import directives from './directives/index'
+import directives from './directives'
+
 const app = createApp(App)
 directives(app)
 app.use(pinia)

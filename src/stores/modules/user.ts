@@ -7,9 +7,11 @@ import router from '@/router'
 import { loginApi } from '@/views/user/login/api'
 import { useRouteStore } from './route'
 import { useTabsStore } from './tabs'
+
 interface UserInfo {
   [key: string]: any
 }
+
 export const useUserStore = defineStore('user', () => {
   const token = ref('')
   const userInfo = ref<UserInfo>({})
@@ -46,11 +48,5 @@ export const useUserStore = defineStore('user', () => {
     console.log('logout', router.getRoutes())
   }
 
-  return {
-    token,
-    userInfo,
-    getToken,
-    login,
-    logout
-  }
+  return { token, userInfo, getToken, login, logout }
 })

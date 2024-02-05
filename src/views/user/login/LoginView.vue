@@ -1,13 +1,16 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useUserStore } from '@/stores/modules/user'
 import { gsap } from 'gsap'
 import { registerApi } from './api'
+
 const user = useUserStore()
+
 // const { tt } = useLocalI18n()
 interface IState {
   email: string
   password: string
 }
+
 const state = reactive<IState>({
   email: '',
   password: ''
@@ -25,15 +28,15 @@ onMounted(() => {
   <div class="login">
     <div class="login-box">
       <div class="login-box_left">
-        <a-avatar style="background: transparent" :size="{ xs: 200, sm: 200, md: 250, lg: 300, xl: 350, xxl: 350 }">
+        <a-avatar :size="{ xs: 200, sm: 200, md: 250, lg: 300, xl: 350, xxl: 350 }" style="background: transparent">
           <template #icon>
-            <img alt="logo" class="img" src="../../../assets/images/logo.svg" />
+            <img alt="logo" class="img" src="assets/images/logo.svg" />
           </template>
         </a-avatar>
       </div>
       <div class="login-box_right">
         <h2 class="title">Welcome to Ace Admin</h2>
-        <a-form autocomplete="off" @finish="onFinish" class="custom-form" :model="state">
+        <a-form :model="state" autocomplete="off" class="custom-form" @finish="onFinish">
           <a-form-item name="email" placeholder="用户名:如 admin@qq.com">
             <a-input v-model:value="state.email"></a-input>
           </a-form-item>
@@ -52,12 +55,13 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .title {
   color: #0000ff; /*设置文字颜色*/
   text-decoration: none;
   animation: shine 2.4s infinite; /*设置动画*/
 }
+
 @keyframes shine {
   /*创建动画*/
   0%,

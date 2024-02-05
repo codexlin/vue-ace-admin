@@ -4,7 +4,9 @@ import setupCommonPlugins from './common'
 import setupComponents from './components'
 import setupIcons from './icon'
 import setupSvgIcon from './svg-icon'
-export default function setupVitePlugins(viteEnv: Record<string, string>, isBuild: boolean) {
+
+// 插件配置
+export default function (viteEnv: Record<string, string>, isBuild: boolean) {
   const { VITE_BUILD_COMPRESS } = viteEnv
   const plugins: PluginOption[] = [
     ...setupCommonPlugins(),
