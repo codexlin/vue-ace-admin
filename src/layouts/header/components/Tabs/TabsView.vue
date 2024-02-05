@@ -78,6 +78,10 @@ watch(
 <style lang="scss">
 .tabs {
   height: 40px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(5px);
   .ant-tabs-nav {
     margin: 0;
     padding: 5px;

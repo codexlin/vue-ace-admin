@@ -8,7 +8,6 @@ import BreadcrumbView from '@/layouts/header/components/Breadcrumb/BreadCrumb.vu
 import FullScreen from '@/layouts/header/components/FullScreen/FullScreen.vue'
 import LangSelect from '@/layouts/header/components/LangSelect/LangSelect.vue'
 import PersonTool from '@/layouts/header/components/PersonTool/PersonTool.vue'
-import TabsView from '@/layouts/header/components/Tabs/TabsView.vue'
 import ThemeSwitch from '@/layouts/header/components/ThemeSwitch/ThemeSwitch.vue'
 import { useAppStore } from '@/stores/modules/app'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
@@ -20,7 +19,7 @@ const app = useAppStore()
   <a-layout-header class="custom-layout layout-header">
     <div class="header-view">
       <div class="header-view-left">
-        <div class="header-view-item" style="display: flex">
+        <div class="header-view-item">
           <menu-unfold-outlined v-if="app.collapsed" class="trigger" @click="app.toggleCollapsed" />
           <menu-fold-outlined v-else class="trigger" @click="app.toggleCollapsed" />
         </div>
@@ -44,30 +43,23 @@ const app = useAppStore()
         </div>
       </div>
     </div>
-    <div>
-      <TabsView></TabsView>
-    </div>
   </a-layout-header>
 </template>
 
 <style lang="scss" scoped>
-.trigger {
-  font-size: 1.3em;
-  line-height: 1.3em;
-}
 .layout-header {
-  margin-bottom: 40px;
   padding: 0;
 }
 .header-view {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   &-left {
     gap: 10px;
     padding-left: 10px;
     display: flex;
     align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   &-right {
@@ -75,13 +67,24 @@ const app = useAppStore()
     gap: 15px;
     display: flex;
     align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   &-item {
-    // :deep(.anticon) {
-    //   font-size: 18px;
-    // }
+    display: flex;
+    align-items: center;
+    :deep(.anticon) {
+      font-size: 16px;
+    }
     cursor: pointer;
+  }
+  .breadcrumb {
+    font-size: 14px;
+  }
+  .trigger {
+    font-size: 1.3em;
+    line-height: 1.3em;
   }
 }
 </style>

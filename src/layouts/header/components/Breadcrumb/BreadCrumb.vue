@@ -3,7 +3,7 @@ import useLocalI18n from '@/hooks/useLocalI18n'
 import router from '@/router'
 import { useRouteStore } from '@/stores/modules/route'
 import { flattenRoutes, getLevelPaths } from '@/utils/common/routeUtil'
-import { HomeOutlined } from '@ant-design/icons-vue'
+import { HomeFilled } from '@ant-design/icons-vue'
 import type { Route, Routes } from 'types/common'
 
 const { tt } = useLocalI18n()
@@ -39,7 +39,7 @@ watch(
 <template>
   <a-breadcrumb>
     <a-breadcrumb-item href="">
-      <home-outlined />
+      <HomeFilled />
     </a-breadcrumb-item>
     <template v-if="breadcrumbs.length > 0">
       <a-breadcrumb-item v-for="item in breadcrumbs" :key="item.path" href="">

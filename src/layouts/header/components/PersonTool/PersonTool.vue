@@ -36,4 +36,9 @@ const handleClick = (item: any) => {
   </a-dropdown>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.header-avatar {
+  display: flex;
+  align-items: center;
+}
+</style>

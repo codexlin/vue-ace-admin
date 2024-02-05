@@ -10,10 +10,10 @@ const { isFullscreen, toggle } = useFullscreen()
     <template #title>
       {{ isFullscreen ? '退出全屏' : '开启全屏' }}
     </template>
-    <span @click="toggle">
+    <div @click="toggle">
       <fullscreen-outlined v-show="!isFullscreen" />
       <fullscreen-exit-outlined v-show="isFullscreen" />
-    </span>
+    </div>
   </a-tooltip>
 </template>
 

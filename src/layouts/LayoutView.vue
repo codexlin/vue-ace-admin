@@ -5,25 +5,14 @@
 -->
 <script lang="ts" setup>
 import globalConfig from '@/config/system/appConfig'
+import FooterView from '@/layouts/components/footer/FooterView.vue'
+import MainView from '@/layouts/components/main/index.vue'
+import HeaderView from '@/layouts/header/HeaderView.vue'
 import SettingVue from '@/layouts/setting/SettingView.vue'
 import { useAppStore } from '@/stores/modules/app'
-import { useTabsStore } from '@/stores/modules/tabs'
-import FooterView from './footer/FooterView.vue'
-import HeaderView from './header/HeaderView.vue'
 import SidebarView from './sidebar/SidebarView.vue'
-import { refreshKey, type MatchPattern } from './type'
-
 const app = useAppStore()
-const store = useTabsStore()
-;(() => {
-  store.setCacheTabs()
-})()
-const isAlive = ref(true)
-provide(refreshKey, async () => {
-  isAlive.value = false
-  await nextTick()
-  isAlive.value = true
-})
+
 const fontSize = computed(() => (app.appConfig.watermark.isShow ? app.appConfig.watermark.font.fontSize : 0))
 </script>
 <template>
@@ -33,15 +22,7 @@ const fontSize = computed(() => (app.appConfig.watermark.isShow ? app.appConfig.
       <a-layout>
         <HeaderView />
         <a-layout-content class="layout-content">
-          <div :style="{ padding: '20px', minHeight: '360px' }">
-            <router-view v-slot="{ Component, route }">
-              <transition name="scale" mode="out-in">
-                <keep-alive :include="store.getCacheTabs as MatchPattern">
-                  <component :is="Component" v-if="isAlive" :key="route.path" />
-                </keep-alive>
-              </transition>
-            </router-view>
-          </div>
+          <MainView />
         </a-layout-content>
         <FooterView />
       </a-layout>
