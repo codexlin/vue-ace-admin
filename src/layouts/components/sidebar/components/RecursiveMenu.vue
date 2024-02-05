@@ -1,7 +1,7 @@
 <!--
  * @Author: LinRenJie xoxosos666@gmail.com
  * @Date: 2023-10-30 20:49:23
- * @Description: 
+ * @Description:
 -->
 <script lang="ts" setup>
 import SvgIconVue from '@/components/svgicon/SvgIcon.vue'
@@ -11,8 +11,10 @@ import { setPageTitleTxt } from '@/router/routerHelp'
 import { useRouteStore } from '@/stores/modules/route'
 import { getLevelPaths } from '@/utils/common/routeUtil'
 import type { ItemType } from 'ant-design-vue'
-import type { Routes } from 'types/common'
+import type { Routes } from '../../../../../types/common'
+import useConfig from '@/layouts/composables/useConfig'
 
+const { headerConfig } = useConfig()
 const { tt, watchSwitchLang } = useLocalI18n()
 const menus = useRouteStore().getRoutes || []
 
@@ -56,13 +58,6 @@ watch(
 </script>
 
 <template>
-  <a-menu
-    v-model:selectedKeys="selectedKeys"
-    :items="items"
-    :openKeys="openKeys"
-    :theme="undefined"
-    mode="inline"
-    @click="handleClick"
-  >
+  <a-menu v-model:selectedKeys="selectedKeys" :items :mode="headerConfig.mode" :theme="undefined" @click="handleClick">
   </a-menu>
 </template>

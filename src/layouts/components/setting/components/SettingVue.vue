@@ -1,7 +1,7 @@
 <!--
  * @Author: LinRenJie xoxosos666@gmail.com
  * @Date: 2023-10-14 21:29:57
- * @Description: 
+ * @Description:
 -->
 <script lang="ts" setup>
 import useLocalI18n from '@/hooks/useLocalI18n'
@@ -12,10 +12,12 @@ const app = useAppStore()
 const color = ref(app.appConfig.token.colorPrimary)
 Reflect.deleteProperty(variables, 'primary')
 Reflect.deleteProperty(variables, 'info')
+
 function handleChange(value: string) {
   app.setThemeName(value)
   color.value = value
 }
+
 const { tt } = useLocalI18n()
 const reset = () => {
   app.resetDefault()
@@ -25,10 +27,10 @@ const reset = () => {
 
 <template>
   <div class="setting-drawer">
-    <a-button @click="reset" type="primary">重置全部</a-button>
+    <a-button type="primary" @click="reset">重置全部</a-button>
     <div>
       <p class="setting-title" data-label="自定义主题颜色" />
-      <input class="color-picker" v-model="color" type="color" @change="handleChange(color)" />
+      <input v-model="color" class="color-picker" type="color" @change="handleChange(color)" />
     </div>
     <div>
       <p class="setting-title" data-label="预设主题颜色" />
@@ -42,6 +44,13 @@ const reset = () => {
     </div>
     <div>
       <p class="setting-title" data-label="布局设置" />
+      <div class="setting-item">
+        <label> 整体布局 </label>
+        <a-radio-group v-model:value="app.appConfig.layout">
+          <a-radio-button value="default">默认</a-radio-button>
+          <a-radio-button value="horizon">水平</a-radio-button>
+        </a-radio-group>
+      </div>
       <div class="setting-item">
         <label> 组件方向 </label>
         <a-radio-group v-model:value="app.appConfig.direction">
@@ -84,6 +93,7 @@ const reset = () => {
 .setting-drawer {
   display: flex;
   flex-direction: column;
+
   & :deep(.color-picker) {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -98,11 +108,13 @@ const reset = () => {
       border-radius: 15px;
       border: none;
     }
+
     &::-moz-color-swatch {
       border-radius: 15px;
       border: none;
     }
   }
+
   & :deep(.setting-title) {
     width: 100%;
     height: 1px;
@@ -122,6 +134,7 @@ const reset = () => {
       font-size: 15px;
     }
   }
+
   & :deep(.setting-item) {
     width: 100%;
     display: flex;

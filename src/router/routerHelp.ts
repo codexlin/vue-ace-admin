@@ -28,15 +28,18 @@ export function setupRouterHooks() {
     const routes = routerStore.getRoutes
     if (user.getToken) {
       if (flag && routes.length > 0) {
-        addRoutes(routes)
+        await addRoutes(routes)
+        console.log(routes)
         flag = false
         next({ path: to.path })
       }
       // 页面刷新时，重新加载路由
       if (routes.length === 0) {
+        console.log('routes.length === 0')
         await routerStore.setRoutes()
         next({ path: to.path })
       } else {
+        console.log('routes.length === 0---else', to.path)
         next()
       }
     } else if (to.path === '/login') {
@@ -57,19 +60,26 @@ export function setupRouterHooks() {
 const loadView = import.meta.glob('../views/**/*.vue')
 
 // 动态添加路由
-export function addRoutes(menu: RouteRecordRaw[]) {
-  menu.forEach((m) => {
-    const { name, path, meta, children, component } = m
-    // 只将页面信息添加到路由中
-    if (!children || children.length === 0) {
-      router.addRoute('layout', {
-        name,
-        path,
-        meta,
-        component: loadView[`../views${component}.vue`]
+export function addRoutes(menu: RouteRecordRaw[]): Promise<void> {
+  return new Promise((resolve, reject) => {
+    try {
+      menu.forEach((m) => {
+        const { name, path, meta, children, component } = m
+        // 只将页面信息添加到路由中
+        if (!children || children.length === 0) {
+          router.addRoute('layout', {
+            name,
+            path,
+            meta,
+            component: loadView[`../views${component}.vue`]
+          })
+        } else {
+          addRoutes(children)
+        }
       })
-    } else {
-      addRoutes(children)
+      resolve() // 异步操作成功时，调用 resolve
+    } catch (error) {
+      reject(error) // 异步操作出错时，调用 reject
     }
   })
 }

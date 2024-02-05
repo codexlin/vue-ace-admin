@@ -4,6 +4,8 @@ const globalConfig: any = {
   appTitle: 'Ace Admin',
   // 组件方向 具体支持方向切换的组件请参考antd
   direction: 'ltr',
+  // 布局
+  layout: 'default',
   // 水印相关
   watermark: {
     isShow: true,

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import SettingVue from '@/layouts/setting/components/SettingVue.vue'
+import SettingVue from '@/layouts/components/setting/components/SettingVue.vue'
 import { SettingOutlined } from '@ant-design/icons-vue'
 import { h } from 'vue'
 

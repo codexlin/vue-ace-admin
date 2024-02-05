@@ -40,6 +40,8 @@ export const useAppStore = defineStore('app', () => {
 
   const getLanguage = computed(() => appConfig.value.defaultLanguage)
   const getDirection = computed(() => appConfig.value.direction)
+  const getLayout = computed<string>(() => appConfig.value.layout)
+
   const setThemeName = (value: string) => {
     appConfig.value.token.colorPrimary = value
   }
@@ -65,6 +67,7 @@ export const useAppStore = defineStore('app', () => {
   }
 
   return {
+    getLayout,
     getDirection,
     toggleCollapsed,
     collapsed,

@@ -1,6 +1,7 @@
 @import './theme.scss';
 @import './animation.scss';
 @import './antDesign.scss';
+
 $padding: 8px;
 // html {
 //   .gray {
@@ -21,6 +22,7 @@ body {
     color: getModeVar('infoColor');
   }
 }
+
 .ant-drawer:has(.ant-layout-sider) {
   display: none;
 }
@@ -29,6 +31,7 @@ body {
   @include useTheme {
     background: getModeVar('bgColor');
   }
+
   .ant-drawer-body {
     @include useTheme {
       background: getModeVar('bgColor');
@@ -36,12 +39,70 @@ body {
     padding: 0;
   }
 }
+
 #nprogress .bar {
   background: $primary; // 跟随主色
 }
 
 .ant-layout {
   font-family: $font-family;
+
+  .ant-layout-header {
+    .ant-menu {
+      border: none;
+    }
+  }
+
+  .layout-content {
+    overflow-y: auto;
+    // margin: 41px 0 0;
+    /* ---滚动条公共样式--- */
+
+    /*定义滚动条宽高及背景，宽高分别对应横竖滚动条的尺寸*/
+    // 滚动条整体部分
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      width: 6px;
+      height: 6px;
+      // background: rgb(239, 239, 239);
+      border-radius: 2px;
+    }
+
+    // 滚动条的轨道的两端按钮，允许通过点击微调小方块的位置。
+    &::-webkit-scrollbar-button {
+      display: none;
+    }
+
+    // 滚动条里面的小方块，能向上向下移动（或往左往右移动，取决于是垂直滚动条还是水平滚动条）
+    &::-webkit-scrollbar-thumb {
+      // @include useTheme {
+      //   background: getColor('primary');
+      // }
+      background-color: rgba(144, 147, 153, 0.3);
+      cursor: pointer;
+      border-radius: 4px;
+      transition: 0.3s background-color;
+
+      &:hover {
+        background-color: rgba(144, 147, 153, 0.5);
+      }
+    }
+
+    // 边角，即两个滚动条的交汇处
+    &::-webkit-scrollbar-corner {
+      display: none;
+    }
+
+    // 两个滚动条的交汇处上用于通过拖动调整元素大小的小控件
+    &::-webkit-resizer {
+      display: none;
+    }
+  }
+
 }
 
 .flex-cards {
