@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import TabsView from '@/layouts/components/header/components/Tabs/TabsView.vue'
+import TabsView from '@/layouts/components/Tabs/TabsView.vue'
 import { useTabsStore } from '@/stores/modules/tabs'
 import { refreshKey, type MatchPattern } from '../../type'
 
