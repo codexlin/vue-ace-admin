@@ -4,17 +4,16 @@
  * @Description: Vite配置
  */
 import { defineConfig, loadEnv } from 'vite'
-import loadPlugins from './vite/plugins'
-import loadViteResolve from './vite/resolve'
-import loadViteServer from './vite/server'
-import loadViteBuild from './vite/build'
+import viteConfig from './vite'
 
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd())
   console.log(mode, env, command)
+  const { loadPlugins, loadViteResolve, loadViteServer, loadViteBuild } = viteConfig
+  const isBuildCommand = command === 'build'
   return {
     // 插件配置
-    plugins: loadPlugins(env, command === 'build'),
+    plugins: loadPlugins(env, isBuildCommand),
     // 解析配置
     resolve: loadViteResolve(),
     // 开发服务器配置
