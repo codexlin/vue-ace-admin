@@ -21,8 +21,14 @@ const menus = useRouteStore().getRoutes || []
 const openKeys = ref<string[]>([])
 const selectedKeys = ref<string[]>([])
 const items = ref<ItemType[]>([])
-
 const handleClick = (item: ItemType) => item?.key && router.push(item.key as string)
+const state = reactive({
+  items,
+  openKeys: headerConfig.value.mode === 'inline' ? openKeys : undefined,
+  mode: headerConfig.value.mode,
+  theme: undefined,
+  onClick: handleClick
+})
 
 const getItem = (label: VNode | string, key: string, icon?: any, children?: ItemType[], type?: 'group'): ItemType => ({
   key,
@@ -40,24 +46,21 @@ const generateItems = (data: Routes): ItemType[] => {
     return getItem(tt(item.meta?.title as string), item.path, icon, children)
   })
 }
-
 const setItems = () => (items.value = generateItems(menus))
-
 onMounted(() => setItems())
-
 watchSwitchLang(setItems, () => setPageTitleTxt(router.currentRoute.value.meta))
 watch(
   () => router.currentRoute.value.path,
   (path) => {
+    openKeys.value = getLevelPaths(path)
     selectedKeys.value = [path]
-    const paths = getLevelPaths(path)
-    openKeys.value = paths
   },
-  { immediate: true }
+  {
+    immediate: true
+  }
 )
 </script>
 
 <template>
-  <a-menu v-model:selectedKeys="selectedKeys" :items :mode="headerConfig.mode" :theme="undefined" @click="handleClick">
-  </a-menu>
+  <a-menu v-model:selectedKeys="selectedKeys" v-bind="state"></a-menu>
 </template>
