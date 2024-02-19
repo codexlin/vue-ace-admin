@@ -9,6 +9,7 @@ lerna-debug.log*
 
 .DS_Store
 dist
+dist-test
 dist-ssr
 coverage
 *.local

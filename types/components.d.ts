@@ -34,8 +34,6 @@ declare module 'vue' {
     APopconfirm: (typeof import('ant-design-vue/es'))['Popconfirm']
     ARadioButton: (typeof import('ant-design-vue/es'))['RadioButton']
     ARadioGroup: (typeof import('ant-design-vue/es'))['RadioGroup']
-    ASelect: (typeof import('ant-design-vue/es'))['Select']
-    ASelectOption: (typeof import('ant-design-vue/es'))['SelectOption']
     ASpace: (typeof import('ant-design-vue/es'))['Space']
     AStatistic: (typeof import('ant-design-vue/es'))['Statistic']
     ASwitch: (typeof import('ant-design-vue/es'))['Switch']
