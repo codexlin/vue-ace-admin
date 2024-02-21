@@ -1,5 +1,11 @@
 export default {
   route: {
+    m: {
+      system: '系统管理'
+    },
+    c: {
+      menu: '菜单管理'
+    },
     login: '登录',
     dashboard: '首页',
     personal: '个人设置',

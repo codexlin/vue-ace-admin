@@ -1,5 +1,11 @@
 export default {
   route: {
+    m: {
+      system: 'System Manage'
+    },
+    c: {
+      menu: 'Menu Manage'
+    },
     login: 'Login',
     personal: 'Personal Setting',
     dashboard: 'Dashboard',
