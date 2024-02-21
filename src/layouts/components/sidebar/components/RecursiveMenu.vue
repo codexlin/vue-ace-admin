@@ -62,5 +62,5 @@ watch(
 </script>
 
 <template>
-  <a-menu v-model:selectedKeys="selectedKeys" v-bind="state"></a-menu>
+  <a-menu v-model:selectedKeys="selectedKeys" style="border-inline-end: none" v-bind="state"></a-menu>
 </template>
