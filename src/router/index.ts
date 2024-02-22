@@ -12,8 +12,17 @@ const history = import.meta.env.VITE_HASH_ROUTE === 'true' ? createWebHashHistor
 export const router = createRouter({
   routes: basicRoutes,
   scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    }
+    // For some reason using documentation example doesn't scroll on page navigation.
+    if (to.hash) {
+      return { el: to.hash, behavior: 'smooth' }
+    } else {
+      window.scrollTo(0, 0)
+    }
     // 始终滚动到顶部
-    return { top: 0 }
+    // return { top: 0 }
   },
   history: history()
 })

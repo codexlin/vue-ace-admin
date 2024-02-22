@@ -4,8 +4,8 @@
  * @Description:
 -->
 <script lang="ts" setup>
-import DefaultLayout from '@/layouts/default-layout/index.vue'
-import HorizonLayout from '@/layouts/horizon-layout/index.vue'
+import DefaultLayout from '@/layouts/default/index.vue'
+import HorizonLayout from '@/layouts/horizon/index.vue'
 import useConfig from '@/layouts/composables/useConfig'
 import { useAppStore } from '@/stores/modules/app'
 
