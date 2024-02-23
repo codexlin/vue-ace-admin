@@ -68,7 +68,7 @@ export default function useList<ItemType extends Object, FilterOption extends Ob
     loading.value = true
     try {
       const r = await listRequestFn(params)
-      list.value = r?.data?.list || []
+      list.value = r?.data || r?.data?.list || []
       total.value = r?.data?.total || 0
       options?.message?.GET_DATA_IF_SUCCEED && message(options.message.GET_DATA_IF_SUCCEED)
       options?.requestSuccess?.()
