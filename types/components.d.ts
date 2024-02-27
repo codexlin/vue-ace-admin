@@ -13,6 +13,7 @@ declare module 'vue' {
     AButton: (typeof import('ant-design-vue/es'))['Button']
     ACard: (typeof import('ant-design-vue/es'))['Card']
     AConfigProvider: (typeof import('ant-design-vue/es'))['ConfigProvider']
+    ADivider: (typeof import('ant-design-vue/es'))['Divider']
     ADrawer: (typeof import('ant-design-vue/es'))['Drawer']
     ADropdown: (typeof import('ant-design-vue/es'))['Dropdown']
     AForm: (typeof import('ant-design-vue/es'))['Form']

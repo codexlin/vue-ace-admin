@@ -1,7 +1,8 @@
-<script lang="ts" setup>
+<script lang="tsx" setup>
 import { onMounted, ref } from 'vue'
 import useList from '@/hooks/useList'
 import { getMenuTreeList } from '@/views/system/api'
+import OperationButtons from '@/components/button/OperationButtons.vue'
 
 defineOptions({
   name: 'MenuManage'
@@ -71,6 +72,42 @@ const columns = [
     title: 'component',
     dataIndex: 'component',
     key: 'component'
+  },
+  {
+    title: 'operation',
+    dataIndex: 'operation',
+    key: 'operation',
+    width: '10%',
+    fixed: 'right',
+    customRender: ({ record }: any) => {
+      const items = [
+        {
+          auth: 'add',
+          text: '新增',
+          type: 'primary',
+          cb: () => {
+            console.log('新增', record)
+          }
+        },
+        {
+          auth: 'edit',
+          text: '编辑',
+          type: 'primary',
+          cb: () => {
+            console.log('编辑', record)
+          }
+        },
+        {
+          auth: 'delete',
+          text: '删除',
+          type: 'danger',
+          cb: () => {
+            console.log('删除', record)
+          }
+        }
+      ]
+      return <OperationButtons items={items} />
+    }
   }
 ]
 
