@@ -21,6 +21,9 @@ const onFinish = async (values: IState) => {
   console.log('Success:', values)
   Object.values(values).length === 2 ? await user.login(values) : await registerApi(values)
 }
+const refresh = () => {
+  document.querySelector('#codeImg')?.setAttribute('src', 'http://localhost:8081/user/captcha')
+}
 onMounted(() => {
   gsap.to('.img', { rotation: 360, duration: 2, ease: 'bounce.out', repeat: Infinity })
 })
@@ -47,7 +50,7 @@ onMounted(() => {
           </a-form-item>
           <a-form-item>
             <a-input v-model:value="state.captcha"></a-input>
-            <img src="http://localhost:8081/user/captcha" id="codeImg" onclick="refresh()" alt="" />
+            <img src="http://localhost:8081/user/captcha" id="codeImg" @click="refresh()" alt="" />
           </a-form-item>
           <a-form-item>
             <span style="float: right">
