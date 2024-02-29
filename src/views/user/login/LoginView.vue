@@ -9,11 +9,13 @@ const user = useUserStore()
 interface IState {
   email: string
   password: string
+  captcha: string
 }
 
 const state = reactive<IState>({
   email: '',
-  password: ''
+  password: '',
+  captcha: ''
 })
 const onFinish = async (values: IState) => {
   console.log('Success:', values)
@@ -42,6 +44,10 @@ onMounted(() => {
           </a-form-item>
           <a-form-item name="password" placeholder="密码:任意填">
             <a-input-password v-model:value="state.password" />
+          </a-form-item>
+          <a-form-item>
+            <a-input v-model:value="state.captcha"></a-input>
+            <img src="http://localhost:8081/user/captcha" id="codeImg" onclick="refresh()" alt="" />
           </a-form-item>
           <a-form-item>
             <span style="float: right">
