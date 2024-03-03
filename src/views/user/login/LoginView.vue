@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useUserStore } from '@/stores/modules/user'
+import { WechatOutlined } from '@ant-design/icons-vue'
 import { gsap } from 'gsap'
 import { registerApi } from './api'
 
@@ -78,6 +79,14 @@ onMounted(() => {
           <a-form-item>
             <a-button html-type="submit" style="width: 100%" type="primary">登录</a-button>
           </a-form-item>
+          <a-divider>
+            <a-typography-text type="secondary">通过以下方式登录</a-typography-text>
+          </a-divider>
+          <a-form-item>
+            <div class="extra-login">
+              <a><wechat-outlined style="font-size: 40px; color: #24bf24" /></a>
+            </div>
+          </a-form-item>
         </a-form>
       </div>
     </div>
@@ -142,6 +151,9 @@ onMounted(() => {
       }
     }
     &_right {
+      .extra-login {
+        text-align: center;
+      }
       h2 {
         text-align: center;
       }

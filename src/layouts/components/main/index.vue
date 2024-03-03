@@ -2,7 +2,6 @@
 import TabsView from '@/layouts/components/Tabs/TabsView.vue'
 import { useTabsStore } from '@/stores/modules/tabs'
 import { refreshKey, type MatchPattern } from '../../type'
-
 defineOptions({
   name: 'MainView'
 })
