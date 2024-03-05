@@ -5,6 +5,7 @@
   "type": "module",
   "homepage": "https://github.com/xoxosos/vue-ace-admin#readme",
   "engines": {
+    "npm": ">=9.0.0",
     "node": ">=18.0.0"
   },
   "keywords": [
@@ -63,6 +64,7 @@
     "@vue/tsconfig": "^0.4.0",
     "eslint": "^8.56.0",
     "eslint-plugin-vue": "^9.19.2",
+    "fast-glob": "3.2.11",
     "lint-staged": "^14.0.1",
     "npm-run-all2": "^6.1.1",
     "prettier": "^3.1.1",
