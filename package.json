@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "homepage": "https://github.com/xoxosos/vue-ace-admin#readme",
   "engines": {
-    "npm": ">=9.0.0",
+    "npm": ">=8.0.0",
+    "pnpm": ">=8.0.0",
     "node": ">=18.0.0"
   },
   "keywords": [
