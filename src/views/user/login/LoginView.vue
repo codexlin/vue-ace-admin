@@ -18,12 +18,12 @@ const state = reactive<IState>({
   password: '',
   captcha: ''
 })
+const src = shallowRef('http://localhost:8081/user/captcha')
 const onFinish = async (values: IState) => {
-  Object.values(values).length === 2 ? await user.login(values) : await registerApi(values)
+  Object.values(values).length === 3 ? await user.login(values) : await registerApi(values)
 }
-const refresh = () => {
-  document.querySelector('#codeImg')?.setAttribute('src', 'http://localhost:8081/user/captcha')
-}
+const refresh = () => (src.value = src.value + '?' + Math.random())
+
 onMounted(() => {
   gsap.to('.img', {
     rotation: 55, // 顺时针旋转90度
@@ -69,9 +69,9 @@ onMounted(() => {
           <a-form-item name="password" placeholder="密码:任意填">
             <a-input-password size="large" v-model:value="state.password" />
           </a-form-item>
-          <a-form-item>
-            <a-input class="captcha-input" size="large" v-model:value="state.captcha"> </a-input>
-            <img src="http://localhost:8081/user/captcha" id="codeImg" @click="refresh()" alt="logo" />
+          <a-form-item name="captcha">
+            <a-input class="captcha-input" size="large" v-model:value="state.captcha"></a-input>
+            <img :src id="codeImg" @click="refresh()" alt="logo" />
           </a-form-item>
           <a-divider>
             <a-typography-text type="secondary">忘记密码</a-typography-text>
@@ -84,7 +84,9 @@ onMounted(() => {
           </a-divider>
           <a-form-item>
             <div class="extra-login">
-              <a><wechat-outlined style="font-size: 40px; color: #24bf24" /></a>
+              <a>
+                <wechat-outlined style="font-size: 40px; color: #24bf24" />
+              </a>
             </div>
           </a-form-item>
         </a-form>
@@ -124,6 +126,7 @@ onMounted(() => {
     50vmax 50vmax;
   background-repeat: no-repeat;
   animation: 10s movement linear infinite;
+
   &-box {
     flex-wrap: wrap;
     margin: auto;
@@ -142,21 +145,26 @@ onMounted(() => {
       22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
       41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
       100px 100px 80px rgba(0, 0, 0, 0.07);
+
     &_left {
       position: relative;
+
       div {
         position: absolute;
         top: 20px;
         left: 15px;
       }
     }
+
     &_right {
       .extra-login {
         text-align: center;
       }
+
       h2 {
         text-align: center;
       }
+
       :deep(.ant-btn-primary) {
         height: 35px;
         font-size: 15px;
@@ -168,9 +176,11 @@ onMounted(() => {
         width: 300px;
         border: none;
       }
+
       .captcha-input {
         width: 200px;
       }
+
       @media (max-width: 768px) {
         input,
         :deep(.ant-input-password) {
@@ -202,6 +212,7 @@ onMounted(() => {
       0 0 40px #0000ff;
   }
 }
+
 @keyframes movement {
   0%,
   100% {

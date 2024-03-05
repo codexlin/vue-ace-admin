@@ -31,8 +31,8 @@ export const useUserStore = defineStore('user', () => {
   // 登录
   async function login(form: any) {
     const res = await loginApi(form)
-    token.value = res.data.token
-    userInfo.value = res.data
+    token.value = res.data?.token || null
+    userInfo.value = res.data || {}
     // 转换后端路由信息并添加到路由实例
     await useRouteStore().setRoutes()
     // 打开数据库并保存路由信息到 IndexedDB
