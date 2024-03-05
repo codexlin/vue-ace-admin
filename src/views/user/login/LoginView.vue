@@ -2,7 +2,7 @@
 import { useUserStore } from '@/stores/modules/user'
 import { WechatOutlined } from '@ant-design/icons-vue'
 import { gsap } from 'gsap'
-import { registerApi } from './api'
+import { getCaptcha, registerApi } from './api'
 
 const user = useUserStore()
 
@@ -18,11 +18,28 @@ const state = reactive<IState>({
   password: '',
   captcha: ''
 })
-const src = shallowRef(`${import.meta.env.VITE_API_URL}/user/captcha`)
+const src = ref()
+function transformArrayBufferToBase64(buffer: any) {
+  let binary = ''
+  let bytes = new Uint8Array(buffer)
+  for (let len = bytes.byteLength, i = 0; i < len; i++) {
+    binary += String.fromCharCode(bytes[i])
+  }
+  return window.btoa(binary)
+}
+function getImg() {
+  getCaptcha().then((res) => {
+    let temp = transformArrayBufferToBase64(res) // 将ArrayBuffer 转成base64
+    src.value = `data:image/png;base64,${temp}` //这个数据就可以渲染到img标签中
+  })
+}
+onMounted(() => {
+  getImg()
+})
+
 const onFinish = async (values: IState) => {
   Object.values(values).length === 3 ? await user.login(values) : await registerApi(values)
 }
-const refresh = () => (src.value = src.value + '?' + Math.random())
 
 onMounted(() => {
   gsap.to('.img', {
@@ -71,7 +88,7 @@ onMounted(() => {
           </a-form-item>
           <a-form-item name="captcha">
             <a-input class="captcha-input" size="large" v-model:value="state.captcha"></a-input>
-            <img :src id="codeImg" @click="refresh()" alt="logo" />
+            <img :src @click="getImg()" alt="logo" />
           </a-form-item>
           <a-divider>
             <a-typography-text type="secondary">忘记密码</a-typography-text>
