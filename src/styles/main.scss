@@ -14,7 +14,7 @@ $padding: 8px;
 //   }
 // }
 body {
-  font-family: $font-family;
+  font-family: $font-family, Consolas, Menlo, Monaco, 'Courier New', 'PingFang SC', 'Microsoft YaHei', monospace;
   position: relative;
   // 样式规则，使用混合应用当前模式和主题的样式
   @include useTheme {
@@ -43,7 +43,6 @@ body {
 #nprogress .bar {
   background: $primary; // 跟随主色
 }
-
 
 .flex-cards {
   display: flex;
