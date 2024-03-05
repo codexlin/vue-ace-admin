@@ -18,7 +18,7 @@ const state = reactive<IState>({
   password: '',
   captcha: ''
 })
-const src = shallowRef('http://localhost:8081/user/captcha')
+const src = shallowRef(`${import.meta.env.VITE_APP_BASE_API}/user/captcha`)
 const onFinish = async (values: IState) => {
   Object.values(values).length === 3 ? await user.login(values) : await registerApi(values)
 }
