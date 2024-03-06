@@ -56,7 +56,7 @@ class Request {
         console.log('响应后拦截器：', response)
         if (response.status !== 200) return Promise.reject(response.data)
         handleAuthError(response.data.code)
-        handleGeneralError(response.data.code, response.data.message)
+        handleGeneralError(response)
         return response
       },
       (error: AxiosError) => {

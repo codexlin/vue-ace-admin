@@ -5,6 +5,7 @@
  */
 import { useUserStore } from '@/stores/modules/user'
 import { message } from 'ant-design-vue'
+import type { AxiosResponse } from 'axios'
 
 /**
  * 请求的调整 可以给请求头带上token等
@@ -85,12 +86,17 @@ export const handleAuthError = (errno: string) => {
  * @param errno
  * @param errMsg
  */
-export const handleGeneralError = (errno: any, errMsg: any) => {
-  if (errno !== 0) {
-    console.log('handleGeneralError', errno)
-    message.error(errMsg)
+export const handleGeneralError = (response: AxiosResponse) => {
+  const { data, config } = response
+  if (data.code) {
+    const { code, message: msg } = data
+    console.log('handleGeneralError', code)
+    message.error(msg)
     return false
   }
-
+  if (config.url === '/user/captcha') {
+    return !!data
+  }
+  console.log('handleGeneralError->结束')
   return true
 }

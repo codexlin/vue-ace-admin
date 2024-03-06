@@ -33,12 +33,14 @@ export const useUserStore = defineStore('user', () => {
     const res = await loginApi(form)
     token.value = res.data?.token || null
     userInfo.value = res.data || {}
-    // 转换后端路由信息并添加到路由实例
-    await useRouteStore().setRoutes()
-    // 打开数据库并保存路由信息到 IndexedDB
-    // await openDB('my-database', 1, 'routes')
-    // await put('routes', 'backendRoutes', useRouteStore().getRoutes)
-    await router.push('/')
+    if (res.code === 0) {
+      // 转换后端路由信息并添加到路由实例
+      await useRouteStore().setRoutes()
+      // 打开数据库并保存路由信息到 IndexedDB
+      // await openDB('my-database', 1, 'routes')
+      // await put('routes', 'backendRoutes', useRouteStore().getRoutes)
+      await router.push('/')
+    }
   }
 
   // 退出登录
