@@ -1,0 +1,3 @@
+{
+  "routes": [{ "src": "/api/(.*)", "dest": "http://look4u.top:8081/$1" }]
+}
