@@ -20,6 +20,7 @@ const state = reactive<IState>({
 })
 const src = ref()
 function transformArrayBufferToBase64(buffer: any) {
+  // 将ArrayBuffer 转成base64
   let binary = ''
   let bytes = new Uint8Array(buffer)
   for (let len = bytes.byteLength, i = 0; i < len; i++) {
@@ -27,11 +28,15 @@ function transformArrayBufferToBase64(buffer: any) {
   }
   return window.btoa(binary)
 }
-function getImg() {
-  getCaptcha().then((res) => {
-    let temp = transformArrayBufferToBase64(res) // 将ArrayBuffer 转成base64
-    src.value = `data:image/png;base64,${temp}` //这个数据就可以渲染到img标签中
-  })
+async function getImg() {
+  try {
+    const res = await getCaptcha<string>()
+    const temp = transformArrayBufferToBase64(res)
+    //渲染到img标签中
+    src.value = `data:image/png;base64,${temp}`
+  } catch (error) {
+    console.trace(error)
+  }
 }
 onMounted(() => {
   getImg()
