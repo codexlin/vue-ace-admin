@@ -4,7 +4,7 @@
  * @Description: 配置处理
  */
 import { useUserStore } from '@/stores/modules/user'
-import { message } from 'ant-design-vue'
+import { message as antMsg } from 'ant-design-vue'
 import type { AxiosResponse } from 'axios'
 
 /**
@@ -47,13 +47,13 @@ const errObj = new Map([
   [505, 'http版本不支持该请求']
 ])
 export const handleNetworkError = (errStatus: number) => {
-  let errMessage = '未知错误'
+  let errMessage = ''
   if (errStatus) {
     errMessage = errObj.get(errStatus) ?? `其他连接错误 --${errStatus}`
   } else {
     errMessage = `无法连接到服务器！`
   }
-  message.error(errMessage)
+  antMsg.error(errMessage)
 }
 
 /**
@@ -73,7 +73,7 @@ export const handleAuthError = (errno: string) => {
   }
 
   if (Object.hasOwn(authErrMap, errno)) {
-    message.error(authErrMap[errno])
+    antMsg.error(authErrMap[errno])
     // 授权错误，登出账户
     useUserStore().logout()
     return false
@@ -89,9 +89,9 @@ export const handleAuthError = (errno: string) => {
 export const handleGeneralError = (response: AxiosResponse) => {
   const { data, config } = response
   if (data.code) {
-    const { code, message: msg } = data
+    const { code, message } = data
     console.log('handleGeneralError', code)
-    message.error(msg)
+    antMsg.error(message)
     return false
   }
   if (config.url === '/user/captcha') {

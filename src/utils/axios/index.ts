@@ -13,18 +13,24 @@ import {
   handleNetworkError
 } from './config'
 
-// 请求返回结果
+// 请求通用返回结果(与后端沟通好结构)
 export interface IResponse<T> {
   data: T | null
   code: number
   message: string
 }
-
-class Request {
+// 可自定义实例
+export class Request {
   private instance: AxiosInstance
-
-  constructor(config: AxiosRequestConfig) {
-    this.instance = axios.create(config)
+  // 默认配置
+  private defaultConfig: AxiosRequestConfig = {
+    // 根据实际情况修改
+    baseURL: import.meta.env.VITE_APP_BASE_API,
+    // 默认超时时间
+    timeout: 6000
+  }
+  constructor(config?: AxiosRequestConfig) {
+    this.instance = axios.create({ ...config, ...this.defaultConfig })
     /**
      * 请求拦截
      * todo 可增加loading
@@ -47,20 +53,21 @@ class Request {
     /**
      * 响应拦截
      * 当我们将所有的错误类型处理函数写完，在 axios 的拦截器中进行调用即可。
-     * response.data 数据结构需要定好
      *
      */
     this.instance.interceptors.response.use(
       (response: AxiosResponse) => {
-        // 对响应数据做点什么
+        // 响应成功的处理(2xx)
         console.log('响应后拦截器：', response)
         if (response.status !== 200) return Promise.reject(response.data)
+        // const isArrayBuffer = response.request.responseType === 'arrayBuffer'
+        // const isBlob = response.request.responseType === 'blob'
         handleAuthError(response.data.code)
         handleGeneralError(response)
-        return response
+        return response.data
       },
       (error: AxiosError) => {
-        // 对响应错误做点什么
+        // 响应错误时的处理(4xx,5xx等)
         console.error('响应后捕获的错误：', error)
         handleNetworkError(error?.response?.status as number)
         // Promise.reject(error.response)
@@ -69,31 +76,21 @@ class Request {
     )
   }
 
-  public async get<T = object>(url: string, config?: AxiosRequestConfig): Promise<IResponse<T>> {
-    const response = await this.instance.get<IResponse<T>>(url, config)
-    return response.data
+  public get<T = any>(url: string, config?: AxiosRequestConfig): Promise<IResponse<T>> {
+    return this.instance.get(url, config)
   }
 
-  public async post<T = object>(url: string, data: T, config?: AxiosRequestConfig): Promise<IResponse<T>> {
-    const response = await this.instance.post<IResponse<T>>(url, data, config)
-    return response.data
+  public post<T = any, V = any>(url: string, data: V, config?: AxiosRequestConfig): Promise<IResponse<T>> {
+    return this.instance.post(url, data, config)
   }
 
-  public async put<T = object>(url: string, data?: T, config?: AxiosRequestConfig): Promise<IResponse<T>> {
-    const response = await this.instance.put<IResponse<T>>(url, data, config)
-    return response.data
+  public put<T = any, V = any>(url: string, data?: V, config?: AxiosRequestConfig): Promise<IResponse<T>> {
+    return this.instance.put(url, data, config)
   }
 
-  public async delete<T = object>(url: string, config?: AxiosRequestConfig): Promise<IResponse<T>> {
-    const response = await this.instance.delete<IResponse<T>>(url, config)
-    return response.data
+  public delete<T = any>(url: string, config?: AxiosRequestConfig): Promise<IResponse<T>> {
+    return this.instance.delete(url, config)
   }
 }
-
-const request = new Request({
-  // 根据实际情况修改
-  baseURL: import.meta.env.VITE_APP_BASE_API,
-  // 默认超时时间
-  timeout: 6000
-})
-export default request
+// 导出默认实例
+export default new Request()
