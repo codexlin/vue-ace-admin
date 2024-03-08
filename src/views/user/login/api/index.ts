@@ -10,6 +10,6 @@ export const loginApi = <T, V>(data: V) => Request.post<T, V>(prefix + '/login',
 export const registerApi = <T, V>(data: V) => Request.post<T, V>(prefix + '/register', data)
 export const backendRoutesApi = () => Request.get(prefix + '/getMenu')
 export const getCaptcha = <T>() =>
-  Request.get<T>(prefix + '/cap', {
+  Request.get<T>(prefix + '/captcha', {
     responseType: 'arraybuffer'
   })

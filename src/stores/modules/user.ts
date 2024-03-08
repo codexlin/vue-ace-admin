@@ -5,23 +5,20 @@
  */
 import router from '@/router'
 import { loginApi } from '@/views/user/login/api'
+import type { ILoginData, ILoginForm } from 'types/common'
 import { useRouteStore } from './route'
 import { useTabsStore } from './tabs'
 
-interface UserInfo {
-  [key: string]: any
-}
-
 export const useUserStore = defineStore('user', () => {
   const token = ref('')
-  const userInfo = ref<UserInfo>({})
+  const userInfo = ref<ILoginData>({ token: '' })
   const getToken = computed(() => token.value)
   // const { openDB, put, deleteData } = useIndexedDB()
 
   // 初始化
   function init() {
     token.value = ''
-    userInfo.value = {}
+    userInfo.value = { token: '' }
     useRouteStore().init()
     useTabsStore().init()
     // await openDB('my-database', 1, 'routes')
@@ -29,18 +26,17 @@ export const useUserStore = defineStore('user', () => {
   }
 
   // 登录
-  async function login(form: any) {
-    const res = await loginApi(form)
-    token.value = res.data?.token || null
+  async function login(form: ILoginForm) {
+    const res = await loginApi<ILoginData, ILoginForm>(form)
+    if (!res.data) return
+    token.value = res.data.token
     userInfo.value = res.data || {}
-    if (res.code === 0) {
-      // 转换后端路由信息并添加到路由实例
-      await useRouteStore().setRoutes()
-      // 打开数据库并保存路由信息到 IndexedDB
-      // await openDB('my-database', 1, 'routes')
-      // await put('routes', 'backendRoutes', useRouteStore().getRoutes)
-      await router.push('/')
-    }
+    // 转换后端路由信息并添加到路由实例
+    await useRouteStore().setRoutes()
+    // 打开数据库并保存路由信息到 IndexedDB
+    // await openDB('my-database', 1, 'routes')
+    // await put('routes', 'backendRoutes', useRouteStore().getRoutes)
+    await router.push('/')
   }
 
   // 退出登录

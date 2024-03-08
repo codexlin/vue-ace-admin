@@ -12,7 +12,7 @@ export default function permission(app: App) {
     const all = bind.arg
 
     // 获取当前用户权限
-    const roles = useUserStore().userInfo?.roles || ''
+    const roles = useUserStore().userInfo?.permissions || []
 
     if (!roles || !bind.value) {
       throw new Error(`roles 或 bind.value 不能为空`)

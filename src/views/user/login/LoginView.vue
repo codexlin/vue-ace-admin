@@ -2,18 +2,14 @@
 import { useUserStore } from '@/stores/modules/user'
 import { WechatOutlined } from '@ant-design/icons-vue'
 import { gsap } from 'gsap'
+import type { ILoginForm } from 'types/common'
 import { getCaptcha, registerApi } from './api'
 
 const user = useUserStore()
 
 // const { tt } = useLocalI18n()
-interface IState {
-  email: string
-  password: string
-  captcha: string
-}
 
-const state = reactive<IState>({
+const state = reactive<ILoginForm>({
   email: '',
   password: '',
   captcha: ''
@@ -42,7 +38,7 @@ onMounted(() => {
   getImg()
 })
 
-const onFinish = async (values: IState) => {
+const onFinish = async (values: ILoginForm) => {
   Object.values(values).length === 3 ? await user.login(values) : await registerApi(values)
 }
 
