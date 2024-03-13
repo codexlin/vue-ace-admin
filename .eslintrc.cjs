@@ -20,6 +20,36 @@ module.exports = {
     node: true
   },
   rules: {
+    // 可选开启kebab-case写法 规则默认的是PascalCase的写法
+    // 'vue/component-name-in-template-casing': [
+    //   'error',
+    //   'kebab-case',
+    //   {
+    //     registeredComponentsOnly: true,
+    //     ignores: []
+    //   }
+    // ],
+    // 强制标签执行自动关闭
+    'vue/html-self-closing': [
+      'error',
+      {
+        html: {
+          void: 'never',
+          normal: 'always',
+          component: 'always'
+        },
+        svg: 'always',
+        math: 'always'
+      }
+    ],
+    // 此规则将强制注释<!--前后的间距保持一致。
+    'vue/html-comment-content-spacing': [
+      'error',
+      'always',
+      {
+        exceptions: []
+      }
+    ],
     'no-debugger': 'error',
     // 禁止使用 var
     'no-var': 'error',
