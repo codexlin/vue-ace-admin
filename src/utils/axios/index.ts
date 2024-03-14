@@ -32,14 +32,12 @@ export class Request {
   constructor(config?: AxiosRequestConfig) {
     this.instance = axios.create({ ...config, ...this.defaultConfig })
     /**
-     * 请求拦截
-     * todo 可增加loading
+     * 请求拦截 如 可增加loading
      * 我们需要两块内容，一是请求的调整 ，二是 配置用户标识
      */
     this.instance.interceptors.request.use(
       (config: InternalAxiosRequestConfig) => {
         config = handleChangeRequestHeader(config)
-        // if (!useAuthStore().getToken) return config
         config = handleConfigureAuth(config)
         console.log('请求前拦截器：', config)
         return config
@@ -67,7 +65,7 @@ export class Request {
         return response.data
       },
       (error: AxiosError) => {
-        // 响应错误时的处理(4xx,5xx等)
+        // 响应错误时的处理(不是2xx的状态码)
         console.error('响应后捕获的错误：', error)
         handleNetworkError(error?.response?.status as number)
         // Promise.reject(error.response)

@@ -30,18 +30,14 @@ module.exports = {
     //   }
     // ],
     // 强制标签执行自动关闭
-    'vue/html-self-closing': [
-      'error',
-      {
-        html: {
-          void: 'never',
-          normal: 'always',
-          component: 'always'
-        },
-        svg: 'always',
-        math: 'always'
-      }
-    ],
+    // 'vue/html-self-closing': [
+    //   'error',
+    //   {
+    //     html: {
+    //       void: 'never'
+    //     }
+    //   }
+    // ],
     // 此规则将强制注释<!--前后的间距保持一致。
     'vue/html-comment-content-spacing': [
       'error',

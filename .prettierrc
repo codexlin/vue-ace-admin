@@ -6,6 +6,6 @@
   "trailingComma": "none",
   "semi": false,
   "proseWrap": "preserve",
-  "htmlWhitespaceSensitivity": "css",
+  "htmlWhitespaceSensitivity": "strict",
   "endOfLine": "auto"
 }
