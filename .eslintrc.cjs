@@ -34,8 +34,12 @@ module.exports = {
     //   'error',
     //   {
     //     html: {
-    //       void: 'never'
-    //     }
+    //       void: 'never',
+    //       normal: 'always',
+    //       component: 'always'
+    //     },
+    //     svg: 'always',
+    //     math: 'always'
     //   }
     // ],
     // 此规则将强制注释<!--前后的间距保持一致。

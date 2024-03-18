@@ -1,10 +1,10 @@
 <script lang="ts" setup>
+import Motion from '@/components/functional/Motion'
 import { useUserStore } from '@/stores/modules/user'
 import { WechatOutlined } from '@ant-design/icons-vue'
 import { gsap } from 'gsap'
 import type { ILoginForm } from 'types/common'
 import { getCaptcha, registerApi } from './api'
-
 const user = useUserStore()
 
 // const { tt } = useLocalI18n()
@@ -15,6 +15,9 @@ const state = reactive<ILoginForm>({
   captcha: ''
 })
 const src = ref()
+const onFinish = async (values: ILoginForm) => {
+  Object.values(values).length === 3 ? await user.login(values) : await registerApi(values)
+}
 function transformArrayBufferToBase64(buffer: any) {
   // 将ArrayBuffer 转成base64
   let binary = ''
@@ -35,14 +38,6 @@ async function getImg() {
   }
 }
 onMounted(() => {
-  getImg()
-})
-
-const onFinish = async (values: ILoginForm) => {
-  Object.values(values).length === 3 ? await user.login(values) : await registerApi(values)
-}
-
-onMounted(() => {
   gsap.to('.img', {
     rotation: 55, // 顺时针旋转90度
     duration: 1.5, // 动画持续时间
@@ -58,6 +53,7 @@ onMounted(() => {
     },
     ease: 'elastic'
   })
+  getImg()
 })
 </script>
 
@@ -81,16 +77,22 @@ onMounted(() => {
       <div class="login-box_right">
         <h2 class="title">Welcome to Ace Admin :(</h2>
         <a-form :model="state" autocomplete="off" class="custom-form" @finish="onFinish">
-          <a-form-item name="email" placeholder="用户名:如 admin@qq.com">
-            <a-input size="large" v-model:value="state.email"></a-input>
-          </a-form-item>
-          <a-form-item name="password" placeholder="密码:任意填">
-            <a-input-password size="large" v-model:value="state.password" />
-          </a-form-item>
-          <a-form-item name="captcha">
-            <a-input class="captcha-input" size="large" v-model:value="state.captcha"></a-input>
-            <img :src @click="getImg()" alt="logo" />
-          </a-form-item>
+          <Motion :delay="300">
+            <a-form-item name="email" placeholder="用户名:如 admin@qq.com">
+              <a-input size="large" v-model:value="state.email" />
+            </a-form-item>
+          </Motion>
+          <Motion :delay="400">
+            <a-form-item name="password" placeholder="密码:任意填">
+              <a-input-password size="large" v-model:value="state.password" />
+            </a-form-item>
+          </Motion>
+          <Motion :delay="500">
+            <a-form-item name="captcha">
+              <a-input class="captcha-input" size="large" v-model:value="state.captcha" />
+              <img :src @click="getImg()" alt="logo" />
+            </a-form-item>
+          </Motion>
           <a-divider>
             <a-typography-text type="secondary">忘记密码</a-typography-text>
           </a-divider>

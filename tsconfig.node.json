@@ -8,12 +8,14 @@
     "playwright.config.*",
     "vite/**/*.ts"
   ],
-    "compilerOptions": {
+  "compilerOptions": {
     "types": ["node"],
     "composite": true,
     "skipLibCheck": true,
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "allowSyntheticDefaultImports": true
-  },
+    "allowSyntheticDefaultImports": true,
+    "jsx": "preserve",
+    "jsxImportSource": "vue"
+  }
 }

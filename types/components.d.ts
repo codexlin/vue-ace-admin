@@ -31,6 +31,7 @@ declare module 'vue' {
     AListItemMeta: (typeof import('ant-design-vue/es'))['ListItemMeta']
     AMenu: (typeof import('ant-design-vue/es'))['Menu']
     AMenuItem: (typeof import('ant-design-vue/es'))['MenuItem']
+    AModal: (typeof import('ant-design-vue/es'))['Modal']
     ARadioButton: (typeof import('ant-design-vue/es'))['RadioButton']
     ARadioGroup: (typeof import('ant-design-vue/es'))['RadioGroup']
     ASpace: (typeof import('ant-design-vue/es'))['Space']
