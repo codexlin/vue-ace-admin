@@ -78,12 +78,12 @@ onMounted(() => {
         <h2 class="title">Welcome to Ace Admin :(</h2>
         <a-form :model="state" autocomplete="off" class="custom-form" @finish="onFinish">
           <Motion :delay="300">
-            <a-form-item name="email" placeholder="用户名:如 admin@qq.com">
+            <a-form-item name="email" placeholder="用户名:如 xoxosos666@gmail.com">
               <a-input size="large" v-model:value="state.email" />
             </a-form-item>
           </Motion>
           <Motion :delay="400">
-            <a-form-item name="password" placeholder="密码:任意填">
+            <a-form-item name="password" placeholder="密码:123456">
               <a-input-password size="large" v-model:value="state.password" />
             </a-form-item>
           </Motion>

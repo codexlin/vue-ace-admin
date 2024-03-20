@@ -1,8 +1,9 @@
 <script lang="tsx" setup>
-import { onMounted, ref } from 'vue'
+import OperationButtons from '@/components/button/OperationButtons.vue'
+import FormModal from '@/components/form/FormModal'
 import useList from '@/hooks/useList'
 import { getMenuTreeList } from '@/views/system/api'
-import OperationButtons from '@/components/button/OperationButtons.vue'
+import { onMounted, ref } from 'vue'
 
 defineOptions({
   name: 'MenuManage'
@@ -86,7 +87,7 @@ const columns = [
           text: '新增',
           type: 'primary',
           cb: () => {
-            console.log('新增', record)
+            toggle()
           }
         },
         {
@@ -94,7 +95,7 @@ const columns = [
           text: '编辑',
           type: 'primary',
           cb: () => {
-            console.log('编辑', record)
+            toggle()
           }
         },
         {
@@ -102,7 +103,7 @@ const columns = [
           text: '删除',
           type: 'danger',
           cb: () => {
-            console.log('删除', record)
+            toggle()
           }
         }
       ]
@@ -110,7 +111,9 @@ const columns = [
     }
   }
 ]
-
+const open = ref(false)
+const formItems = [{ ui: 'a-input', name: 'input', label: 'input', disabled: false }]
+const toggle = () => (open.value = !open.value)
 const { list, loadData, loading, pageSize, curPage, total } = useList({ listRequestFn: getMenuTreeList })
 onMounted(async () => await loadData())
 const rowSelection = ref({
@@ -143,5 +146,8 @@ const rowSelection = ref({
       />
     </a-card>
   </div>
+  <a-modal v-model:open="open" title="Basic Modal" @ok="toggle">
+    <FormModal :form-items="formItems" />
+  </a-modal>
 </template>
 <style lang="scss" scoped></style>
