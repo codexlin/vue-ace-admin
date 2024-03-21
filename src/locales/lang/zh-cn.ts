@@ -1,4 +1,29 @@
 export default {
+  status: {
+    active: '活动中',
+    inactive: '未激活',
+    pending: '待处理',
+    completed: '已完成',
+    loading: '加载中'
+  },
+  common: {
+    add: '添加',
+    edit: '编辑',
+    delete: '删除',
+    detail: '详情',
+    yes: '是',
+    no: '否',
+    confirm: '确认',
+    confirmationMessage: '您确定要继续吗？',
+    cancel: '取消',
+    save: '保存',
+    close: '关闭',
+    reset: '重置',
+    submit: '提交',
+    noData: '无数据',
+    noDataMessage: '暂无可用数据',
+    search: '搜索'
+  },
   route: {
     m: {
       system: '系统管理'

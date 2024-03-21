@@ -1,81 +1,99 @@
 <script lang="tsx" setup>
 import OperationButtons from '@/components/button/OperationButtons.vue'
 import FormModal from '@/components/form/FormModal'
+import SvgIcon from '@/components/svgicon/SvgIcon.vue'
 import useList from '@/hooks/useList'
+import useLocalI18n from '@/hooks/useLocalI18n'
 import { getMenuTreeList } from '@/views/system/api'
 import { onMounted, ref } from 'vue'
 
 defineOptions({
   name: 'MenuManage'
 })
+const { tt } = useLocalI18n()
 const columns = [
+  // {
+  //   title: 'id',
+  //   dataIndex: 'id',
+  //   key: 'id'
+  // },
   {
-    title: 'id',
-    dataIndex: 'id',
-    key: 'id'
+    title: '菜单名称',
+    dataIndex: 'title',
+    key: 'title',
+    customRender: ({ text }: any) => {
+      return <span>{tt(text)}</span>
+    }
   },
   {
-    title: 'name',
+    title: '路由名称',
     dataIndex: 'name',
     key: 'name'
   },
+  // {
+  //   title: 'parentId',
+  //   dataIndex: 'parentId',
+  //   key: 'parentId'
+  // },
   {
-    title: 'parentId',
-    dataIndex: 'parentId',
-    key: 'parentId'
-  },
-  {
-    title: 'orderNum',
-    dataIndex: 'orderNum',
-    key: 'orderNum'
-  },
-  {
-    title: 'path',
+    title: '路由路径',
     dataIndex: 'path',
     key: 'path'
   },
   {
-    title: 'title',
-    dataIndex: 'title',
-    key: 'title'
-  },
-  {
     title: 'isFrame',
     dataIndex: 'isFrame',
-    key: 'isFrame'
+    key: 'isFrame',
+    customRender: ({ text }: any) => {
+      return <span>{text === 0 ? tt('common.yes') : tt('common.no')}</span>
+    }
   },
   {
     title: 'isCache',
     dataIndex: 'isCache',
-    key: 'isCache'
+    key: 'isCache',
+    customRender: ({ text }: any) => {
+      return <span>{text === 0 ? tt('common.yes') : tt('common.no')}</span>
+    }
   },
   {
-    title: 'menuType',
+    title: '类型',
     dataIndex: 'menuType',
-    key: 'menuType'
+    key: 'menuType',
+    customRender: ({ text }: any) => {
+      return <a-tag color="#87d068">{text}</a-tag>
+    }
   },
+  // {
+  //   title: 'hidden',
+  //   dataIndex: 'hidden',
+  //   key: 'hidden'
+  // },
   {
-    title: 'hidden',
-    dataIndex: 'hidden',
-    key: 'hidden'
-  },
-  {
-    title: 'permission',
+    title: '权限标识',
     dataIndex: 'permission',
     key: 'permission'
   },
   {
-    title: 'icon',
+    title: '菜单图标',
     dataIndex: 'icon',
-    key: 'icon'
+    key: 'icon',
+    customRender: ({ record }: any) => {
+      return <SvgIcon name={record.icon} />
+    }
   },
   {
-    title: 'component',
+    title: '组件路径',
     dataIndex: 'component',
     key: 'component'
   },
   {
-    title: 'operation',
+    title: '排序',
+    dataIndex: 'orderNum',
+    key: 'orderNum'
+  },
+  {
+    title: '操作',
     dataIndex: 'operation',
     key: 'operation',
     width: '10%',
@@ -112,7 +130,64 @@ const columns = [
   }
 ]
 const open = ref(false)
-const formItems = [{ ui: 'a-input', name: 'input', label: 'input', disabled: false }]
+const formItems = [
+  // {
+  //   ui: 'a-tree-select',
+  //   name: 'parent',
+  //   label: '上级菜单',
+  //   treeData: buildTreeDataSelect()
+  // },
+  { ui: 'a-select', name: 'icon', label: '菜单图标', disabled: false, options: [{ value: 1, label: 1 }] },
+  { ui: 'a-input', name: 'path', label: '菜单路径', disabled: false },
+  { ui: 'a-input', name: 'component', label: 'input', disabled: false },
+  { ui: 'a-input', name: 'title', label: '菜单名称', disabled: false },
+  { ui: 'a-input', name: 'component', label: '组件路径', disabled: false },
+  {
+    ui: 'a-radio-group',
+    name: 'menuType',
+    label: '菜单类型',
+    disabled: false,
+    defaultValue: 'M',
+    options: [
+      { value: 'M', label: '目录' },
+      { value: 'C', label: '菜单' },
+      { value: 'F', label: '按钮' }
+    ]
+  },
+  {
+    ui: 'a-radio-group',
+    name: 'isFrame',
+    label: '是否外链',
+    defaultValue: '0',
+    disabled: false,
+    options: [
+      { value: '0', label: '是' },
+      { value: '1', label: '否' }
+    ]
+  },
+  {
+    ui: 'a-radio-group',
+    name: 'isCache',
+    label: '是否缓存',
+    disabled: false,
+    defaultValue: '0',
+    options: [
+      { value: '0', label: '是' },
+      { value: '1', label: '否' }
+    ]
+  },
+  {
+    ui: 'a-radio-group',
+    name: 'hidden',
+    label: '是否隐藏',
+    disabled: false,
+    defaultValue: '1',
+    options: [
+      { value: '0', label: '是' },
+      { value: '1', label: '否' }
+    ]
+  }
+]
 const toggle = () => (open.value = !open.value)
 const { list, loadData, loading, pageSize, curPage, total } = useList({ listRequestFn: getMenuTreeList })
 onMounted(async () => await loadData())

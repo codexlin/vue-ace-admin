@@ -1,4 +1,29 @@
 export default {
+  status: {
+    active: 'Active',
+    inactive: 'Inactive',
+    pending: 'Pending',
+    completed: 'Completed',
+    loading: 'Loading'
+  },
+  common: {
+    add: 'Add',
+    edit: 'Edit',
+    delete: 'Delete',
+    detail: 'Detail',
+    yes: 'Yes',
+    no: 'No',
+    confirm: 'Confirm',
+    confirmationMessage: 'Are you sure you want to proceed?',
+    cancel: 'Cancel',
+    save: 'Save',
+    close: 'Close',
+    reset: 'Reset',
+    submit: 'Submit',
+    noData: 'No Data',
+    noDataMessage: 'No data available',
+    search: 'Search'
+  },
   route: {
     m: {
       system: 'System Manage'
