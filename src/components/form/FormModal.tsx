@@ -5,11 +5,10 @@ interface IItem {
   label: string
   name: string
   ui: string
-
-  [key: string]: any
-
   defaultValue?: string | number
   disabled?: boolean
+
+  [key: string]: any
 }
 
 export default defineComponent(
@@ -19,16 +18,12 @@ export default defineComponent(
     const change = () => {
       console.log('formState:', formState)
     }
+    console.log('formItems', formItems.value)
     const components = (item: IItem) => {
       // 根据ui创建vNode
       const vNode = createVNode(h(resolveComponent(item.ui)))
       const rest = omit(item, ['name', 'label'])
       if (item.defaultValue) formState[item.name] = item.defaultValue
-      const res = item.treeData
-      console.log(res)
-      if (item.ui === 'a-tree-select') {
-        return <a-tree-select v-model={[formState[item.name], 'value']} tree-data={res} {...rest}></a-tree-select>
-      }
       return <vNode v-model={[formState[item.name], 'value']} onChange={change} {...rest} />
     }
     return () => (

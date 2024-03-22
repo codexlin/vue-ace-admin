@@ -52,6 +52,6 @@ declare module 'vue' {
     RouterLink: (typeof import('vue-router'))['RouterLink']
     RouterView: (typeof import('vue-router'))['RouterView']
     StatisticCard: (typeof import('./../src/components/statistic/StatisticCard.vue'))['default']
-    SvgIcon: (typeof import('./../src/components/svgicon/SvgIcon.vue'))['default']
+    SvgIcon: (typeof import('@/components/svgIcon/index.vue'))['default']
   }
 }

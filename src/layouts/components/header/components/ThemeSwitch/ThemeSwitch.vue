@@ -1,10 +1,10 @@
 <!--
  * @Author: LinRenJie xoxosos666@gmail.com
  * @Date: 2023-10-14 23:29:23
- * @Description: 
+ * @Description:
 -->
 <script lang="ts" setup>
-import SvgIcon from '@/components/svgicon/SvgIcon.vue'
+import SvgIcon from '@/components/svgIcon/index.vue'
 import { useAppStore } from '@/stores/modules/app'
 
 const app = useAppStore()

@@ -4,15 +4,15 @@
  * @Description:
 -->
 <script lang="ts" setup>
-import SvgIconVue from '@/components/svgicon/SvgIcon.vue'
+import SvgIconVue from '@/components/svgIcon/index.vue'
 import useLocalI18n from '@/hooks/useLocalI18n'
+import useConfig from '@/layouts/composables/useConfig'
 import router from '@/router'
 import { setPageTitleTxt } from '@/router/routerHelp'
 import { useRouteStore } from '@/stores/modules/route'
 import { getLevelPaths } from '@/utils/common/routeUtil'
 import type { ItemType } from 'ant-design-vue'
 import type { Routes } from '../../../../../types/common'
-import useConfig from '@/layouts/composables/useConfig'
 
 const { headerConfig } = useConfig()
 const { tt, watchSwitchLang } = useLocalI18n()

@@ -17,26 +17,22 @@ class TreeNode {
     this.children = []
   }
 }
-
-export function buildTree(menuItems: MenuItem[], parentId: number): TreeNode[] {
+export function buildTree(menuItems: MenuItem[], parentId: number, tt: (str: string) => string): TreeNode[] {
   const nodes: TreeNode[] = []
   for (const menuItem of menuItems) {
     if (menuItem.parentId === parentId) {
-      const node = new TreeNode(menuItem.id, menuItem.title)
-      const children = buildTree(menuItems, menuItem.id)
+      const node = new TreeNode(menuItem.id, tt(menuItem.title))
+      const children = buildTree(menuItems, menuItem.id, tt)
       if (children.length > 0) {
         node.children = children
       }
       nodes.push(node)
     }
   }
-  console.log(nodes)
   return nodes
 }
 
-export function buildTreeDataSelect() {
-  let a = <any>[]
-  getMenuList().then((res: any) => (a = buildTree(res, 0)))
-  console.log(a)
-  return a
+export async function buildTreeDataSelect(tt: (str: string) => string) {
+  const res = await getMenuList()
+  return buildTree(res as any, 0, tt)
 }
