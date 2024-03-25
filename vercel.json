@@ -1,3 +1,8 @@
 {
-  "routes": [{ "src": "/api/(.*)", "dest": "http://look4u.top:8081/$1" }]
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "http://look4u.top:8081/$1"
+    }
+  ]
 }
