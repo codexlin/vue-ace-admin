@@ -5,8 +5,7 @@
   "type": "module",
   "homepage": "https://github.com/xoxosos/vue-ace-admin#readme",
   "engines": {
-    "npm": ">=9.0.0",
-    "node": ">=18.0.0"
+    "node": "20.x"
   },
   "keywords": [
     "vue3",
