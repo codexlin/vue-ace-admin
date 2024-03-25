@@ -4,6 +4,5 @@
       "source": "/api/(.*)",
       "destination": "http://look4u.top:8081/$1"
     }
-  ],
-  "installCommand": "pnpm install"
+  ]
 }
