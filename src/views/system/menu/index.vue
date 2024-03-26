@@ -5,7 +5,7 @@ import SvgIcon from '@/components/svgIcon/index.vue'
 import useList from '@/hooks/useList'
 import useLocalI18n from '@/hooks/useLocalI18n'
 import { buildTreeDataSelect } from '@/utils/common/treeUtil'
-import { getMenuTreeList } from '@/views/system/api'
+import { addMenu, getMenuTreeList } from '@/views/system/api'
 import type { ColumnsType } from 'ant-design-vue/es/table/Table'
 import { onMounted, ref } from 'vue'
 
@@ -203,6 +203,12 @@ const toggle = async () => {
   await initFormItems()
   open.value = !open.value
 }
+const formRef = ref<any>(null)
+const save = async () => {
+  await toggle()
+  const data = formRef.value?.formState || null
+  await addMenu(data)
+}
 const { list, loadData, loading } = useList({ listRequestFn: getMenuTreeList })
 onMounted(async () => await loadData())
 const rowSelection = ref({
@@ -235,8 +241,8 @@ const rowSelection = ref({
       />
     </a-card>
   </div>
-  <a-modal v-model:open="open" title="Basic Modal" @ok="toggle">
-    <FormModal :form-items="formItems" />
+  <a-modal v-model:open="open" title="Basic Modal" @ok="save">
+    <FormModal :form-items="formItems" ref="formRef" />
   </a-modal>
 </template>
 <style lang="scss" scoped></style>

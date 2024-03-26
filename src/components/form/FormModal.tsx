@@ -12,13 +12,16 @@ interface IItem {
 }
 
 export default defineComponent(
-  (props, { slots }) => {
+  (props, { expose }) => {
     const { formItems } = toRefs(props)
     const formState = reactive<Record<string, any>>({})
     const change = () => {
       console.log('formState:', formState)
     }
     console.log('formItems', formItems.value)
+    expose({
+      formState
+    })
     const components = (item: IItem) => {
       // 根据ui创建vNode
       const vNode = createVNode(h(resolveComponent(item.ui)))
