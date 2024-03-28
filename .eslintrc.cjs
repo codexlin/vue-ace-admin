@@ -11,10 +11,7 @@ module.exports = {
     'prettier'
   ],
   parserOptions: {
-    ecmaVersion: 'latest',
-    ecmaFeatures: {
-      jsx: true
-    }
+    ecmaVersion: 'latest'
   },
   env: {
     node: true
