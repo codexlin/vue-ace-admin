@@ -1,13 +1,13 @@
 export default {
   status: {
-    active: '活动中',
+    active: '激活中',
     inactive: '未激活',
     pending: '待处理',
     completed: '已完成',
     loading: '加载中'
   },
   common: {
-    add: '添加',
+    add: '新增',
     edit: '编辑',
     delete: '删除',
     detail: '详情',

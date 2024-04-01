@@ -59,7 +59,7 @@ export default function useList<ItemType extends Object, FilterOption extends Ob
   const total = ref(0)
   // 分页大小
   const pageSize = ref(10)
-  const list = ref<ItemType[]>([])
+  const dataSource = ref<ItemType[]>([])
   // 过滤数据
   // 获取列表数据
   const loadData = async (page = curPage.value) => {
@@ -68,7 +68,7 @@ export default function useList<ItemType extends Object, FilterOption extends Ob
     loading.value = true
     try {
       const r = await listRequestFn(params)
-      list.value = r?.data || r?.data?.list || []
+      dataSource.value = r?.data || r?.data?.list || []
       total.value = r?.data?.total || 0
       options?.message?.GET_DATA_IF_SUCCEED && message(options.message.GET_DATA_IF_SUCCEED)
       options?.requestSuccess?.()
@@ -121,7 +121,7 @@ export default function useList<ItemType extends Object, FilterOption extends Ob
     }
   }
   return {
-    list,
+    dataSource,
     loading,
     reset,
     curPage,

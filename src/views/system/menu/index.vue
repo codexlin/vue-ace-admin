@@ -5,7 +5,7 @@ import SvgIcon from '@/components/svgIcon/index.vue'
 import useList from '@/hooks/useList'
 import useLocalI18n from '@/hooks/useLocalI18n'
 import { buildTreeDataSelect } from '@/utils/common/treeUtil'
-import { addMenu, getMenuTreeList } from '@/views/system/api'
+import { addMenu, getMenuTreeList, updateMenu } from '@/views/system/api'
 import type { ColumnsType } from 'ant-design-vue/es/table/Table'
 import { onMounted, ref } from 'vue'
 
@@ -19,7 +19,6 @@ interface IItem {
   ui: string
   defaultValue?: string | number
   disabled?: boolean
-
   [key: string]: any
 }
 
@@ -109,7 +108,7 @@ const columns = [
           text: '新增',
           type: 'primary',
           cb: () => {
-            toggle()
+            toggle('add')
           }
         },
         {
@@ -117,7 +116,7 @@ const columns = [
           text: '编辑',
           type: 'primary',
           cb: () => {
-            toggle()
+            toggle('edit')
           }
         },
         {
@@ -198,51 +197,34 @@ const initFormItems = async () => {
     }
   ]
 }
-
-const toggle = async () => {
+const title = shallowRef('')
+type modelType = 'add' | 'edit'
+const type = shallowRef<modelType>('add')
+const toggle = async (str?: modelType) => {
+  if (str) {
+    title.value = str === 'add' ? tt('common.add') : tt('common.edit')
+    type.value = str
+  }
   await initFormItems()
   open.value = !open.value
 }
 const formRef = ref<any>(null)
-const save = async () => {
+const handleOk = async () => {
   await toggle()
   const data = formRef.value?.formState || null
-  await addMenu(data)
+  type.value === 'add' ? await addMenu(data) : await updateMenu(data)
 }
-const { list, loadData, loading } = useList({ listRequestFn: getMenuTreeList })
+const { dataSource, loadData, loading } = useList({ listRequestFn: getMenuTreeList })
 onMounted(async () => await loadData())
-const rowSelection = ref({
-  checkStrictly: false,
-  onChange: (selectedRowKeys: (string | number)[], selectedRows: any[]) => {
-    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows)
-  },
-  onSelect: (record: any, selected: boolean, selectedRows: any[]) => {
-    console.log(record, selected, selectedRows)
-  },
-  onSelectAll: (selected: boolean, selectedRows: any[], changeRows: any[]) => {
-    console.log(selected, selectedRows, changeRows)
-  }
-})
 </script>
 <template>
   <div>
-    <a-space align="center" style="margin-bottom: 16px">
-      CheckStrictly:
-      <a-switch v-model:checked="rowSelection.checkStrictly"></a-switch>
-    </a-space>
     <a-card>
-      <a-table
-        :scroll="{ x: 2000 }"
-        row-key="id"
-        :loading="loading"
-        :columns="columns"
-        :data-source="list"
-        :row-selection="rowSelection"
-      />
+      <a-table :scroll="{ x: 2000 }" row-key="id" :loading :columns :dataSource />
     </a-card>
   </div>
-  <a-modal v-model:open="open" title="Basic Modal" @ok="save">
-    <FormModal :form-items="formItems" ref="formRef" />
+  <a-modal v-model:open="open" :title @ok="handleOk">
+    <FormModal :formItems ref="formRef" />
   </a-modal>
 </template>
 <style lang="scss" scoped></style>

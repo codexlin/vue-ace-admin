@@ -6,7 +6,7 @@ defineOptions({
   name: 'MainView'
 })
 const store = useTabsStore()
-;(() => {
+void (() => {
   store.setCacheTabs()
 })()
 const isAlive = ref(true)
