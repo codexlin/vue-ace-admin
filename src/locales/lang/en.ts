@@ -7,6 +7,7 @@ export default {
     loading: 'Loading'
   },
   common: {
+    more: 'More',
     add: 'Add',
     edit: 'Edit',
     delete: 'Delete',

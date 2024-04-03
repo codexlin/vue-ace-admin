@@ -1,21 +1,26 @@
 <script setup lang="ts">
-import { EllipsisOutlined } from '@ant-design/icons-vue'
 import type { Item } from '@/components/button/type'
+import useLocalI18n from '@/hooks/useLocalI18n'
+import { DownOutlined } from '@ant-design/icons-vue'
 
 const props = defineProps<{
   items: Item[]
 }>()
 const menuArray = computed<Item[]>(() => (props.items.length > 2 ? props.items.slice(1) : props.items))
+const { tt } = useLocalI18n()
 </script>
 <template>
-  <div v-if="items.length > 3">
+  <div v-if="items.length >= 3">
     <a-space>
       <template #split>
         <a-divider type="vertical" />
       </template>
       <a @click="() => items[0].cb()"> {{ items[0].text }}</a>
       <a-dropdown placement="bottom">
-        <EllipsisOutlined />
+        <a class="ant-dropdown-link" @click.prevent>
+          {{ tt('common.more') }}
+          <DownOutlined />
+        </a>
         <template #overlay>
           <a-menu>
             <template v-for="item in menuArray" :key="item.btnName">
@@ -39,5 +44,3 @@ const menuArray = computed<Item[]>(() => (props.items.length > 2 ? props.items.s
     </a-space>
   </div>
 </template>
-
-<style scoped lang="scss"></style>

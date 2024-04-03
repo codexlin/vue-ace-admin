@@ -34,7 +34,7 @@ export default defineComponent(
         {formItems.value.map((item) => {
           const { name, label } = item
           return (
-            <a-form-item name={name} label={label}>
+            <a-form-item name={name} label={label} key={name}>
               {components(item)}
             </a-form-item>
           )

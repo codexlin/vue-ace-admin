@@ -220,11 +220,10 @@ onMounted(async () => await loadData())
 <template>
   <div>
     <a-card>
-      <a-table :scroll="{ x: 2000 }" row-key="id" :loading :columns :dataSource />
+      <a-table class="scroll-table" :scroll="{ x: 2000 }" row-key="id" :loading :columns :dataSource />
     </a-card>
+    <a-modal v-model:open="open" :title @ok="handleOk">
+      <FormModal :formItems ref="formRef" />
+    </a-modal>
   </div>
-  <a-modal v-model:open="open" :title @ok="handleOk">
-    <FormModal :formItems ref="formRef" />
-  </a-modal>
 </template>
-<style lang="scss" scoped></style>

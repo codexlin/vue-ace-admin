@@ -1,13 +1,10 @@
 // 设置ant样式
-.ant-layout .ant-layout-header {
-  height: var(--header-height);
-  line-height: var(--header-height);
-}
-
 .ant-layout {
   font-family: $font-family;
 
   .ant-layout-header {
+    height: var(--header-height);
+    line-height: var(--header-height);
     .ant-menu {
       border: none;
     }
@@ -61,27 +58,23 @@
     &::-webkit-resizer {
       display: none;
     }
-
-    .ant-table-body {
-      &::-webkit-scrollbar {
-        height: 8px;
-        width: 0;
-        overflow-y: auto;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        border-radius: 4px;
-        background: gray;
-      }
-
-      &::-webkit-scrollbar-track {
-        border-radius: 0;
-        background: #1d4176;
-      }
+  }
+}
+.scroll-table {
+  .ant-table-content {
+    &::-webkit-scrollbar {
+      height: 8px;
+      width: 0px;
+      overflow-y: auto;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background: var(--primary);
+    }
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: 0;
+      border-radius: 0;
+      background: rgba(144, 147, 153, 0.3);
     }
   }
-
 }
-
-
-
