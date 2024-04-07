@@ -16,9 +16,9 @@ Ace Admin 是一个基于 Vue3.4、TypeScript5.x、Antd-Vue4.x、Pinia2.x 及 Vi
 
 ## 📺 在线预览
 
-| 位置   | 账号                        | 密码                       | 链接                                                                |
-| ------ | --------------------------- | ---------------------------|-------------------------------------------------------------------- |
-| vercel | xoxosos666@gmail.com        | admin666                   | <a href="https://vue-ace-admin.vercel.app/" target="_blank">链接</a> |
+| 位置   | 账号                 | 密码     | 链接                                                                 |
+| ------ | -------------------- | -------- | -------------------------------------------------------------------- |
+| vercel | xoxosos666@gmail.com | admin666 | <a href="https://vue-ace-admin.vercel.app/" target="_blank">链接</a> |
 
 ## ❤️ 用爱发电
 
@@ -50,7 +50,7 @@ Ace Admin 是一个基于 Vue3.4、TypeScript5.x、Antd-Vue4.x、Pinia2.x 及 Vi
 - [x] **Hooks**：常用hooks封装
 - [x] **多环境**：多环境支持,适配开发、预发布和生产环境。
 - [x] **多主题**：内置普通、黑暗、自定义主题模式。
-- [ ] **多布局**：内置左侧、顶部、混合三种布局模式(开发中)。
+- [x] **多布局**：内置左侧、顶部布局模式。
 - [x] **错误页面**: 错误处理页面，如403、404。
 - [x] **Dashboard**：根据用户角色定制化显示。
 - [x] **其他内置功能**：如SVG、动态侧边栏、动态面包屑、标签页快捷导航、Screenfull 全屏、自适应收缩侧边栏等
@@ -98,18 +98,15 @@ pnpm lint
 ## ✔️ 预览
 
 ```js
-# 预览预发布环境
-pnpm preview:stage
-
 # 预览正式环境
-pnpm preview:prod
+pnpm preview
 ```
 
 ## 📦️ 多环境打包
 
 ```bash
 # 构建预发布环境
-pnpm build:stage
+pnpm build:test
 
 # 构建正式环境
 pnpm build:prod
@@ -156,4 +153,4 @@ Git 提交规范，包含了常见的提交类型，方便开发者追踪和管�
 
 本项目采用 [MIT](./LICENSE) 许可协议，版权归 [AceLin](https://github.com/xoxosos)所有。
 
-Copyright (c) 2023-present [AceLin](https://github.com/xoxosos)
+Copyright (c) 2023-Present [AceLin](https://github.com/xoxosos)
