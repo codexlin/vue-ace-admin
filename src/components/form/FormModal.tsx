@@ -26,7 +26,9 @@ export default defineComponent(
       // 根据ui创建vNode
       const vNode = createVNode(h(resolveComponent(item.ui)))
       const rest = omit(item, ['name', 'label'])
-      if (item.defaultValue) formState[item.name] = item.defaultValue
+      if (!formState[item.name] && item.defaultValue) {
+        formState[item.name] = item.defaultValue
+      }
       return <vNode v-model={[formState[item.name], 'value']} onChange={change} {...rest} />
     }
     return () => (

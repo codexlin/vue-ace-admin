@@ -5,7 +5,7 @@ import SvgIcon from '@/components/svgIcon/index.vue'
 import useList from '@/hooks/useList'
 import useLocalI18n from '@/hooks/useLocalI18n'
 import { buildTreeDataSelect } from '@/utils/common/treeUtil'
-import { addMenu, getMenuTreeList, updateMenu } from '@/views/system/api'
+import { addMenu, deleteMenu, getDetail, getMenuTreeList, updateMenu } from '@/views/system/api'
 import type { ColumnsType } from 'ant-design-vue/es/table/Table'
 import { onMounted, ref } from 'vue'
 
@@ -19,6 +19,7 @@ interface IItem {
   ui: string
   defaultValue?: string | number
   disabled?: boolean
+
   [key: string]: any
 }
 
@@ -108,7 +109,7 @@ const columns = [
           text: '新增',
           type: 'primary',
           cb: () => {
-            toggle('add')
+            handleClick(record, 'add')
           }
         },
         {
@@ -116,7 +117,7 @@ const columns = [
           text: '编辑',
           type: 'primary',
           cb: () => {
-            toggle('edit')
+            handleClick(record, 'edit')
           }
         },
         {
@@ -124,7 +125,7 @@ const columns = [
           text: '删除',
           type: 'danger',
           cb: () => {
-            toggle()
+            handleClick(record, 'delete')
           }
         }
       ]
@@ -139,17 +140,49 @@ const initFormItems = async () => {
   formItems.value = [
     {
       ui: 'a-tree-select',
-      name: 'parent',
+      name: 'parentId',
       label: '上级菜单',
       allowClear: true,
+      placeholder: '请选择上级菜单,不选默认为根节点',
       treeData
     },
-    { ui: 'a-select', name: 'icon', label: '菜单图标', disabled: false, options: [{ value: 1, label: 1 }] },
-    { ui: 'a-input', name: 'path', label: '菜单路径', disabled: false },
-    { ui: 'a-input', name: 'title', label: '菜单名称', disabled: false },
-    { ui: 'a-input', name: 'name', label: '路由名称', disabled: false },
-    { ui: 'a-input', name: 'component', label: '组件路径', disabled: false },
-    { ui: 'a-input-number', name: 'orderNum', label: '排序', disabled: false },
+    {
+      ui: 'a-select',
+      name: 'icon',
+      label: '菜单图标',
+      disabled: false,
+      allowClear: true,
+      options: [{ value: 1, label: 1 }]
+    },
+    {
+      ui: 'a-input',
+      name: 'path',
+      label: '菜单路径',
+      disabled: false,
+      placeholder: '路由中的path值如:/xxx'
+    },
+    {
+      ui: 'a-input',
+      name: 'title',
+      label: '菜单名称',
+      disabled: false,
+      placeholder: '格式:router.xxx'
+    },
+    {
+      ui: 'a-input',
+      name: 'name',
+      label: '路由名称',
+      disabled: false,
+      placeholder: '路由中的name值'
+    },
+    {
+      ui: 'a-input',
+      name: 'component',
+      label: '组件路径',
+      disabled: false,
+      placeholder: '组件路径'
+    },
+    { ui: 'a-input-number', name: 'orderNum', label: '排序', disabled: false, defaultValue: 0 },
     {
       ui: 'a-radio-group',
       name: 'menuType',
@@ -198,21 +231,43 @@ const initFormItems = async () => {
   ]
 }
 const title = shallowRef('')
-type modelType = 'add' | 'edit'
+type modelType = 'add' | 'edit' | 'delete'
 const type = shallowRef<modelType>('add')
-const toggle = async (str?: modelType) => {
-  if (str) {
-    title.value = str === 'add' ? tt('common.add') : tt('common.edit')
-    type.value = str
+const detailData = shallowRef()
+const toggle = () => (open.value = !open.value)
+const handleClick = async (record?: any, btnType?: modelType) => {
+  if (btnType) {
+    title.value = btnType === 'add' ? tt('common.add') : tt('common.edit')
+    type.value = btnType
+    await initFormItems()
+    if (record && record.id) {
+      formItems.value[0].defaultValue = record.id
+    }
+    if (['edit', 'detail'].includes(btnType)) {
+      const data = (await getDetail(record.id)) as Record<string, any>
+      detailData.value = data
+      console.log('data', data)
+      formItems.value.forEach((i: IItem) => {
+        const hasData = data[i.name]
+        if (hasData) {
+          i.defaultValue = hasData
+        }
+      })
+    }
+    // 可加modal确认
+    if (btnType === 'delete') return await deleteMenu(record.id)
   }
-  await initFormItems()
-  open.value = !open.value
+  toggle()
 }
 const formRef = ref<any>(null)
 const handleOk = async () => {
-  await toggle()
   const data = formRef.value?.formState || null
-  type.value === 'add' ? await addMenu(data) : await updateMenu(data)
+  if (type.value !== 'add') {
+    data.id = detailData.value.id
+    return await updateMenu(data)
+  }
+  await addMenu(data)
+  toggle()
 }
 const { dataSource, loadData, loading } = useList({ listRequestFn: getMenuTreeList })
 onMounted(async () => await loadData())
@@ -220,10 +275,10 @@ onMounted(async () => await loadData())
 <template>
   <div>
     <a-card>
-      <a-table class="scroll-table" :scroll="{ x: 2000 }" row-key="id" :loading :columns :dataSource />
+      <a-table :columns :dataSource :loading :scroll="{ x: 2000 }" class="scroll-table" row-key="id" />
     </a-card>
-    <a-modal v-model:open="open" :title @ok="handleOk">
-      <FormModal :formItems ref="formRef" />
+    <a-modal v-model:open="open" :title destroy-on-close @ok="handleOk">
+      <FormModal ref="formRef" :formItems />
     </a-modal>
   </div>
 </template>
