@@ -5,6 +5,7 @@ import { WechatOutlined } from '@ant-design/icons-vue'
 import { gsap } from 'gsap'
 import type { ILoginForm } from 'types/common'
 import { getCaptcha, registerApi } from './api'
+
 const user = useUserStore()
 
 // const { tt } = useLocalI18n()
@@ -18,6 +19,7 @@ const src = ref()
 const onFinish = async (values: ILoginForm) => {
   Object.values(values).length === 3 ? await user.login(values) : await registerApi(values)
 }
+
 function transformArrayBufferToBase64(buffer: any) {
   // 将ArrayBuffer 转成base64
   let binary = ''
@@ -27,6 +29,7 @@ function transformArrayBufferToBase64(buffer: any) {
   }
   return window.btoa(binary)
 }
+
 async function getImg() {
   try {
     const res = await getCaptcha<string>()
@@ -37,6 +40,7 @@ async function getImg() {
     console.trace(error)
   }
 }
+
 onMounted(() => {
   gsap.to('.img', {
     rotation: 55, // 顺时针旋转90度
@@ -79,18 +83,18 @@ onMounted(() => {
         <a-form :model="state" autocomplete="off" class="custom-form" @finish="onFinish">
           <Motion :delay="300">
             <a-form-item name="email" placeholder="用户名:如 xoxosos666@gmail.com">
-              <a-input size="large" v-model:value="state.email" />
+              <a-input v-model:value="state.email" size="large" />
             </a-form-item>
           </Motion>
           <Motion :delay="400">
             <a-form-item name="password" placeholder="密码:123456">
-              <a-input-password size="large" v-model:value="state.password" />
+              <a-input-password v-model:value="state.password" size="large" />
             </a-form-item>
           </Motion>
           <Motion :delay="500">
-            <a-form-item name="captcha">
-              <a-input class="captcha-input" size="large" v-model:value="state.captcha" />
-              <img :src @click="getImg()" alt="logo" />
+            <a-form-item class="captcha" name="captcha">
+              <a-input v-model:value="state.captcha" class="captcha-input" size="large" />
+              <img :src alt="logo" @click="getImg()" />
             </a-form-item>
           </Motion>
           <a-divider>
@@ -179,6 +183,10 @@ onMounted(() => {
     &_right {
       .extra-login {
         text-align: center;
+
+        a {
+          cursor: pointer;
+        }
       }
 
       h2 {
@@ -197,8 +205,19 @@ onMounted(() => {
         border: none;
       }
 
-      .captcha-input {
-        width: 200px;
+      .captcha {
+        :deep(.ant-form-item-control-input-content) {
+          display: flex;
+          gap: 1px;
+        }
+
+        .captcha-input {
+          width: 200px;
+
+          & + img {
+            cursor: pointer;
+          }
+        }
       }
 
       @media (max-width: 768px) {
