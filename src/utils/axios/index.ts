@@ -5,13 +5,7 @@ import axios, {
   type AxiosResponse,
   type InternalAxiosRequestConfig
 } from 'axios'
-import {
-  handleAuthError,
-  handleChangeRequestHeader,
-  handleConfigureAuth,
-  handleGeneralError,
-  handleNetworkError
-} from './config'
+import { handleChangeRequestHeader, handleConfigureAuth, handleNetworkError, handleResponseData } from './config'
 
 // 请求通用返回结果(与后端沟通好结构)
 export interface IResponse<T> {
@@ -19,6 +13,7 @@ export interface IResponse<T> {
   code: number
   message: string
 }
+
 // 可自定义实例
 export class Request {
   private instance: AxiosInstance
@@ -29,6 +24,7 @@ export class Request {
     // 默认超时时间
     timeout: 6000
   }
+
   constructor(config?: AxiosRequestConfig) {
     this.instance = axios.create({ ...config, ...this.defaultConfig })
     /**
@@ -55,20 +51,27 @@ export class Request {
      */
     this.instance.interceptors.response.use(
       (response: AxiosResponse) => {
-        // 响应成功的处理(2xx)
+        // if (response.status !== 200) return Promise.reject(response.data)
+        // // const isArrayBuffer = response.request.responseType === 'arrayBuffer'
+        // // const isBlob = response.request.responseType === 'blob'
         console.log('响应后拦截器：', response)
-        if (response.status !== 200) return Promise.reject(response.data)
-        // const isArrayBuffer = response.request.responseType === 'arrayBuffer'
-        // const isBlob = response.request.responseType === 'blob'
-        handleAuthError(response.data.code)
-        handleGeneralError(response)
-        return response.data
+        // 响应成功时的处理(2xx)
+        if (response.status === 200) {
+          const result = handleResponseData(response)
+          if (result instanceof Error) {
+            // 业务层try catch 会接收到这段message
+            return Promise.reject(result.message)
+          }
+          return result
+        } else {
+          return Promise.reject('非200的状态码：' + response.status)
+        }
       },
       (error: AxiosError) => {
         // 响应错误时的处理(不是2xx的状态码)
         console.error('响应后捕获的错误：', error)
         handleNetworkError(error?.response?.status as number)
-        // Promise.reject(error.response)
+        // 业务层try catch 会接收到这段message
         return Promise.reject(error)
       }
     )
@@ -90,5 +93,6 @@ export class Request {
     return this.instance.delete(url, config)
   }
 }
+
 // 导出默认实例
 export default new Request()

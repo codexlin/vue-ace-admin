@@ -8,6 +8,8 @@ import { buildTreeDataSelect } from '@/utils/common/treeUtil'
 import { addMenu, deleteMenu, getDetail, getMenuTreeList, updateMenu } from '@/views/system/api'
 import type { ColumnsType } from 'ant-design-vue/es/table/Table'
 import { onMounted, ref } from 'vue'
+import { useUserStore } from '@/stores/modules/user'
+import { showModalConfirm } from '@/utils/common'
 
 defineOptions({
   name: 'MenuManage'
@@ -54,7 +56,7 @@ const columns = [
     dataIndex: 'isFrame',
     key: 'isFrame',
     customRender: ({ text }: any) => {
-      return <span>{text === 0 ? tt('common.yes') : tt('common.no')}</span>
+      return <span>{text === '0' ? tt('common.yes') : tt('common.no')}</span>
     }
   },
   {
@@ -62,7 +64,7 @@ const columns = [
     dataIndex: 'isCache',
     key: 'isCache',
     customRender: ({ text }: any) => {
-      return <span>{text === 0 ? tt('common.yes') : tt('common.no')}</span>
+      return <span>{text === '0' ? tt('common.yes') : tt('common.no')}</span>
     }
   },
   {
@@ -234,39 +236,69 @@ const title = shallowRef('')
 type modelType = 'add' | 'edit' | 'delete'
 const type = shallowRef<modelType>('add')
 const detailData = shallowRef()
-const toggle = () => (open.value = !open.value)
+const toggle = (needRefresh?: boolean) => {
+  needRefresh && loadData()
+  open.value = !open.value
+}
 const handleClick = async (record?: any, btnType?: modelType) => {
   if (btnType) {
-    title.value = btnType === 'add' ? tt('common.add') : tt('common.edit')
+    const isAdd = btnType === 'add'
+    const isDelete = btnType === 'delete'
+    title.value = isAdd ? tt('common.add') : tt('common.edit')
     type.value = btnType
     await initFormItems()
-    if (record && record.id) {
+    if (record && record.id && isAdd) {
       formItems.value[0].defaultValue = record.id
     }
     if (['edit', 'detail'].includes(btnType)) {
-      const data = (await getDetail(record.id)) as Record<string, any>
+      const { data } = await getDetail<IItem>(record.id)
       detailData.value = data
       console.log('data', data)
       formItems.value.forEach((i: IItem) => {
-        const hasData = data[i.name]
+        const hasData = data?.[i.name]
         if (hasData) {
           i.defaultValue = hasData
         }
       })
     }
     // 可加modal确认
-    if (btnType === 'delete') return await deleteMenu(record.id)
+    if (isDelete) {
+      const onOk = async () => {
+        await deleteMenu(record.id)
+        await loadData()
+      }
+      return showModalConfirm({
+        title: '确认删除吗?',
+        onOk
+      })
+    }
   }
   toggle()
 }
 const formRef = ref<any>(null)
+const handleRequest = async (cb: (...args: any[]) => any) => {
+  try {
+    await cb()
+    showModalConfirm({
+      title: '是否重新登录?',
+      content: '您修改了菜单相关设置,需要重新登录后才生效',
+      onOk() {
+        useUserStore().logout()
+      },
+      onCancel: () => toggle(true)
+    })
+  } catch (e) {
+    console.log(e)
+  }
+}
+
 const handleOk = async () => {
   const data = formRef.value?.formState || null
   if (type.value !== 'add') {
     data.id = detailData.value.id
-    return await updateMenu(data)
+    return handleRequest(() => updateMenu(data))
   }
-  await addMenu(data)
+  await handleRequest(() => addMenu(data))
   toggle()
 }
 const { dataSource, loadData, loading } = useList({ listRequestFn: getMenuTreeList })

@@ -6,6 +6,7 @@
 import { useUserStore } from '@/stores/modules/user'
 import { message as antMsg } from 'ant-design-vue'
 import type { AxiosResponse } from 'axios'
+import type { IResponse } from '@/utils/axios/index'
 
 /**
  * 请求的调整 可以给请求头带上token等
@@ -60,7 +61,7 @@ export const handleNetworkError = (errStatus: number) => {
  * 响应拦截 授权错误处理
  * @param errno
  */
-export const handleAuthError = (errno: string) => {
+const handleAuthError = (errno: string | number) => {
   const authErrMap: any = {
     '10031': '登录失效，需要重新登录', // token 失效
     '10032': '您太久没登录，请重新登录~', // token 过期
@@ -83,10 +84,9 @@ export const handleAuthError = (errno: string) => {
 }
 /**
  * 响应拦截 普通错误处理
- * @param errno
- * @param errMsg
+ * @param response
  */
-export const handleGeneralError = (response: AxiosResponse) => {
+const handleGeneralError = (response: AxiosResponse) => {
   const { data, config } = response
   if (data.code) {
     const { code, message } = data
@@ -99,4 +99,17 @@ export const handleGeneralError = (response: AxiosResponse) => {
   }
   console.log('handleGeneralError->结束')
   return true
+}
+
+// 统一错误处理
+export function handleResponseData(response: AxiosResponse) {
+  const { data } = response
+  if (!handleAuthError(data.code)) {
+    return new Error('认证错误')
+  }
+  if (!handleGeneralError(response)) {
+    return new Error(data.message)
+  }
+  // 响应数据
+  return data
 }

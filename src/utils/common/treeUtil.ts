@@ -17,6 +17,7 @@ class TreeNode {
     this.children = []
   }
 }
+
 export function buildTree(menuItems: MenuItem[], parentId: number, tt: (str: string) => string): TreeNode[] {
   const nodes: TreeNode[] = []
   for (const menuItem of menuItems) {
@@ -33,6 +34,6 @@ export function buildTree(menuItems: MenuItem[], parentId: number, tt: (str: str
 }
 
 export async function buildTreeDataSelect(tt: (str: string) => string) {
-  const res = await getMenuList()
-  return buildTree(res as any, 0, tt)
+  const res = await getMenuList<MenuItem[]>()
+  return buildTree(res?.data || [], 0, tt)
 }
