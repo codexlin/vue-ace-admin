@@ -38,7 +38,7 @@ watch(
 <template>
   <a-breadcrumb>
     <a-breadcrumb-item href="">
-      <div>
+      <div @click="() => router.push('/')">
         <HomeFilled />
       </div>
     </a-breadcrumb-item>
