@@ -7,5 +7,7 @@
   "semi": false,
   "proseWrap": "preserve",
   "htmlWhitespaceSensitivity": "strict",
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+  "arrowParens": "always",
+  "bracketSpacing": true
 }

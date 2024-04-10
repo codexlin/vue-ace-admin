@@ -47,14 +47,17 @@ module.exports = {
         exceptions: []
       }
     ],
-    'no-debugger': 'error',
     // 禁止使用 var
     'no-var': 'error',
-    // 优先使用 interface 而不是 type
-    // '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
     eqeqeq: 2, //必须使用全等
     'max-lines': ['error', 500], // 限制行数 请勿修改 请优化你的代码
     complexity: ['error', 15], // 限制复杂度
-    'require-await': 'error'
+    'require-await': 'error',
+    // 声明后永远不会重新分配的变量需要 const 声明
+    'prefer-const': 'error',
+    // 禁止不规则空格
+    'no-irregular-whitespace': 'off',
+    // 禁止使用 debugger
+    'no-debugger': 'off'
   }
 }
