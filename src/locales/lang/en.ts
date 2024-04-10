@@ -139,6 +139,7 @@ export default {
     index: 'dashboard'
   },
   colors: {
+    chineseRed: 'Chinese Red',
     jalapenoRed: 'Jalapeno Red',
     pumpkin: 'Pumpkin',
     sunFlower: 'Sun Flower',

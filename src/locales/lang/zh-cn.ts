@@ -138,6 +138,7 @@ export default {
     index: '首页'
   },
   colors: {
+    chineseRed: '中国红',
     jalapenoRed: '红辣椒',
     pumpkin: '南瓜橙',
     sunFlower: '向日葵',

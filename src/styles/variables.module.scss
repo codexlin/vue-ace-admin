@@ -1,18 +1,21 @@
 :root {
-  --primary: #ff5733;
-  --info: #ff5733;
+  --primary: #ed0000;
+  --info: #ed0000;
   --header-height: 56px; // header高度推荐: 48+n*8
 }
-$jalapenoRed: #b71540;
-$pumpkin: #d35400;
+
+$chineseRed: #ed0000;
+$jalapenoRed: #D01144;
+$pumpkin: #E85827;
 $sunFlower: #f1c40f;
 $turquoise: #1abc9c;
-$pureApple: #6ab04c;
+$pureApple: #41ae3c;
 $royalBlue: #3742fa;
 $gloomyPurple: #5f27cd;
 $primary: var(--primary);
 $info: var(--info);
 :export {
+  chineseRed: $chineseRed;
   jalapenoRed: $jalapenoRed;
   pumpkin: $pumpkin;
   sunFlower: $sunFlower;
