@@ -83,16 +83,12 @@ const config = computed(() => headerConfig.value)
   &-item {
     display: flex;
     align-items: center;
-
-    :deep(.anticon) {
-      font-size: 16px;
-    }
-
+    font-size: 17px;
     cursor: pointer;
   }
 
   .breadcrumb {
-    font-size: 14px;
+    font-size: 17px;
   }
 
   .trigger {

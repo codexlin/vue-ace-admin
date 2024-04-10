@@ -12,7 +12,6 @@ import { setPageTitleTxt } from '@/router/routerHelp'
 import { useRouteStore } from '@/stores/modules/route'
 import { getLevelPaths } from '@/utils/common/routeUtil'
 import type { ItemType } from 'ant-design-vue'
-import type { Routes } from '../../../../../types/common'
 
 const { headerConfig } = useConfig()
 const { tt, watchSwitchLang } = useLocalI18n()

@@ -4,7 +4,6 @@ import router from '@/router'
 import { useRouteStore } from '@/stores/modules/route'
 import { flattenRoutes, getLevelPaths } from '@/utils/common/routeUtil'
 import { HomeFilled } from '@ant-design/icons-vue'
-import type { Route, Routes } from '../../../../../../types/common'
 
 const { tt } = useLocalI18n()
 const menus = useRouteStore().getRoutes || []
@@ -14,12 +13,12 @@ const initBreadcrumb = (path: string) => {
   const paths = getLevelPaths(path)
 
   if (paths.length === 1) {
-    return routes.filter((i) => i.path === path)
+    return routes.filter((i: Route) => i.path === path)
   } else if (paths.length > 1) {
     paths[paths.length - 1] = path
     const array: Routes = []
     paths.forEach((p) => {
-      const output = routes.find((i) => i.path === p) as Route
+      const output = routes.find((i: Route) => i.path === p)
       array.push(output)
     })
     return array
@@ -39,7 +38,9 @@ watch(
 <template>
   <a-breadcrumb>
     <a-breadcrumb-item href="">
-      <HomeFilled />
+      <div>
+        <HomeFilled />
+      </div>
     </a-breadcrumb-item>
     <template v-if="breadcrumbs.length > 0">
       <a-breadcrumb-item v-for="item in breadcrumbs" :key="item.path" href="">

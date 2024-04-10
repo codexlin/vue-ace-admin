@@ -3,13 +3,9 @@ import Motion from '@/components/functional/Motion'
 import { useUserStore } from '@/stores/modules/user'
 import { WechatOutlined } from '@ant-design/icons-vue'
 import { gsap } from 'gsap'
-import type { ILoginForm } from 'types/common'
 import { getCaptcha, registerApi } from './api'
-
 const user = useUserStore()
-
 // const { tt } = useLocalI18n()
-
 const state = reactive<ILoginForm>({
   email: '',
   password: '',
@@ -23,7 +19,7 @@ const onFinish = async (values: ILoginForm) => {
 function transformArrayBufferToBase64(buffer: any) {
   // 将ArrayBuffer 转成base64
   let binary = ''
-  let bytes = new Uint8Array(buffer)
+  const bytes = new Uint8Array(buffer)
   for (let len = bytes.byteLength, i = 0; i < len; i++) {
     binary += String.fromCharCode(bytes[i])
   }

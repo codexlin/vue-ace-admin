@@ -5,7 +5,6 @@
  */
 import router from '@/router'
 import { loginApi } from '@/views/user/login/api'
-import type { ILoginData, ILoginForm } from 'types/common'
 import { useRouteStore } from './route'
 import { useTabsStore } from './tabs'
 

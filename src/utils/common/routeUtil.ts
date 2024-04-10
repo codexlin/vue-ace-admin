@@ -4,8 +4,6 @@
  * @Description:
  */
 
-import type { Routes } from 'types/common'
-
 // eg: '/user/userList/detail' -> ['/user','/user/UserList','/user/userList/detail']
 export function getLevelPaths(path: string) {
   const pathSegments = path.split('/').filter(Boolean)
