@@ -6,7 +6,6 @@
 import { useUserStore } from '@/stores/modules/user'
 import { message as antMsg } from 'ant-design-vue'
 import type { AxiosResponse } from 'axios'
-import type { IResponse } from '@/utils/axios/index'
 
 /**
  * 请求的调整 可以给请求头带上token等

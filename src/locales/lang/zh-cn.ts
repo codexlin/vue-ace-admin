@@ -7,6 +7,7 @@ export default {
     loading: '加载中'
   },
   common: {
+    operation: '操作',
     more: '更多',
     add: '新增',
     edit: '编辑',

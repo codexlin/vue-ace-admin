@@ -7,6 +7,7 @@ export default {
     loading: 'Loading'
   },
   common: {
+    operation: 'Operation',
     more: 'More',
     add: 'Add',
     edit: 'Edit',

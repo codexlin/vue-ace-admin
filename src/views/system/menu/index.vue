@@ -4,12 +4,12 @@ import FormModal from '@/components/form/FormModal'
 import SvgIcon from '@/components/svgIcon/index.vue'
 import useList from '@/hooks/useList'
 import useLocalI18n from '@/hooks/useLocalI18n'
+import { useUserStore } from '@/stores/modules/user'
+import { showModalConfirm } from '@/utils/common'
 import { buildTreeDataSelect } from '@/utils/common/treeUtil'
 import { addMenu, deleteMenu, getDetail, getMenuTreeList, updateMenu } from '@/views/system/api'
 import type { ColumnsType } from 'ant-design-vue/es/table/Table'
 import { onMounted, ref } from 'vue'
-import { useUserStore } from '@/stores/modules/user'
-import { showModalConfirm } from '@/utils/common'
 
 defineOptions({
   name: 'MenuManage'
@@ -99,16 +99,16 @@ const columns = [
     key: 'orderNum'
   },
   {
-    title: '操作',
+    title: tt('common.operation'),
     dataIndex: 'operation',
     key: 'operation',
     width: '10%',
     fixed: 'right',
-    customRender: ({ record }: any) => {
+    customRender: ({ record }) => {
       const items = [
         {
           auth: 'add',
-          text: '新增',
+          text: tt('common.add'),
           type: 'primary',
           cb: () => {
             handleClick(record, 'add')
@@ -116,7 +116,7 @@ const columns = [
         },
         {
           auth: 'edit',
-          text: '编辑',
+          text: tt('common.edit'),
           type: 'primary',
           cb: () => {
             handleClick(record, 'edit')
@@ -124,7 +124,7 @@ const columns = [
         },
         {
           auth: 'delete',
-          text: '删除',
+          text: tt('common.delete'),
           type: 'danger',
           cb: () => {
             handleClick(record, 'delete')

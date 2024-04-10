@@ -1,5 +1,4 @@
 import { omit } from 'lodash-es'
-import { createVNode } from 'vue'
 
 interface IItem {
   label: string
@@ -23,13 +22,18 @@ export default defineComponent(
       formState
     })
     const components = (item: IItem) => {
-      // 根据ui创建vNode
-      const vNode = createVNode(h(resolveComponent(item.ui)))
-      const rest = omit(item, ['name', 'label'])
       if (!formState[item.name] && item.defaultValue) {
         formState[item.name] = item.defaultValue
       }
-      return <vNode v-model={[formState[item.name], 'value']} onChange={change} {...rest} />
+      // 根据ui创建vNode 这里使用resolveComponent来动态引入组件
+      return h(resolveComponent(item.ui), {
+        value: formState[item.name],
+        ['onUpdate:value']: (value: unknown) => {
+          formState[item.name] = value
+        },
+        onChange: change,
+        ...omit(item, ['name', 'label', 'ui', 'defaultValue'])
+      })
     }
     return () => (
       <a-form model={formState}>
