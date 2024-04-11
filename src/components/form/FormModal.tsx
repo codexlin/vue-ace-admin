@@ -9,7 +9,10 @@ interface IItem {
 
   [key: string]: any
 }
-
+// 提供给ref使用
+export interface IFormModal {
+  formState: Record<string, any>
+}
 export default defineComponent(
   (props, { expose }) => {
     const { formItems } = toRefs(props)
@@ -18,9 +21,6 @@ export default defineComponent(
       console.log('formState:', formState)
     }
     console.log('formItems', formItems.value)
-    expose({
-      formState
-    })
     const components = (item: IItem) => {
       if (!formState[item.name] && item.defaultValue) {
         formState[item.name] = item.defaultValue
@@ -35,6 +35,9 @@ export default defineComponent(
         ...omit(item, ['name', 'label', 'ui', 'defaultValue'])
       })
     }
+    // 注意：vue 对于tsx中使用expose的支持不够完善 会导致instance type of 拿不到正确的类型，所以我们需要自己定义expose导出的类型 如上
+    expose({ formState })
+
     return () => (
       <a-form model={formState}>
         {formItems.value.map((item) => {

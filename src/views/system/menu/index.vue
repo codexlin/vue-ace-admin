@@ -1,6 +1,6 @@
 <script lang="tsx" setup>
 import OperationButtons from '@/components/button/OperationButtons.vue'
-import FormModal from '@/components/form/FormModal'
+import FormModal, { type IFormModal } from '@/components/form/FormModal'
 import SvgIcon from '@/components/svgIcon/index.vue'
 import useList from '@/hooks/useList'
 import useLocalI18n from '@/hooks/useLocalI18n'
@@ -275,7 +275,7 @@ const handleClick = async (record?: any, btnType?: modelType) => {
   }
   toggle()
 }
-const formRef = ref<any>(null)
+const formRef = ref<IFormModal | null>(null)
 const handleRequest = async (cb: (...args: any[]) => any) => {
   try {
     await cb()
@@ -294,12 +294,14 @@ const handleRequest = async (cb: (...args: any[]) => any) => {
 
 const handleOk = async () => {
   const data = formRef.value?.formState || null
-  if (type.value !== 'add') {
-    data.id = detailData.value.id
-    return handleRequest(() => updateMenu(data))
+  if (data) {
+    if (type.value !== 'add') {
+      data.id = detailData.value.id
+      return handleRequest(() => updateMenu(data))
+    }
+    await handleRequest(() => addMenu(data))
+    toggle()
   }
-  await handleRequest(() => addMenu(data))
-  toggle()
 }
 const { dataSource, loadData, loading } = useList({ listRequestFn: getMenuTreeList })
 onMounted(async () => await loadData())

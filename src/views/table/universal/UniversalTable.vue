@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-pre>{{ value }}</div>
-    <a-input v-model:value="value"></a-input>
+    <a-input v-model:value="value" />
   </div>
 </template>
 
