@@ -1,7 +1,6 @@
 <script lang="tsx" setup>
-import OperationButtons from '@/components/button/OperationButtons.vue'
 import FormModal, { type IFormModal } from '@/components/form/FormModal'
-import SvgIcon from '@/components/svgIcon/index.vue'
+import { OperationButtons, SvgIcon } from '@/components'
 import useList from '@/hooks/useList'
 import useLocalI18n from '@/hooks/useLocalI18n'
 import { useUserStore } from '@/stores/modules/user'
