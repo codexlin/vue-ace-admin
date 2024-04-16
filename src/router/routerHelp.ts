@@ -71,7 +71,7 @@ export function addRoutes(menu: RouteRecordRaw[]): Promise<void> {
             name,
             path,
             meta,
-            component: loadView[`../views${component}.vue`]
+            component: loadView[`../views${component}.vue`] || import('../views/DefaultView.vue')
           })
         } else {
           addRoutes(children)
