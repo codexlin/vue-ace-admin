@@ -16,7 +16,7 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .default-component {
   text-align: center;
   margin: 20px auto;
@@ -24,11 +24,14 @@ onMounted(() => {
   border: 2px solid #ccc;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  color: #da2727;
-  animation: pulse 2s infinite alternate;
+  p {
+    color: #90a924;
+    margin-bottom: 20px;
+  }
+  h1 {
+    color: #da2727;
+    animation: pulse 2s infinite alternate;
+  }
 }
 
 @keyframes pulse {
@@ -38,10 +41,5 @@ h1 {
   to {
     transform: scale(1.1);
   }
-}
-
-p {
-  color: #d0ff00;
-  margin-bottom: 20px;
 }
 </style>
