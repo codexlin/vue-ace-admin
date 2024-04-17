@@ -27,49 +27,20 @@ export default {
     search: 'Search'
   },
   route: {
-    m: {
+    // dir 目录
+    d: {
       system: 'System Manage'
+    },
+    // menu 菜单
+    m: {
+      system: 'System Manage',
+      menu: 'Menu Manage',
+      user: 'User Manage',
+      role: 'Role Manage',
+      dashboard: 'Dashboard'
     },
     c: {
       menu: 'Menu Manage'
-    },
-    login: 'Login',
-    personal: 'Personal Setting',
-    dashboard: 'Dashboard',
-    form: 'Form',
-    about: 'About',
-    table: {
-      root: 'Table Setting',
-      children: {
-        editable: 'Editable Table',
-        universal: 'Universal Table',
-        children: {
-          universal: 'Universal Child Table'
-        },
-        level3: {
-          page: 'navigation1-1-1'
-        }
-      }
-    },
-    list: {
-      root: 'List',
-      page1: 'user list',
-      page2: 'goods list',
-      detail1: 'user detail',
-      detail2: 'goods detail'
-    },
-    permission: {
-      root: 'Permission Setting',
-      children: {
-        user: 'User Setting',
-        role: 'Role Setting'
-      }
-    },
-    tabbar: 'tabbar',
-    directives: {
-      root: 'directives',
-      copy: 'copy directive',
-      watermarker: 'watermarker directive'
     }
   },
   tabbar: {

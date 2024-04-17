@@ -68,13 +68,12 @@ export default function useList<ItemType extends Object, FilterOption extends Ob
     loading.value = true
     try {
       const r = await listRequestFn(params)
-      dataSource.value = r?.data || r?.data?.list || []
+      dataSource.value = r?.data || r?.data?.list || r || []
       total.value = r?.data?.total || 0
       options?.message?.GET_DATA_IF_SUCCEED && message(options.message.GET_DATA_IF_SUCCEED)
       options?.requestSuccess?.()
     } catch (error) {
       console.error('loadData', error)
-
       options?.message?.GET_DATA_IF_FAILED && errorMessage(options.message.GET_DATA_IF_FAILED)
       // 执行失败钩子
       options?.requestError?.()

@@ -27,49 +27,19 @@ export default {
     search: '搜索'
   },
   route: {
-    m: {
+    // dir 目录
+    d: {
       system: '系统管理'
     },
+    // menu 菜单
+    m: {
+      menu: '菜单管理',
+      user: '用户管理',
+      role: '角色管理',
+      dashboard: '首页'
+    },
     c: {
-      menu: '菜单管理'
-    },
-    login: '登录',
-    dashboard: '首页',
-    personal: '个人设置',
-    form: '表单设置',
-    about: '关于',
-    table: {
-      root: '表格设置',
-      children: {
-        editable: '可编辑表格',
-        universal: '通用表格',
-        children: {
-          universal: '通用子表格'
-        },
-        level3: {
-          page: 'navigation1-1-1'
-        }
-      }
-    },
-    list: {
-      root: '列表',
-      page1: '用户列表',
-      page2: '商品列表',
-      detail1: '用户详情',
-      detail2: '商品详情'
-    },
-    permission: {
-      root: '权限设置',
-      children: {
-        user: '用户管理',
-        role: '角色管理'
-      }
-    },
-    tabbar: '标签栏',
-    directives: {
-      root: '自定义指令',
-      copy: '复制指令',
-      watermarker: '水印指令'
+      menu: 'Menu Manage'
     }
   },
   tabbar: {
