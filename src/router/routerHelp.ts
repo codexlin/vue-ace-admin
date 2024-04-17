@@ -58,7 +58,6 @@ export function setupRouterHooks() {
 
 // vue3 + vite中的动态引入组件的方法
 const loadView = import.meta.glob('../views/**/*.vue')
-
 // 动态添加路由
 export function addRoutes(menu: RouteRecordRaw[]): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -71,7 +70,7 @@ export function addRoutes(menu: RouteRecordRaw[]): Promise<void> {
             name,
             path,
             meta,
-            component: loadView[`../views${component}.vue`] || import('../views/DefaultView.vue')
+            component: loadView[`../views${component}.vue`] || loadView['../views/DefaultView.vue']
           })
         } else {
           addRoutes(children)
