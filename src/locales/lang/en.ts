@@ -24,7 +24,9 @@ export default {
     submit: 'Submit',
     noData: 'No Data',
     noDataMessage: 'No data available',
-    search: 'Search'
+    search: 'Search',
+    description: 'Description',
+    update: 'Update'
   },
   route: {
     // dir 目录

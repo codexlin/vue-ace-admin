@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import useList from '@/hooks/useList'
 import { getUserList } from '../api'
+import FormModal from '@/components/form/FormModal'
+
 export interface IUser {
   avatar?: null
   createBy?: null
@@ -23,8 +25,10 @@ export interface IUser {
   userId?: number
   userName?: string
   userType?: string
+
   [property: string]: any
 }
+
 const { dataSource, loadData, loading } = useList({ listRequestFn: getUserList })
 const columns = [
   {
@@ -65,6 +69,8 @@ const columns = [
     slots: { customRender: 'operation' }
   }
 ]
+const open = ref(false)
+const formItems = ref([])
 onMounted(async () => {
   await loadData()
   console.log('User View mounted')
@@ -74,6 +80,9 @@ onMounted(async () => {
   <div>
     <h1>User View</h1>
     <CommonTable :dataSource :loading :columns />
+    <a-modal title="新增用户" v-model:open="open">
+      <FormModal :formItems />
+    </a-modal>
   </div>
 </template>
 

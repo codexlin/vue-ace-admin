@@ -24,7 +24,9 @@ export default {
     submit: '提交',
     noData: '无数据',
     noDataMessage: '暂无可用数据',
-    search: '搜索'
+    search: '搜索',
+    description: '描述',
+    update: '更新'
   },
   route: {
     // dir 目录
@@ -66,10 +68,7 @@ export default {
     orUseAccount: '或者使用你的账户',
     forgotPassword: '忘记密码？',
     welcomeBack: '欢迎回来！',
-    keepConnected: '请使用你的个人信息登录以保持与我们的联系',
-    helloFriend: '你好，朋友！',
-    enterDetails: '输入你的个人信息并开始你的旅程',
-    footerText: '由 Florin Pop 创建 - 阅读我如何创建这个以及你如何加入挑战'
+    helloFriend: '你好，朋友！'
   },
   personal: {
     personal: '个人设置',
@@ -89,23 +88,14 @@ export default {
     toolbar: '工具栏',
     other: '其他',
     mianContentBgColor: '主区域背景色',
-
     logoBgColor: '背景色',
     logoTextColor: '文字颜色',
-
     bgColor: '背景色',
     activeBgColor: '选中背景色',
     hoverBgColor: '鼠标经过背景色',
     textColor: '文字颜色',
     activeTextColor: '选中文字颜色',
     hoverTextColor: '鼠标经过文字颜色'
-  },
-  btn: {
-    confirm: '确定',
-    cancel: '取消'
-  },
-  sidebar: {
-    index: '首页'
   },
   colors: {
     chineseRed: '中国红',
