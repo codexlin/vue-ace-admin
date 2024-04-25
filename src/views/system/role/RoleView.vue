@@ -1,11 +1,18 @@
 <script setup lang="ts">
 import { getRoleList } from '../api'
-import FormModal from '@/components/form/FormModal'
+import FormModal, { type IFormModal } from '@/components/form/FormModal'
 import { buildTreeDataSelect } from '@/utils/common/treeUtil'
 import useLocalI18n from '@/hooks/useLocalI18n'
+import { ref } from 'vue'
 
 const { tt } = useLocalI18n()
 const open = ref(false)
+const formRef = ref<IFormModal | null>(null)
+const title = ref('新增角色')
+const handleOk = async () => {
+  const res = await formRef.value?.submit()
+  console.log('handleOk', res)
+}
 const formItems = ref()
 const handleClick = async () => {
   open.value = true
@@ -52,13 +59,16 @@ onMounted(async () => {
   <div>
     <h1>Role View</h1>
     <a-card>
-      <a-space>
-        <a-button type="primary" @click="handleClick">新增</a-button>
-      </a-space>
-      <CommonTable />
+      <CommonTable>
+        <template #toolbar>
+          <a-space>
+            <a-button type="primary" @click="handleClick">新增</a-button>
+          </a-space>
+        </template>
+      </CommonTable>
     </a-card>
-    <a-modal title="新增角色" v-model:open="open">
-      <FormModal :formItems />
+    <a-modal v-model:open="open" :title destroy-on-close @ok="handleOk">
+      <FormModal :formItems ref="formRef" />
     </a-modal>
   </div>
 </template>
