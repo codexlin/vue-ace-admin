@@ -81,10 +81,6 @@
     "vite-plugin-vue-devtools": "^7.0.26",
     "vue-tsc": "^2.0.11"
   },
-  "simple-git-hooks": {
-    "pre-commit": "npx lint-staged",
-    "commit-msg": "npx commitlint -e $1"
-  },
   "lint-staged": {
     "*.{js,ts,tsx,jsx,vue}": [
       "eslint --fix",
