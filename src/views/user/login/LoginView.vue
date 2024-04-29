@@ -13,7 +13,11 @@ const state = reactive<ILoginForm>({
 })
 const src = ref()
 const onFinish = async (values: ILoginForm) => {
-  Object.values(values).length === 3 ? await user.login(values) : await registerApi(values)
+  try {
+    Object.values(values).length === 3 ? await user.login(values) : await registerApi(values)
+  } catch (error) {
+    await getImg()
+  }
 }
 
 function transformArrayBufferToBase64(buffer: any) {
