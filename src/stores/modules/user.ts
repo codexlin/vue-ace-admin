@@ -35,7 +35,7 @@ export const useUserStore = defineStore('user', () => {
     // 打开数据库并保存路由信息到 IndexedDB
     // await openDB('my-database', 1, 'routes')
     // await put('routes', 'backendRoutes', useRouteStore().getRoutes)
-    await router.push('/')
+    await router.push('/dashboard')
   }
 
   // 退出登录

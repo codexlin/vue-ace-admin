@@ -3,7 +3,7 @@ import type { IData, IProps } from './type'
 
 const props = withDefaults(defineProps<IProps>(), {
   showHeader: true,
-  isZebra: undefined
+  isZebra: 'none'
 })
 const setRowClassName = (_record: any, index: number) => {
   switch (props.isZebra) {
