@@ -10,8 +10,8 @@ import { handleChangeRequestHeader, handleConfigureAuth, handleNetworkError, han
 // 请求通用返回结果(与后端沟通好结构)
 export interface IResponse<T> {
   data: T | null
-  code: number
-  message: string
+  code: string
+  msg: string
 }
 
 // 可自定义实例
@@ -50,7 +50,7 @@ export class Request {
      *
      */
     this.instance.interceptors.response.use(
-      (response: AxiosResponse) => {
+      (response: AxiosResponse<IResponse<any>>) => {
         // if (response.status !== 200) return Promise.reject(response.data)
         // // const isArrayBuffer = response.request.responseType === 'arrayBuffer'
         // // const isBlob = response.request.responseType === 'blob'

@@ -6,6 +6,7 @@
 import { useUserStore } from '@/stores/modules/user'
 import { message as antMsg } from 'ant-design-vue'
 import type { AxiosResponse } from 'axios'
+import type { IResponse } from '../axios'
 
 /**
  * 请求的调整 可以给请求头带上token等
@@ -82,32 +83,32 @@ const handleAuthError = (errno: string | number) => {
   return true
 }
 /**
- * 响应拦截 普通错误处理
+ * 响应拦截 普通业务错误处理
  * @param response
  */
-const handleGeneralError = (response: AxiosResponse) => {
+const handleGeneralError = (response: AxiosResponse<IResponse<any>>) => {
   const { data, config } = response
-  if (data.code) {
-    const { code, message } = data
-    console.log('handleGeneralError', code)
-    antMsg.error(message)
-    return false
-  }
   if (config.url === '/user/captcha') {
     return !!data
+  }
+  if (data.code !== '0') {
+    const { code, msg } = data
+    console.log('handleGeneralError', code)
+    antMsg.error(msg)
+    return false
   }
   console.log('handleGeneralError->结束')
   return true
 }
 
 // 统一错误处理
-export function handleResponseData(response: AxiosResponse) {
+export function handleResponseData(response: AxiosResponse<IResponse<any>>) {
   const { data } = response
   if (!handleAuthError(data.code)) {
     return new Error('认证错误')
   }
   if (!handleGeneralError(response)) {
-    return new Error(data.message)
+    return new Error(data.msg)
   }
   // 响应数据
   return data
