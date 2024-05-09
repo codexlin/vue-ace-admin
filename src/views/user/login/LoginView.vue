@@ -40,7 +40,9 @@ async function getImg() {
     console.trace(error)
   }
 }
+// 获取图片元素
 
+const imageLoaded = ref(false)
 onMounted(() => {
   gsap.to('.img', {
     rotation: 55, // 顺时针旋转90度
@@ -120,6 +122,10 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
+/* 初始状态为模糊 */
+#logo {
+  filter: blur(8px);
+}
 .title {
   color: #0000ff; /*设置文字颜色*/
   text-decoration: none;
@@ -127,6 +133,13 @@ onMounted(() => {
 }
 
 .login {
+  :deep(.ant-input-affix-wrapper) {
+    background-color: #fff;
+  }
+  :deep(.ant-input) {
+    background-color: #fff;
+    color: dimgray;
+  }
   display: flex;
   height: 100vh;
   margin: 0;
