@@ -27,6 +27,7 @@ export const useUserStore = defineStore('user', () => {
   // 登录
   async function login(form: ILoginForm) {
     const res = await loginApi<ILoginData, ILoginForm>(form)
+    console.log('res', res)
     if (!res.data) return
     token.value = res.data.token
     userInfo.value = res.data || {}

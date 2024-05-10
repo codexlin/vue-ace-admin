@@ -1,21 +1,35 @@
-<script setup lang="ts">
-import { getRoleList } from '../api'
+<script setup lang="tsx">
+import { addRole, getRoleList } from '../api'
 import FormModal, { type IFormModal } from '@/components/form/FormModal'
 import { buildTreeDataSelect } from '@/utils/common/treeUtil'
 import useLocalI18n from '@/hooks/useLocalI18n'
 import { ref } from 'vue'
+import useList from '@/hooks/useList'
+import { OperationButtons } from '@/components'
+import { useToggle } from '@vueuse/core'
+import type { ColumnsType } from 'ant-design-vue/es/table'
 
+interface State {
+  type: 'add' | 'edit' | 'detail' | 'delete'
+  id: number | null
+}
+
+const [value, toggle] = useToggle()
 const { tt } = useLocalI18n()
-const open = ref(false)
 const formRef = ref<IFormModal | null>(null)
 const title = ref('新增角色')
 const handleOk = async () => {
-  const res = await formRef.value?.submit()
+  const data = formRef.value?.formState
+  const res = await addRole(data)
+  if (res.code === '0') {
+    toggle()
+  }
   console.log('handleOk', res)
 }
 const formItems = ref()
-const handleClick = async () => {
-  open.value = true
+const handleClick = async (record = null, type: State['type']) => {
+  console.log(record)
+  toggle()
   await initFormItems()
 }
 const initFormItems = async () => {
@@ -30,7 +44,7 @@ const initFormItems = async () => {
     },
     {
       ui: 'a-tree-select',
-      name: 'menuId',
+      name: 'menuIds',
       label: '菜单权限',
       allowClear: true,
       treeCheckable: true,
@@ -50,24 +64,72 @@ const initFormItems = async () => {
     }
   ]
 }
+const columns = [
+  {
+    title: '角色ID',
+    dataIndex: 'id'
+  },
+  {
+    title: '角色名称',
+    dataIndex: 'roleName'
+  },
+  {
+    title: '角色状态',
+    dataIndex: 'status'
+  },
+  {
+    title: '操作',
+    dataIndex: 'operation',
+    customRender: ({ record }: any) => {
+      const items = [
+        {
+          auth: 'add',
+          text: tt('common.add'),
+          type: 'primary',
+          cb: () => {
+            handleClick(record, 'add')
+          }
+        },
+        {
+          auth: 'edit',
+          text: tt('common.edit'),
+          type: 'primary',
+          cb: () => {
+            handleClick(record, 'edit')
+          }
+        },
+        {
+          auth: 'delete',
+          text: tt('common.delete'),
+          type: 'danger',
+          cb: () => {
+            handleClick(record, 'delete')
+          }
+        }
+      ]
+      return <OperationButtons items={items} />
+    }
+  }
+] as ColumnsType<any>
+const { dataSource, loadData, loading } = useList({ listRequestFn: getRoleList })
+
 onMounted(async () => {
-  const res = await getRoleList()
-  console.log('Role View mounted', res)
+  await loadData()
 })
 </script>
 <template>
   <div>
     <h1>Role View</h1>
     <a-card>
-      <CommonTable>
+      <CommonTable :dataSource :loading :columns>
         <template #toolbar>
           <a-space>
-            <a-button type="primary" @click="handleClick">新增</a-button>
+            <a-button type="primary" @click="handleClick(null, 'add')">新增</a-button>
           </a-space>
         </template>
       </CommonTable>
     </a-card>
-    <a-modal v-model:open="open" :title destroy-on-close @ok="handleOk">
+    <a-modal v-model:open="value" :title destroy-on-close @ok="handleOk">
       <FormModal :formItems ref="formRef" />
     </a-modal>
   </div>

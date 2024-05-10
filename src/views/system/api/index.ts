@@ -11,3 +11,4 @@ export const deleteMenu = <T>(param: number) => request.delete<T>(`${MENU_PREFIX
 export const getDetail = <T>(param: number) => request.get<T>(`${MENU_PREFIX}/getInfo/${param}`)
 export const getUserList = <T>() => request.get<T>(`${USER_PREFIX}/list`)
 export const getRoleList = <T>() => request.get<T>(`${ROLE_PREFIX}/list`)
+export const addRole = <T, V>(data: V) => request.post<T, V>(`${ROLE_PREFIX}/save`, data)
