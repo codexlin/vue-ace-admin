@@ -57,6 +57,27 @@ export const handleNetworkError = (errStatus: number) => {
   antMsg.error(errMessage)
 }
 
+// 主要的Axios响应处理函数 直接返回服务器结果
+export function handleResponseData(response: AxiosResponse<IResponse<any>>) {
+  const { data } = response
+  try {
+    handleError(response, data)
+  } catch (error) {
+    return Promise.reject(error)
+  }
+  return data // 返回处理后的数据
+}
+
+// 错误处理函数
+function handleError(response: AxiosResponse<IResponse<any>>, data: IResponse<any>) {
+  if (!handleAuthError(data.code)) {
+    throw new Error('认证错误')
+  }
+  if (!handleGeneralError(response)) {
+    throw new Error(data.msg)
+  }
+}
+
 /**
  * 响应拦截 授权错误处理
  * @param errno
@@ -99,17 +120,4 @@ const handleGeneralError = (response: AxiosResponse<IResponse<any>>) => {
   }
   console.log('handleGeneralError->结束')
   return true
-}
-
-// 统一错误处理
-export function handleResponseData(response: AxiosResponse<IResponse<any>>) {
-  const { data } = response
-  if (!handleAuthError(data.code)) {
-    return new Error('认证错误')
-  }
-  if (!handleGeneralError(response)) {
-    return new Error(data.msg)
-  }
-  // 响应数据
-  return data
 }

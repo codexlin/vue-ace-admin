@@ -50,26 +50,26 @@ export class Request {
      *
      */
     this.instance.interceptors.response.use(
+      // @ts-ignore
       (response: AxiosResponse<IResponse<any>>) => {
-        // if (response.status !== 200) return Promise.reject(response.data)
-        // // const isArrayBuffer = response.request.responseType === 'arrayBuffer'
-        // // const isBlob = response.request.responseType === 'blob'
         console.log('响应后拦截器：', response)
-        // 响应成功时的处理(2xx)
-        if (response.status === 200) {
-          const result = handleResponseData(response)
-          if (result instanceof Error) {
-            // 业务层try catch 会接收到这段message
-            return Promise.reject(result.message)
+        // 只处理 2xx 状态码
+        if (response.status >= 200 && response.status < 300) {
+          try {
+            return handleResponseData(response)
+          } catch (error) {
+            return error instanceof Error
+              ? Promise.reject(error.message || '处理响应出现错误')
+              : Promise.reject(error || '未知错误类型')
           }
-          return result
         } else {
-          return Promise.reject('非200的状态码：' + response.status)
+          return Promise.reject('非2xx的状态码：' + response.status)
         }
       },
       (error: AxiosError) => {
-        // 响应错误时的处理(不是2xx的状态码)
+        // 所有请求失败情况都可以在这里捕获并处理
         console.error('响应后捕获的错误：', error)
+        // 处理网络错误，如记录日志、统计等
         handleNetworkError(error?.response?.status as number)
         // 业务层try catch 会接收到这段message
         return Promise.reject(error)
