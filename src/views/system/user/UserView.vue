@@ -1,7 +1,12 @@
-<script setup lang="ts">
+<script setup lang="tsx">
 import useList from '@/hooks/useList'
-import { getUserList } from '../api'
+import { addRole, deleteRole, getUserList, updateRole } from '../api'
 import FormModal from '@/components/form/FormModal'
+import { OperationButtons } from '@/components'
+import { ref } from 'vue'
+import { useToggle } from '@vueuse/core'
+import useLocalI18n from '@/hooks/useLocalI18n'
+import { buildTreeDataSelect } from '@/utils/common/treeUtil'
 
 export interface IUser {
   avatar?: null
@@ -27,6 +32,68 @@ export interface IUser {
   userType?: string
 
   [property: string]: any
+}
+
+interface State {
+  type: 'add' | 'edit' | 'detail' | 'delete'
+  id: number | null
+}
+
+const formRef = ref(null)
+
+const handleOk = async () => {
+  const data = formRef.value?.formState
+  const res = clickType.value === 'add' ? await addRole(data) : await updateRole(data)
+  if (res.code === '0') {
+    toggle()
+  }
+  console.log('handleOk', res)
+}
+const [value, toggle] = useToggle()
+const { tt } = useLocalI18n()
+const formItems = ref()
+
+const clickType = ref('add')
+const handleClick = async (record = null, type: State['type']) => {
+  console.log(record)
+  if (type === 'delete') {
+    return await deleteRole(record?.id)
+  }
+  clickType.value = type
+  toggle()
+  await initFormItems()
+}
+const initFormItems = async () => {
+  const treeData = await buildTreeDataSelect(tt)
+  formItems.value = [
+    {
+      ui: 'a-input',
+      name: 'roleName',
+      label: '用户名称',
+      disabled: false,
+      placeholder: '请输入用户名'
+    },
+    {
+      ui: 'a-tree-select',
+      name: 'menuIds',
+      label: '用户角色',
+      allowClear: true,
+      treeCheckable: true,
+      placeholder: '请设置用户的角色',
+      treeData
+    },
+    {
+      ui: 'a-radio-group',
+      name: 'status',
+      label: '是否启用',
+      defaultValue: '0',
+      disabled: false,
+      options: [
+        { value: '0', label: '是' },
+        { value: '1', label: '否' }
+      ]
+    }
+  ]
 }
 
 const { dataSource, loadData, loading } = useList({ listRequestFn: getUserList })
@@ -66,11 +133,39 @@ const columns = [
   {
     title: '操作',
     dataIndex: 'operation',
-    slots: { customRender: 'operation' }
+    customRender: ({ record }: any) => {
+      const items = [
+        {
+          auth: 'add',
+          text: tt('common.add'),
+          type: 'primary',
+          cb: () => {
+            handleClick(record, 'add')
+          }
+        },
+        {
+          auth: 'edit',
+          text: tt('common.edit'),
+          type: 'primary',
+          cb: () => {
+            handleClick(record, 'edit')
+          }
+        },
+        {
+          auth: 'delete',
+          text: tt('common.delete'),
+          type: 'danger',
+          cb: () => {
+            handleClick(record, 'delete')
+          }
+        }
+      ]
+      return <OperationButtons items={items} />
+    }
   }
 ]
 const open = ref(false)
-const formItems = ref([])
+
 onMounted(async () => {
   await loadData()
   console.log('User View mounted')

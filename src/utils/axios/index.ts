@@ -69,10 +69,17 @@ export class Request {
       (error: AxiosError) => {
         // 所有请求失败情况都可以在这里捕获并处理
         console.error('响应后捕获的错误：', error)
-        // 处理网络错误，如记录日志、统计等
-        handleNetworkError(error?.response?.status as number)
-        // 业务层try catch 会接收到这段message
-        return Promise.reject(error)
+        // 处理网络或其他错误
+        if (error.response) {
+          // 服务器响应了请求但有错误状态码
+          handleNetworkError(error?.response?.status as number)
+        } else if (error.request) {
+          // 请求已发出但没有收到响应
+          return Promise.reject('无响应：' + error.message)
+        } else {
+          // 在设置请求时触发了错误
+          return Promise.reject('请求错误：' + error.message)
+        }
       }
     )
   }

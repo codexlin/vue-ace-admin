@@ -1,5 +1,5 @@
 <script setup lang="tsx">
-import { addRole, getRoleList } from '../api'
+import { addRole, deleteRole, getRoleList, updateRole } from '../api'
 import FormModal, { type IFormModal } from '@/components/form/FormModal'
 import { buildTreeDataSelect } from '@/utils/common/treeUtil'
 import useLocalI18n from '@/hooks/useLocalI18n'
@@ -20,15 +20,20 @@ const formRef = ref<IFormModal | null>(null)
 const title = ref('新增角色')
 const handleOk = async () => {
   const data = formRef.value?.formState
-  const res = await addRole(data)
+  const res = clickType.value === 'add' ? await addRole(data) : await updateRole(data)
   if (res.code === '0') {
     toggle()
   }
   console.log('handleOk', res)
 }
 const formItems = ref()
+const clickType = ref('add')
 const handleClick = async (record = null, type: State['type']) => {
   console.log(record)
+  if (type === 'delete') {
+    return await deleteRole(record?.id)
+  }
+  clickType.value = type
   toggle()
   await initFormItems()
 }
