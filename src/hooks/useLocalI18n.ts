@@ -1,14 +1,18 @@
 import { useAppStore } from '@/stores/modules/app'
 import { useI18n } from 'vue-i18n'
 
-export default function useLocalI18n() {
+type Prefix = String | null
+export default function useLocalI18n(prefix: Prefix) {
   const i18n = useI18n()
+
   // 根据当前的语言环境来翻译
   function tt(text: string) {
     if (!text) return ''
+    const i18nText = prefix ? `${prefix}.${text}` : text
     // 如果找不到对应的翻译，则返回原始的 text
-    return i18n.te(text) ? i18n.t(text) : text
+    return i18n.te(i18nText) ? i18n.t(i18nText) : i18nText
   }
+
   // 监听语言切换
   function watchSwitchLang(...cbs: any[]) {
     const useAppConfig = useAppStore()
