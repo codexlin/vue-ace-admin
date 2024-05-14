@@ -58,27 +58,21 @@ export function setupRouterHooks() {
 
 // vue3 + vite中的动态引入组件的方法
 const loadView = import.meta.glob('../views/**/*.vue')
-// 动态添加路由
-export function addRoutes(menu: RouteRecordRaw[]): Promise<void> {
-  return new Promise((resolve, reject) => {
-    try {
-      menu.forEach((m) => {
-        const { name, path, meta, children, component } = m
-        // 只将页面信息添加到路由中
-        if (!children || children.length === 0) {
-          router.addRoute('layout', {
-            name,
-            path,
-            meta,
-            component: loadView[`../views${component}.vue`] || loadView['../views/DefaultView.vue']
-          })
-        } else {
-          addRoutes(children)
-        }
+
+// 异步添加路由函数
+export async function addRoutes(menu: RouteRecordRaw[]): Promise<void> {
+  for (const m of menu) {
+    const { name, path, meta, children, component } = m
+    // 只将页面信息添加到路由中
+    if (!children || children.length === 0) {
+      router.addRoute('layout', {
+        name,
+        path,
+        meta,
+        component: loadView[`../views${component}.vue`] || loadView['../views/DefaultView.vue']
       })
-      resolve() // 异步操作成功时，调用 resolve
-    } catch (error) {
-      reject(error) // 异步操作出错时，调用 reject
+    } else {
+      await addRoutes(children)
     }
-  })
+  }
 }

@@ -89,7 +89,7 @@ export function useConfig(handleClick: (record: any, type: 'add' | 'edit' | 'del
       customRender: ({ record }) => {
         const items = [
           {
-            auth: 'add',
+            auth: 'sys:menu:add',
             text: tt('common.add'),
             type: 'primary',
             cb: () => {
@@ -97,7 +97,7 @@ export function useConfig(handleClick: (record: any, type: 'add' | 'edit' | 'del
             }
           },
           {
-            auth: 'edit',
+            auth: 'sys:menu:edit',
             text: tt('common.edit'),
             type: 'primary',
             cb: () => {
@@ -105,7 +105,7 @@ export function useConfig(handleClick: (record: any, type: 'add' | 'edit' | 'del
             }
           },
           {
-            auth: 'delete',
+            auth: 'sys:menu:add',
             text: tt('common.delete'),
             type: 'danger',
             cb: () => {

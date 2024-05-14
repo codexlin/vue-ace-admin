@@ -1,4 +1,4 @@
-<script setup lang="tsx">
+<script lang="tsx" setup>
 import { addRole, deleteRole, getRoleList, updateRole } from '../api'
 import FormModal, { type IFormModal } from '@/components/form/FormModal'
 import { buildTreeDataSelect } from '@/utils/common/treeUtil'
@@ -18,8 +18,35 @@ const [value, toggle] = useToggle()
 const { tt } = useLocalI18n()
 const formRef = ref<IFormModal | null>(null)
 const title = ref('新增角色')
+const valueMap = {}
+
+function loops(list: [], parent?: any) {
+  return (list || []).map(({ children, value }) => {
+    const node = (valueMap[value] = {
+      parent,
+      value
+    })
+    node.children = loops(children, node)
+    return node
+  })
+}
+
+function getPath(value: number) {
+  const path = []
+  let current = valueMap[value]
+  while (current) {
+    path.unshift(current.value)
+    current = current.parent
+  }
+  return path
+}
+
 const handleOk = async () => {
   const data = formRef.value?.formState
+  console.log(valueMap)
+  const path: number[] = []
+  data.menuIds = [...new Set(data?.menuIds?.flatMap((i: number) => getPath(i)))]
+  console.log(data.menuIds)
   const res = clickType.value === 'add' ? await addRole(data) : await updateRole(data)
   if (res.code === '0') {
     toggle()
@@ -39,6 +66,7 @@ const handleClick = async (record = null, type: State['type']) => {
 }
 const initFormItems = async () => {
   const treeData = await buildTreeDataSelect(tt)
+  loops(treeData)
   formItems.value = [
     {
       ui: 'a-input',
@@ -126,7 +154,7 @@ onMounted(async () => {
   <div>
     <h1>Role View</h1>
     <a-card>
-      <CommonTable :dataSource :loading :columns>
+      <CommonTable :columns :dataSource :loading>
         <template #toolbar>
           <a-space>
             <a-button type="primary" @click="handleClick(null, 'add')">新增</a-button>
@@ -135,7 +163,7 @@ onMounted(async () => {
       </CommonTable>
     </a-card>
     <a-modal v-model:open="value" :title destroy-on-close @ok="handleOk">
-      <FormModal :formItems ref="formRef" />
+      <FormModal ref="formRef" :formItems />
     </a-modal>
   </div>
 </template>

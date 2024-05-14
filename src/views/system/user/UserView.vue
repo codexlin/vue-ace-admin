@@ -1,6 +1,6 @@
-<script setup lang="tsx">
+<script lang="tsx" setup>
 import useList from '@/hooks/useList'
-import { addRole, deleteRole, getUserList, updateRole } from '../api'
+import { addRole, deleteRole, getRoleList, getUserList, updateRole, updateUserRole } from '../api'
 import FormModal from '@/components/form/FormModal'
 import { OperationButtons } from '@/components'
 import { ref } from 'vue'
@@ -40,10 +40,11 @@ interface State {
 }
 
 const formRef = ref(null)
-
+const detailData = ref()
 const handleOk = async () => {
   const data = formRef.value?.formState
-  const res = clickType.value === 'add' ? await addRole(data) : await updateRole(data)
+  const userId = detailData.value.userId
+  const res = clickType.value === 'add' ? await addRole(data) : await updateUserRole({ ...data, userId })
   if (res.code === '0') {
     toggle()
   }
@@ -56,6 +57,7 @@ const formItems = ref()
 const clickType = ref('add')
 const handleClick = async (record = null, type: State['type']) => {
   console.log(record)
+  detailData.value = record
   if (type === 'delete') {
     return await deleteRole(record?.id)
   }
@@ -63,35 +65,30 @@ const handleClick = async (record = null, type: State['type']) => {
   toggle()
   await initFormItems()
 }
+const title = computed(() => {
+  const text = {
+    add: '新增用户',
+    edit: '编辑用户',
+    detail: '用户详情'
+  } as Record<string, string>
+  return text[clickType.value]
+})
 const initFormItems = async () => {
-  const treeData = await buildTreeDataSelect(tt)
+  const res = await getRoleList<any[]>()
+  const options = res.data?.map((i) => ({ value: i.roleId, label: i.roleName }))
+  if (res.data) {
+    res.data
+  }
+  console.log(options)
   formItems.value = [
     {
-      ui: 'a-input',
-      name: 'roleName',
-      label: '用户名称',
-      disabled: false,
-      placeholder: '请输入用户名'
-    },
-    {
-      ui: 'a-tree-select',
-      name: 'menuIds',
+      ui: 'a-select',
+      name: 'roleIds',
       label: '用户角色',
       allowClear: true,
-      treeCheckable: true,
       placeholder: '请设置用户的角色',
-      treeData
-    },
-    {
-      ui: 'a-radio-group',
-      name: 'status',
-      label: '是否启用',
-      defaultValue: '0',
-      disabled: false,
-      options: [
-        { value: '0', label: '是' },
-        { value: '1', label: '否' }
-      ]
+      mode: 'multiple',
+      options
     }
   ]
 }
@@ -164,7 +161,6 @@ const columns = [
     }
   }
 ]
-const open = ref(false)
 
 onMounted(async () => {
   await loadData()
@@ -174,9 +170,9 @@ onMounted(async () => {
 <template>
   <div>
     <h1>User View</h1>
-    <CommonTable :dataSource :loading :columns />
-    <a-modal title="新增用户" v-model:open="open">
-      <FormModal :formItems />
+    <CommonTable :columns :dataSource :loading />
+    <a-modal v-model:open="value" :title @ok="handleOk">
+      <FormModal ref="formRef" :formItems />
     </a-modal>
   </div>
 </template>

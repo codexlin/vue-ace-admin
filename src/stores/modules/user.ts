@@ -7,10 +7,11 @@ import router from '@/router'
 import { loginApi } from '@/views/user/login/api'
 import { useRouteStore } from './route'
 import { useTabsStore } from './tabs'
+import { addRoutes } from '@/router/routerHelp'
 
 export const useUserStore = defineStore('user', () => {
   const token = ref('')
-  const userInfo = ref<ILoginData>({ token: '' })
+  const userInfo = ref<ILoginData>({ token: '', menus: [] })
   const getToken = computed(() => token.value)
   // const { openDB, put, deleteData } = useIndexedDB()
 
@@ -32,7 +33,9 @@ export const useUserStore = defineStore('user', () => {
     token.value = res.data.token
     userInfo.value = res.data || {}
     // 转换后端路由信息并添加到路由实例
-    await useRouteStore().setRoutes()
+    // await useRouteStore().setRoutes()
+    useRouteStore().routes = userInfo.value.menus
+    await addRoutes(useRouteStore().routes)
     // 打开数据库并保存路由信息到 IndexedDB
     // await openDB('my-database', 1, 'routes')
     // await put('routes', 'backendRoutes', useRouteStore().getRoutes)

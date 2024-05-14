@@ -1,8 +1,8 @@
 import { useAppStore } from '@/stores/modules/app'
 import { useI18n } from 'vue-i18n'
 
-type Prefix = String | null
-export default function useLocalI18n(prefix: Prefix) {
+type Prefix = String
+export default function useLocalI18n(prefix?: Prefix) {
   const i18n = useI18n()
 
   // 根据当前的语言环境来翻译

@@ -9,17 +9,21 @@ interface IItem {
 
   [key: string]: any
 }
+
 // 提供给ref使用
 export interface IFormModal {
   formState: Record<string, any>
 }
+
 export default defineComponent(
   (props, { expose }) => {
     const { formItems } = toRefs(props)
     const formState = reactive<Record<string, any>>({})
-    const change = () => {
+    const change = (a, b, c) => {
+      console.log(a, b, c)
       console.log('formState:', formState)
     }
+
     console.log('formItems', formItems.value)
     const components = (item: IItem) => {
       if (!formState[item.name] && item.defaultValue) {
