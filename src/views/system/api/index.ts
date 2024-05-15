@@ -9,6 +9,8 @@ export const addMenu = <T, V>(data: V) => request.post<T, V>(`${MENU_PREFIX}/sav
 export const updateMenu = <T, V>(data: V) => request.put<T, V>(`${MENU_PREFIX}/update`, data)
 export const deleteMenu = <T>(param: number) => request.delete<T>(`${MENU_PREFIX}/remove/${param}`)
 export const getDetail = <T>(param: number) => request.get<T>(`${MENU_PREFIX}/getInfo/${param}`)
+export const getUserInfoAndPermission = <T>(param: number) =>
+  request.get<T>(`${USER_PREFIX}/getUserInfoAndPermission/${param}`)
 export const getUserList = <T>() => request.get<T>(`${USER_PREFIX}/list`)
 export const addUser = <T, V>(data: V) => request.post<T, V>(`${USER_PREFIX}/save`, data)
 export const updateUser = <T, V>(data: V) => request.put<T, V>(`${USER_PREFIX}/update`, data)

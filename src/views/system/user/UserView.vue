@@ -1,12 +1,11 @@
 <script lang="tsx" setup>
 import useList from '@/hooks/useList'
-import { addRole, deleteRole, getRoleList, getUserList, updateRole, updateUserRole } from '../api'
+import { addRole, deleteRole, getRoleList, getUserInfoAndPermission, getUserList, updateUserRole } from '../api'
 import FormModal from '@/components/form/FormModal'
 import { OperationButtons } from '@/components'
 import { ref } from 'vue'
 import { useToggle } from '@vueuse/core'
 import useLocalI18n from '@/hooks/useLocalI18n'
-import { buildTreeDataSelect } from '@/utils/common/treeUtil'
 
 export interface IUser {
   avatar?: null
@@ -55,6 +54,14 @@ const { tt } = useLocalI18n()
 const formItems = ref()
 
 const clickType = ref('add')
+const initWithClickType = async (record = null) => {
+  if (clickType.value === 'delete') {
+    return await deleteRole(record?.id)
+  }
+  if (clickType.value === 'edit') {
+    await getUserInfoAndPermission(record?.userId)
+  }
+}
 const handleClick = async (record = null, type: State['type']) => {
   console.log(record)
   detailData.value = record
@@ -62,6 +69,7 @@ const handleClick = async (record = null, type: State['type']) => {
     return await deleteRole(record?.id)
   }
   clickType.value = type
+  await initWithClickType()
   toggle()
   await initFormItems()
 }
