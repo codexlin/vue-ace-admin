@@ -48,7 +48,7 @@ const change = () => {
 const btnFormItems = ['name', 'title', 'parentId', 'menuType', 'hidden']
 const constFormItems = ref<IItem[]>([])
 const initFormItems = async () => {
-  const treeData = await buildTreeDataSelect(tt)
+  const treeData = await buildTreeDataSelect()
   constFormItems.value = [
     {
       ui: 'a-tree-select',

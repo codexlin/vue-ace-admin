@@ -1,13 +1,13 @@
 <script lang="tsx" setup>
-import { addRole, deleteRole, getRoleList, updateRole } from '../api'
+import { ref } from 'vue'
+import { useToggle } from '@vueuse/core'
+import type { ColumnsType } from 'ant-design-vue/es/table'
+import { addRole, deleteRole, getRoleDetail, getRoleList, updateRole } from '../api'
 import FormModal, { type IFormModal } from '@/components/form/FormModal'
 import { buildTreeDataSelect } from '@/utils/common/treeUtil'
 import useLocalI18n from '@/hooks/useLocalI18n'
-import { ref } from 'vue'
 import useList from '@/hooks/useList'
 import { OperationButtons } from '@/components'
-import { useToggle } from '@vueuse/core'
-import type { ColumnsType } from 'ant-design-vue/es/table'
 
 interface State {
   type: 'add' | 'edit' | 'detail' | 'delete'
@@ -19,7 +19,7 @@ const { tt } = useLocalI18n()
 const formRef = ref<IFormModal | null>(null)
 const title = ref('新增角色')
 const valueMap = {}
-
+const detailData = ref()
 function loops(list: [], parent?: any) {
   return (list || []).map(({ children, value }) => {
     const node = (valueMap[value] = {
@@ -41,7 +41,7 @@ function getPath(value: number) {
   return path
 }
 
-const handleOk = async () => {
+async function handleOk() {
   const data = formRef.value?.formState
   console.log(valueMap)
   const path: number[] = []
@@ -51,23 +51,29 @@ const handleOk = async () => {
   if (res.code === '0') {
     toggle()
   }
+
   console.log('handleOk', res)
 }
+
 const formItems = ref()
 const clickType = ref('add')
-const handleClick = async (record = null, type: State['type']) => {
+
+async function handleClick(record = null, type: State['type']) {
   console.log(record)
-  if (type === 'delete') {
-    return await deleteRole(record?.id)
+  if (type === 'delete') return await deleteRole(record?.id)
+  if (type !== 'add') {
+    detailData.value = await getRoleDetail(record?.id)
   }
   clickType.value = type
   toggle()
   await initFormItems()
 }
-const initFormItems = async () => {
-  const treeData = await buildTreeDataSelect(tt)
+
+async function initFormItems() {
+  const treeData = await buildTreeDataSelect()
   loops(treeData)
-  formItems.value = [
+  // 定义初始表单项
+  const initialFormItems = [
     {
       ui: 'a-input',
       name: 'roleName',
@@ -96,7 +102,18 @@ const initFormItems = async () => {
       ]
     }
   ]
+
+  // 更新表单项默认值，如果有详细数据存在
+  if (detailData.value) {
+    formItems.value = initialFormItems.map((item) => ({
+      ...item,
+      defaultValue: detailData.value[item.name] ?? item.defaultValue
+    }))
+  } else {
+    formItems.value = initialFormItems
+  }
 }
+
 const columns = [
   {
     title: '角色ID',
@@ -150,21 +167,23 @@ onMounted(async () => {
   await loadData()
 })
 </script>
+
 <template>
   <div>
     <h1>Role View</h1>
     <a-card>
-      <CommonTable :columns :dataSource :loading>
+      <CommonTable :columns :data-source="dataSource" :loading>
         <template #toolbar>
           <a-space>
-            <a-button type="primary" @click="handleClick(null, 'add')">新增</a-button>
+            <a-button type="primary" @click="handleClick(null, 'add')"> 新增 </a-button>
           </a-space>
         </template>
       </CommonTable>
     </a-card>
     <a-modal v-model:open="value" :title destroy-on-close @ok="handleOk">
-      <FormModal ref="formRef" :formItems />
+      <FormModal ref="formRef" :form-items="formItems" />
     </a-modal>
   </div>
 </template>
+
 <style scoped></style>

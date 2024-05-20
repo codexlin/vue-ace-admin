@@ -3,10 +3,10 @@
  * @Date: 2023-10-30 20:49:23
  * @Description:
  */
-import router from '@/router'
-import { loginApi } from '@/views/user/login/api'
 import { useRouteStore } from './route'
 import { useTabsStore } from './tabs'
+import router from '@/router'
+import { loginApi } from '@/views/user/login/api'
 import { addRoutes } from '@/router/routerHelp'
 
 export const useUserStore = defineStore('user', () => {
@@ -18,7 +18,7 @@ export const useUserStore = defineStore('user', () => {
   // 初始化
   function init() {
     token.value = ''
-    userInfo.value = { token: '' }
+    userInfo.value = { menus: [], token: '' }
     useRouteStore().init()
     useTabsStore().init()
     // await openDB('my-database', 1, 'routes')
@@ -46,7 +46,6 @@ export const useUserStore = defineStore('user', () => {
   async function logout() {
     await router.push({ name: 'login', replace: true })
     init()
-    console.log('logout', router.getRoutes())
   }
 
   return { token, userInfo, getToken, login, logout }

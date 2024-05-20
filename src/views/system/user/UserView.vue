@@ -14,7 +14,7 @@ export interface IUser {
   delFlag?: string
   deptId?: null
   email?: string
-  id?: number
+  id: number
   loginDate?: null
   loginIp?: null
   loginName?: null
@@ -26,7 +26,7 @@ export interface IUser {
   status?: string
   updateBy?: null
   updateTime?: null
-  userId?: number
+  userId: number
   userName?: string
   userType?: string
 
@@ -39,10 +39,12 @@ interface State {
 }
 
 const formRef = ref(null)
+const recordData = ref()
 const detailData = ref()
+
 const handleOk = async () => {
   const data = formRef.value?.formState
-  const userId = detailData.value.userId
+  const userId = recordData.value.userId
   const res = clickType.value === 'add' ? await addRole(data) : await updateUserRole({ ...data, userId })
   if (res.code === '0') {
     toggle()
@@ -54,24 +56,22 @@ const { tt } = useLocalI18n()
 const formItems = ref()
 
 const clickType = ref('add')
-const initWithClickType = async (record = null) => {
+const initWithClickType = async (record: IUser) => {
   if (clickType.value === 'delete') {
     return await deleteRole(record?.id)
   }
-  if (clickType.value === 'edit') {
-    await getUserInfoAndPermission(record?.userId)
+  if (clickType.value !== 'add') {
+    const res = await getUserInfoAndPermission(record?.userId)
+    detailData.value = res.data
   }
 }
-const handleClick = async (record = null, type: State['type']) => {
+const handleClick = async (record: IUser, type: State['type']) => {
   console.log(record)
-  detailData.value = record
-  if (type === 'delete') {
-    return await deleteRole(record?.id)
-  }
+  recordData.value = record
   clickType.value = type
-  await initWithClickType()
-  toggle()
+  await initWithClickType(record)
   await initFormItems()
+  toggle()
 }
 const title = computed(() => {
   const text = {
@@ -84,21 +84,29 @@ const title = computed(() => {
 const initFormItems = async () => {
   const res = await getRoleList<any[]>()
   const options = res.data?.map((i) => ({ value: i.roleId, label: i.roleName }))
-  if (res.data) {
-    res.data
-  }
+
   console.log(options)
-  formItems.value = [
+  const initialFormItems = [
     {
       ui: 'a-select',
       name: 'roleIds',
       label: '用户角色',
       allowClear: true,
       placeholder: '请设置用户的角色',
+      defaultValue: [],
       mode: 'multiple',
       options
     }
   ]
+  // 更新表单项默认值，如果有详细数据存在
+  if (detailData.value) {
+    formItems.value = initialFormItems.map((item) => ({
+      ...item,
+      defaultValue: detailData.value[item.name] ?? item.defaultValue
+    }))
+  } else {
+    formItems.value = initialFormItems
+  }
 }
 
 const { dataSource, loadData, loading } = useList({ listRequestFn: getUserList })
@@ -169,7 +177,6 @@ const columns = [
     }
   }
 ]
-
 onMounted(async () => {
   await loadData()
   console.log('User View mounted')
