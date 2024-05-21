@@ -1,4 +1,3 @@
-````markdown
 <div align="center">
   <img alt="Ace Admin" width="120" height="120" src="src/assets/images/logo.svg">
   <h1>Ace Admin</h1>
@@ -68,7 +67,7 @@ Ace Admin is a free and open-source backend management system solution built usi
 # Clone the project
 git clone https://github.com/xoxosos/vue-ace-admin.git
 ```
-````
+
 
 ```js
 # Enter the project directory
