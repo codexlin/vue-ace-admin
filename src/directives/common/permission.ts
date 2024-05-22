@@ -24,8 +24,7 @@ export default function permission(app: App) {
     const hasPermission = value.filter((role: string) => roles.includes(role))
 
     if (all ? value.length !== hasPermission.length : !hasPermission.length) {
-      // el.parentNode?.removeChild(el)
-      // el.style.display = 'none' // 使用 display: none; 隐藏元素
+      // el.parentNode?.removeChild(el) || (el.style.display = 'none')
       if (el.tagName === 'A') {
         el.style.pointerEvents = 'none'
       }

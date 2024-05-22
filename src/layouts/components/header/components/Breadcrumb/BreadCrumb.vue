@@ -43,9 +43,27 @@ watch(
       </div>
     </a-breadcrumb-item>
     <template v-if="breadcrumbs.length > 0">
-      <a-breadcrumb-item v-for="item in breadcrumbs" :key="item.path" href="">
-        <span class="breadcrumb-title">{{ tt(`${item.meta?.title}`) }}</span>
-      </a-breadcrumb-item>
+      <transition-group name="slide-fadein-right">
+        <a-breadcrumb-item v-for="item in breadcrumbs" :key="item.path" href="">
+          <span class="breadcrumb-title">{{ tt(`${item.meta?.title}`) }}</span>
+        </a-breadcrumb-item>
+      </transition-group>
     </template>
   </a-breadcrumb>
 </template>
+<style scoped>
+/*
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.5s;
+}
+.v-enter,
+.v-leave-active {
+  opacity: 0;
+  transform: translateX(20px);
+}
+.v-leave-active {
+  position: absolute;
+}
+*/
+</style>
