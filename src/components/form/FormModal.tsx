@@ -19,10 +19,8 @@ export default defineComponent(
   (props, { expose }) => {
     const { formItems } = toRefs(props)
     const formState = reactive<Record<string, any>>({})
-    const change = (a, b, c) => {
-      console.log(a, b, c)
-      console.log('formState:', formState)
-    }
+
+    console.log('formState', formState)
 
     console.log('formItems', formItems.value)
     const components = (item: IItem) => {
@@ -35,7 +33,7 @@ export default defineComponent(
         ['onUpdate:value']: (value: unknown) => {
           formState[item.name] = value
         },
-        onChange: change,
+        // onChange: change,
         ...omit(item, ['name', 'label', 'ui', 'defaultValue'])
       })
     }

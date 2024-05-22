@@ -39,7 +39,7 @@ const { tt } = useLocalI18n()
         <a-divider type="vertical" />
       </template>
       <template v-for="item in items" :key="item.btn">
-        <a v-permission="[item.auth]" @click="() => item.cb()"> {{ item.text }}</a>
+        <a @click="() => item.cb()"> {{ item.text }}</a>
       </template>
     </a-space>
   </div>

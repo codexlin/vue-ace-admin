@@ -20,6 +20,7 @@ const formRef = ref<IFormModal | null>(null)
 const title = ref('新增角色')
 const valueMap = {}
 const detailData = ref()
+
 function loops(list: [], parent?: any) {
   return (list || []).map(({ children, value }) => {
     const node = (valueMap[value] = {
@@ -46,8 +47,11 @@ async function handleOk() {
   console.log(valueMap)
   const path: number[] = []
   data.menuIds = [...new Set(data?.menuIds?.flatMap((i: number) => getPath(i)))]
-  console.log(data.menuIds)
-  const res = clickType.value === 'add' ? await addRole(data) : await updateRole(data)
+  console.log('menuIds', data.menuIds)
+  const res = clickType.value === 'add' ? await addRole(data) : await updateRole({
+    ...data,
+    roleId: detailData.value.roleId
+  })
   if (res.code === '0') {
     toggle()
   }
@@ -60,9 +64,10 @@ const clickType = ref('add')
 
 async function handleClick(record = null, type: State['type']) {
   console.log(record)
-  if (type === 'delete') return await deleteRole(record?.id)
+  if (type === 'delete') return await deleteRole(record?.roleId)
   if (type !== 'add') {
-    detailData.value = await getRoleDetail(record?.id)
+    const res = await getRoleDetail(record?.roleId)
+    detailData.value = { ...res.data.role, menuIds: res.data?.menus.map(i => i.id.toString()) }
   }
   clickType.value = type
   toggle()
@@ -109,6 +114,7 @@ async function initFormItems() {
       ...item,
       defaultValue: detailData.value[item.name] ?? item.defaultValue
     }))
+    console.log('edit', formItems.value)
   } else {
     formItems.value = initialFormItems
   }
@@ -175,12 +181,12 @@ onMounted(async () => {
       <CommonTable :columns :data-source="dataSource" :loading>
         <template #toolbar>
           <a-space>
-            <a-button type="primary" @click="handleClick(null, 'add')"> 新增 </a-button>
+            <a-button type="primary" @click="handleClick(null, 'add')"> 新增</a-button>
           </a-space>
         </template>
       </CommonTable>
     </a-card>
-    <a-modal v-model:open="value" :title destroy-on-close @ok="handleOk">
+    <a-modal v-model:open="value" :destroy-on-close="true" :title @ok="handleOk">
       <FormModal ref="formRef" :form-items="formItems" />
     </a-modal>
   </div>

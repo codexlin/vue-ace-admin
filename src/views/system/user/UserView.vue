@@ -1,6 +1,14 @@
 <script lang="tsx" setup>
 import useList from '@/hooks/useList'
-import { addRole, deleteRole, getRoleList, getUserInfoAndPermission, getUserList, updateUserRole } from '../api'
+import {
+  addRole,
+  deleteRole,
+  getRoleList,
+  getUserInfoAndPermission,
+  getUserList,
+  getUserRoleInfo,
+  updateUserRole
+} from '../api'
 import FormModal from '@/components/form/FormModal'
 import { OperationButtons } from '@/components'
 import { ref } from 'vue'
@@ -61,8 +69,8 @@ const initWithClickType = async (record: IUser) => {
     return await deleteRole(record?.id)
   }
   if (clickType.value !== 'add') {
-    const res = await getUserInfoAndPermission(record?.userId)
-    detailData.value = res.data
+    const res = await getUserRoleInfo(record?.userId)
+    detailData.value = { ...res.data, roleIds: res.data?.roles.map(i => i.roleId) }
   }
 }
 const handleClick = async (record: IUser, type: State['type']) => {
@@ -104,6 +112,7 @@ const initFormItems = async () => {
       ...item,
       defaultValue: detailData.value[item.name] ?? item.defaultValue
     }))
+    console.log(formItems.value)
   } else {
     formItems.value = initialFormItems
   }
