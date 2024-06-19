@@ -1,3 +1,4 @@
+/* SlideInScaleOut 元素“滑入”视图并在“缩小”后离开 */
 .scale-slide-enter-active,
 .scale-slide-leave-active {
   position: absolute;
@@ -9,7 +10,7 @@
 }
 
 .scale-slide-enter-to {
-  left: 0%;
+  left: 0;
 }
 
 .scale-slide-leave-from {
@@ -66,7 +67,7 @@
 .fade-leave-to {
   opacity: 0;
 }
-
+/* 向上滑入滑出 */
 .slide-fadein-up-enter-active,
 .slide-fadein-up-leave-active {
   transition:
@@ -83,7 +84,7 @@
   transform: translateY(-20px);
   opacity: 0;
 }
-
+/* 透明滑入滑出 */
 .slide-fadein-right-enter-active,
 .slide-fadein-right-leave-active {
   transition:
@@ -101,7 +102,7 @@
   transform: translateX(20px);
   opacity: 0;
 }
-
+/* ZoomFadeInOut 轻微的缩小(不透明) 放大（透明）*/
 .zoom-fadein-enter-active,
 .zoom-fadein-leave-active {
   transition:
@@ -118,7 +119,7 @@
   transform: scale(1.01);
   opacity: 0;
 }
-
+/* FadeInOut 淡入淡出 */
 .fadein-enter-active,
 .fadein-leave-active {
   transition: opacity 0.3s ease-in-out !important;

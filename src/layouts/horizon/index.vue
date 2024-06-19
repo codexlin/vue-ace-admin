@@ -1,9 +1,5 @@
 <script lang="ts" setup>
 import RecursiveMenu from '@/layouts/components/sidebar/components/RecursiveMenu.vue'
-
-defineOptions({
-  name: 'HorizonLayout'
-})
 import globalConfig from '@/config/system/appConfig'
 import FooterView from '@/layouts/components/footer/FooterView.vue'
 import MainView from '@/layouts/components/main/index.vue'
@@ -12,11 +8,15 @@ import SettingVue from '@/layouts/components/setting/SettingView.vue'
 import { useAppStore } from '@/stores/modules/app'
 import LogoView from '@/layouts/components/logo/index.vue'
 
+defineOptions({
+  name: 'HorizonLayout'
+})
+
 const app = useAppStore()
-const fontSize = computed(() => (app.appConfig.watermark.isShow ? app.appConfig.watermark.font.fontSize : 0))
+const content = app.getWaterMarkContent
 </script>
 <template>
-  <a-watermark :font="{ ...globalConfig.watermark.font, fontSize }" v-bind="globalConfig.watermark">
+  <a-watermark v-bind="{ ...globalConfig.watermark, content }">
     <a-layout style="height: 100vh; min-width: 375px">
       <a-layout>
         <HeaderView>

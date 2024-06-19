@@ -3,7 +3,7 @@
  * @Date: 2023-10-14 21:29:57
  * @Description:
  */
-import systemConfig from '@/config/system/index'
+import allConfig from '@/config/system/index'
 import type { MenuTheme } from 'ant-design-vue'
 import { theme } from 'ant-design-vue'
 import { cloneDeep } from 'lodash-es'
@@ -14,7 +14,7 @@ import { cloneDeep } from 'lodash-es'
 export const useAppStore = defineStore('app', () => {
   const { darkAlgorithm, compactAlgorithm, defaultAlgorithm } = theme
   const appConfig = ref({
-    ...cloneDeep(systemConfig)
+    ...cloneDeep(allConfig)
   })
   const collapsed = ref<boolean>(false)
 
@@ -41,6 +41,9 @@ export const useAppStore = defineStore('app', () => {
   const getLanguage = computed(() => appConfig.value.defaultLanguage)
   const getDirection = computed(() => appConfig.value.direction)
   const getLayout = computed<string>(() => appConfig.value.layout)
+  const getWaterMarkContent = computed<string | string[]>(() =>
+    appConfig.value.watermark.isShow ? appConfig.value.watermark.content : ''
+  )
 
   const setThemeName = (value: string) => {
     appConfig.value.token.colorPrimary = value
@@ -61,12 +64,13 @@ export const useAppStore = defineStore('app', () => {
     // appConfig.value.token = cloneDeep(systemConfig.token)
     // appConfig.value.compactAlgorithm = systemConfig.compactAlgorithm
     appConfig.value = {
-      ...cloneDeep(systemConfig)
+      ...structuredClone(allConfig)
     }
     console.log('resetDefault', appConfig.value)
   }
 
   return {
+    getWaterMarkContent,
     getLayout,
     getDirection,
     toggleCollapsed,

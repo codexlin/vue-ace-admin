@@ -28,5 +28,5 @@ const layouts: { [key: string]: any } = {
 }
 </script>
 <template>
-  <component :is="layouts[app.getLayout]"></component>
+  <component :is="layouts[app.getLayout]" />
 </template>

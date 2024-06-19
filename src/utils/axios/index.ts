@@ -13,7 +13,6 @@ export interface IResponse<T> {
   code: string
   msg: string
 }
-
 // 可自定义实例
 export class Request {
   private instance: AxiosInstance
@@ -22,7 +21,7 @@ export class Request {
     // 根据实际情况修改
     baseURL: import.meta.env.VITE_APP_BASE_API,
     // 默认超时时间
-    timeout: 6000
+    timeout: 10000
   }
 
   constructor(config?: AxiosRequestConfig) {

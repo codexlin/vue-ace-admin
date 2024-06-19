@@ -3,7 +3,7 @@ import type { App } from 'vue'
 
 /**
  * @param {string|string[]} bind.value 权限值
- * @param {} all 参数传递给指令 例如 v-permission:all
+ * @param app
  */
 
 export default function permission(app: App) {

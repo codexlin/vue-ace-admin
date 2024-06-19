@@ -23,6 +23,10 @@ const reset = () => {
   app.resetDefault()
   color.value = app.appConfig.token.colorPrimary
 }
+watchEffect(() => {
+  const isShow = app.appConfig.watermark.isShow
+  console.log(isShow)
+})
 </script>
 
 <template>
@@ -67,11 +71,11 @@ const reset = () => {
       </div>
       <div class="setting-item">
         <label> 文字大小 </label>
-        <a-input-number v-model:value="app.appConfig.token.fontSize"></a-input-number>
+        <a-input-number v-model:value="app.appConfig.token.fontSize" />
       </div>
       <div class="setting-item">
         <label> 圆角设置 </label>
-        <a-input-number v-model:value="app.appConfig.token.borderRadius"></a-input-number>
+        <a-input-number v-model:value="app.appConfig.token.borderRadius" />
       </div>
       <div class="setting-item">
         <label> 线框风格 </label>

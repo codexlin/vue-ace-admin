@@ -6,6 +6,15 @@ export default {
     completed: '已完成',
     loading: '加载中'
   },
+  actions: {
+    add: '新增',
+    edit: '编辑',
+    delete: '删除',
+    detail: '详情',
+    search: '搜索',
+    save: '保存',
+    update: '更新'
+  },
   common: {
     operation: '操作',
     more: '更多',
@@ -13,20 +22,20 @@ export default {
     edit: '编辑',
     delete: '删除',
     detail: '详情',
+    save: '保存',
+    search: '搜索',
+    update: '更新',
     yes: '是',
     no: '否',
     confirm: '确认',
     confirmationMessage: '您确定要继续吗？',
     cancel: '取消',
-    save: '保存',
     close: '关闭',
     reset: '重置',
     submit: '提交',
     noData: '无数据',
     noDataMessage: '暂无可用数据',
-    search: '搜索',
-    description: '描述',
-    update: '更新'
+    description: '描述'
   },
   route: {
     // dir 目录
