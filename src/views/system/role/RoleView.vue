@@ -1,13 +1,13 @@
 <script lang="tsx" setup>
-import { ref } from 'vue'
+import { OperationButtons } from '@/components'
+import FormModal, { type IFormModal } from '@/components/form/FormModal'
+import useList from '@/hooks/useList'
+import useLocalI18n from '@/hooks/useLocalI18n'
+import { buildTreeDataSelect } from '@/utils/common/treeUtil'
 import { useToggle } from '@vueuse/core'
 import type { ColumnsType } from 'ant-design-vue/es/table'
+import { ref } from 'vue'
 import { addRole, deleteRole, getRoleDetail, getRoleList, updateRole } from '../api'
-import FormModal, { type IFormModal } from '@/components/form/FormModal'
-import { buildTreeDataSelect } from '@/utils/common/treeUtil'
-import useLocalI18n from '@/hooks/useLocalI18n'
-import useList from '@/hooks/useList'
-import { OperationButtons } from '@/components'
 
 interface State {
   type: 'add' | 'edit' | 'detail' | 'delete'
@@ -41,17 +41,36 @@ function getPath(value: number) {
   }
   return path
 }
+// 筛选最深的子节点
+function filterDeepestNodes(selectedNodes) {
+  const valueSet = new Set(selectedNodes)
+  console.log(valueSet)
 
+  // 判断一个节点是否是最深的子节点
+  function isDeepestNode(value) {
+    const node = valueMap[value]
+    if (!node || !node.children || node.children.length === 0) {
+      return true
+    }
+    return node.children.every((child) => !valueSet.has(child.value))
+  }
+
+  // 筛选出最深的子节点
+  return selectedNodes.filter(isDeepestNode)
+}
 async function handleOk() {
   const data = formRef.value?.formState
   console.log(valueMap)
   const path: number[] = []
   data.menuIds = [...new Set(data?.menuIds?.flatMap((i: number) => getPath(i)))]
   console.log('menuIds', data.menuIds)
-  const res = clickType.value === 'add' ? await addRole(data) : await updateRole({
-    ...data,
-    roleId: detailData.value.roleId
-  })
+  const res =
+    clickType.value === 'add'
+      ? await addRole(data)
+      : await updateRole({
+          ...data,
+          roleId: detailData.value.roleId
+        })
   if (res.code === '0') {
     toggle()
   }
@@ -63,15 +82,17 @@ const formItems = ref()
 const clickType = ref('add')
 
 async function handleClick(record = null, type: State['type']) {
-  console.log(record)
   if (type === 'delete') return await deleteRole(record?.roleId)
   if (type !== 'add') {
     const res = await getRoleDetail(record?.roleId)
-    detailData.value = { ...res.data.role, menuIds: res.data?.menus.map(i => i.id.toString()) }
+    const menuIds = filterDeepestNodes(res.data?.menus.map((i) => i.id) || [])
+    detailData.value = { ...res.data.role, menuIds }
+  } else {
+    detailData.value = {}
   }
   clickType.value = type
-  toggle()
   await initFormItems()
+  toggle()
 }
 
 async function initFormItems() {
@@ -177,7 +198,6 @@ onMounted(async () => {
 <template>
   <div>
     <h1>Role View</h1>
-    <a-card>
       <CommonTable :columns :data-source="dataSource" :loading>
         <template #toolbar>
           <a-space>
@@ -185,7 +205,6 @@ onMounted(async () => {
           </a-space>
         </template>
       </CommonTable>
-    </a-card>
     <a-modal v-model:open="value" :destroy-on-close="true" :title @ok="handleOk">
       <FormModal ref="formRef" :form-items="formItems" />
     </a-modal>

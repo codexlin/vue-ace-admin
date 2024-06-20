@@ -1,19 +1,11 @@
 <script lang="tsx" setup>
-import useList from '@/hooks/useList'
-import {
-  addRole,
-  deleteRole,
-  getRoleList,
-  getUserInfoAndPermission,
-  getUserList,
-  getUserRoleInfo,
-  updateUserRole
-} from '../api'
-import FormModal from '@/components/form/FormModal'
 import { OperationButtons } from '@/components'
-import { ref } from 'vue'
-import { useToggle } from '@vueuse/core'
+import FormModal from '@/components/form/FormModal'
+import useList from '@/hooks/useList'
 import useLocalI18n from '@/hooks/useLocalI18n'
+import { useToggle } from '@vueuse/core'
+import { ref } from 'vue'
+import { addRole, deleteRole, getRoleList, getUserList, getUserRoleInfo, updateUserRole } from '../api'
 
 export interface IUser {
   avatar?: null
@@ -70,7 +62,8 @@ const initWithClickType = async (record: IUser) => {
   }
   if (clickType.value !== 'add') {
     const res = await getUserRoleInfo(record?.userId)
-    detailData.value = { ...res.data, roleIds: res.data?.roles.map(i => i.roleId) }
+    const roleIds = res.data?.roles?.map((i) => i.roleId) || []
+    detailData.value = { ...res.data, roleIds }
   }
 }
 const handleClick = async (record: IUser, type: State['type']) => {
@@ -91,9 +84,7 @@ const title = computed(() => {
 })
 const initFormItems = async () => {
   const res = await getRoleList<any[]>()
-  const options = res.data?.map((i) => ({ value: i.roleId, label: i.roleName }))
-
-  console.log(options)
+  const options = res.data?.map((i) => ({ value: i.roleId, label: i.roleName })) || []
   const initialFormItems = [
     {
       ui: 'a-select',
@@ -195,7 +186,7 @@ onMounted(async () => {
   <div>
     <h1>User View</h1>
     <CommonTable :columns :dataSource :loading />
-    <a-modal v-model:open="value" :title @ok="handleOk">
+    <a-modal v-model:open="value" :destroy-on-close="true" :title @ok="handleOk">
       <FormModal ref="formRef" :formItems />
     </a-modal>
   </div>

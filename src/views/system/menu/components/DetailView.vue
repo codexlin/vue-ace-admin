@@ -150,12 +150,6 @@ const initFormItems = async () => {
     if (props.id) {
       const { data } = await getDetail<IItem>(props.id)
       formState.value = data || {}
-      //   constFormItems.value.forEach((item) => {
-      //     const defaultValue = data?.[item.name]
-      //     if (defaultValue) {
-      //       formState.value[item.name] = defaultValue
-      //     }
-      //   })
     }
   }
   formItems.value = [...constFormItems.value]
