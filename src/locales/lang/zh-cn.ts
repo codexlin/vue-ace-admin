@@ -89,31 +89,32 @@ export default {
     back: '首页'
   },
   theme: {
-    themeChange: '主题更换',
-    logo: 'Logo',
-    mianNav: '主导航',
-    subNav: '侧导航',
-    tabbar: '导航栏',
-    toolbar: '工具栏',
-    other: '其他',
-    mianContentBgColor: '主区域背景色',
-    logoBgColor: '背景色',
-    logoTextColor: '文字颜色',
-    bgColor: '背景色',
-    activeBgColor: '选中背景色',
-    hoverBgColor: '鼠标经过背景色',
-    textColor: '文字颜色',
-    activeTextColor: '选中文字颜色',
-    hoverTextColor: '鼠标经过文字颜色'
-  },
-  colors: {
-    chineseRed: '中国红',
-    jalapenoRed: '红辣椒',
-    pumpkin: '南瓜橙',
-    sunFlower: '向日葵',
-    turquoise: '绿松石',
-    pureApple: '青苹果',
-    royalBlue: '皇家蓝',
-    gloomyPurple: '忧郁紫'
+    reset_all: '重置全部',
+    customize_theme_color: '自定义主题颜色',
+    preset_theme_colors: '预设主题颜色',
+    layout_settings: '布局设置',
+    overall_layout: '整体布局',
+    default: '默认',
+    horizontal: '水平',
+    component_direction: '组件方向',
+    ltr: 'LTR',
+    rtl: 'RTL',
+    system_color: '系统颜色',
+    toggle_mode: '切换模式',
+    text_size: '文字大小',
+    corner_setting: '圆角设置',
+    frame_style: '线框风格',
+    compact_mode: '紧凑模式',
+    watermark_toggle: '水印开关',
+    colors: {
+      chineseRed: '中国红',
+      jalapenoRed: '红辣椒',
+      pumpkin: '南瓜橙',
+      sunFlower: '向日葵',
+      turquoise: '绿松石',
+      pureApple: '青苹果',
+      royalBlue: '皇家蓝',
+      gloomyPurple: '忧郁紫'
+    }
   }
 }

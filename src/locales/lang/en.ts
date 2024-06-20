@@ -85,24 +85,33 @@ export default {
     back: 'HOME'
   },
   theme: {
-    themeChange: 'Theme Change',
-    logo: 'Logo',
-    mianNav: 'Mian Nav',
-    subNav: 'Sub Nav',
-    tabbar: 'Tabbar',
-    toolbar: 'Toolbar',
-    other: 'Other',
-    mianContentBgColor: 'Main Bg Color',
-
-    logoBgColor: 'BgColor',
-    logoTextColor: 'TextColor',
-
-    bgColor: 'BgColor',
-    activeBgColor: 'ActiveBgColor',
-    hoverBgColor: 'HoverBgColor',
-    textColor: 'TextColor',
-    activeTextColor: 'ActiveTextColor',
-    hoverTextColor: 'HoverTextColor'
+    reset_all: 'Reset All',
+    customize_theme_color: 'Customize Theme Color',
+    preset_theme_colors: 'Preset Theme Colors',
+    layout_settings: 'Layout Settings',
+    overall_layout: 'Overall Layout',
+    default: 'Default',
+    horizontal: 'Horizontal',
+    component_direction: 'Component Direction',
+    ltr: 'LTR',
+    rtl: 'RTL',
+    system_color: 'System Color',
+    toggle_mode: 'Toggle Mode',
+    text_size: 'Text Size',
+    corner_setting: 'Corner Setting',
+    frame_style: 'Frame Style',
+    compact_mode: 'Compact Mode',
+    watermark_toggle: 'Watermark Toggle',
+    colors: {
+      chineseRed: 'Chinese Red',
+      jalapenoRed: 'Jalapeno Red',
+      pumpkin: 'Pumpkin',
+      sunFlower: 'Sun Flower',
+      turquoise: 'Turquoise',
+      pureApple: 'Pure Apple',
+      royalBlue: 'Royal Blue',
+      gloomyPurple: 'Gloomy Purple'
+    }
   },
   btn: {
     confirm: 'confirm',
@@ -110,15 +119,5 @@ export default {
   },
   sidebar: {
     index: 'dashboard'
-  },
-  colors: {
-    chineseRed: 'Chinese Red',
-    jalapenoRed: 'Jalapeno Red',
-    pumpkin: 'Pumpkin',
-    sunFlower: 'Sun Flower',
-    turquoise: 'Turquoise',
-    pureApple: 'Pure Apple',
-    royalBlue: 'Royal Blue',
-    gloomyPurple: 'Gloomy Purple'
   }
 }

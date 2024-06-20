@@ -18,26 +18,22 @@ function handleChange(value: string) {
   color.value = value
 }
 
-const { tt } = useLocalI18n()
+const { tt } = useLocalI18n('theme')
 const reset = () => {
   app.resetDefault()
   color.value = app.appConfig.token.colorPrimary
 }
-watchEffect(() => {
-  const isShow = app.appConfig.watermark.isShow
-  console.log(isShow)
-})
 </script>
 
 <template>
   <div class="setting-drawer">
-    <a-button type="primary" @click="reset">重置全部</a-button>
+    <a-button type="primary" @click="reset">{{ tt('reset_all') }}</a-button>
     <div>
-      <p class="setting-title" data-label="自定义主题颜色" />
+      <p class="setting-title" :data-label="tt('customize_theme_color')" />
       <input v-model="color" class="color-picker" type="color" @change="handleChange(color)" />
     </div>
     <div>
-      <p class="setting-title" data-label="预设主题颜色" />
+      <p class="setting-title" :data-label="tt('preset_theme_colors')" />
       <a-space wrap>
         <template v-for="(color, name) in variables" :key="name">
           <a-button :style="{ background: color }" @click="handleChange(color)">
@@ -47,46 +43,46 @@ watchEffect(() => {
       </a-space>
     </div>
     <div>
-      <p class="setting-title" data-label="布局设置" />
+      <p class="setting-title" :data-label="tt('layout_settings')" />
       <div class="setting-item">
-        <label> 整体布局 </label>
+        <label> {{ tt('overall_layout') }} </label>
         <a-radio-group v-model:value="app.appConfig.layout">
-          <a-radio-button value="default">默认</a-radio-button>
-          <a-radio-button value="horizon">水平</a-radio-button>
+          <a-radio-button value="default">{{ tt('default') }}</a-radio-button>
+          <a-radio-button value="horizon">{{ tt('horizontal') }}</a-radio-button>
         </a-radio-group>
       </div>
       <div class="setting-item">
-        <label> 组件方向 </label>
+        <label> {{ tt('component_direction') }} </label>
         <a-radio-group v-model:value="app.appConfig.direction">
-          <a-radio-button value="ltr">LTR</a-radio-button>
-          <a-radio-button value="rtl">RTL</a-radio-button>
+          <a-radio-button value="ltr">{{ tt('ltr') }}</a-radio-button>
+          <a-radio-button value="rtl">{{ tt('rtl') }}</a-radio-button>
         </a-radio-group>
       </div>
     </div>
     <div>
       <p class="setting-title" data-label="Layout" />
       <div class="setting-item">
-        <label> 系統颜色 </label>
-        <a-button @click="app.toggleDarkMode">切换模式{{ app.darkModeComp }}</a-button>
+        <label> {{ tt('system_color') }} </label>
+        <a-button @click="app.toggleDarkMode">{{ `${tt('toggle_mode')}${app.darkModeComp}` }}</a-button>
       </div>
       <div class="setting-item">
-        <label> 文字大小 </label>
+        <label> {{ tt('text_size') }} </label>
         <a-input-number v-model:value="app.appConfig.token.fontSize" />
       </div>
       <div class="setting-item">
-        <label> 圆角设置 </label>
+        <label> {{ tt('corner_setting') }} </label>
         <a-input-number v-model:value="app.appConfig.token.borderRadius" />
       </div>
       <div class="setting-item">
-        <label> 线框风格 </label>
+        <label> {{ tt('frame_style') }} </label>
         <a-switch v-model:checked="app.appConfig.token.wireframe" checked-children="开" un-checked-children="关" />
       </div>
       <div class="setting-item">
-        <label> 紧凑模式 </label>
+        <label> {{ tt('compact_mode') }} </label>
         <a-switch v-model:checked="app.appConfig.compactAlgorithm" checked-children="开" un-checked-children="关" />
       </div>
       <div class="setting-item">
-        <label> 水印开关 </label>
+        <label> {{ tt('watermark_toggle') }} </label>
         <a-switch v-model:checked="app.appConfig.watermark.isShow" checked-children="开" un-checked-children="关" />
       </div>
     </div>
