@@ -3,7 +3,8 @@ import type { IData, IProps } from './type'
 
 const props = withDefaults(defineProps<IProps>(), {
   showHeader: true,
-  isZebra: 'none'
+  isZebra: 'none',
+  useCardWrapper: true
 })
 const setRowClassName = (_record: any, index: number) => {
   switch (props.isZebra) {
@@ -17,19 +18,24 @@ const setRowClassName = (_record: any, index: number) => {
 }
 const slots = useSlots()
 const slotNames = Object.keys(slots) as []
+const initWrapper = () => {
+  return props.useCardWrapper ? 'a-card' : 'div'
+}
 </script>
 <template>
-  <a-flex gap="small" vertical>
-    <!-- 工具栏插槽 -->
-    <div class="table-toolbar">
-      <slot name="toolbar" />
-    </div>
-    <a-table v-bind="props" class="ant-table-striped" :row-class-name="setRowClassName">
-      <template v-for="(slot, index) of slotNames" :key="index" #[slot]="data:IData">
-        <slot :name="slot" v-bind="data" />
-      </template>
-    </a-table>
-  </a-flex>
+  <component :is="initWrapper()">
+    <a-flex gap="small" vertical>
+      <!-- 工具栏插槽 -->
+      <div class="table-toolbar">
+        <slot name="toolbar" />
+      </div>
+      <a-table :row-class-name="setRowClassName" class="ant-table-striped" v-bind="props">
+        <template v-for="(slot, index) of slotNames" :key="index" #[slot]="data:IData">
+          <slot :name="slot" v-bind="data" />
+        </template>
+      </a-table>
+    </a-flex>
+  </component>
 </template>
 <style scoped>
 [data-theme='light'] .ant-table-striped :deep(.table-striped) td {
