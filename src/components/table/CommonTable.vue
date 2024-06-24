@@ -7,14 +7,8 @@ const props = withDefaults(defineProps<IProps>(), {
   useCardWrapper: true
 })
 const setRowClassName = (_record: any, index: number) => {
-  switch (props.isZebra) {
-    case 'even':
-      return index % 2 === 0 ? 'table-striped' : undefined
-    case 'odd':
-      return index % 2 !== 0 ? 'table-striped' : undefined
-    default:
-      return undefined
-  }
+  const isEven = index % 2 === 0
+  return (props.isZebra === 'even' && isEven) || (props.isZebra === 'odd' && !isEven) ? 'table-striped' : undefined
 }
 const slots = useSlots()
 const slotNames = Object.keys(slots) as []

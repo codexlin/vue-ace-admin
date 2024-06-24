@@ -177,6 +177,37 @@ const columns = [
     }
   }
 ]
+const fields = ref([
+  { name: 'name', label: '姓名', component: 'a-input', props: { placeholder: '请输入姓名' } },
+  { name: 'age', label: '年龄', component: 'a-input-number', props: { placeholder: '请输入年龄' } },
+  {
+    name: 'gender',
+    label: '性别',
+    component: 'a-select',
+    props: {
+      options: [
+        { value: 'male', label: '男' },
+        { value: 'female', label: '女' }
+      ]
+    }
+  }
+])
+
+const defaultValues = ref({
+  name: '默认姓名',
+  age: 25,
+  gender: 'male'
+})
+
+const handleSearch = (formState) => {
+  console.log('搜索条件:', formState)
+  // 执行检索操作
+}
+
+const handleReset = () => {
+  console.log('表单已重置')
+  // 执行重置操作
+}
 onMounted(async () => {
   await loadData()
   console.log('User View mounted')
@@ -185,6 +216,7 @@ onMounted(async () => {
 <template>
   <div>
     <h1>User View</h1>
+    <SearchForm :fields :defaultValues @submit="handleSearch" @reset="handleReset" />
     <CommonTable :columns :dataSource :loading />
     <a-modal v-model:open="value" :destroy-on-close="true" :title @ok="handleOk">
       <FormModal ref="formRef" :formItems />
