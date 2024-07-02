@@ -1,11 +1,6 @@
-<!--
- * @Author: LinRenJie xoxosos666@gmail.com
- * @Date: 2023-10-14 21:29:57
- * @Description:
--->
 <script lang="ts" setup>
-import DefaultLayout from '@/layouts/default/index.vue'
-import HorizonLayout from '@/layouts/horizon/index.vue'
+import DefaultLayout from '@/layouts/default/DefaultLayout.vue'
+import HorizonLayout from '@/layouts/horizon/HorizonLayout.vue'
 import useConfig from '@/layouts/composables/useConfig'
 import { useAppStore } from '@/stores/modules/app'
 

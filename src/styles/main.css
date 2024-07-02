@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 :root {
   --primary:#ff5733;
   --info:#ff5733 ;
@@ -15,12 +16,14 @@
 }
 
 @font-face {
-  font-family: "Lato";
-  src: url("../assets/fonts/Lato-Regular.ttf");
+  font-family: Lato;
+  font-style: normal;
+
   /* 可以包括更多字体格式和字体描述 */
   font-weight: normal;
-  font-style: normal;
+  src: url("../assets/fonts/Lato-Regular.ttf");
 }
+
 .scale-slide-enter-active,
 .scale-slide-leave-active {
   position: absolute;
@@ -90,36 +93,42 @@
 }
 
 body {
-  font-family: "Lato", -apple-system, "Microsoft YaHei", "sans-serif";
   position: relative;
+  font-family: Lato, -apple-system, "Microsoft YaHei", sans-serif;
   transition: background-color 0.3s, color 0.3s;
 }
-html[data-theme=light] body {
-  background-color: #fff;
+
+html[data-theme="light"] body {
   color: #141414;
+  background-color: #fff;
 }
-html[data-theme=dark] body {
-  background-color: #141414;
+
+html[data-theme="dark"] body {
   color: #f6f8fa;
+  background-color: #141414;
 }
 
 .ant-drawer:has(.ant-layout-sider) {
   display: none;
 }
 
-html[data-theme=light] .custom-layout {
+html[data-theme="light"] .custom-layout {
   background: #fff;
 }
-html[data-theme=dark] .custom-layout {
+
+html[data-theme="dark"] .custom-layout {
   background: #141414;
 }
+
 .custom-layout .ant-drawer-body {
   padding: 0;
 }
-html[data-theme=light] .custom-layout .ant-drawer-body {
+
+html[data-theme="light"] .custom-layout .ant-drawer-body {
   background: #fff;
 }
-html[data-theme=dark] .custom-layout .ant-drawer-body {
+
+html[data-theme="dark"] .custom-layout .ant-drawer-body {
   background: #141414;
 }
 
@@ -128,22 +137,25 @@ html[data-theme=dark] .custom-layout .ant-drawer-body {
 }
 
 .ant-layout {
-  font-family: "Lato", -apple-system, "Microsoft YaHei", "sans-serif";
+  font-family: Lato, -apple-system, "Microsoft YaHei", sans-serif;
 }
 
 .flex-cards {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   gap: 16px;
+  justify-content: space-between;
   padding: 8px;
 }
+
 .flex-cards_left {
   width: calc(60% - 8px);
 }
+
 .flex-cards_right {
   width: calc(40% - 8px);
 }
+
 .flex-cards .chart {
   height: 320px;
 }
@@ -153,32 +165,39 @@ html[data-theme=dark] .custom-layout .ant-drawer-body {
 }
 
 /* 2xl */
+
 /* xl */
+
 /* lg */
-@media (max-width: 1024px) {
+@media (width <= 1024px) {
   .flex-card {
     flex: 0 0 calc(50% - 8px);
   }
+
   .flex-cards_left, .flex-cards_right {
     width: 100%;
   }
 }
+
 /* md */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .ant-drawer:has(.ant-layout-sider) {
     display: inline-block;
   }
+
   .default-sidebar {
     display: none;
   }
+
   .flex-cards {
     flex-direction: column;
   }
+
   .flex-card {
     flex: 0 0 calc(100% - 8px);
   }
 }
-/* sm */
-/* xs */
 
-/*# sourceMappingURL=main.css.map */
+/* sm */
+
+/* xs */

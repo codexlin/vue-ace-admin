@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { isFunction } from '@/utils/common/checkUtils'
 import type { Props } from '../type'
+import { isFunction } from '@/utils/common/checkUtils'
 
 const props = withDefaults(defineProps<Props>(), {
   autoLoading: false // 自动loading
@@ -43,10 +43,10 @@ const handlePromiseCallBack = async (res: Promise<void> | undefined) => {
 <template>
   <a-button v-bind="{ ...props, loading: loadingStatus, onClick: handleClick }">
     <template #icon>
-      <slot name="icon"></slot>
+      <slot name="icon" />
     </template>
     <template #default="data">
-      <slot v-bind="data || {}"></slot>
+      <slot v-bind="data || {}" />
     </template>
   </a-button>
 </template>

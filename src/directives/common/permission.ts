@@ -1,5 +1,5 @@
-import { useUserStore } from '@/stores/modules/user'
 import type { App } from 'vue'
+import { useUserStore } from '@/stores/modules/user'
 
 /**
  * @param {string|string[]} bind.value 权限值

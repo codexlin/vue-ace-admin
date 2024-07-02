@@ -1,10 +1,10 @@
 <script lang="ts" setup>
+import { h } from 'vue'
+import { ReloadOutlined } from '@ant-design/icons-vue'
+import type { TabsProps } from 'ant-design-vue'
 import useLocalI18n from '@/hooks/useLocalI18n'
 import { refreshKey } from '@/layouts/type'
 import { useTabsStore } from '@/stores/modules/tabs'
-import { ReloadOutlined } from '@ant-design/icons-vue'
-import type { TabsProps } from 'ant-design-vue'
-import { h } from 'vue'
 interface Props {
   title: string
   key: string
@@ -51,8 +51,8 @@ watch(
       type="editable-card"
       hide-add
       @edit="onEdit"
-      @tabClick="clickTab"
-      @tabScroll="callback"
+      @tab-click="clickTab"
+      @tab-scroll="callback"
     >
       <a-tab-pane v-for="i in tabList" :key="i.key" :closable="i.closable">
         <template #tab>
@@ -70,28 +70,31 @@ watch(
         </template>
       </a-tab-pane>
       <template #rightExtra>
-        <a-button :icon="h(ReloadOutlined)" @click="onRefresh(curTab?.content!)"></a-button>
+        <a-button :icon="h(ReloadOutlined)" @click="onRefresh(curTab?.content!)" />
       </template>
     </a-tabs>
   </div>
 </template>
 <style lang="scss">
 .tabs {
-  height: 40px;
   position: sticky;
   top: 0;
   z-index: 10;
+  height: 40px;
   backdrop-filter: blur(5px);
+
   .ant-tabs-nav {
-    margin: 0;
-    padding: 5px;
     height: 40px;
+    padding: 5px;
     padding-right: 6px;
+    margin: 0;
+
     & .ant-tabs-nav-list .ant-tabs-tab,
     .ant-tabs-nav-add {
       border-radius: 8px;
+
       & button {
-        margin: 0 -8px 0 0px;
+        margin: 0 -8px 0 0;
       }
     }
   }

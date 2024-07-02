@@ -1,7 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router'
 
 const Login = () => import('@/views/user/login/LoginView.vue')
-// const Home = () => import('@/views/dashboard/index.vue')
+// const Home = () => import('@/views/dashboard/MenuView.vue')
 const Layout = () => import('@/layouts/LayoutView.vue')
 const Page404 = () => import('@/views/NotFound.vue')
 

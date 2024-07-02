@@ -4,7 +4,7 @@
  * @Description:
 -->
 <script lang="ts" setup>
-import SvgIcon from '@/components/svgIcon/index.vue'
+import SvgIcon from '../../../../../components/svgIcon/SvgIcon.vue'
 import { useAppStore } from '@/stores/modules/app'
 
 const app = useAppStore()

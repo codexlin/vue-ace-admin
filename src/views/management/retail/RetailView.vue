@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import CustomButton from '@/components/button/CustomButton.vue'
-import SvgIconVue from '@/components/svgIcon/index.vue'
 import { SearchOutlined } from '@ant-design/icons-vue'
 import { h } from 'vue'
+import CustomButton from '@/components/button/CustomButton.vue'
+import SvgIconVue from '@/components/svgIcon/SvgIcon.vue'
 
 const handleClick = () => {
   return new Promise((resolve, reject) => {
@@ -21,7 +21,7 @@ const value = ref('')
   <div>
     <div class="test">retail</div>
     <div>
-      <a-input v-model:value="value"></a-input>
+      <a-input v-model:value="value" />
       <CustomButton :icon="h(SearchOutlined)" auto-loading @click="handleClick">自定义按钮</CustomButton>
       <CustomButton :icon="h(SvgIconVue, { name: 'mdi:account-cog-outline' })" auto-loading @click="handleClick"
         >自定义按钮1
@@ -30,7 +30,7 @@ const value = ref('')
       <CustomButton auto-loading enable-confirm @click="handleClick">
         自定义按钮2
         <template #icon>
-          <SvgIconVue name="mdi:account-cog-outline"></SvgIconVue>
+          <SvgIconVue name="mdi:account-cog-outline" />
         </template>
       </CustomButton>
     </div>
@@ -42,6 +42,7 @@ const value = ref('')
 
 .test {
   height: 20px;
+
   @include useTheme {
     // 定制
     background-color: getColor(primary);

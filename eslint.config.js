@@ -41,7 +41,7 @@ export default [
     rules: {
       // 0 off 1 warn 2 error 强制标签执行自动关闭
       'vue/html-self-closing': [
-        'error',
+        2,
         {
           html: {
             void: 'any',

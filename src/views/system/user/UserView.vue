@@ -1,11 +1,10 @@
 <script lang="tsx" setup>
+import { useToggle } from '@vueuse/core'
+import { addRole, deleteRole, getRoleList, getUserList, getUserRoleInfo, updateUserRole } from '../api'
 import { OperationButtons } from '@/components'
 import FormModal from '@/components/form/FormModal'
 import useList from '@/hooks/useList'
 import useLocalI18n from '@/hooks/useLocalI18n'
-import { useToggle } from '@vueuse/core'
-import { ref } from 'vue'
-import { addRole, deleteRole, getRoleList, getUserList, getUserRoleInfo, updateUserRole } from '../api'
 
 export interface IUser {
   avatar?: null

@@ -70,6 +70,7 @@ watchEffect(() => {
 <style scoped lang="scss">
 .search-container {
   padding: 10px;
+
   .ant-input-number {
     width: 100%;
   }

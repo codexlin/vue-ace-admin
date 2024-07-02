@@ -1,13 +1,8 @@
-<!--
- * @Author: LinRenJie xoxosos666@gmail.com
- * @Date: 2023-10-25 21:53:39
- * @Description:
--->
 <script lang="ts" setup>
-import { useAppStore } from '@/stores/modules/app'
 import type { DrawerProps } from 'ant-design-vue'
 import RecursiveMenuVue from './components/RecursiveMenu.vue'
-import LogoView from '@/layouts/components/logo/index.vue'
+import { useAppStore } from '@/stores/modules/app'
+import LogoView from '@/layouts/components/logo/LogoView.vue'
 
 const app = useAppStore()
 const placement = ref<DrawerProps['placement']>('left')

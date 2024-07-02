@@ -1,10 +1,8 @@
 <script lang="ts" setup>
+import { refreshKey, type MatchPattern } from '../../type'
 import TabsView from '@/layouts/components/Tabs/TabsView.vue'
 import { useTabsStore } from '@/stores/modules/tabs'
-import { refreshKey, type MatchPattern } from '../../type'
-defineOptions({
-  name: 'MainView'
-})
+
 const store = useTabsStore()
 void (() => {
   store.setCacheTabs()
@@ -18,7 +16,7 @@ provide(refreshKey, async () => {
 </script>
 <template>
   <div>
-    <TabsView></TabsView>
+    <TabsView />
     <div :style="{ padding: '20px', minHeight: '360px' }">
       <router-view v-slot="{ Component, route }">
         <transition mode="out-in" name="scale">

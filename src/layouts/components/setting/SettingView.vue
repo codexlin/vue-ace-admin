@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import SettingVue from '@/layouts/components/setting/components/SettingVue.vue'
 import { SettingOutlined } from '@ant-design/icons-vue'
 import { h } from 'vue'
+import SettingVue from '@/layouts/components/setting/components/SettingVue.vue'
 
 const open = ref<boolean>(false)
 
@@ -30,8 +30,8 @@ const showDrawer = () => {
 <style lang="scss" scoped>
 .setting-fixed {
   position: fixed;
-  z-index: 2;
-  right: 0;
   top: 50%;
+  right: 0;
+  z-index: 2;
 }
 </style>

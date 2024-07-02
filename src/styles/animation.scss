@@ -1,4 +1,3 @@
-/* SlideInScaleOut 元素“滑入”视图并在“缩小”后离开 */
 .scale-slide-enter-active,
 .scale-slide-leave-active {
   position: absolute;
@@ -21,7 +20,6 @@
   transform: scale(0.8);
 }
 
-// 缩放过渡
 .scale-enter-active,
 .scale-leave-active {
   transition: all 0.5s ease;
@@ -32,7 +30,7 @@
   opacity: 0;
   transform: scale(0.9);
 }
-// 幻灯片过渡
+
 .slide-enter-active,
 .slide-leave-active {
   transition: all 0.75s ease-out;
@@ -57,7 +55,7 @@
   position: absolute;
   left: 0;
 }
-// 渐变
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s ease;
@@ -67,6 +65,7 @@
 .fade-leave-to {
   opacity: 0;
 }
+
 /* 向上滑入滑出 */
 .slide-fadein-up-enter-active,
 .slide-fadein-up-leave-active {
@@ -76,15 +75,15 @@
 }
 
 .slide-fadein-up-enter-from {
-  transform: translateY(20px);
   opacity: 0;
+  transform: translateY(20px);
 }
 
 .slide-fadein-up-leave-to {
-  transform: translateY(-20px);
   opacity: 0;
+  transform: translateY(-20px);
 }
-/* 透明滑入滑出 */
+
 .slide-fadein-right-enter-active,
 .slide-fadein-right-leave-active {
   transition:
@@ -94,15 +93,15 @@
 }
 
 .slide-fadein-right-enter-from {
-  transform: translateX(-20px);
   opacity: 0;
+  transform: translateX(-20px);
 }
 
 .slide-fadein-right-leave-to {
-  transform: translateX(20px);
   opacity: 0;
+  transform: translateX(20px);
 }
-/* ZoomFadeInOut 轻微的缩小(不透明) 放大（透明）*/
+
 .zoom-fadein-enter-active,
 .zoom-fadein-leave-active {
   transition:
@@ -111,21 +110,21 @@
 }
 
 .zoom-fadein-enter-from {
-  transform: scale(0.99);
   opacity: 0;
+  transform: scale(0.99);
 }
 
 .zoom-fadein-leave-to {
-  transform: scale(1.01);
   opacity: 0;
+  transform: scale(1.01);
 }
-/* FadeInOut 淡入淡出 */
+
 .fadein-enter-active,
 .fadein-leave-active {
-  transition: opacity 0.3s ease-in-out !important;
+  transition: opacity 0.3s ease-in-out ;
 }
 
 .fadein-enter-from,
 .fadein-leave-to {
-  opacity: 0 !important;
+  opacity: 0 ;
 }

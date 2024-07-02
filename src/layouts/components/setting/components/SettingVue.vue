@@ -1,8 +1,3 @@
-<!--
- * @Author: LinRenJie xoxosos666@gmail.com
- * @Date: 2023-10-14 21:29:57
- * @Description:
--->
 <script lang="ts" setup>
 import useLocalI18n from '@/hooks/useLocalI18n'
 import { useAppStore } from '@/stores/modules/app'
@@ -95,51 +90,51 @@ const reset = () => {
   flex-direction: column;
 
   & :deep(.color-picker) {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
     width: 50px;
     height: 50px;
+    appearance: none;
+    appearance: none;
+    appearance: none;
+    cursor: pointer;
     background-color: transparent;
     border: none;
-    cursor: pointer;
 
     &::-webkit-color-swatch {
-      border-radius: 15px;
       border: none;
+      border-radius: 15px;
     }
 
     &::-moz-color-swatch {
-      border-radius: 15px;
       border: none;
+      border-radius: 15px;
     }
   }
 
   & :deep(.setting-title) {
+    position: relative;
     width: 100%;
     height: 1px;
-    background: #333;
-    position: relative;
     margin: 25px 0;
+    background: #333;
 
     &::before {
-      content: attr(data-label);
       position: absolute;
-      left: 10%;
       top: 0;
-      transform: translateY(-50%);
+      left: 10%;
       padding: 0 15px;
-      background: #fff;
-      color: #666;
       font-size: 15px;
+      color: #666;
+      content: attr(data-label);
+      background: #fff;
+      transform: translateY(-50%);
     }
   }
 
   & :deep(.setting-item) {
-    width: 100%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
     margin-bottom: 10px;
 
     & .ant-input {

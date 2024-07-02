@@ -18,16 +18,18 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .default-component {
-  text-align: center;
-  margin: 20px auto;
   padding: 20px;
+  margin: 20px auto;
+  text-align: center;
   border: 2px solid #ccc;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+
   p {
-    color: #90a924;
     margin-bottom: 20px;
+    color: #90a924;
   }
+
   h1 {
     color: #da2727;
     animation: pulse 2s infinite alternate;
@@ -38,6 +40,7 @@ onMounted(() => {
   from {
     transform: scale(1);
   }
+
   to {
     transform: scale(1.1);
   }

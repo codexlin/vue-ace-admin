@@ -1,8 +1,9 @@
-@import './theme.scss';
-@import './animation.scss';
+@import './theme';
+@import './animation';
 @import './antd';
 
 $padding: 8px;
+
 // html {
 //   .gray {
 //     -webkit-filter: grayscale(100%);
@@ -14,12 +15,13 @@ $padding: 8px;
 //   }
 // }
 body {
-  font-family: $font-family, Consolas, Menlo, Monaco, 'Courier New', 'PingFang SC', 'Microsoft YaHei', monospace;
   position: relative;
+  font-family: $font-family, Consolas, Menlo, Monaco, 'Courier New', 'PingFang SC', 'Microsoft YaHei', monospace;
+
   // 样式规则，使用混合应用当前模式和主题的样式
   @include useTheme {
-    background: getModeVar('bgColor');
     color: getModeVar('infoColor');
+    background: getModeVar('bgColor');
   }
 }
 
@@ -36,6 +38,7 @@ body {
     @include useTheme {
       background: getModeVar('bgColor');
     }
+
     padding: 0;
   }
 }
@@ -47,8 +50,8 @@ body {
 .flex-cards {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   gap: 2 * $padding;
+  justify-content: space-between;
   padding: $padding;
 
   &_left {
@@ -69,18 +72,19 @@ body {
 }
 
 /* 2xl */
-@media (max-width: 1536px) {
+@media (width <= 1536px) {
 }
 
 /* xl */
-@media (max-width: 1280px) {
+@media (width <= 1280px) {
 }
 
 /* lg */
-@media (max-width: 1024px) {
+@media (width <= 1024px) {
   .flex-card {
     flex: 0 0 calc(50% - #{$padding}); // 在中等屏幕上每行显示2个 使用#{}插值
   }
+
   .flex-cards {
     &_left,
     &_right {
@@ -90,28 +94,31 @@ body {
 }
 
 /* md */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .ant-drawer:has(.ant-layout-sider) {
     display: inline-block;
   }
+
   .default-sidebar {
     display: none;
   }
+
   .flex-cards {
     flex-direction: column;
   }
+
   .flex-card {
     flex: 0 0 calc(100% - #{$padding}); // 在小屏幕上每行只显示1个
   }
 }
 
 /* sm */
-@media (max-width: 640px) {
+@media (width <= 640px) {
   .breadcrumb {
     display: none;
   }
 }
 
 /* xs */
-@media (max-width: 475px) {
+@media (width <= 475px) {
 }

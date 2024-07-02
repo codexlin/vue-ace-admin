@@ -1,17 +1,12 @@
-<!--
- * @Author: LinRenJie xoxosos666@gmail.com
- * @Date: 2023-10-30 20:49:23
- * @Description:
--->
 <script lang="ts" setup>
-import SvgIconVue from '@/components/svgIcon/index.vue'
+import type { ItemType } from 'ant-design-vue'
+import SvgIconVue from '@/components/svgIcon/SvgIcon.vue'
 import useLocalI18n from '@/hooks/useLocalI18n'
 import useConfig from '@/layouts/composables/useConfig'
 import router from '@/router'
 import { setPageTitleTxt } from '@/router/routerHelp'
 import { useRouteStore } from '@/stores/modules/route'
 import { getLevelPaths } from '@/utils/common/routeUtil'
-import type { ItemType } from 'ant-design-vue'
 
 const { headerConfig } = useConfig()
 const { tt, watchSwitchLang } = useLocalI18n()
@@ -61,5 +56,5 @@ watch(
 </script>
 
 <template>
-  <a-menu v-model:selectedKeys="selectedKeys" style="border-inline-end: none" v-bind="state"></a-menu>
+  <a-menu v-model:selectedKeys="selectedKeys" style="border-inline-end: none" v-bind="state" />
 </template>

@@ -1,39 +1,42 @@
 <script lang="tsx" setup>
+import { useToggle } from '@vueuse/core'
+import type { ColumnsType } from 'ant-design-vue/es/table'
+import { addRole, deleteRole, getRoleDetail, getRoleList, updateRole } from '../api'
 import { OperationButtons } from '@/components'
 import FormModal, { type IFormModal } from '@/components/form/FormModal'
 import useList from '@/hooks/useList'
 import useLocalI18n from '@/hooks/useLocalI18n'
 import { buildTreeDataSelect } from '@/utils/common/treeUtil'
-import { useToggle } from '@vueuse/core'
-import type { ColumnsType } from 'ant-design-vue/es/table'
-import { ref } from 'vue'
-import { addRole, deleteRole, getRoleDetail, getRoleList, updateRole } from '../api'
 
 interface State {
   type: 'add' | 'edit' | 'detail' | 'delete'
   id: number | null
 }
-
+interface TreeNode {
+  parent?: TreeNode
+  value: number
+  children?: TreeNode[]
+}
 const [value, toggle] = useToggle()
 const { tt } = useLocalI18n()
 const formRef = ref<IFormModal | null>(null)
 const title = ref('新增角色')
-const valueMap = {}
+const valueMap: Record<number, TreeNode> = {}
 const detailData = ref()
-
-function loops(list: [], parent?: any) {
+function loops(list?: TreeNode[], parent?: TreeNode): TreeNode[] {
   return (list || []).map(({ children, value }) => {
-    const node = (valueMap[value] = {
+    const node: TreeNode = {
       parent,
       value
-    })
+    }
+    valueMap[value] = node
     node.children = loops(children, node)
     return node
   })
 }
 
-function getPath(value: number) {
-  const path = []
+function getPath(value: number): number[] {
+  const path: number[] = []
   let current = valueMap[value]
   while (current) {
     path.unshift(current.value)
@@ -41,13 +44,14 @@ function getPath(value: number) {
   }
   return path
 }
+
 // 筛选最深的子节点
-function filterDeepestNodes(selectedNodes) {
+function filterDeepestNodes(selectedNodes: number[]): number[] {
   const valueSet = new Set(selectedNodes)
   console.log(valueSet)
 
   // 判断一个节点是否是最深的子节点
-  function isDeepestNode(value) {
+  function isDeepestNode(value: number) {
     const node = valueMap[value]
     if (!node || !node.children || node.children.length === 0) {
       return true
@@ -59,33 +63,28 @@ function filterDeepestNodes(selectedNodes) {
   return selectedNodes.filter(isDeepestNode)
 }
 async function handleOk() {
-  const data = formRef.value?.formState
-  console.log(valueMap)
-  const path: number[] = []
+  const data = formRef.value?.formState || {}
   data.menuIds = [...new Set(data?.menuIds?.flatMap((i: number) => getPath(i)))]
-  console.log('menuIds', data.menuIds)
   const res =
     clickType.value === 'add'
       ? await addRole(data)
       : await updateRole({
           ...data,
-          roleId: detailData.value.roleId
+          roleId: detailData.value?.roleId
         })
   if (res.code === '0') {
     toggle()
   }
-
-  console.log('handleOk', res)
 }
 
 const formItems = ref()
 const clickType = ref('add')
 
-async function handleClick(record = null, type: State['type']) {
+async function handleClick(record: Record<string, any> | null, type: State['type']) {
   if (type === 'delete') return await deleteRole(record?.roleId)
   if (type !== 'add') {
-    const res = await getRoleDetail(record?.roleId)
-    const menuIds = filterDeepestNodes(res.data?.menus.map((i) => i.id) || [])
+    const res = await getRoleDetail<any>(record?.roleId)
+    const menuIds = filterDeepestNodes(res.data?.menus.map((i: any) => i.id) || [])
     detailData.value = { ...res.data.role, menuIds }
   } else {
     detailData.value = {}
@@ -198,13 +197,13 @@ onMounted(async () => {
 <template>
   <div>
     <h1>Role View</h1>
-      <CommonTable :columns :data-source="dataSource" :loading>
-        <template #toolbar>
-          <a-space>
-            <a-button type="primary" @click="handleClick(null, 'add')"> 新增</a-button>
-          </a-space>
-        </template>
-      </CommonTable>
+    <CommonTable :columns :data-source="dataSource" :loading>
+      <template #toolbar>
+        <a-space>
+          <a-button type="primary" @click="handleClick(null, 'add')"> 新增</a-button>
+        </a-space>
+      </template>
+    </CommonTable>
     <a-modal v-model:open="value" :destroy-on-close="true" :title @ok="handleOk">
       <FormModal ref="formRef" :form-items="formItems" />
     </a-modal>

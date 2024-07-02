@@ -1,10 +1,7 @@
 <script lang="ts" setup>
-import { useAppStore } from '@/stores/modules/app'
 import { gsap } from 'gsap'
+import { useAppStore } from '@/stores/modules/app'
 
-defineOptions({
-  name: 'LogoView'
-})
 onMounted(() => {
   gsap.to('.logo-img', { rotation: 360, duration: 2, ease: 'bounce.out', repeat: Infinity })
 })
@@ -23,17 +20,17 @@ const width = computed(() => (app.collapsed ? '80px' : '200px'))
 @import '@/styles/theme';
 
 .logo {
-  height: var(--header-height);
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
+  justify-content: space-evenly;
   width: v-bind(width);
+  height: var(--header-height);
 
   span {
-    transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
-    font-weight: bold;
     font-size: 16px;
+    font-weight: bold;
     color: getColor('primary');
+    transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
   }
 }
 </style>

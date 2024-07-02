@@ -21,7 +21,7 @@ const initWrapper = () => {
     <a-flex gap="small" vertical>
       <!-- 工具栏插槽 -->
       <div class="table-toolbar">
-        <slot name="toolbar" />
+        <slot name="toolbar"></slot>
       </div>
       <a-table :row-class-name="setRowClassName" class="ant-table-striped" v-bind="props">
         <template v-for="(slot, index) of slotNames" :key="index" #[slot]="data:IData">
@@ -37,6 +37,6 @@ const initWrapper = () => {
 }
 
 [data-theme='dark'] .ant-table-striped :deep(.table-striped) td {
-  background-color: rgb(29, 29, 29);
+  background-color: rgb(29 29 29);
 }
 </style>

@@ -2,7 +2,7 @@
   <div>
     <div>通用子</div>
     <div>
-      <a-input v-model:value="value"></a-input>
+      <a-input v-model:value="value" />
     </div>
   </div>
 </template>

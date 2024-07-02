@@ -1,20 +1,8 @@
-<template>
-  <div>
-    <a-form :model="formState">
-      <template v-for="item in formItems" :key="item.name">
-        <a-form-item :name="item.name" :label="item.label">
-          <component :is="item.ui" v-model:value="formState[item.name]" v-bind="initUi(item)" @change="change" />
-        </a-form-item>
-      </template>
-    </a-form>
-  </div>
-</template>
-
 <script setup lang="ts">
-import useLocalI18n from '@/hooks/useLocalI18n'
-import { buildTreeDataSelect } from '@/utils/common/treeUtil'
 import { omit } from 'lodash-es'
 import { getDetail } from '../../api'
+import useLocalI18n from '@/hooks/useLocalI18n'
+import { buildTreeDataSelect } from '@/utils/common/treeUtil'
 
 interface IItem {
   label: string
@@ -174,6 +162,7 @@ watch(
           }
           return true
         }
+        return false
       })
       formItems.value.splice(-1, 0, {
         ui: 'a-input',
@@ -196,5 +185,15 @@ defineExpose({
   formState
 })
 </script>
-
+<template>
+  <div>
+    <a-form :model="formState">
+      <template v-for="item in formItems" :key="item.name">
+        <a-form-item :name="item.name" :label="item.label">
+          <component :is="item.ui" v-model:value="formState[item.name]" v-bind="initUi(item)" @change="change" />
+        </a-form-item>
+      </template>
+    </a-form>
+  </div>
+</template>
 <style scoped></style>

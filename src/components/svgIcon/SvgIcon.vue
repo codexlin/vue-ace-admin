@@ -28,8 +28,8 @@ const symbolId = computed(() => `#${props.prefix}-${props.name}`)
 .svg-icon {
   width: 1.1em;
   height: 1.1em;
+  overflow: hidden;
   vertical-align: -0.15em;
   fill: currentcolor;
-  overflow: hidden;
 }
 </style>

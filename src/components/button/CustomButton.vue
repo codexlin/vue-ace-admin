@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { isFunction } from '@/utils/common/checkUtils'
 import { omit } from 'lodash-es'
 import type { Props } from './type'
+import { isFunction } from '@/utils/common/checkUtils'
 
 const props = withDefaults(defineProps<Props>(), {
   autoLoading: false, // 自动loading
@@ -55,10 +55,10 @@ const handlePromiseCallBack = async (res: Promise<void> | undefined) => {
     <a-popconfirm v-bind="props.popConfig">
       <a-button v-bind="{ ...propsCache, loading: loadingStatus, onClick: handleClick }">
         <template #icon>
-          <slot name="icon"></slot>
+          <slot name="icon" />
         </template>
         <template #default="data">
-          <slot v-bind="data || {}"></slot>
+          <slot v-bind="data || {}" />
         </template>
       </a-button>
     </a-popconfirm>
@@ -66,13 +66,11 @@ const handlePromiseCallBack = async (res: Promise<void> | undefined) => {
   <template v-else>
     <a-button v-bind="{ ...propsCache, loading: loadingStatus, onClick: handleClick }">
       <template #icon>
-        <slot name="icon"></slot>
+        <slot name="icon" />
       </template>
       <template #default="data">
-        <slot v-bind="data || {}"></slot>
+        <slot v-bind="data || {}" />
       </template>
     </a-button>
   </template>
 </template>
-
-<style scoped></style>

@@ -1,9 +1,9 @@
 <script lang="ts" setup>
+import { HomeFilled } from '@ant-design/icons-vue'
 import useLocalI18n from '@/hooks/useLocalI18n'
 import router from '@/router'
 import { useRouteStore } from '@/stores/modules/route'
 import { flattenRoutes, getLevelPaths } from '@/utils/common/routeUtil'
-import { HomeFilled } from '@ant-design/icons-vue'
 
 const { tt } = useLocalI18n()
 const menus = useRouteStore().getRoutes || []
@@ -51,4 +51,3 @@ watch(
     </template>
   </a-breadcrumb>
 </template>
-

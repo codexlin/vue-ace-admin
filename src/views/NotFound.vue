@@ -62,10 +62,10 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -80%);
-  height: 350px;
   width: 350px;
+  height: 350px;
   text-align: center;
+  transform: translate(-50%, -80%);
 
   p {
     text-align: left;

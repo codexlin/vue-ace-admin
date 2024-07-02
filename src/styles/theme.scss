@@ -1,11 +1,13 @@
-@import './variables.module.scss';
+@import './variables.module';
+
 // 定义字体
 @font-face {
-  font-family: 'Lato';
-  src: url('https://cdn.jsdelivr.net/gh/xoxosos/jsDelivr/assets/fonts/Lato-Regular.ttf');
+  font-family: Lato;
+  font-style: normal;
+
   /* 可以包括更多字体格式和字体描述 */
   font-weight: normal;
-  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/gh/xoxosos/jsDelivr/assets/fonts/Lato-Regular.ttf');
 }
 
 $font-family:
@@ -33,12 +35,14 @@ $custom-colors: (
   primary: $primary,
   info: $info
 );
+
 // 设置当前模式和主题
 $curMode: light;
 
 // 函数用于获取当前模式的变量值
 @function getModeVar($key) {
   $modeMap: map-get($modes, $curMode);
+
   @return map-get($modeMap, $key);
 }
 
@@ -46,6 +50,7 @@ $curMode: light;
 @function getColor($key) {
   @return map-get($custom-colors, $key);
 }
+
 // 混合用于应用主题样式
 @mixin useTheme() {
   @each $key1, $value1 in $modes {

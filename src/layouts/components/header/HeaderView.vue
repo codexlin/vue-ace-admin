@@ -63,19 +63,19 @@ const config = computed(() => headerConfig.value)
   justify-content: space-between;
 
   &-left {
-    gap: 10px;
-    padding-left: 10px;
     display: flex;
+    gap: 10px;
     align-items: center;
+    padding-left: 10px;
     overflow: hidden;
     white-space: nowrap;
   }
 
   &-right {
-    padding-right: 10px;
-    gap: 15px;
     display: flex;
+    gap: 15px;
     align-items: center;
+    padding-right: 10px;
     overflow: hidden;
     white-space: nowrap;
   }

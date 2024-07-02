@@ -1,7 +1,7 @@
 <script lang="ts" setup>
+import { DownOutlined } from '@ant-design/icons-vue'
 import type { Item } from '@/components/button/type'
 import useLocalI18n from '@/hooks/useLocalI18n'
-import { DownOutlined } from '@ant-design/icons-vue'
 
 const props = defineProps<{
   items: Item[]

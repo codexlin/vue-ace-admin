@@ -1,16 +1,12 @@
 <script lang="tsx" setup>
+import { onMounted, ref } from 'vue'
+import DetailView from './components/DetailView.vue'
+import { useConfig } from './hooks/useConfig'
 import useList from '@/hooks/useList'
 import useLocalI18n from '@/hooks/useLocalI18n'
 import { useUserStore } from '@/stores/modules/user'
 import { showModalConfirm } from '@/utils/common'
 import { addMenu, deleteMenu, getMenuTreeList, updateMenu } from '@/views/system/api'
-import { onMounted, ref } from 'vue'
-import DetailView from './components/DetailView.vue'
-import { useConfig } from './hooks/useConfig'
-
-defineOptions({
-  name: 'MenuManage'
-})
 
 const { tt } = useLocalI18n()
 const title = shallowRef('')

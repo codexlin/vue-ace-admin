@@ -4,8 +4,8 @@
  * @Description:
 -->
 <script lang="ts" setup>
-import { useUserStore } from '@/stores/modules/user'
 import { DownOutlined, LockOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons-vue'
+import { useUserStore } from '@/stores/modules/user'
 
 const username = 'username'
 const avatar = 'https://xsgames.co/randomusers/avatar.php?g=pixel&key=1'
