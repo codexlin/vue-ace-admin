@@ -1,22 +1,51 @@
 export default {
+  // 设置为根路径
   root: true,
   extends: ['stylelint-config-standard-scss', 'stylelint-config-recess-order'],
+  // 忽略所有文件，除了 src 目录下的文件，并且忽略 src 目录下的 JavaScript 和 TypeScript 文件。
   ignoreFiles: ['**/*', '!src/**/*', 'src/**/*.{js,jsx,ts,tsx}'],
-  ignoreFunctions: ['/regex-as-string/', /regex/, 'non-regex'],
   rules: {
-    'function-name-case': 'lower',
+    // 忽略以 get- 和 v- 开头的函数
+    'function-no-unknown': [true, { ignoreFunctions: ['/^get-/', '/^v-/'] }],
+    // 强制类名遵循特定的命名模式，支持 BEM 命名法和 Mui 前缀的类名。
+    'selector-class-pattern':
+      '^[a-z]([a-z0-9-]+)?(__([a-z0-9]+-?)+)?(__([a-z0-9]+-?)+)?(--([a-z0-9]+-?)+){0,2}$|^Mui.*$|^([a-z][a-z0-9]*)(_[a-z0-9]+)*$',
+    'font-family-no-missing-generic-family-keyword': null,
     'scss/dollar-variable-pattern': null,
     'block-no-empty': null,
-    'comment-empty-line-before': null,
     'no-empty-source': null,
     'property-no-unknown': null,
-    'selector-class-pattern': null,
+    'no-descending-specificity': null,
+    // 忽略未知的选择器
     'selector-pseudo-class-no-unknown': [
       true,
       {
-        ignorePseudoClasses: ['global', 'local', 'export', 'import', 'deep']
+        ignorePseudoClasses: ['export', 'deep', 'global', 'import']
       }
     ],
+    // 在规则之前总是添加空行，除了第一个嵌套规则和注释后面的规则。
+    'rule-empty-line-before': [
+      'always',
+      {
+        except: ['first-nested'],
+        ignore: ['after-comment']
+      }
+    ],
+    // 在自定义属性之前总是添加空行，除了在另一个自定义属性之后和第一个嵌套规则。
+    'custom-property-empty-line-before': [
+      'always',
+      {
+        except: ['after-custom-property', 'first-nested']
+      }
+    ],
+    // 在声明之前总是添加空行，除了在另一个声明之后和第一个嵌套规则。
+    'declaration-empty-line-before': [
+      'always',
+      {
+        except: ['after-declaration', 'first-nested']
+      }
+    ],
+    // 忽略以下at规则
     'at-rule-no-unknown': [
       true,
       {
@@ -31,19 +60,12 @@ export default {
           'each',
           'include',
           'mixin',
-          'return'
+          'return',
+          'use'
         ]
       }
     ],
-    'named-grid-areas-no-invalid': null,
-    'no-descending-specificity': null,
-    'font-family-no-missing-generic-family-keyword': null,
-    'rule-empty-line-before': [
-      'always',
-      {
-        ignore: ['after-comment', 'first-nested']
-      }
-    ],
+    // 忽略 rpx 单位。
     'unit-no-unknown': [true, { ignoreUnits: ['rpx'] }],
     'order/order': [
       [
@@ -62,6 +84,13 @@ export default {
         'rules'
       ],
       { severity: 'warning' }
+    ],
+    // 忽视 -webkit-xxxx 等兼容写法
+    'property-no-vendor-prefix': [
+      true,
+      {
+        ignoreProperties: ['box-shadow']
+      }
     ]
   },
   overrides: [

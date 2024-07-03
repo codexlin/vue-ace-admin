@@ -19,15 +19,14 @@
     "build": "run-p type-check \"build-only {@}\" --",
     "build:prod": "vite build  --mode production",
     "build:test": "vite build  --mode test",
-    "preview": "vite preview",
     "build-only": "vite build",
+    "preview": "vite preview",
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "lint:eslint": "eslint . --fix",
-    "lint:prettier": "prettier --write src/**/*.{ts,vue,js,tsx,jsx,json}",
-    "lint:stylelint": "stylelint . --fix",
+    "lint:eslint": "eslint --fix ./src",
+    "lint:prettier": "prettier --write src/",
+    "stylelint": "stylelint ./src/**/*.{scss,vue}",
+    "stylelint:fix": "stylelint ./src/**/*.{scss,vue} --fix",
     "lint:lint-staged": "lint-staged",
-    "format": "prettier --write src/",
     "preinstall": "npx only-allow pnpm",
     "postinstall": "npx simple-git-hooks"
   },
@@ -96,11 +95,11 @@
   },
   "lint-staged": {
     "src/**/*.{ts,vue,js,tsx,jsx,json}": [
-      "npm run lint:eslint",
-      "npm run lint:prettier"
+      "pnpm lint:eslint",
+      "pnpm lint:prettier"
     ],
-    "*.{scss,vue,css,less}": [
-      "pnpm lint:stylelint"
+    "*.{scss,vue}": [
+      "pnpm stylelint:fix"
     ],
     "package.json": [
       "prettier --write"

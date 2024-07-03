@@ -40,6 +40,14 @@ export default [
     files: ['src/**/*.{js,ts,jsx,tsx,vue}'],
     rules: {
       // 0 off 1 warn 2 error 强制标签执行自动关闭
+      'vue/script-setup-uses-vars': 2,
+      'vue/v-on-event-hyphenation': [
+        1,
+        'always',
+        {
+          autofix: true
+        }
+      ],
       'vue/html-self-closing': [
         2,
         {
@@ -60,7 +68,8 @@ export default [
           ignores: ['index'] // 忽略 index 命名，一般表示页面
         }
       ],
-      '@typescript-eslint/no-explicit-any': 'off', // 允许使用 any 类型
+      '@typescript-eslint/no-explicit-any': 0, // 允许使用 any 类型
+      '@typescript-eslint/no-unused-vars': 0,
       'prettier/prettier': ['error', { endOfLine: 'auto' }], // 自动选择结尾换行
 
       'array-callback-return': 'error',
