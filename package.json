@@ -5,8 +5,7 @@
   "type": "module",
   "homepage": "https://github.com/xoxosos/vue-ace-admin#readme",
   "engines": {
-    "node": ">=18",
-    "pnpm": ">=8"
+    "node": ">=18.0.0"
   },
   "packageManager": "pnpm@8.9.1",
   "keywords": [
