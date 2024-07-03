@@ -39,7 +39,7 @@ Ace Admin 是一个基于 Vue3.4、TypeScript5.x、Antd-Vue4.x、Pinia2.x 及 Vi
 - **TypeScript**：超越传统 JavaScript 语言的静态类型方案。
 - **Pnpm**：快速且节省空间的包管理工具。
 - **Scss**：用于定制布局和颜色风格。
-- **ESLint & Prettier**：代码校验与格式化工具。
+- **ESLint9 & Prettier**：代码校验与格式化工具。
 - **Axios**：网络请求库（优雅封装）。
 - **兼容移动端**: 布局兼容移动端页面分辨率(开发中)。
 
