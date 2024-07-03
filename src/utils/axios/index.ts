@@ -49,7 +49,8 @@ export class Request {
      *
      */
     this.instance.interceptors.response.use(
-      // @ts-ignore
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       (response: AxiosResponse<IResponse<any>>) => {
         console.log('响应后拦截器：', response)
         // 只处理 2xx 状态码

@@ -1,11 +1,11 @@
-import { useAppStore } from '@/stores/modules/app'
 import { useI18n } from 'vue-i18n'
+import { useAppStore } from '@/stores/modules/app'
 
 /**
  *
  * @param prefix 前缀
  */
-export default function useLocalI18n(prefix?: String) {
+export default function useLocalI18n(prefix?: string) {
   const i18n = useI18n()
 
   // 根据当前的语言环境来翻译

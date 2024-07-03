@@ -49,18 +49,12 @@ export function isArray(value: unknown): value is any[] {
   return Array.isArray(value)
 }
 
-export function isObject<T extends Record<string, any> = Record<string, any>>(
-  value: unknown
-): value is T {
+export function isObject<T extends Record<string, any> = Record<string, any>>(value: unknown): value is T {
   return is(value, 'Object')
 }
 
 export function isPromise(value: unknown): value is Promise<any> {
-  return (
-    !!value &&
-    typeof (value as any).then === 'function' &&
-    typeof (value as any).catch === 'function'
-  )
+  return !!value && typeof (value as any).then === 'function' && typeof (value as any).catch === 'function'
 }
 
 export function isFunction(value: unknown): value is (...any: any[]) => any {
@@ -100,7 +94,7 @@ export function isEmpty(value: unknown) {
 }
 
 export function noop(...args: any[]): any
-/* eslint-disable-next-line @typescript-eslint/no-empty-function */
+
 export function noop() {}
 
 /**

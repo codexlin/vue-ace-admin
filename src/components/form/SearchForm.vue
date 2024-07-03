@@ -51,7 +51,7 @@ watchEffect(() => {
     <a-form @submit.prevent="handleSubmit">
       <a-row :gutter="16">
         <!-- 动态生成表单字段 -->
-        <a-col :span="8" v-for="field in fields" :key="field.name">
+        <a-col v-for="field in fields" :key="field.name" :span="8">
           <a-form-item :label="field.label">
             <component :is="field.component || 'a-input'" v-model:value="formState[field.name]" v-bind="field.props" />
           </a-form-item>

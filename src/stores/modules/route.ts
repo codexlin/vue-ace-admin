@@ -3,9 +3,9 @@
  * @Date: 2023-10-25 21:53:39
  * @Description:
  */
+import type { RouteRecordRaw } from 'vue-router'
 import { addRoutes } from '@/router/routerHelp'
 import { backendRoutesApi } from '@/views/user/login/api'
-import type { RouteRecordRaw } from 'vue-router'
 
 export const useRouteStore = defineStore('route', () => {
   const routes = ref<any[]>([])

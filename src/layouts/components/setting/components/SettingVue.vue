@@ -30,8 +30,8 @@ const reset = () => {
     <div>
       <p class="setting-title" :data-label="tt('preset_theme_colors')" />
       <a-space wrap>
-        <template v-for="(color, name) in variables" :key="name">
-          <a-button :style="{ background: color }" @click="handleChange(color)">
+        <template v-for="(variable, name) in variables" :key="name">
+          <a-button :style="{ background: variable }" @click="handleChange(variable)">
             {{ tt(`colors.${name}`) }}
           </a-button>
         </template>
@@ -92,8 +92,6 @@ const reset = () => {
   & :deep(.color-picker) {
     width: 50px;
     height: 50px;
-    appearance: none;
-    appearance: none;
     appearance: none;
     cursor: pointer;
     background-color: transparent;

@@ -29,7 +29,7 @@ const width = computed(() => (app.collapsed ? '80px' : '200px'))
   span {
     font-size: 16px;
     font-weight: bold;
-    color: getColor('primary');
+    color: get-color('primary');
     transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
   }
 }

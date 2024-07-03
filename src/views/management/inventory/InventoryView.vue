@@ -1,7 +1,7 @@
 <script lang="tsx" setup>
+import { getListWithPage } from '../api/index'
 import CommonTableVue from '@/components/table/CommonTable.vue'
 import useList from '@/hooks/useList'
-import { getListWithPage } from '../api/index'
 
 type Props = {
   pageNum: number
@@ -60,7 +60,7 @@ const columns = [
 const { list, loadData, loading, pageSize, curPage, total } = useList({ listRequestFn: getListWithPage<Props> })
 const pagination = computed(() => ({
   total: total.value,
-  showTotal(total: Number) {
+  showTotal(total: number) {
     return `Total  ${total} items`
   }
 }))

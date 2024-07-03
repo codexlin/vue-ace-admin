@@ -6,10 +6,6 @@ interface IProps {
   prefix?: string
 }
 
-defineOptions({
-  name: 'SvgIcon'
-})
-
 const props = withDefaults(defineProps<IProps>(), {
   prefix: 'icon'
 })

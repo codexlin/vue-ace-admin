@@ -121,139 +121,9 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-/* 初始状态为模糊 */
-#logo {
-  filter: blur(8px);
-}
-
-.title {
-  color: #00f; /* 设置文字颜色 */
-  text-decoration: none;
-  animation: shine 2.4s infinite; /* 设置动画 */
-}
-
-.login {
-  :deep(.ant-input-affix-wrapper) {
-    background-color: #fff;
-  }
-
-  :deep(.ant-input) {
-    color: dimgray;
-    background-color: #fff;
-  }
-
-  display: flex;
-  height: 100vh;
-  margin: 0;
-  background-color: #abc6f8;
-  background-image: radial-gradient(closest-side, rgb(255 255 255), rgb(235 105 78 / 0%)),
-    radial-gradient(closest-side, rgb(250 203 203), rgb(243 11 164 / 0%)),
-    radial-gradient(closest-side, rgb(237 252 202), rgb(254 234 131 / 0%)),
-    radial-gradient(closest-side, rgb(197 248 241), rgb(170 142 245 / 0%)),
-    radial-gradient(closest-side, rgb(206 200 243), rgb(248 192 147 / 0%));
-  background-repeat: no-repeat;
-  background-position:
-    -80vmax -80vmax,
-    60vmax -30vmax,
-    10vmax 10vmax,
-    -30vmax -10vmax,
-    50vmax 50vmax;
-  background-size:
-    130vmax 130vmax,
-    80vmax 80vmax,
-    90vmax 90vmax,
-    110vmax 110vmax,
-    90vmax 90vmax;
-  animation: 10s movement linear infinite;
-
-  &-box {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
-    width: 90%;
-    height: 85%;
-    margin: auto;
-    background-color: rgb(255 255 255 / 40%);
-    border-radius: 30px;
-    box-shadow:
-      2.8px 2.8px 2.2px rgb(0 0 0 / 2%),
-      6.7px 6.7px 5.3px rgb(0 0 0 / 2.8%),
-      12.5px 12.5px 10px rgb(0 0 0 / 3.5%),
-      22.3px 22.3px 17.9px rgb(0 0 0 / 4.2%),
-      41.8px 41.8px 33.4px rgb(0 0 0 / 5%),
-      100px 100px 80px rgb(0 0 0 / 7%);
-    transition: all 0.8s cubic-bezier(0.15, 0.83, 0.66, 1);
-
-    &_left {
-      position: relative;
-
-      div {
-        position: absolute;
-        top: 20px;
-        left: 15px;
-      }
-    }
-
-    &_right {
-      .extra-login {
-        text-align: center;
-
-        a {
-          cursor: pointer;
-        }
-      }
-
-      h2 {
-        text-align: center;
-      }
-
-      :deep(.ant-btn-primary) {
-        height: 35px;
-        font-size: 15px;
-      }
-
-      input,
-      :deep(.ant-input-password) {
-        width: 300px;
-        height: 35px;
-        border: none;
-      }
-
-      .captcha {
-        :deep(.ant-form-item-control-input-content) {
-          display: flex;
-          gap: 1px;
-        }
-
-        .captcha-input {
-          width: 200px;
-
-          & + img {
-            cursor: pointer;
-          }
-        }
-      }
-
-      @media (width <= 768px) {
-        input,
-        :deep(.ant-input-password) {
-          width: 280px;
-        }
-      }
-
-      @media (width <= 380px) {
-        input,
-        :deep(.ant-input-password) {
-          width: 200px;
-        }
-      }
-    }
-  }
-}
-
 @keyframes shine {
   /* 创建动画 */
+
   0%,
   100% {
     color: #fff;
@@ -329,6 +199,136 @@ onMounted(() => {
       100vmax 100vmax,
       90vmax 90vmax,
       70vmax 70vmax;
+  }
+}
+
+#logo {
+  filter: blur(8px);
+}
+
+.title {
+  color: #00f; /* 设置文字颜色 */
+  text-decoration: none;
+  animation: shine 2.4s infinite; /* 设置动画 */
+}
+
+.login {
+  display: flex;
+  height: 100vh;
+  margin: 0;
+  background-color: #abc6f8;
+  background-image: radial-gradient(closest-side, rgb(255 255 255), rgb(235 105 78 / 0%)),
+    radial-gradient(closest-side, rgb(250 203 203), rgb(243 11 164 / 0%)),
+    radial-gradient(closest-side, rgb(237 252 202), rgb(254 234 131 / 0%)),
+    radial-gradient(closest-side, rgb(197 248 241), rgb(170 142 245 / 0%)),
+    radial-gradient(closest-side, rgb(206 200 243), rgb(248 192 147 / 0%));
+  background-repeat: no-repeat;
+  background-position:
+    -80vmax -80vmax,
+    60vmax -30vmax,
+    10vmax 10vmax,
+    -30vmax -10vmax,
+    50vmax 50vmax;
+  background-size:
+    130vmax 130vmax,
+    80vmax 80vmax,
+    90vmax 90vmax,
+    110vmax 110vmax,
+    90vmax 90vmax;
+  animation: 10s movement linear infinite;
+
+  :deep(.ant-input-affix-wrapper) {
+    background-color: #fff;
+  }
+
+  :deep(.ant-input) {
+    color: dimgray;
+    background-color: #fff;
+  }
+
+  &-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    width: 90%;
+    height: 85%;
+    margin: auto;
+    background-color: rgb(255 255 255 / 40%);
+    border-radius: 30px;
+    box-shadow:
+      2.8px 2.8px 2.2px rgb(0 0 0 / 2%),
+      6.7px 6.7px 5.3px rgb(0 0 0 / 2.8%),
+      12.5px 12.5px 10px rgb(0 0 0 / 3.5%),
+      22.3px 22.3px 17.9px rgb(0 0 0 / 4.2%),
+      41.8px 41.8px 33.4px rgb(0 0 0 / 5%),
+      100px 100px 80px rgb(0 0 0 / 7%);
+    transition: all 0.8s cubic-bezier(0.15, 0.83, 0.66, 1);
+
+    &_left {
+      position: relative;
+
+      div {
+        position: absolute;
+        top: 20px;
+        left: 15px;
+      }
+    }
+
+    &_right {
+      @media (width <= 768px) {
+        input,
+        :deep(.ant-input-password) {
+          width: 280px;
+        }
+      }
+
+      @media (width <= 380px) {
+        input,
+        :deep(.ant-input-password) {
+          width: 200px;
+        }
+      }
+
+      .extra-login {
+        text-align: center;
+
+        a {
+          cursor: pointer;
+        }
+      }
+
+      h2 {
+        text-align: center;
+      }
+
+      :deep(.ant-btn-primary) {
+        height: 35px;
+        font-size: 15px;
+      }
+
+      input,
+      :deep(.ant-input-password) {
+        width: 300px;
+        height: 35px;
+        border: none;
+      }
+
+      .captcha {
+        :deep(.ant-form-item-control-input-content) {
+          display: flex;
+          gap: 1px;
+        }
+
+        .captcha-input {
+          width: 200px;
+
+          & + img {
+            cursor: pointer;
+          }
+        }
+      }
+    }
   }
 }
 </style>

@@ -40,12 +40,12 @@ export function infoMessage(message: string) {
 }
 // hooks参数
 interface Props {
-  listRequestFn: Function
-  filterOption?: Ref<Object>
-  exportRequestFn?: Function
+  listRequestFn: () => void | Promise<any>
+  filterOption?: Ref<object>
+  exportRequestFn?: () => void | Promise<void>
   options?: OptionsType
 }
-export default function useList<ItemType extends Object, FilterOption extends Object>({
+export default function useList<ItemType extends object, FilterOption extends object>({
   listRequestFn,
   filterOption,
   exportRequestFn,

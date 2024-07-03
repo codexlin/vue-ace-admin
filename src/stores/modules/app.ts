@@ -3,10 +3,10 @@
  * @Date: 2023-10-14 21:29:57
  * @Description:
  */
-import allConfig from '@/config/system/index'
-import type { MenuTheme } from 'ant-design-vue'
 import { theme } from 'ant-design-vue'
 import { cloneDeep } from 'lodash-es'
+import type { MenuTheme } from 'ant-design-vue'
+import allConfig from '@/config/system/index'
 
 /**
  * app 配置

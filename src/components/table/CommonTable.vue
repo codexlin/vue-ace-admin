@@ -21,7 +21,7 @@ const initWrapper = () => {
     <a-flex gap="small" vertical>
       <!-- 工具栏插槽 -->
       <div class="table-toolbar">
-        <slot name="toolbar"></slot>
+        <slot name="toolbar" />
       </div>
       <a-table :row-class-name="setRowClassName" class="ant-table-striped" v-bind="props">
         <template v-for="(slot, index) of slotNames" :key="index" #[slot]="data:IData">

@@ -14,15 +14,17 @@ $padding: 8px;
 //     filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
 //   }
 // }
+
 body {
+  // 样式规则，使用混合应用当前模式和主题的样式
+
+  @include use-theme {
+    color: get-mode-var('infoColor');
+    background: get-mode-var('bgColor');
+  }
+
   position: relative;
   font-family: $font-family, Consolas, Menlo, Monaco, 'Courier New', 'PingFang SC', 'Microsoft YaHei', monospace;
-
-  // 样式规则，使用混合应用当前模式和主题的样式
-  @include useTheme {
-    color: getModeVar('infoColor');
-    background: getModeVar('bgColor');
-  }
 }
 
 .ant-drawer:has(.ant-layout-sider) {
@@ -30,13 +32,13 @@ body {
 }
 
 .custom-layout {
-  @include useTheme {
-    background: getModeVar('bgColor');
+  @include use-theme {
+    background: get-mode-var('bgColor');
   }
 
   .ant-drawer-body {
-    @include useTheme {
-      background: getModeVar('bgColor');
+    @include use-theme {
+      background: get-mode-var('bgColor');
     }
 
     padding: 0;
@@ -72,14 +74,17 @@ body {
 }
 
 /* 2xl */
+
 @media (width <= 1536px) {
 }
 
 /* xl */
+
 @media (width <= 1280px) {
 }
 
 /* lg */
+
 @media (width <= 1024px) {
   .flex-card {
     flex: 0 0 calc(50% - #{$padding}); // 在中等屏幕上每行显示2个 使用#{}插值
@@ -94,6 +99,7 @@ body {
 }
 
 /* md */
+
 @media (width <= 768px) {
   .ant-drawer:has(.ant-layout-sider) {
     display: inline-block;
@@ -113,6 +119,7 @@ body {
 }
 
 /* sm */
+
 @media (width <= 640px) {
   .breadcrumb {
     display: none;
@@ -120,5 +127,6 @@ body {
 }
 
 /* xs */
+
 @media (width <= 475px) {
 }

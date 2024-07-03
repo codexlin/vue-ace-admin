@@ -4,13 +4,13 @@
  * @Description:
 -->
 <script lang="ts" setup>
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
 import BreadcrumbView from '@/layouts/components/header/components/Breadcrumb/BreadCrumb.vue'
 import FullScreen from '@/layouts/components/header/components/FullScreen/FullScreen.vue'
 import LangSelect from '@/layouts/components/header/components/LangSelect/LangSelect.vue'
 import PersonTool from '@/layouts/components/header/components/PersonTool/PersonTool.vue'
 import ThemeSwitch from '@/layouts/components/header/components/ThemeSwitch/ThemeSwitch.vue'
 import { useAppStore } from '@/stores/modules/app'
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
 import useConfig from '@/layouts/composables/useConfig'
 
 const app = useAppStore()
@@ -30,9 +30,9 @@ const config = computed(() => headerConfig.value)
           <BreadcrumbView />
         </div>
         <template v-if="config.showLogo">
-          <slot name="logo"></slot>
+          <slot name="logo" />
         </template>
-        <slot></slot>
+        <slot />
       </div>
       <div class="header-view-right">
         <!-- 全屏 -->

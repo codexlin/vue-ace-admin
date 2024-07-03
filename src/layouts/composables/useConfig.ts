@@ -1,6 +1,6 @@
 interface Props {
-  showBreadcrumb?: Boolean
-  showLogo?: Boolean
+  showBreadcrumb?: boolean
+  showLogo?: boolean
   mode?: 'inline' | 'horizontal'
 }
 

@@ -1,11 +1,14 @@
 @import './variables.module';
+@use 'sass:map';
 
 // 定义字体
+
 @font-face {
   font-family: Lato;
   font-style: normal;
 
   /* 可以包括更多字体格式和字体描述 */
+
   font-weight: normal;
   src: url('https://cdn.jsdelivr.net/gh/xoxosos/jsDelivr/assets/fonts/Lato-Regular.ttf');
 }
@@ -40,19 +43,22 @@ $custom-colors: (
 $curMode: light;
 
 // 函数用于获取当前模式的变量值
-@function getModeVar($key) {
-  $modeMap: map-get($modes, $curMode);
 
-  @return map-get($modeMap, $key);
+@function get-mode-var($key) {
+  $modeMap: map.get($modes, $curMode);
+
+  @return map.get($modeMap, $key);
 }
 
 // 函数用于获取当前主题的颜色值
-@function getColor($key) {
-  @return map-get($custom-colors, $key);
+
+@function get-color($key) {
+  @return map.get($custom-colors, $key);
 }
 
 // 混合用于应用主题样式
-@mixin useTheme() {
+
+@mixin use-theme() {
   @each $key1, $value1 in $modes {
     $curMode: $key1 !global;
     html[data-theme='#{$key1}'] & {

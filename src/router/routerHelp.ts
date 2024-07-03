@@ -1,16 +1,11 @@
-/*
- * @Author: LinRenJie xoxosos666@gmail.com
- * @Date: 2023-10-25 21:53:39
- * @Description:
- */
+import Nprogress from 'nprogress'
+import type { RouteRecordRaw } from 'vue-router'
 import { i18n } from '@/locales'
 import { router } from '@/router'
 import { useAppStore } from '@/stores/modules/app'
 import { useRouteStore } from '@/stores/modules/route'
 import { useUserStore } from '@/stores/modules/user'
-import Nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
-import type { RouteRecordRaw } from 'vue-router'
 
 export const setPageTitleTxt = (meta: any) => {
   const appTitle = useAppStore().appConfig.appTitle

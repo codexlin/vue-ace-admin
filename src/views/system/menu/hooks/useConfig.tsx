@@ -1,6 +1,6 @@
+import type { ColumnsType } from 'ant-design-vue/es/table'
 import { OperationButtons, SvgIcon } from '@/components'
 import useLocalI18n from '@/hooks/useLocalI18n'
-import type { ColumnsType } from 'ant-design-vue/es/table'
 
 export function useConfig(handleClick: (record: any, type: 'add' | 'edit' | 'delete') => void) {
   const { tt } = useLocalI18n()

@@ -41,11 +41,12 @@ const value = ref('')
 @import '@/styles/theme';
 
 .test {
-  height: 20px;
-
-  @include useTheme {
+  @include use-theme {
     // 定制
-    background-color: getColor(primary);
+
+    background-color: get-color(primary);
   }
+
+  height: 20px;
 }
 </style>

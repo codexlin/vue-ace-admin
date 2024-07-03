@@ -67,6 +67,7 @@
 }
 
 /* 向上滑入滑出 */
+
 .slide-fadein-up-enter-active,
 .slide-fadein-up-leave-active {
   transition:
@@ -121,10 +122,10 @@
 
 .fadein-enter-active,
 .fadein-leave-active {
-  transition: opacity 0.3s ease-in-out ;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .fadein-enter-from,
 .fadein-leave-to {
-  opacity: 0 ;
+  opacity: 0;
 }

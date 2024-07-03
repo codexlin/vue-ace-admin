@@ -3,10 +3,10 @@
  * @Date: 2023-10-25 21:53:39
  * @Description:
  */
-import { basicRoutes } from '@/router/router'
-import type { App } from 'vue'
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
+import type { App } from 'vue'
 import { setupRouterHooks } from './routerHelp'
+import { basicRoutes } from '@/router/router'
 
 const history = import.meta.env.VITE_HASH_ROUTE === 'true' ? createWebHashHistory : createWebHistory
 export const router = createRouter({

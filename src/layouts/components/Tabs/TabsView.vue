@@ -5,6 +5,7 @@ import type { TabsProps } from 'ant-design-vue'
 import useLocalI18n from '@/hooks/useLocalI18n'
 import { refreshKey } from '@/layouts/type'
 import { useTabsStore } from '@/stores/modules/tabs'
+
 interface Props {
   title: string
   key: string
@@ -75,7 +76,7 @@ watch(
     </a-tabs>
   </div>
 </template>
-<style lang="scss">
+<style scoped lang="scss">
 .tabs {
   position: sticky;
   top: 0;
@@ -85,8 +86,7 @@ watch(
 
   .ant-tabs-nav {
     height: 40px;
-    padding: 5px;
-    padding-right: 6px;
+    padding: 5px 6px 5px 5px;
     margin: 0;
 
     & .ant-tabs-nav-list .ant-tabs-tab,

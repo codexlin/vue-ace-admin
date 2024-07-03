@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useAppStore } from '@/stores/modules/app'
 import enUS from 'ant-design-vue/es/locale/en_US'
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
 import dayjs from 'dayjs'
+import { useAppStore } from '@/stores/modules/app'
 import 'dayjs/locale/zh-cn'
 const app = useAppStore()
 const locale = computed(() => (app.getLanguage === 'zh-cn' ? zhCN : enUS))

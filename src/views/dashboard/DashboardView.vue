@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import StatisticCard from '@/components/statistic/StatisticCard.vue'
 import { ArrowDownOutlined, ArrowUpOutlined, HomeOutlined } from '@ant-design/icons-vue'
-import type { EChartsOption } from 'echarts'
 import { BarChart, LineChart, PieChart } from 'echarts/charts'
 import { GridComponent, LegendComponent, TitleComponent, TooltipComponent } from 'echarts/components'
 import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
 import { h } from 'vue'
 import VChart from 'vue-echarts'
+import type { EChartsOption } from 'echarts'
+import StatisticCard from '@/components/statistic/StatisticCard.vue'
 
 use([CanvasRenderer, BarChart, LineChart, PieChart, TitleComponent, TooltipComponent, GridComponent, LegendComponent])
 
@@ -243,7 +243,7 @@ const tableData = [
         :tab-list="tabList"
         class="flex-cards_left"
         title="Card title"
-        @tabChange="(key) => onTabChange(key, 'key')"
+        @tab-change="(key) => onTabChange(key, 'key')"
       >
         <template #customTab="item">
           <span v-if="item.key === 'tab1'">
