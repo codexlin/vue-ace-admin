@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
+    "@tinymce/tinymce-vue": "^6.0.1",
     "@vueuse/core": "^10.11.0",
     "@vueuse/motion": "^2.2.3",
     "ant-design-vue": "~4.2.3",
@@ -44,6 +45,8 @@
     "nprogress": "^0.2.0",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
+    "tinymce": "^7.2.1",
+    "tinymce-i18n": "^24.7.1",
     "vue": "^3.4.31",
     "vue-echarts": "latest",
     "vue-i18n": "^9.13.1",
