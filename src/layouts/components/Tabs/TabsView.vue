@@ -62,7 +62,7 @@ watch(
             <template #overlay>
               <a-menu>
                 <a-menu-item key="1" @click="onRefresh(i.content!)">刷新</a-menu-item>
-                <a-menu-item key="2" @click="deleteTab('cur', i.key)">关闭当前</a-menu-item>
+                <a-menu-item key="2" @click="deleteTab('cur', i.key)">关闭此页</a-menu-item>
                 <a-menu-item key="3" @click="deleteTab('other', i.key)">关闭其他</a-menu-item>
                 <a-menu-item key="4" @click="deleteTab('all', i.key)">关闭所有</a-menu-item>
               </a-menu>

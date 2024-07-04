@@ -1,10 +1,18 @@
+<script lang="ts" setup>
+import TinymceEditor from '@/components/tinymce/TinymceEditor.vue'
+const value = ref(
+  'Thanks for supporting TinyMCE! We hope it helps you and your users create great content.\n' +
+    'All the best from the TinyMCE team.'
+)
+const getContent = () => {
+  console.log(tinymce.value?.handleGetContent())
+}
+const tinymce = ref<InstanceType<typeof TinymceEditor> | null>(null)
+</script>
 <template>
   <div>
-    <div v-pre>{{ value }}</div>
     <a-input v-model:value="value" />
+    <a-button @click="getContent">Get Content</a-button>
+    <TinymceEditor ref="tinymce" v-model="value" />
   </div>
 </template>
-
-<script lang="ts" setup>
-const value = ref('{{test}}')
-</script>

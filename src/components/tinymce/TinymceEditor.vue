@@ -13,28 +13,92 @@ import 'tinymce/themes/silver'
 import 'tinymce/icons/default'
 import 'tinymce-i18n/langs6/zh-Hans.js'
 import 'tinymce/plugins/code'
-
+import 'tinymce/plugins/image'
+import 'tinymce/plugins/table'
+import 'tinymce/plugins/lists' // 列表插件
+import 'tinymce/plugins/wordcount' // 文字计数
+import 'tinymce/plugins/preview' // 预览
+import 'tinymce/plugins/emoticons' // emoji表情
+import 'tinymce/plugins/emoticons/js/emojis.js' //必须引入这个文件才有表情图库
+import 'tinymce/plugins/link' // 链接插件
+import 'tinymce/plugins/advlist' //高级列表
+import 'tinymce/plugins/codesample' //代码示例
+import 'tinymce/plugins/autoresize' // 自动调整编辑器大小
+import 'tinymce/plugins/quickbars' // 光标处快捷提示
+import 'tinymce/plugins/nonbreaking' //插入不间断空格
+import 'tinymce/plugins/searchreplace' //查找替换
+import 'tinymce/plugins/autolink' //自动链接
+import 'tinymce/plugins/directionality' //文字方向
+import 'tinymce/plugins/visualblocks' //显示元素范围
+import 'tinymce/plugins/visualchars' //显示不可见字符
+import 'tinymce/plugins/charmap' // 特殊符号
+import 'tinymce/plugins/insertdatetime' //插入日期时间
+import 'tinymce/plugins/importcss' //引入自定义样式的css文件
+import 'tinymce/plugins/accordion' // 可折叠数据手风琴模式
+import 'tinymce/plugins/anchor' //锚点
+import 'tinymce/plugins/fullscreen' //全屏
+import tinymce from 'tinymce'
 const editorValue = defineModel({ required: true, type: String, default: '' })
 const props = defineProps({
   plugins: {
     type: [String, Array],
-    default: 'code'
+    default:
+      ' importcss autoresize searchreplace autolink directionality code visualblocks visualchars  image link codesample table  nonbreaking anchor insertdatetime advlist lists wordcount charmap quickbars emoticons accordion fullscreen preview'
   },
   toolbar: {
     type: [String, Array],
-    default: 'undo redo | styles | bold italic cut copy paste forecolor removeformat code'
+    default:
+      'undo redo | styles fontfamily fontsize | preview bold italic cut copy paste forecolor backcolor removeformat code accordion accordionremove | blocks |  underline strikethrough ltr rtl  | align numlist bullist | link image | table | lineheight outdent indent | charmap emoticons | anchor codesample fullscreen'
+  },
+  readonly: {
+    type: Boolean,
+    default: false
   }
 })
 
-const initOptions = ref({
+const initOptions = reactive({
   language: 'zh-Hans',
   height: 500,
+  min_height: 500,
+  branding: false,
   skin: false,
   menubar: false,
-  content_css: false,
   plugins: props.plugins,
   toolbar: props.toolbar,
+  // content_css: '/tinymce/skins/content/default/content.css',   //以css文件方式自定义可编辑区域的css样式，css文件需自己创建并引入
+  // 工具栏模式 floating / sliding / scrolling / wrap
   toolbar_mode: 'sliding',
+  // 取消图片资源路径转换
+  convert_urls: false,
+  // table边框位0是否展示网格线
+  // visual: false,
+  link_default_target: '_blank', // 链接默认打开方式
+  link_context_toolbar: true,
+  // 默认快捷菜单
+  quickbars_insert_toolbar: 'image codesample table',
+  // 文字样式
+  font_family_formats:
+    'Arial=arial,helvetica,sans-serif; 宋体=SimSun; 微软雅黑=Microsoft Yahei; Impact=impact,chicago;',
+  font_size_formats: '11px 12px 14px 16px 18px 24px 36px 48px 64px 72px',
+  image_caption: true,
+  noneditable_class: 'mceNonEditable',
+  // 默认样式
+  content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
+  image_advtab: true,
+  importcss_append: true,
+  paste_merge_formats: true,
+  nonbreaking_force_tab: false,
+  paste_auto_cleanup_on_paste: false,
+  file_picker_types: 'file',
+  // 选中图片的快捷提示
+  quickbars_image_toolbar: 'alignleft aligncenter alignright | rotateleft rotateright | imageoptions',
+  editimage_toolbar: 'rotateleft rotateright | flipv fliph | editimage imageoptions',
+  editimage_cors_hosts: ['picsum.photos'],
+  // 选中文字的快捷提示
+  quickbars_selection_toolbar: 'bold italic quicklink h2 h3 blockquote quickimage quicktable',
+  // 编辑器高度自适应
+  autoresize_bottom_margin: 20,
+  // autoresize_overflow_padding: 16,
   ...getPasteOption(),
   ...getImageOption()
 })
@@ -48,7 +112,7 @@ onMounted(() => {
  * */
 function getImageOption() {
   return {
-    images_upload_handler: (blobInfo, progress) =>
+    images_upload_handler: (blobInfo: any, progress: any) =>
       new Promise(async (resolve, reject) => {
         const formData = new FormData()
         formData.append('file', blobInfo.blob(), blobInfo.filename())
@@ -74,18 +138,35 @@ function getImageOption() {
  * */
 function getPasteOption() {
   return {
-    paste_preprocess: (editor, args) => {
+    paste_preprocess: (editor: any, args: any) => {
       console.log(args.content)
     },
     // paste_remove_styles_if_webkit: false,
-    /*
-     * 此选项允许您指定在 WebKit 中粘贴时要保留的样式。WebKit 有一个怪癖，
-     * 它将获取元素的所有计算 CSS 属性并将它们添加到编辑器中的 span 中。由于大多数用户不希望在整个文档中添加随机跨度，
-     * 因此我们需要手动清理它，直到修复错误。此选项默认为'none'但可以设置为'all'或要保留的特定样式列表。
-     * */
     paste_webkit_styles: 'color'
   }
 }
+// 设置编辑器只读模式
+watchEffect(async () => {
+  if (props.readonly) {
+    await nextTick()
+    tinymce && tinymce.activeEditor && tinymce.activeEditor.mode.set(props.readonly ? 'readonly' : 'design')
+  }
+})
+
+// 设置值
+const handleSetContent = (content: string) => {
+  tinymce?.activeEditor?.setContent(content)
+}
+
+// 获取值
+const handleGetContent = () => {
+  return tinymce?.activeEditor?.getContent() || ''
+}
+
+defineExpose({
+  handleSetContent,
+  handleGetContent
+})
 </script>
 
 <style scoped></style>
