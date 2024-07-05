@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
 :root {
-  --primary:#ff5733;
-  --info:#ff5733 ;
+  --primary: #ff5733;
+  --info: #ff5733;
 }
 
 :export {
@@ -21,7 +21,7 @@
 
   /* 可以包括更多字体格式和字体描述 */
   font-weight: normal;
-  src: url("../assets/fonts/Lato-Regular.ttf");
+  src: url('../assets/fonts/Lato-Regular.ttf');
 }
 
 .scale-slide-enter-active,
@@ -94,16 +94,22 @@
 
 body {
   position: relative;
-  font-family: Lato, -apple-system, "Microsoft YaHei", sans-serif;
-  transition: background-color 0.3s, color 0.3s;
+  font-family:
+    Lato,
+    -apple-system,
+    'Microsoft YaHei',
+    sans-serif;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
 
-html[data-theme="light"] body {
+html[data-theme='light'] body {
   color: #141414;
   background-color: #fff;
 }
 
-html[data-theme="dark"] body {
+html[data-theme='dark'] body {
   color: #f6f8fa;
   background-color: #141414;
 }
@@ -112,11 +118,11 @@ html[data-theme="dark"] body {
   display: none;
 }
 
-html[data-theme="light"] .custom-layout {
+html[data-theme='light'] .custom-layout {
   background: #fff;
 }
 
-html[data-theme="dark"] .custom-layout {
+html[data-theme='dark'] .custom-layout {
   background: #141414;
 }
 
@@ -124,11 +130,11 @@ html[data-theme="dark"] .custom-layout {
   padding: 0;
 }
 
-html[data-theme="light"] .custom-layout .ant-drawer-body {
+html[data-theme='light'] .custom-layout .ant-drawer-body {
   background: #fff;
 }
 
-html[data-theme="dark"] .custom-layout .ant-drawer-body {
+html[data-theme='dark'] .custom-layout .ant-drawer-body {
   background: #141414;
 }
 
@@ -137,7 +143,11 @@ html[data-theme="dark"] .custom-layout .ant-drawer-body {
 }
 
 .ant-layout {
-  font-family: Lato, -apple-system, "Microsoft YaHei", sans-serif;
+  font-family:
+    Lato,
+    -apple-system,
+    'Microsoft YaHei',
+    sans-serif;
 }
 
 .flex-cards {
@@ -174,7 +184,8 @@ html[data-theme="dark"] .custom-layout .ant-drawer-body {
     flex: 0 0 calc(50% - 8px);
   }
 
-  .flex-cards_left, .flex-cards_right {
+  .flex-cards_left,
+  .flex-cards_right {
     width: 100%;
   }
 }
