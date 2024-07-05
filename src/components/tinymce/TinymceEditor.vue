@@ -38,6 +38,7 @@ import 'tinymce/plugins/accordion' // 可折叠数据手风琴模式
 import 'tinymce/plugins/anchor' //锚点
 import 'tinymce/plugins/fullscreen' //全屏
 import tinymce from 'tinymce'
+
 const editorValue = defineModel({ required: true, type: String, default: '' })
 const props = defineProps({
   plugins: {
@@ -58,9 +59,11 @@ const props = defineProps({
 
 const initOptions = reactive({
   language: 'zh-Hans',
-  height: 500,
+  height: 500, // 引入autoresize时失效
   min_height: 500,
   branding: false,
+  elementPath: false,
+  // statusBar: false,
   skin: false,
   menubar: false,
   plugins: props.plugins,
@@ -97,6 +100,7 @@ const initOptions = reactive({
   // 选中文字的快捷提示
   quickbars_selection_toolbar: 'bold italic quicklink h2 h3 blockquote quickimage quicktable',
   // 编辑器高度自适应
+  resize: 'both',
   autoresize_bottom_margin: 20,
   // autoresize_overflow_padding: 16,
   ...getPasteOption(),
