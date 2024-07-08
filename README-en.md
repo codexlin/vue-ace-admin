@@ -63,28 +63,28 @@ Ace Admin is a free and open-source backend management system solution built usi
 2. Recommended node version 18+/20+
 3. Recommended pnpm version 8.x+
 
-```js
+```shell
 # Clone the project
 git clone https://github.com/xoxosos/vue-ace-admin.git
 ```
 
 
-```js
+```shell
 # Enter the project directory
 cd vue-ace-admin
 ```
 
-```js
+```shell
 # Install pnpm (skip if already installed)
 npm install pnpm -g
 ```
 
-```js
+```shell
 # Install dependencies
 pnpm i
 ```
 
-```js
+```shell
 # Start the service
 pnpm dev
 ```
@@ -98,17 +98,18 @@ pnpm lint
 
 ## ✔️ Preview
 
-```js
+```shell
 # Preview the production environment
 pnpm preview
 ```
 
 ## 📦️ Multi-environment Packaging
 
-```bash
+```shell
 # Build for pre-release environment
 pnpm build:test
-
+```
+```shell
 # Build for production environment
 pnpm build:prod
 ```

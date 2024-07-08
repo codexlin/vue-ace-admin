@@ -63,27 +63,27 @@ Ace Admin 是一个基于 Vue3.4、TypeScript5.x、Antd-Vue4.x、Pinia2.x 及 Vi
 2. node 版本推荐 18+/20+
 3. pnpm 版本推荐 8.x+
 
-```js
+```shell
 # 克隆项目
 git clone https://github.com/xoxosos/vue-ace-admin.git
 ```
 
-```js
+```shell
 # 进入项目目录
 cd vue-ace-admin
 ```
 
-```js
+```shell
 # 安装 pnpm (如已安装可跳过)
 npm install pnpm -g
 ```
 
-```js
+```shell
 # 安装依赖
 pnpm i
 ```
 
-```js
+```shell
 # 启动服务
 pnpm dev
 ```
@@ -97,17 +97,19 @@ pnpm lint
 
 ## ✔️ 预览
 
-```js
+```shell
 # 预览正式环境
 pnpm preview
 ```
 
 ## 📦️ 多环境打包
 
-```bash
+```shell
 # 构建预发布环境
 pnpm build:test
+```
 
+```shell
 # 构建正式环境
 pnpm build:prod
 ```
