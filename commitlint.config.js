@@ -46,23 +46,23 @@ export default {
     },
     // prettier-ignore
     types: [
-      { value: 'feat', name: '特性:     ✨  新增功能', emoji: ':sparkles:' },
-      { value: 'fix', name: '修复:     🐛  修复缺陷', emoji: ':bug:' },
-      { value: 'docs', name: '文档:     📝  文档变更', emoji: ':memo:' },
-      { value: 'style', name: '格式:     💄  代码格式（不影响功能，例如空格、分号等格式修正）', emoji: ':lipstick:' },
-      { value: 'refactor', name: '重构:     ♻️  代码重构（不包括 bug 修复、功能新增）', emoji: ':recycle:' },
-      { value: 'perf', name: '性能:     ⚡️  性能优化', emoji: ':zap:' },
-      { value: 'test', name: '测试:     ✅  添加疏漏测试或已有测试改动', emoji: ':white_check_mark:' },
+      { value: 'feat', name: 'feat:     ✨  新增功能 | A new feature', emoji: ':sparkles:' },
+      { value: 'fix', name: 'fix:     🐛  修复缺陷 | A bug fix', emoji: ':bug:' },
+      { value: 'docs', name: 'docs:     📝  文档更新 | Documentation only changes', emoji: ':memo:' },
+      { value: 'style', name: 'style:     💄  代码格式 | Changes that do not affect the meaning of the code', emoji: ':lipstick:' },
+      { value: 'refactor', name: 'refactor:     ♻️  代码重构 | A code change that neither fixes a bug nor adds a feature', emoji: ':recycle:' },
+      { value: 'perf', name: 'perf:     ⚡️  性能优化 | A code change that improves performance', emoji: ':zap:' },
+      { value: 'test', name: 'test:     ✅  测试相关 | Adding missing tests or correcting existing tests', emoji: ':white_check_mark:' },
       {
         value: 'build',
-        name: '构建:     📦️  构建流程、外部依赖变更（如升级 npm 包、修改 vite 配置等）',
+        name: 'build:     📦️  构建流程、依赖变更相关 | Changes that affect the build system or external dependencies',
         emoji: ':package:'
       },
-      { value: 'ci', name: '集成:     🎡  修改 CI 配置、脚本', emoji: ':ferris_wheel:' },
-      { value: 'revert', name: '回退:     ⏪️  回滚 commit', emoji: ':rewind:' },
-      { value: 'chore', name: '其他:     🔨  对构建过程或辅助工具和库的更改（不影响源文件、测试用例）', emoji: ':hammer:' }
+      { value: 'ci', name: 'ci:     🎡  持续集成 | Changes to our CI configuration files and scripts', emoji: ':ferris_wheel:' },
+      { value: 'revert', name: 'revert:     ⏪️  回退代码 | Revert to a commit', emoji: ':rewind:' },
+      { value: 'chore', name: 'chore:     🔨  其他修改 | Other changes that do not modify src or test files', emoji: ':hammer:' }
     ],
-    useEmoji: false,
+    useEmoji: true,
     emojiAlign: 'center',
     useAI: false,
     aiNumber: 1,
@@ -79,16 +79,17 @@ export default {
     breaklineNumber: 100,
     breaklineChar: '|',
     skipQuestions: [],
-    issuePrefixes: [{ value: 'closed', name: 'closed:   ISSUES has been processed' }],
+    issuePrefixes: [
+      // 如果使用 gitee 作为开发管理
+      { value: 'link', name: 'link:     链接 ISSUES 进行中' },
+      { value: 'closed', name: 'closed:   标记 ISSUES 已完成' }
+    ],
     customIssuePrefixAlign: 'top',
     emptyIssuePrefixAlias: 'skip',
     customIssuePrefixAlias: 'custom',
     allowCustomIssuePrefix: true,
     allowEmptyIssuePrefix: true,
     confirmColorize: true,
-    maxHeaderLength: Infinity,
-    maxSubjectLength: Infinity,
-    minSubjectLength: 0,
     scopeOverrides: undefined,
     defaultBody: '',
     defaultIssues: '',

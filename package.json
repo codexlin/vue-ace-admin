@@ -69,6 +69,7 @@
     "@vue/eslint-config-prettier": "^9.0.0",
     "@vue/eslint-config-typescript": "^13.0.0",
     "@vue/tsconfig": "^0.5.1",
+    "cz-git": "^1.9.3",
     "eslint": "^9.6.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import-x": "^0.5.3",
@@ -95,6 +96,11 @@
     "vite-plugin-svg-icons": "^2.0.1",
     "vite-plugin-vue-devtools": "^7.3.5",
     "vue-tsc": "^2.0.24"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
   },
   "lint-staged": {
     "src/**/*.{ts,vue,js,tsx,jsx,json}": [
