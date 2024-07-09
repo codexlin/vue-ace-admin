@@ -14,5 +14,6 @@ const tinymce = ref<InstanceType<typeof TinymceEditor> | null>(null)
     <a-input v-model:value="value" />
     <a-button @click="getContent">Get Content</a-button>
     <TinymceEditor ref="tinymce" v-model="value" />
+    <AiChat />
   </div>
 </template>

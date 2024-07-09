@@ -47,13 +47,9 @@ const errObj = new Map([
   [504, '网络超时'],
   [505, 'http版本不支持该请求']
 ])
+
 export const handleNetworkError = (errStatus: number) => {
-  let errMessage = ''
-  if (errStatus) {
-    errMessage = errObj.get(errStatus) ?? `其他连接错误 --${errStatus}`
-  } else {
-    errMessage = `无法连接到服务器！`
-  }
+  const errMessage = errStatus ? errObj.get(errStatus) || `其他连接错误 --${errStatus}` : `无法连接到服务器！`
   antMsg.error(errMessage)
 }
 
@@ -82,27 +78,27 @@ function handleError(response: AxiosResponse<IResponse<any>>, data: IResponse<an
  * 响应拦截 授权错误处理
  * @param errno
  */
-const handleAuthError = (errno: string | number) => {
-  const authErrMap: any = {
-    '10031': '登录失效，需要重新登录', // token 失效
-    '10032': '您太久没登录，请重新登录~', // token 过期
-    '10033': '账户未绑定角色，请联系管理员绑定角色',
-    '10034': '该用户未注册，请联系管理员注册用户',
-    '10035': 'code 无法获取对应第三方平台用户',
-    '10036': '该账户未关联员工，请联系管理员做关联',
-    '10037': '账号已无效',
-    '10038': '账号未找到'
-  }
+const authErrorMessages: Record<string | number, string> = {
+  '10031': '登录失效，需要重新登录', // token 失效
+  '10032': '您太久没登录，请重新登录~', // token 过期
+  '10033': '账户未绑定角色，请联系管理员绑定角色',
+  '10034': '该用户未注册，请联系管理员注册用户',
+  '10035': 'code 无法获取对应第三方平台用户',
+  '10036': '该账户未关联员工，请联系管理员做关联',
+  '10037': '账号已无效',
+  '10038': '账号未找到'
+}
 
-  if (Object.hasOwn(authErrMap, errno)) {
-    antMsg.error(authErrMap[errno])
-    // 授权错误，登出账户
+const handleAuthError = (errno: string | number) => {
+  const errMessage = authErrorMessages[errno]
+  if (errMessage) {
+    antMsg.error(errMessage)
     useUserStore().logout()
     return false
   }
-
   return true
 }
+
 /**
  * 响应拦截 普通业务错误处理
  * @param response
@@ -113,11 +109,9 @@ const handleGeneralError = (response: AxiosResponse<IResponse<any>>) => {
     return !!data
   }
   if (data.code !== '0') {
-    const { code, msg } = data
-    console.log('handleGeneralError', code)
+    const { msg } = data
     antMsg.error(msg)
     return false
   }
-  console.log('handleGeneralError->结束')
   return true
 }

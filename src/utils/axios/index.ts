@@ -13,6 +13,11 @@ export interface IResponse<T> {
   code: string
   msg: string
 }
+export interface IStreamResponse {
+  data: ReadableStream<Uint8Array> | null
+  code: string
+  msg: string
+}
 // 可自定义实例
 export class Request {
   private instance: AxiosInstance
@@ -83,7 +88,10 @@ export class Request {
       }
     )
   }
-
+  // 取消请求
+  public cancelTokenSource() {
+    return axios.CancelToken.source()
+  }
   public get<T = any>(url: string, config?: AxiosRequestConfig): Promise<IResponse<T>> {
     return this.instance.get(url, config)
   }
@@ -98,6 +106,25 @@ export class Request {
 
   public delete<T = any>(url: string, config?: AxiosRequestConfig): Promise<IResponse<T>> {
     return this.instance.delete(url, config)
+  }
+  // 新增方法：处理文件流
+  public async getFileStream(url: string, config?: AxiosRequestConfig): Promise<Blob> {
+    const response = await this.instance.get(url, { ...config, responseType: 'blob' })
+    return response.data
+  }
+
+  // 新增方法：处理文本流
+  public async getTextStream(url: string, onData: (chunk: string) => void, config?: AxiosRequestConfig): Promise<void> {
+    const response = await this.instance.get('/kimi/chat', { ...config, responseType: 'stream' })
+    const reader = response.data.getReader()
+    const decoder = new TextDecoder('utf-8')
+
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+      const chunk = decoder.decode(value, { stream: true })
+      onData(chunk)
+    }
   }
 }
 
