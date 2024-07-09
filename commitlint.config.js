@@ -80,6 +80,9 @@ export default {
     breaklineChar: '|',
     skipQuestions: [],
     issuePrefixes: [
+      // @see: https://gitee.com/help/articles/4141#article-header2
+      { value: 'wip', name: 'wip:      将任务状态更改为进行中' },
+      { value: 'finish', name: 'finish:   将任务状态更改为待完成' },
       // 如果使用 gitee 作为开发管理
       { value: 'link', name: 'link:     链接 ISSUES 进行中' },
       { value: 'closed', name: 'closed:   标记 ISSUES 已完成' }

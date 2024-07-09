@@ -4,9 +4,15 @@ import zhCN from 'ant-design-vue/es/locale/zh_CN'
 import dayjs from 'dayjs'
 import { useAppStore } from '@/stores/modules/app'
 import 'dayjs/locale/zh-cn'
+
+const antLang: Record<string, any> = {
+  enUS,
+  zhCN
+}
 const app = useAppStore()
-const locale = computed(() => (app.getLanguage === 'zh-cn' ? zhCN : enUS))
+const locale = computed(() => antLang[app.getLanguage as string])
 const direction = computed(() => app.getDirection)
+const theme = computed(() => app.themeConfig)
 void (() => {
   dayjs.locale('zh-cn')
   console.log(
@@ -18,7 +24,7 @@ void (() => {
 </script>
 
 <template>
-  <a-config-provider :direction="direction" :theme="app.themeConfig" :locale="locale">
+  <a-config-provider :direction :theme :locale>
     <RouterView />
   </a-config-provider>
 </template>

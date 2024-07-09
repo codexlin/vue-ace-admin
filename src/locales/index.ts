@@ -1,17 +1,10 @@
 import { createI18n } from 'vue-i18n'
 import type { App } from 'vue'
-import mEnCnLocale from './lang/en'
-import mZhCnLocale from './lang/zh-cn'
+import enUS from './lang/enUS'
+import zhCN from './lang/zhCN'
 import { useAppStore } from '@/stores/modules/app'
 
-const messages = {
-  en: {
-    ...mEnCnLocale
-  },
-  'zh-cn': {
-    ...mZhCnLocale
-  }
-}
+const messages = { enUS, zhCN }
 
 export let i18n: any
 
