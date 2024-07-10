@@ -26,7 +26,7 @@ export class Request {
     // 根据实际情况修改
     baseURL: import.meta.env.VITE_APP_BASE_API,
     // 默认超时时间
-    timeout: 10000
+    timeout: 60000
   }
 
   constructor(config?: AxiosRequestConfig) {
@@ -61,6 +61,11 @@ export class Request {
         // 只处理 2xx 状态码
         if (response.status >= 200 && response.status < 300) {
           try {
+            // if (response.config.responseType === 'stream') {
+            //   const reader = response.data.getReader()
+            //   const decoder = new TextDecoder('utf-8')
+            //   console.log(decoder)
+            // }
             return handleResponseData(response)
           } catch (error) {
             return error instanceof Error
@@ -114,11 +119,16 @@ export class Request {
   }
 
   // 新增方法：处理文本流
-  public async getTextStream(url: string, onData: (chunk: string) => void, config?: AxiosRequestConfig): Promise<void> {
-    const response = await this.instance.get('/kimi/chat', { ...config, responseType: 'stream' })
+  public async getTextStream(
+    url: string,
+    data: object,
+    onData: (chunk: string) => void,
+    config?: AxiosRequestConfig
+  ): Promise<void> {
+    const response = await this.instance.post(url, data, { ...config, responseType: 'stream' })
     const reader = response.data.getReader()
     const decoder = new TextDecoder('utf-8')
-
+    console.log(decoder)
     while (true) {
       const { done, value } = await reader.read()
       if (done) break

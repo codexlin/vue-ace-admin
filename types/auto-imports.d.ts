@@ -70,6 +70,7 @@ declare global {
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useDebounces: typeof import('../src/hooks/useDebouncedRef')['useDebounces']
+  const useFetchWithStream: typeof import('../src/hooks/useFetchWithStream')['useFetchWithStream']
   const useIndexedDB: typeof import('../src/hooks/useIndexedDB')['useIndexedDB']
   const useLink: typeof import('vue-router')['useLink']
   const useList: typeof import('../src/hooks/useList')['default']

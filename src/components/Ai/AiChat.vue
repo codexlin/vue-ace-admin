@@ -42,22 +42,61 @@
 
 <script setup lang="ts">
 import { BulbOutlined, CloseOutlined } from '@ant-design/icons-vue'
-// import hljs from 'highlight.js'
-// import { marked } from 'marked'
-import axios from 'axios'
-import { Request } from '@/utils/axios'
+import hljs from 'highlight.js'
+import { marked } from 'marked'
 
-// function handleResults(text: string) {
-//   const markdownLinkPattern = /\[([^\]]+)\]\((https?:\/\/[^\s]+)\)/g
-//
-//   // 将 Markdown 转换为 HTML
-//   return marked.parse(text.replace(markdownLinkPattern, '<a  style="color:blue" href="$2" target="_blank">$1</a>'), {
-//     highlight: function (code, lang) {
-//       const language = hljs.getLanguage(lang) ? lang : 'plaintext'
-//       return hljs.highlight(code, { language }).value
-//     }
-//   })
-// }
+// import { Request } from '@/utils/axios'
+
+async function useFetch({ data, cb, url, signal = null }) {
+  const body = JSON.stringify(data)
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body,
+    signal // 将信号传递给 fetch 用于cancel请求
+  })
+
+  // not 200
+  if (!response.ok) {
+    throw new Error('网络错误or其他错误' + response.statusText)
+  }
+
+  // 处理流式响应
+  const reader = response.body.getReader()
+  const decoder = new TextDecoder('utf-8')
+  let partialChunk = ''
+  while (true) {
+    const { done, value } = await reader.read()
+    if (done) break
+    partialChunk += decoder.decode(value, { stream: true })
+    let lines = partialChunk.split('\n')
+    partialChunk = lines.pop() // 保留最后一个未完整的行，继续拼接
+    lines = lines.filter(Boolean).map((line) => line.replace('data:', ''))
+    console.log('lines', lines)
+    for (const line of lines) {
+      try {
+        // 根据你的需求处理不同类型的数据
+        // const res = JSON.parse(line)
+        cb(line)
+      } catch (error) {
+        console.error('解析错误:', error)
+      }
+    }
+  }
+}
+function handleResults(text: string) {
+  const markdownLinkPattern = /\[([^\]]+)\]\((https?:\/\/[^\s]+)\)/g
+
+  // 将 Markdown 转换为 HTML
+  return marked.parse(text.replace(markdownLinkPattern, '<a  style="color:blue" href="$2" target="_blank">$1</a>'), {
+    highlight: function (code, lang) {
+      const language = hljs.getLanguage(lang) ? lang : 'plaintext'
+      return hljs.highlight(code, { language }).value
+    }
+  })
+}
 
 interface Message {
   type: 'ai' | 'user'
@@ -99,7 +138,7 @@ const sendMessage = async () => {
     if (chatBody) {
       messageList.value.push({ type: 'user', content: inputMessage.value })
       chatBody.scrollTop = chatBody.scrollHeight
-      const urlPix = '/system/tinymce/callAiStreamKnowledgeChat'
+      const urlPix = '/api/ai/chat'
       messageList.value.push({ type: 'ai', content: '' })
       const cb = (text: string) => {
         messageList.value.at(-1)!.content += text
@@ -110,43 +149,14 @@ const sendMessage = async () => {
       const onData = (data: string) => {
         messageList.value.at(-1)!.content += data
         chatBody.scrollTop = chatBody.scrollHeight
+        console.log(data)
       }
-      await new Request().getTextStream(urlPix, onData)
-      async function callOpenAI(apiKey: string, prompt: string) {
-        const response = await axios({
-          url: 'https://api.openai.com/v1/engines/davinci-codex/completions',
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-            'Content-Type': 'application/json'
-          },
-          data: {
-            prompt: prompt,
-            max_tokens: 100,
-            stream: true // 启用流式传输
-          },
-          responseType: 'text'
-        })
-
-        const reader = response.data.getReader()
-        const decoder = new TextDecoder('utf-8')
-        let result = ''
-
-        while (true) {
-          const { done, value } = await reader.read()
-          if (done) break
-          result += decoder.decode(value, { stream: true })
-          console.log('Received chunk:', result)
-        }
-
-        console.log('Stream ended')
+      const data = {
+        question: command
       }
-
-      const apiKey = 'your-openai-api-key'
-      const prompt = 'Translate the following English text to French: "Hello, how are you?"'
-
-      await callOpenAI(apiKey, prompt)
-      // messageList.value.at(-1)!.content = handleResults(messageList.value.at(-1)!.content)
+      // await new Request().getTextStream('/ai/chat', data, onData)
+      await useFetch({ url: urlPix, data, cb: onData })
+      messageList.value.at(-1)!.content = handleResults(messageList.value.at(-1)!.content)
       await nextTick()
       chatBody.scrollTop = chatBody.scrollHeight
     }
