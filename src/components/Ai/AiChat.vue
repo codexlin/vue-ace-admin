@@ -1,13 +1,22 @@
 <template>
   <a-card>
     <div class="chat-container">
-      <!-- <div class="chat-header"></div> -->
+      <div class="chat-header">
+        <img src="../../assets/images/chatgpt.svg" alt="" />
+      </div>
       <div class="chat-body">
         <div class="chat-message">
           <template v-for="(message, index) in messageList" :key="index">
+            <a-space v-if="message.type === 'ai'">
+              <img height="32" width="32" src="../../assets/images/chatgpt.svg" alt="" />
+              <b>Ace Lin</b>
+              <a-typography-text type="secondary">{{ dayjs().format('YYYY/MM/DD HH:mm:ss') }}</a-typography-text>
+            </a-space>
             <div :class="message.type === 'user' ? 'chat-user-content' : 'chat-ai-content'">
-              <div v-if="message.type === 'ai' && message.content === ''">loading...</div>
-              <div v-else v-html="message.content" />
+              <div v-if="message.type === 'ai' && message.content === ''">
+                <a-spin />
+              </div>
+              <AssistantBlock v-else :text="message.content" />
             </div>
           </template>
         </div>
@@ -42,8 +51,8 @@
 
 <script setup lang="ts">
 import { BulbOutlined, CloseOutlined } from '@ant-design/icons-vue'
-import hljs from 'highlight.js'
-import { marked } from 'marked'
+import dayjs from 'dayjs'
+import AssistantBlock from '@/components/Ai/components/AssistantBlock.vue'
 
 // import { Request } from '@/utils/axios'
 
@@ -81,21 +90,10 @@ async function useFetch({ data, cb, url, signal = null }) {
         // const res = JSON.parse(line)
         cb(line)
       } catch (error) {
-        console.error('解析错误:', error)
+        throw new Error('发生了一点错误请稍后重试')
       }
     }
   }
-}
-function handleResults(text: string) {
-  const markdownLinkPattern = /\[([^\]]+)\]\((https?:\/\/[^\s]+)\)/g
-
-  // 将 Markdown 转换为 HTML
-  return marked.parse(text.replace(markdownLinkPattern, '<a  style="color:blue" href="$2" target="_blank">$1</a>'), {
-    highlight: function (code, lang) {
-      const language = hljs.getLanguage(lang) ? lang : 'plaintext'
-      return hljs.highlight(code, { language }).value
-    }
-  })
 }
 
 interface Message {
@@ -110,7 +108,7 @@ const messageList = ref<Message[]>([
   }
 ])
 
-const tips = ['vue3中的computed和watch的区别是什么？', '帮我写一篇100字的日记']
+const tips = ['vue3中的computed和watch的区别是什么？', '帮我写一篇100字的日记', 'Java如何输出Hello world']
 const inputMessage = ref<string>('')
 const tipFlag = ref<boolean>(true)
 const inputRef = ref<HTMLElement | null>(null)
@@ -156,7 +154,6 @@ const sendMessage = async () => {
       }
       // await new Request().getTextStream('/ai/chat', data, onData)
       await useFetch({ url: urlPix, data, cb: onData })
-      messageList.value.at(-1)!.content = handleResults(messageList.value.at(-1)!.content)
       await nextTick()
       chatBody.scrollTop = chatBody.scrollHeight
     }

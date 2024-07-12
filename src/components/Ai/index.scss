@@ -10,7 +10,6 @@
   align-items: center;
   justify-content: center;
   height: 50px;
-  background-color: #f5f5f5;
 }
 
 .chat-body {
@@ -80,7 +79,6 @@
   //   box-shadow:  20px 20px 60px #bebebe,
   //              -20px -20px 60px #ffffff;
 
-  backdrop-filter: saturate(180%) blur(20px);
   backdrop-filter: saturate(180%) blur(20px);
   border-radius: 8px;
   box-shadow: rgb(255 255 255 / 10%);
