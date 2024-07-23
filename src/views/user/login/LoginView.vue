@@ -300,6 +300,11 @@ onMounted(() => {
 
       h2 {
         text-align: center;
+        text-shadow: 0 1px 2px 0 rgb(135 76 255 / 30%);
+        letter-spacing: 0.02em;
+        background: linear-gradient(98deg, #741bfe 0%, #f224fd 54%, #fc4b34 100%);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
 
       :deep(.ant-btn-primary) {

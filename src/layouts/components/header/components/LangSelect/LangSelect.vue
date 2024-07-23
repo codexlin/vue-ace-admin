@@ -1,8 +1,3 @@
-<!--
- * @Author: LinRenJie xoxosos666@gmail.com
- * @Date: 2023-10-14 21:29:57
- * @Description:
--->
 <script lang="ts" setup>
 import { TranslationOutlined } from '@ant-design/icons-vue'
 import useLocalI18n from '@/hooks/useLocalI18n'
