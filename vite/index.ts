@@ -3,4 +3,13 @@ import loadViteResolve from './resolve'
 import loadViteServer from './server'
 import loadViteBuild from './build'
 
-export default { loadPlugins, loadViteResolve, loadViteServer, loadViteBuild }
+const loadInitLog = () => {
+  const colors = {
+    reset: '\x1b[0m',
+    fg: '\x1b[35m',
+    bg: '\x1b[43m'
+  }
+  const LINK = 'https://github.com/xoxosos/vue-ace-admin#readme'
+  console.log(`${colors.fg} 😊如果您喜欢Ace Admin，不妨点个⭐吧:🔗${colors.bg}${LINK}${colors.reset}`)
+}
+export default { loadPlugins, loadViteResolve, loadViteServer, loadViteBuild, loadInitLog }

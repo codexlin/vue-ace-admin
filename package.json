@@ -16,10 +16,9 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
+    "build": "vite build",
     "build:prod": "vite build  --mode production",
     "build:test": "vite build  --mode test",
-    "build-only": "vite build",
     "preview": "vite preview",
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
     "lint:eslint": "eslint --fix ./src",
