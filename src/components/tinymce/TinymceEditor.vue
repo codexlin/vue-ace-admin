@@ -1,17 +1,22 @@
 <template>
   <div style="width: 100%">
-    <editor v-model="editorValue" :init="initOptions" />
+    <editor v-if="!switching" :id="uuid" v-model="editorValue" :init="initOptions" />
   </div>
 </template>
 
 <script setup lang="ts">
 import Editor from '@tinymce/tinymce-vue'
 import 'tinymce/tinymce'
-import 'tinymce/models/dom'
-import 'tinymce/skins/ui/oxide/skin.css'
+import 'tinymce/models/dom/model'
 import 'tinymce/themes/silver'
 import 'tinymce/icons/default'
+import 'tinymce/skins/ui/oxide/skin'
+import 'tinymce/skins/ui/oxide-dark/skin'
+import 'tinymce/skins/ui/oxide-dark/content'
+import 'tinymce/skins/content/dark/content'
+// 国际化
 import 'tinymce-i18n/langs6/zh-Hans.js'
+// 引入所需的插件
 import 'tinymce/plugins/code'
 import 'tinymce/plugins/image'
 import 'tinymce/plugins/table'
@@ -38,7 +43,21 @@ import 'tinymce/plugins/accordion' // 可折叠数据手风琴模式
 import 'tinymce/plugins/anchor' //锚点
 import 'tinymce/plugins/fullscreen' //全屏
 import tinymce from 'tinymce'
-
+import { uid } from 'radash'
+import { useAppStore } from '@/stores/modules/app'
+const appStore = useAppStore()
+const uuid = uid(7)
+const switching = ref(false)
+const isDark = computed(() => appStore.isDarkMode)
+watch(isDark, () => {
+  const instance = tinymce.get(uuid)
+  console.log('切换主题', instance)
+  instance?.destroy()
+  switching.value = true
+  nextTick(() => {
+    switching.value = false
+  })
+})
 const editorValue = defineModel({ required: true, type: String, default: '' })
 const props = defineProps({
   plugins: {
@@ -57,18 +76,18 @@ const props = defineProps({
   }
 })
 
-const initOptions = reactive({
+const initOptions = computed(() => ({
   language: 'zh-Hans',
-  height: 500, // 引入autoresize时失效
+  height: 500, // 引入autoresize该属性时失效
   min_height: 500,
   branding: false,
   elementPath: false,
   // statusBar: false,
-  skin: false,
+  skin: isDark.value ? 'oxide-dark' : 'oxide',
+  content_css: isDark.value ? 'dark' : 'default',
   menubar: false,
   plugins: props.plugins,
   toolbar: props.toolbar,
-  // content_css: '/tinymce/skins/content/default/content.css',   //以css文件方式自定义可编辑区域的css样式，css文件需自己创建并引入
   // 工具栏模式 floating / sliding / scrolling / wrap
   toolbar_mode: 'sliding',
   // 取消图片资源路径转换
@@ -105,7 +124,7 @@ const initOptions = reactive({
   // autoresize_overflow_padding: 16,
   ...getPasteOption(),
   ...getImageOption()
-})
+}))
 
 onMounted(() => {
   console.log('初始化tinymce')

@@ -1,10 +1,4 @@
-/*
- * @Author: LinRenJie xoxosos666@gmail.com
- * @Date: 2023-10-14 21:29:57
- * @Description:
- */
 import { theme } from 'ant-design-vue'
-import { cloneDeep } from 'lodash-es'
 import type { MenuTheme } from 'ant-design-vue'
 import allConfig from '@/config/system/index'
 
@@ -14,7 +8,7 @@ import allConfig from '@/config/system/index'
 export const useAppStore = defineStore('app', () => {
   const { darkAlgorithm, compactAlgorithm, defaultAlgorithm } = theme
   const appConfig = ref({
-    ...cloneDeep(allConfig)
+    ...structuredClone(allConfig)
   })
   const collapsed = ref<boolean>(false)
 
@@ -44,7 +38,7 @@ export const useAppStore = defineStore('app', () => {
   const getWaterMarkContent = computed<string | string[]>(() =>
     appConfig.value.watermark.isShow ? appConfig.value.watermark.content : ''
   )
-
+  const isDarkMode = computed(() => darkMode.value === 'dark')
   const setThemeName = (value: string) => {
     appConfig.value.token.colorPrimary = value
   }
@@ -70,6 +64,7 @@ export const useAppStore = defineStore('app', () => {
   }
 
   return {
+    isDarkMode,
     getWaterMarkContent,
     getLayout,
     getDirection,

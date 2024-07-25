@@ -54,6 +54,8 @@ declare module 'vue' {
     BasicButton: typeof import('./../src/components/button/components/BasicButton.vue')['default']
     CommonTable: typeof import('./../src/components/table/CommonTable.vue')['default']
     CustomButton: typeof import('./../src/components/button/CustomButton.vue')['default']
+    FormModal: typeof import('./../src/components/form/FormModal.tsx')['default']
+    Motion: typeof import('./../src/components/functional/Motion.tsx')['default']
     OperationButtons: typeof import('./../src/components/button/OperationButtons.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
