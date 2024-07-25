@@ -116,7 +116,7 @@ pnpm build:prod
 
 ## ✒️ Git 提交规范参考
 
-Git 提交规范，包含了常见的提交类型，方便开发者追踪和管理变更。
+Git 提交规范，包含了常见的提交类型，方便开发者追踪和管理变更。内置cz-git, 可直接在终端使用git cz进行交互式提交。
 
 - 参考 [vue](https://github.com/vuejs/vue/blob/dev/.github/COMMIT_CONVENTION.md)
   规范 ([Angular](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular))

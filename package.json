@@ -72,6 +72,7 @@
     "@vue/eslint-config-prettier": "^9.0.0",
     "@vue/eslint-config-typescript": "^13.0.0",
     "@vue/tsconfig": "^0.5.1",
+    "commitizen": "^4.3.0",
     "cz-git": "^1.9.3",
     "eslint": "^9.6.0",
     "eslint-config-prettier": "^9.1.0",
