@@ -57,42 +57,55 @@ import AssistantBlock from '@/components/Ai/components/AssistantBlock.vue'
 // import { Request } from '@/utils/axios'
 
 async function useFetch({ data, cb, url, signal = null }) {
-  const body = JSON.stringify(data)
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body,
-    signal // 将信号传递给 fetch 用于cancel请求
-  })
+  try {
+    const body = JSON.stringify(data)
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body,
+      signal // 将信号传递给 fetch 用于cancel请求
+    })
 
-  // not 200
-  if (!response.ok) {
-    throw new Error('网络错误or其他错误' + response.statusText)
-  }
+    // not 200
+    if (!response.ok) {
+      throw new Error('网络错误or其他错误' + response.statusText)
+    }
 
-  // 处理流式响应
-  const reader = response.body.getReader()
-  const decoder = new TextDecoder('utf-8')
-  let partialChunk = ''
-  while (true) {
-    const { done, value } = await reader.read()
-    if (done) break
-    partialChunk += decoder.decode(value, { stream: true })
-    let lines = partialChunk.split('\n')
-    partialChunk = lines.pop() // 保留最后一个未完整的行，继续拼接
-    lines = lines.filter(Boolean).map((line) => line.replace('data:', ''))
-    console.log('lines', lines)
-    for (const line of lines) {
-      try {
-        // 根据你的需求处理不同类型的数据
-        // const res = JSON.parse(line)
-        cb(line)
-      } catch (error) {
-        throw new Error('发生了一点错误请稍后重试')
+    // 处理流式响应
+    const reader = response.body.getReader()
+    const decoder = new TextDecoder('utf-8')
+    let buffer = ''
+
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+
+      buffer += decoder.decode(value, { stream: true })
+
+      let lines = buffer.split('\n')
+      buffer = lines.pop() ?? '' // 保留未完成的行
+
+      for (let line of lines) {
+        if (line.startsWith('data: ')) {
+          line = line.replace('data:', '').trim()
+          try {
+            cb(line)
+          } catch (error) {
+            console.error('处理数据时出错:', error)
+          }
+        }
       }
     }
+
+    // 处理剩余的缓冲区
+    if (buffer.startsWith('data: ')) {
+      buffer = buffer.replace('data:', '').trim()
+      cb(buffer)
+    }
+  } catch (error) {
+    console.error('请求或处理流时发生错误:', error)
   }
 }
 
@@ -139,21 +152,14 @@ const sendMessage = async () => {
       const urlPix = '/api/ai/chat'
       messageList.value.push({ type: 'ai', content: '' })
       const cb = (text: string) => {
-        messageList.value.at(-1)!.content += text
+        messageList.value.at(-1)!.content += text.replace(/^data: /gm, '')
         chatBody.scrollTop = chatBody.scrollHeight
       }
       inputMessage.value = ''
-      // todo 这里应该是异步请求
-      const onData = (data: string) => {
-        messageList.value.at(-1)!.content += data
-        chatBody.scrollTop = chatBody.scrollHeight
-        console.log(data)
-      }
       const data = {
         question: command
       }
-      // await new Request().getTextStream('/ai/chat', data, onData)
-      await useFetch({ url: urlPix, data, cb: onData })
+      await useFetch({ url: urlPix, data, cb })
       await nextTick()
       chatBody.scrollTop = chatBody.scrollHeight
     }
