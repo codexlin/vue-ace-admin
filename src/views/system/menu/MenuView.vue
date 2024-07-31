@@ -27,9 +27,7 @@ const handleClick = (record?: any, btnType?: State['type']) => {
     const isAdd = btnType === 'add'
     const isDelete = btnType === 'delete'
     title.value = isAdd ? tt('common.add') : tt('common.edit')
-    if (record && record.id) {
-      state.id = record.id
-    }
+    state.id = record?.id ? record.id : null
     // 可加modal确认
     if (isDelete) {
       const onOk = async () => {
@@ -80,9 +78,24 @@ onMounted(async () => await loadData())
 </script>
 <template>
   <div>
-    <a-card>
-      <a-table :columns :dataSource :loading :scroll="{ x: 2000 }" class="scroll-table" row-key="id" />
-    </a-card>
+    <CommonTable
+      isZebra="even"
+      useCardWrapper
+      :columns
+      :dataSource
+      :loading
+      :scroll="{ x: 2000 }"
+      class="scroll-table"
+      row-key="id"
+    >
+      <template #toolbar>
+        <a-space>
+          <a-button type="primary" @click="handleClick(null, 'add')">
+            {{ tt('common.add') }}
+          </a-button>
+        </a-space>
+      </template>
+    </CommonTable>
     <a-modal v-model:open="open" :title destroy-on-close @ok="handleOk">
       <DetailView ref="formRef" v-bind="state" />
     </a-modal>

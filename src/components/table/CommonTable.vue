@@ -1,8 +1,9 @@
 <script lang="tsx" setup>
 import type { IData, IProps } from './type'
-
+defineOptions({
+  inheritAttrs: false
+})
 const props = withDefaults(defineProps<IProps>(), {
-  showHeader: true,
   isZebra: 'none',
   useCardWrapper: true
 })
@@ -23,7 +24,7 @@ const initWrapper = () => {
       <div class="table-toolbar">
         <slot name="toolbar" />
       </div>
-      <a-table :row-class-name="setRowClassName" class="ant-table-striped" v-bind="props">
+      <a-table class="ant-table-striped" v-bind="{ ...$attrs, ...props }" :row-class-name="setRowClassName">
         <template v-for="(slot, index) of slotNames" :key="index" #[slot]="data:IData">
           <slot :name="slot" v-bind="data" />
         </template>

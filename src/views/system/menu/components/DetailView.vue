@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { omit } from 'lodash-es'
+import { omit } from 'radash'
 import { getDetail } from '../../api'
 import useLocalI18n from '@/hooks/useLocalI18n'
 import { buildTreeDataSelect } from '@/utils/common/treeUtil'
@@ -24,6 +24,7 @@ const props = withDefaults(defineProps<State>(), {
 })
 const { tt } = useLocalI18n()
 const formItems = ref<IItem[]>([])
+// 初始化ui组件相关属性
 const initUi = (item: IItem) => {
   if (!formState.value[item.name] && item.defaultValue) {
     formState.value[item.name] = item.defaultValue
@@ -34,14 +35,27 @@ const change = () => {
   console.log('formState:', formState.value)
 }
 const btnFormItems = ['name', 'title', 'parentId', 'menuType', 'hidden']
-const constFormItems = ref<IItem[]>([])
+const detailFormItems = ref<IItem[]>([])
 const initFormItems = async () => {
   const treeData = await buildTreeDataSelect()
-  constFormItems.value = [
+  detailFormItems.value = [
+    {
+      ui: 'a-radio-group',
+      name: 'menuType',
+      label: '菜单类型',
+      disabled: false,
+      defaultValue: 'M',
+      options: [
+        { value: 'M', label: '目录' },
+        { value: 'C', label: '菜单' },
+        { value: 'B', label: '按钮' }
+      ]
+    },
     {
       ui: 'a-tree-select',
       name: 'parentId',
       label: '上级菜单',
+      dropdownStyle: { maxHeight: '400px', overflow: 'auto' },
       allowClear: true,
       placeholder: '请选择上级菜单,不选默认为根节点',
       treeData
@@ -59,42 +73,31 @@ const initFormItems = async () => {
       name: 'path',
       label: '菜单路径',
       disabled: false,
-      placeholder: '比如:/system'
+      placeholder: '比如：/system'
     },
     {
       ui: 'a-input',
       name: 'title',
       label: '菜单名称',
       disabled: false,
-      placeholder: '比如:router.xxx(对应国际化内容)'
+      placeholder: '比如：router.xxx(对应国际化内容)'
     },
     {
       ui: 'a-input',
       name: 'name',
       label: '路由名称',
       disabled: false,
-      placeholder: '比如:Dashboard'
+      placeholder: '比如：Dashboard'
     },
     {
       ui: 'a-input',
       name: 'component',
       label: '组件路径',
       disabled: false,
-      placeholder: '比如:/system/menu/index'
+      placeholder: '比如：/system/menu/index'
     },
     { ui: 'a-input-number', name: 'orderNum', label: '排序', disabled: false, defaultValue: 0 },
-    {
-      ui: 'a-radio-group',
-      name: 'menuType',
-      label: '菜单类型',
-      disabled: false,
-      defaultValue: 'M',
-      options: [
-        { value: 'M', label: '目录' },
-        { value: 'C', label: '菜单' },
-        { value: 'B', label: '按钮' }
-      ]
-    },
+
     {
       ui: 'a-radio-group',
       name: 'isFrame',
@@ -129,10 +132,9 @@ const initFormItems = async () => {
       ]
     }
   ]
-  console.log(constFormItems.value)
 
   if (props.type === 'add' && props.id) {
-    constFormItems.value[0].defaultValue = props.id
+    detailFormItems.value[1].defaultValue = props.id
   }
   if (['edit', 'detail'].includes(props.type)) {
     if (props.id) {
@@ -140,7 +142,7 @@ const initFormItems = async () => {
       formState.value = data || {}
     }
   }
-  formItems.value = [...constFormItems.value]
+  formItems.value = [...detailFormItems.value]
   console.log(formState.value)
 }
 onMounted(() => {
@@ -171,8 +173,8 @@ watch(
         placeholder: '比如:sys:user:add'
       })
     } else {
-      formItems.value = [...constFormItems.value]
-      console.log(constFormItems.value)
+      formItems.value = [...detailFormItems.value]
+      console.log(detailFormItems.value)
     }
   }
 )
