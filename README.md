@@ -139,7 +139,7 @@ Git 提交规范，包含了常见的提交类型，方便开发者追踪和管�
 ## 🖥️ 项目预览图
 
 <div>
-   <img src="https://pic.imgdb.cn/item/654b506fc458853aef84d579.jpg" alt="blob">
+   <img src="https://cdn.jsdelivr.net/gh/xoxosos/jsDelivr/assets/test.gif" alt="blob">
 </div>
 
 ## 🌏 浏览器支持
@@ -154,6 +154,6 @@ Git 提交规范，包含了常见的提交类型，方便开发者追踪和管�
 
 ## 📄 License
 
-本项目采用 [MIT](./LICENSE) 许可协议，版权归 [AceLin](https://github.com/xoxosos)所有。
+本项目采用 [MIT](./LICENSE) 许可协议，版权归 [AceLin](https://github.com/look4u-ovo)所有。
 
-Copyright (c) 2023-Present [AceLin](https://github.com/xoxosos)
+Copyright (c) 2023-Present [AceLin](https://github.com/look4u-ovo)
