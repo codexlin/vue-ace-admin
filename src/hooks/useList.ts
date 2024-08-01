@@ -1,5 +1,5 @@
 import { message as AntMessage } from 'ant-design-vue'
-import type { Ref } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 
 export interface MessageType {
   GET_DATA_IF_FAILED?: string
@@ -38,17 +38,17 @@ export function errorMessage(message: string) {
 export function infoMessage(message: string) {
   AntMessage.info(message)
 }
+type ListRequestFnType = ((params?: any) => void | Promise<any>) | ComputedRef<(params?: any) => void | Promise<any>>
 // hooks参数
 interface Props {
-  listRequestFn: () => void | Promise<any>
+  listRequestFn: ListRequestFnType
   filterOption?: Ref<object>
-  exportRequestFn?: () => void | Promise<void>
   options?: OptionsType
 }
+
 export default function useList<ItemType extends object, FilterOption extends object>({
   listRequestFn,
   filterOption,
-  exportRequestFn,
   options
 }: Props) {
   // 加载态
@@ -67,7 +67,7 @@ export default function useList<ItemType extends object, FilterOption extends ob
     // 设置加载中
     loading.value = true
     try {
-      const r = await listRequestFn(params)
+      const r = await (isRef(listRequestFn) ? listRequestFn.value(params) : listRequestFn(params))
       dataSource.value = r?.data || r?.data?.list || r || []
       total.value = r?.data?.total || 0
       options?.message?.GET_DATA_IF_SUCCEED && message(options.message.GET_DATA_IF_SUCCEED)
@@ -95,30 +95,7 @@ export default function useList<ItemType extends object, FilterOption extends ob
     })
     loadData()
   }
-  // 传入的 exportRequestFn 函数接收的参数数量和类型是否正常对应上 请根据实际情况进行调整
-  const exportFile = async () => {
-    if (!exportRequestFn) {
-      throw new Error('当前没有提供exportRequestFn函数')
-    }
-    if (typeof exportRequestFn !== 'function') {
-      throw new Error('exportRequestFn必须是一个函数')
-    }
-    try {
-      const {
-        data: { link }
-      } = await exportRequestFn(filterOption?.value)
-      window.open(link)
-      // 显示信息
-      options?.message?.EXPORT_DATA_IF_SUCCEED && message(options.message.EXPORT_DATA_IF_SUCCEED)
-      // 执行成功钩子
-      // options?.exportSuccess?.()
-    } catch (error) {
-      // 显示信息
-      options?.message?.EXPORT_DATA_IF_FAILED && errorMessage(options.message.EXPORT_DATA_IF_FAILED)
-      // 执行失败钩子
-      // options?.exportError?.()
-    }
-  }
+
   return {
     dataSource,
     loading,
