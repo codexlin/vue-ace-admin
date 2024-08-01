@@ -139,7 +139,7 @@ Git 提交规范，包含了常见的提交类型，方便开发者追踪和管�
 ## 🖥️ 项目预览图
 
 <div>
-   <img src="https://cdn.jsdelivr.net/gh/xoxosos/jsDelivr/assets/test.gif" alt="blob">
+  ![预览](https://cdn.jsdelivr.net/gh/xoxosos/jsDelivr/assets/test.gif)
 </div>
 
 ## 🌏 浏览器支持
