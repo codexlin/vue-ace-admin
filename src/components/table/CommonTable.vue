@@ -1,4 +1,5 @@
 <script lang="tsx" setup>
+import { Table } from 'ant-design-vue'
 import type { IData, IProps } from './type'
 defineOptions({
   inheritAttrs: false
@@ -7,14 +8,16 @@ const props = withDefaults(defineProps<IProps>(), {
   isZebra: 'none',
   useCardWrapper: true
 })
+type TableSlotsType = InstanceType<typeof Table>['$slots']
+defineSlots<{ toolbar(): any } & TableSlotsType>()
+const attrs = useAttrs()
+const propsData = computed(() => ({ ...attrs, ...props.tableProps }))
+const slots = useSlots()
+const slotNames = Object.keys(slots) as []
+const initWrapper = () => (props.useCardWrapper ? 'a-card' : 'div')
 const setRowClassName = (_record: any, index: number) => {
   const isEven = index % 2 === 0
   return (props.isZebra === 'even' && isEven) || (props.isZebra === 'odd' && !isEven) ? 'table-striped' : undefined
-}
-const slots = useSlots()
-const slotNames = Object.keys(slots) as []
-const initWrapper = () => {
-  return props.useCardWrapper ? 'a-card' : 'div'
 }
 </script>
 <template>
@@ -24,7 +27,7 @@ const initWrapper = () => {
       <div class="table-toolbar">
         <slot name="toolbar" />
       </div>
-      <a-table class="ant-table-striped" v-bind="{ ...$attrs, ...props }" :row-class-name="setRowClassName">
+      <a-table class="ant-table-striped" v-bind="propsData" :row-class-name="setRowClassName">
         <template v-for="(slot, index) of slotNames" :key="index" #[slot]="data:IData">
           <slot :name="slot" v-bind="data" />
         </template>

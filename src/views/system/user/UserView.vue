@@ -216,7 +216,7 @@ onMounted(async () => {
   <div>
     <h1>User View</h1>
     <SearchForm :fields :defaultValues @submit="handleSearch" @reset="handleReset" />
-    <CommonTable :columns :dataSource :loading />
+    <CommonTable :table-props="{ columns, dataSource, loading }" />
     <a-modal v-model:open="value" :destroy-on-close="true" :title @ok="handleOk">
       <FormModal ref="formRef" :formItems />
     </a-modal>

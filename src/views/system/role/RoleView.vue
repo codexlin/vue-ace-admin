@@ -197,7 +197,7 @@ onMounted(async () => {
 <template>
   <div>
     <h1>Role View</h1>
-    <CommonTable :columns :data-source="dataSource" :loading>
+    <CommonTable :table-props="{ rowKey: 'id', columns, dataSource, loading }">
       <template #toolbar>
         <a-space>
           <a-button type="primary" @click="handleClick(null, 'add')"> 新增</a-button>

@@ -14,7 +14,7 @@ interface State {
   type: 'add' | 'edit' | 'detail' | 'delete'
   id: number | null
 }
-const state = reactive<State>({
+const state = shallowReactive<State>({
   type: 'add',
   id: null
 })
@@ -79,14 +79,16 @@ onMounted(async () => await loadData())
 <template>
   <div>
     <CommonTable
+      :tableProps="{
+        columns,
+        dataSource,
+        loading,
+        rowKey: 'id',
+        scroll: { x: 2000 }
+      }"
       isZebra="even"
       useCardWrapper
-      :columns
-      :dataSource
-      :loading
-      :scroll="{ x: 2000 }"
       class="scroll-table"
-      row-key="id"
     >
       <template #toolbar>
         <a-space>
