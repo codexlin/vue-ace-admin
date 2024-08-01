@@ -40,17 +40,17 @@ export default {
   route: {
     // dir 目录
     d: {
-      system: '系统管理'
+      system: '系统管理',
+      components: '内置组件'
     },
     // menu 菜单
     m: {
       menu: '菜单管理',
       user: '用户管理',
       role: '角色管理',
-      dashboard: '首页'
-    },
-    c: {
-      menu: 'Menu Manage'
+      dashboard: '首页',
+      tinymce: '富文本编辑器',
+      AI: 'GPT'
     }
   },
   tabbar: {

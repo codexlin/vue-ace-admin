@@ -31,18 +31,17 @@ export default {
   route: {
     // dir 目录
     d: {
-      system: 'System Manage'
+      system: 'System Manage',
+      components: 'Components'
     },
     // menu 菜单
     m: {
-      system: 'System Manage',
       menu: 'Menu Manage',
       user: 'User Manage',
       role: 'Role Manage',
-      dashboard: 'Dashboard'
-    },
-    c: {
-      menu: 'Menu Manage'
+      dashboard: 'Dashboard',
+      tinymce: 'Tinymce',
+      AI: 'GPT'
     }
   },
   tabbar: {
