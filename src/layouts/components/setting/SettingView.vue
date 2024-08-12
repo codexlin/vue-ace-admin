@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { SettingOutlined } from '@ant-design/icons-vue'
 import { h } from 'vue'
-import SettingVue from '@/layouts/components/setting/components/SettingVue.vue'
+import SettingVue from '@/layouts/components/setting/components/DrawerForm.vue'
+import DrawerForm from '@/layouts/components/setting/components/DrawerForm.vue'
 
 const open = ref<boolean>(false)
 
@@ -14,7 +15,13 @@ const showDrawer = () => {
 }
 </script>
 <template>
-  <a-button :icon="h(SettingOutlined)" class="setting-fixed" shape="circle" type="primary" @click="showDrawer" />
+  <a-button
+    :icon="h(SettingOutlined, { spin: true })"
+    class="setting-fixed"
+    shape="circle"
+    type="primary"
+    @click="showDrawer"
+  />
   <a-drawer
     v-model:open="open"
     class="custom-class"
@@ -23,7 +30,7 @@ const showDrawer = () => {
     title="全局配置"
     @after-open-change="afterOpenChange"
   >
-    <SettingVue />
+    <DrawerForm />
   </a-drawer>
 </template>
 

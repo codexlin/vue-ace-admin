@@ -3,7 +3,13 @@ import { gsap } from 'gsap'
 import { useAppStore } from '@/stores/modules/app'
 
 onMounted(() => {
-  gsap.to('.logo-img', { rotation: 360, duration: 2, ease: 'bounce.out', repeat: Infinity })
+  gsap.to('.logo-img', {
+    scale: 1.2,
+    duration: 0.5,
+    repeat: -1,
+    yoyo: true,
+    ease: 'power1.inOut'
+  })
 })
 const app = useAppStore()
 const width = computed(() => (app.collapsed ? '80px' : '200px'))
@@ -29,7 +35,7 @@ const width = computed(() => (app.collapsed ? '80px' : '200px'))
   span {
     font-size: 16px;
     font-weight: bold;
-    color: get-color('primary');
+    color: get-color('primary'); /* 也可用v-bind token */
     transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
   }
 }

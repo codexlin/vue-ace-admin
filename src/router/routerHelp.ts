@@ -64,7 +64,7 @@ export async function addRoutes(menu: RouteRecordRaw[]): Promise<void> {
         name,
         path,
         meta,
-        component: loadView[`../views${component}.vue`] || loadView['../views/DefaultView.vue']
+        component: loadView[`../views${component}.vue`] || loadView['../views/AntTabs.vue']
       })
     } else {
       await addRoutes(children)

@@ -89,6 +89,14 @@ export default {
     back: '首页'
   },
   theme: {
+    tabs_mode: '标签模式',
+    dark_mode: '暗黑模式',
+    light_mode: '浅色模式',
+    system_mode: '系统模式',
+    show_breadCrumb: '面包屑',
+    show_tabs: '标签页',
+    default_mode: '默认模式',
+    antd_mode: ' Antd 模式',
     reset_all: '重置全部',
     customize_theme_color: '自定义主题颜色',
     preset_theme_colors: '预设主题颜色',

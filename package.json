@@ -27,7 +27,8 @@
     "stylelint:fix": "stylelint ./src/**/*.{scss,vue} --fix",
     "lint:lint-staged": "lint-staged",
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "npx simple-git-hooks"
+    "postinstall": "npx simple-git-hooks",
+    "commit": "git-cz"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",

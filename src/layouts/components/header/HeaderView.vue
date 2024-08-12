@@ -26,7 +26,7 @@ const config = computed(() => headerConfig.value)
           <menu-unfold-outlined v-if="app.collapsed" class="trigger" @click="app.toggleCollapsed" />
           <menu-fold-outlined v-else class="trigger" @click="app.toggleCollapsed" />
         </div>
-        <div v-if="config.showBreadcrumb" class="header-view-item breadcrumb">
+        <div v-if="app.appConfig.showBreadCrumb && config.showBreadcrumb" class="header-view-item breadcrumb">
           <BreadcrumbView />
         </div>
         <template v-if="config.showLogo">

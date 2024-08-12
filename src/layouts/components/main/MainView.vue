@@ -1,13 +1,16 @@
 <script lang="ts" setup>
 import { refreshKey, type MatchPattern } from '../../type'
-import TabsView from '@/layouts/components/Tabs/TabsView.vue'
+import TabsView from '@/layouts/components/tabs/TabsView.vue'
 import { useTabsStore } from '@/stores/modules/tabs'
-
+import { useAppStore } from '@/stores/modules/app'
+const app = useAppStore()
 const store = useTabsStore()
 void (() => {
   store.setCacheTabs()
 })()
 const isAlive = ref(true)
+const showTabs = computed(() => app.appConfig.showTabs)
+
 provide(refreshKey, async () => {
   isAlive.value = false
   await nextTick()
@@ -16,7 +19,7 @@ provide(refreshKey, async () => {
 </script>
 <template>
   <div>
-    <TabsView />
+    <TabsView v-show="showTabs" />
     <div :style="{ padding: '20px', minHeight: '360px' }">
       <router-view v-slot="{ Component, route }">
         <transition mode="out-in" name="scale">

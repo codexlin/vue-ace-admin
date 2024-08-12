@@ -84,6 +84,14 @@ export default {
     back: 'HOME'
   },
   theme: {
+    tabs_mode: 'Tabs Mode',
+    dark_mode: 'Dark Mode',
+    light_mode: 'Light Mode',
+    system_mode: 'System Mode',
+    show_breadCrumb: 'Show Breadcrumb',
+    show_tabs: 'Show Tabs',
+    default_mode: 'Default Mode',
+    antd_mode: 'Antd Mode',
     reset_all: 'Reset All',
     customize_theme_color: 'Customize Theme Color',
     preset_theme_colors: 'Preset Theme Colors',

@@ -5,6 +5,7 @@ import type { TabsProps } from 'ant-design-vue'
 import useLocalI18n from '@/hooks/useLocalI18n'
 import { refreshKey } from '@/layouts/type'
 import { useTabsStore } from '@/stores/modules/tabs'
+import { useAppStore } from '@/stores/modules/app'
 
 interface Props {
   title: string
@@ -20,6 +21,9 @@ const callback: TabsProps['onTabScroll'] = (val) => {
 const { tt } = useLocalI18n()
 const route = useRoute()
 const tabStore = useTabsStore()
+const app = useAppStore()
+const isDefault = computed(() => app.appConfig.tabsMode === 'default')
+
 const { deleteTab, clickTab, refreshTab } = tabStore
 const { activeKey, tabList } = storeToRefs(tabStore)
 const curTab = ref<Props>()
@@ -32,7 +36,6 @@ const onEdit = (targetKey: KeyboardEvent | MouseEvent | Key, action: 'add' | 're
 watch(
   route,
   (to) => {
-    console.log(11)
     const { meta, name, fullPath } = to
     const closable = fullPath !== '/dashboard'
     const item = { title: meta.title, key: fullPath, closable, content: name } as Props
@@ -45,7 +48,7 @@ watch(
 )
 </script>
 <template>
-  <div class="tabs">
+  <div :class="isDefault ? 'custom-tabs' : 'default-tabs'">
     <a-tabs
       v-model:activeKey="activeKey"
       :tab-position="mode"
@@ -77,26 +80,32 @@ watch(
   </div>
 </template>
 <style scoped lang="scss">
-.tabs {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  height: 40px;
-  backdrop-filter: blur(5px);
-
-  .ant-tabs-nav {
+.custom-tabs {
+  :deep(.ant-tabs-nav) {
     height: 40px;
     padding: 5px 6px 5px 5px;
     margin: 0;
 
     & .ant-tabs-nav-list .ant-tabs-tab,
     .ant-tabs-nav-add {
-      border-radius: 8px;
-
       & button {
         margin: 0 -8px 0 0;
       }
     }
+
+    & .ant-tabs-tab-active {
+      border-bottom: 2px solid;
+      border-radius: 8px 8px 0 0;
+      box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+    }
   }
+}
+
+.default-tabs,
+.custom-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(8px);
 }
 </style>

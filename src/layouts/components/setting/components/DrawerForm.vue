@@ -57,10 +57,6 @@ const reset = () => {
     <div>
       <p class="setting-title" data-label="Layout" />
       <div class="setting-item">
-        <label> {{ tt('system_color') }} </label>
-        <a-button @click="app.toggleDarkMode">{{ `${tt('toggle_mode')}${app.darkModeComp}` }}</a-button>
-      </div>
-      <div class="setting-item">
         <label> {{ tt('text_size') }} </label>
         <a-input-number v-model:value="app.appConfig.token.fontSize" />
       </div>
@@ -79,6 +75,21 @@ const reset = () => {
       <div class="setting-item">
         <label> {{ tt('watermark_toggle') }} </label>
         <a-switch v-model:checked="app.appConfig.watermark.isShow" checked-children="开" un-checked-children="关" />
+      </div>
+      <div class="setting-item">
+        <label> {{ tt('show_breadCrumb') }} </label>
+        <a-switch v-model:checked="app.appConfig.showBreadCrumb" checked-children="开" un-checked-children="关" />
+      </div>
+      <div class="setting-item">
+        <label> {{ tt('show_tabs') }} </label>
+        <a-switch v-model:checked="app.appConfig.showTabs" checked-children="开" un-checked-children="关" />
+      </div>
+      <div v-if="app.appConfig.showTabs" class="setting-item">
+        <label> {{ tt('tabs_mode') }} </label>
+        <a-radio-group v-model:value="app.appConfig.tabsMode">
+          <a-radio-button value="default">{{ tt('default_mode') }}</a-radio-button>
+          <a-radio-button value="antd">{{ tt('antd_mode') }}</a-radio-button>
+        </a-radio-group>
       </div>
     </div>
   </div>
