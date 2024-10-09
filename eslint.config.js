@@ -37,6 +37,7 @@ export default [
     }
   },
   {
+    // 这里是项目整体的 rule 配置
     files: ['src/**/*.{js,ts,jsx,tsx,vue}'],
     rules: {
       // 0 off 1 warn 2 error 强制标签执行自动关闭
@@ -70,11 +71,9 @@ export default [
       ],
       '@typescript-eslint/no-explicit-any': 0, // 允许使用 any 类型
       '@typescript-eslint/no-unused-vars': 0,
-      'prettier/prettier': ['error', { endOfLine: 'auto' }], // 自动选择结尾换行
-
+      '@typescript-eslint/no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
       'array-callback-return': 'error',
       'sort-imports': 'off',
-
       'import-x/order': [
         'error',
         {
