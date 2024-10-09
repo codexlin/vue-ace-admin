@@ -18,10 +18,7 @@ interface State {
   type: 'add' | 'edit' | 'detail' | 'delete'
   id: number | null
 }
-const props = withDefaults(defineProps<State>(), {
-  type: 'add',
-  parentId: null
-})
+const { type = 'add', id = null } = defineProps<State>()
 const { tt } = useLocalI18n()
 const formItems = ref<IItem[]>([])
 // 初始化ui组件相关属性
@@ -132,13 +129,12 @@ const initFormItems = async () => {
       ]
     }
   ]
-
-  if (props.type === 'add' && props.id) {
-    detailFormItems.value[1].defaultValue = props.id
+  if (type === 'add' && id) {
+    detailFormItems.value[1].defaultValue = id
   }
-  if (['edit', 'detail'].includes(props.type)) {
-    if (props.id) {
-      const { data } = await getDetail<IItem>(props.id)
+  if (['edit', 'detail'].includes(type)) {
+    if (id) {
+      const { data } = await getDetail<IItem>(id)
       formState.value = data || {}
     }
   }

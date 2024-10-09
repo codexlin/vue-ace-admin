@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import type { Props } from './type'
+import type { StatisticProps } from 'ant-design-vue'
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<StatisticProps>(), {
   title: 'Feedback',
   value: 3,
   suffix: ''

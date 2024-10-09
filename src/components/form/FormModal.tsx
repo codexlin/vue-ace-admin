@@ -1,4 +1,4 @@
-import { omit } from 'lodash-es'
+import { omit } from 'radash'
 
 interface IItem {
   label: string
