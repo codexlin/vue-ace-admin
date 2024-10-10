@@ -8,7 +8,7 @@
 
 > Ace Admin 目标是搭建一套免费开源的中后台管理系统，基于最新且最前沿的技术，无复杂封装、结构清晰、代码优雅、功能丰富、开箱即用，让你快速搭建一个精美的中后台管理系统。
 
-Ace Admin 是一个基于 Vue3.4、TypeScript5.x、Antd-Vue4.x、Pinia2.x 及 Vite5.x 等前沿技术栈构建的免费开源中后台管理系统解决方案(后端服务通过`Springboot3 + Java17 `实现。)。在 Antd4 精美的主题基础上，我构建了一个清晰且高效的项目逻辑架构，整合了最新的技术框架。欢迎大家使用！
+Ace Admin 是一个基于 Vue3.5、TypeScript5.x、Antd-Vue4.x、Pinia2.x 及 Vite5.x 等前沿技术栈构建的免费开源中后台管理系统解决方案(后端服务通过`Springboot3 + Java17 `实现。)。在 Antd4 精美的主题基础上，我构建了一个清晰且高效的项目逻辑架构，整合了最新的技术框架。欢迎大家使用！
 
 ## 📚 文档
 
@@ -30,7 +30,7 @@ Ace Admin 是一个基于 Vue3.4、TypeScript5.x、Antd-Vue4.x、Pinia2.x 及 Vi
 
 ## 📖 项目亮点
 
-- **前沿技术**：Vue 3.4 最新周边生态。
+- **前沿技术**：Vue 3.5 最新周边生态。
 - **Simple git hooks**：尤大推荐(可代替husky)。
 - **Antd-Vue**：使用更精美的Ant-Design-Vue 4.x 版本。
 - **Pinia**: 传说中的 Vuex5 , 已集成 Pinia 持久化插件。
