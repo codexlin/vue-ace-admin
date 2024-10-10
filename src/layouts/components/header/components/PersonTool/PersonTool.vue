@@ -1,8 +1,3 @@
-<!--
- * @Author: LinRenJie xoxosos666@gmail.com
- * @Date: 2023-10-25 21:53:39
- * @Description:
--->
 <script lang="ts" setup>
 import { DownOutlined, LockOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons-vue'
 import { useUserStore } from '@/stores/modules/user'

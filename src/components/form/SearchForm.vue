@@ -1,20 +1,22 @@
 <script setup lang="ts">
-const props = defineProps({
-  fields: {
-    type: Array,
-    required: true
-  },
-  defaultValues: {
-    type: Object,
-    default: () => ({})
-  }
-})
+interface Field {
+  name: string
+  label: string
+  component?: string
+  props?: any
+}
+interface IProps {
+  fields: Array<Field>
+  defaultValues: Record<string, any>
+}
+
+const { fields, defaultValues } = defineProps<IProps>()
 
 const emits = defineEmits(['submit', 'reset'])
 // 获取当前组件实例
 const instance = getCurrentInstance()
 // 表单状态管理
-const formState = reactive({ ...props.defaultValues })
+const formState = reactive({ ...defaultValues })
 // 提交表单
 const handleSubmit = () => {
   if (instance?.vnode.props?.onSubmit) {
@@ -28,7 +30,7 @@ const handleSubmit = () => {
 // 重置表单
 const handleReset = () => {
   for (const key in formState) {
-    formState[key] = props.defaultValues[key] || ''
+    formState[key] = defaultValues[key] || ''
   }
   if (instance?.vnode.props?.onReset) {
     emits('reset')
@@ -40,8 +42,8 @@ const handleReset = () => {
 
 // 监听默认值的变化以更新表单状态
 watchEffect(() => {
-  for (const key in props.defaultValues) {
-    formState[key] = props.defaultValues[key]
+  for (const key in defaultValues) {
+    formState[key] = defaultValues[key]
   }
 })
 </script>

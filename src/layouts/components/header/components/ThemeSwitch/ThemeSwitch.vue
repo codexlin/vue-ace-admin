@@ -1,8 +1,3 @@
-<!--
- * @Author: LinRenJie xoxosos666@gmail.com
- * @Date: 2023-10-14 23:29:23
- * @Description:
--->
 <script lang="ts" setup>
 import SvgIcon from '../../../../../components/svgIcon/SvgIcon.vue'
 import { useAppStore } from '@/stores/modules/app'

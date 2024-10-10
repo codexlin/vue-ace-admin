@@ -1,3 +1,4 @@
+import { Interface } from 'readline'
 import type { ButtonProps, PopconfirmProps } from 'ant-design-vue'
 
 export interface PopProps {
@@ -16,4 +17,7 @@ export type Item = {
   text: string
   cb: () => void
   type: string
+}
+export interface Items {
+  items: Item[]
 }

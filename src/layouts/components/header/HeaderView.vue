@@ -1,8 +1,3 @@
-<!--
- * @Author: LinRenJie xoxosos666@gmail.com
- * @Date: 2023-10-14 21:29:57
- * @Description:
--->
 <script lang="ts" setup>
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
 import BreadcrumbView from '@/layouts/components/header/components/Breadcrumb/BreadCrumb.vue'

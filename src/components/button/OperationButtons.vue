@@ -1,12 +1,9 @@
 <script lang="ts" setup>
 import { DownOutlined } from '@ant-design/icons-vue'
-import type { Item } from '@/components/button/type'
+import type { Items, Item } from '@/components/button/type'
 import useLocalI18n from '@/hooks/useLocalI18n'
-
-const props = defineProps<{
-  items: Item[]
-}>()
-const menuArray = computed<Item[]>(() => (props.items.length > 2 ? props.items.slice(1) : props.items))
+const { items } = defineProps<Items>()
+const menuArray = computed<Item[]>(() => (items.length > 2 ? items.slice(1) : items))
 const { tt } = useLocalI18n()
 </script>
 <template>

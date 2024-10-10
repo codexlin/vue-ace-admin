@@ -1,5 +1,11 @@
+import { Table } from 'ant-design-vue'
 import type { TableProps } from 'ant-design-vue'
+import type { VNode } from 'vue'
 
+type CustomSlotsType = {
+  toolbar(): () => VNode
+}
+export type TableSlotsType = InstanceType<typeof Table>['$slots'] & CustomSlotsType
 export interface IData {
   text: any
   record: any

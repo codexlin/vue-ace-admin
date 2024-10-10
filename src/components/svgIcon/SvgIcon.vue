@@ -5,12 +5,8 @@ interface IProps {
   name: string
   prefix?: string
 }
-
-const props = withDefaults(defineProps<IProps>(), {
-  prefix: 'icon'
-})
-
-const symbolId = computed(() => `#${props.prefix}-${props.name}`)
+const { name, prefix = 'icon' } = defineProps<IProps>()
+const symbolId = computed(() => `#${prefix}-${name}`)
 </script>
 
 <template>

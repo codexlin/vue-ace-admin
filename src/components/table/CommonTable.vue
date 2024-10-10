@@ -1,23 +1,18 @@
 <script lang="tsx" setup>
-import { Table } from 'ant-design-vue'
-import type { IData, IProps } from './type'
+import type { IData, IProps, TableSlotsType } from './type'
+const { isZebra = 'none', useCardWrapper = true, tableProps } = defineProps<IProps>()
 defineOptions({
   inheritAttrs: false
 })
-const props = withDefaults(defineProps<IProps>(), {
-  isZebra: 'none',
-  useCardWrapper: true
-})
-type TableSlotsType = InstanceType<typeof Table>['$slots']
-defineSlots<{ toolbar(): any } & TableSlotsType>()
+defineSlots<TableSlotsType>()
 const attrs = useAttrs()
-const propsData = computed(() => ({ ...attrs, ...props.tableProps }))
+const propsData = computed(() => ({ ...attrs, ...tableProps }))
 const slots = useSlots()
 const slotNames = Object.keys(slots) as []
-const initWrapper = () => (props.useCardWrapper ? 'a-card' : 'div')
+const initWrapper = () => (useCardWrapper ? 'a-card' : 'div')
 const setRowClassName = (_record: any, index: number) => {
   const isEven = index % 2 === 0
-  return (props.isZebra === 'even' && isEven) || (props.isZebra === 'odd' && !isEven) ? 'table-striped' : undefined
+  return (isZebra === 'even' && isEven) || (isZebra === 'odd' && !isEven) ? 'table-striped' : undefined
 }
 </script>
 <template>

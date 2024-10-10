@@ -1,16 +1,27 @@
 <script setup lang="ts">
 import axios from 'axios'
-import type { UploadRequestOption } from 'ant-design-vue/es/vc-upload/interface'
+import { ref } from 'vue'
+import type { UploadFile, UploadChangeParam } from 'ant-design-vue/es/upload/interface'
 
-const fileList = ref([])
-const uploadProgress = ref(0)
+// 文件列表类型为 UploadFile 的数组
+const fileList = ref<UploadFile[]>([])
+const uploadProgress = ref<number>(0)
 const chunkSize = 5 * 1024 * 1024 // 5MB
 
-const handleUpload = async (options: UploadRequestOption) => {
+// 上传文件处理函数
+const handleUpload = async (options: UploadChangeParam) => {
   const { file } = options
+
+  // 类型检查确保 file 是 RcFile 或 Blob
+  if (!(file instanceof Blob)) {
+    console.error('File is not a Blob or RcFile.')
+    return
+  }
+
   const totalChunks = Math.ceil(file.size / chunkSize)
   let currentChunk = 0
 
+  // 上传单个文件分片
   const uploadChunk = async (start: number, end: number) => {
     const chunk = file.slice(start, end)
     const formData = new FormData()
@@ -22,7 +33,9 @@ const handleUpload = async (options: UploadRequestOption) => {
     try {
       await axios.post('/upload', formData, {
         onUploadProgress: (progressEvent) => {
-          uploadProgress.value = Math.round((progressEvent.loaded / progressEvent.total) * 100)
+          if (progressEvent.total) {
+            uploadProgress.value = Math.round((progressEvent.loaded / progressEvent.total) * 100)
+          }
         }
       })
       currentChunk++
@@ -37,11 +50,13 @@ const handleUpload = async (options: UploadRequestOption) => {
   await uploadChunk(0, chunkSize)
 }
 
-const handleRemove = (file) => {
+// 移除文件处理函数
+const handleRemove = (file: UploadFile) => {
   fileList.value = fileList.value.filter((item) => item.uid !== file.uid)
 }
 
-const handleChange = (info) => {
+// 文件列表变化处理函数
+const handleChange = (info: UploadChangeParam) => {
   fileList.value = info.fileList
 }
 </script>
