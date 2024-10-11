@@ -22,7 +22,9 @@ const reset = () => {
 
 <template>
   <div class="setting-drawer">
-    <a-button type="primary" @click="reset">{{ tt('reset_all') }}</a-button>
+    <a-button type="primary" @click="reset">
+      {{ tt('reset_all') }}
+    </a-button>
     <div>
       <p class="setting-title" :data-label="tt('customize_theme_color')" />
       <input v-model="color" class="color-picker" type="color" @change="handleChange(color)" />

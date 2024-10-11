@@ -40,7 +40,7 @@
               placeholder="请输入消息进行对话"
               @press-enter="sendMessage"
             />
-            <a-button type="primary" @click="sendMessage">发送</a-button>
+            <a-button type="primary" @click="sendMessage"> 发送 </a-button>
           </div>
         </div>
         <p style="font-size: 12px; color: #656464">Copyright © All Rights Reserved Ace Lin.</p>

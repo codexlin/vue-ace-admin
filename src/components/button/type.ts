@@ -1,4 +1,3 @@
-import { Interface } from 'readline'
 import type { ButtonProps, PopconfirmProps } from 'ant-design-vue'
 
 export interface PopProps {

@@ -13,8 +13,8 @@ const handleClick = ({ key }: { key: string }) => changeLanguage(key)
     </div>
     <template #overlay>
       <a-menu @click="(e: any) => handleClick(e)">
-        <a-menu-item key="zhCN" :disabled="language === 'zhCN'">简体中文</a-menu-item>
-        <a-menu-item key="enUS" :disabled="language === 'enUS'">English</a-menu-item>
+        <a-menu-item key="zhCN" :disabled="language === 'zhCN'"> 简体中文 </a-menu-item>
+        <a-menu-item key="enUS" :disabled="language === 'enUS'"> English </a-menu-item>
       </a-menu>
     </template>
   </a-dropdown>

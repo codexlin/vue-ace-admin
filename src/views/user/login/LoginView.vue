@@ -102,7 +102,7 @@ onMounted(() => {
             <a-typography-text type="secondary">忘记密码</a-typography-text>
           </a-divider>
           <a-form-item>
-            <a-button html-type="submit" style="width: 100%" type="primary">登录</a-button>
+            <a-button html-type="submit" style="width: 100%" type="primary"> 登录 </a-button>
           </a-form-item>
           <a-divider>
             <a-typography-text type="secondary">通过以下方式登录</a-typography-text>

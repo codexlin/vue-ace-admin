@@ -200,7 +200,7 @@ onMounted(async () => {
     <CommonTable :table-props="{ rowKey: 'id', columns, dataSource, loading }">
       <template #toolbar>
         <a-space>
-          <a-button type="primary" @click="handleClick(null, 'add')"> 新增</a-button>
+          <a-button type="primary" @click="handleClick(null, 'add')"> 新增 </a-button>
         </a-space>
       </template>
     </CommonTable>

@@ -61,8 +61,8 @@ watchEffect(() => {
       </a-row>
       <a-row>
         <a-col :span="24" style="text-align: right">
-          <a-button type="primary" @click="handleSubmit">搜索</a-button>
-          <a-button style="margin-left: 8px" @click="handleReset">重置</a-button>
+          <a-button type="primary" @click="handleSubmit"> 搜索 </a-button>
+          <a-button style="margin-left: 8px" @click="handleReset"> 重置 </a-button>
         </a-col>
       </a-row>
     </a-form>
