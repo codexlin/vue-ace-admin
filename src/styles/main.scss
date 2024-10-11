@@ -27,10 +27,6 @@ body {
   font-family: $font-family, Consolas, Menlo, Monaco, 'Courier New', 'PingFang SC', 'Microsoft YaHei', monospace;
 }
 
-.ant-drawer:has(.ant-layout-sider) {
-  display: none;
-}
-
 .custom-layout {
   @include use-theme {
     background: get-mode-var('bgColor');
@@ -49,7 +45,23 @@ body {
   background: $primary; // 跟随主色
 }
 
+.flex-card {
+  @include respond-to('lg') {
+    flex: 0 0 calc(50% - #{$padding});
+  }
+
+  @include respond-to('md') {
+    flex: 0 0 calc(100% - #{$padding});
+  }
+
+  flex: 0 0 calc(25% - 2 * $padding);
+}
+
 .flex-cards {
+  @include respond-to('md') {
+    flex-direction: column;
+  }
+
   display: flex;
   flex-wrap: wrap;
   gap: 2 * $padding;
@@ -67,66 +79,19 @@ body {
   .chart {
     height: 320px;
   }
-}
 
-.flex-card {
-  flex: 0 0 calc(25% - 2 * $padding);
-}
-
-/* 2xl */
-
-@media (width <= 1536px) {
-}
-
-/* xl */
-
-@media (width <= 1280px) {
-}
-
-/* lg */
-
-@media (width <= 1024px) {
-  .flex-card {
-    flex: 0 0 calc(50% - #{$padding}); // 在中等屏幕上每行显示2个 使用#{}插值
-  }
-
-  .flex-cards {
-    &_left,
-    &_right {
+  &_left,
+  &_right {
+    @include respond-to('lg') {
       width: 100%;
     }
   }
 }
 
-/* md */
-
-@media (width <= 768px) {
-  .ant-drawer:has(.ant-layout-sider) {
+.ant-drawer:has(.ant-layout-sider) {
+  @include respond-to('md') {
     display: inline-block;
   }
 
-  .default-sidebar {
-    display: none;
-  }
-
-  .flex-cards {
-    flex-direction: column;
-  }
-
-  .flex-card {
-    flex: 0 0 calc(100% - #{$padding}); // 在小屏幕上每行只显示1个
-  }
-}
-
-/* sm */
-
-@media (width <= 640px) {
-  .breadcrumb {
-    display: none;
-  }
-}
-
-/* xs */
-
-@media (width <= 475px) {
+  display: none;
 }

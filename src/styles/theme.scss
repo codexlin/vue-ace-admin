@@ -66,3 +66,24 @@ $curMode: light;
     }
   }
 }
+
+// 定义断点 map
+$breakpoints: (
+  '2xl': 1536px,
+  'xl': 1280px,
+  'lg': 1024px,
+  'md': 768px,
+  'sm': 640px,
+  'xs': 475px
+);
+
+// 使用 mixin 和 map
+@mixin respond-to($breakpoint) {
+  $value: map.get($breakpoints, $breakpoint);
+
+  @if $value {
+    @media (max-width: $value) {
+      @content;
+    }
+  }
+}

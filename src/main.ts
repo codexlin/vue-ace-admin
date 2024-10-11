@@ -1,8 +1,3 @@
-/*
- * @Author: LinRenJie xoxosos666@gmail.com
- * @Date: 2023-10-09 21:03:39
- * @Description:
- */
 import { MotionPlugin } from '@vueuse/motion'
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/reset.css'

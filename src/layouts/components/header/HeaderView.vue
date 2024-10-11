@@ -49,6 +49,8 @@ const config = computed(() => headerConfig.value)
 </template>
 
 <style lang="scss" scoped>
+@import '@/styles/theme';
+
 .layout-header {
   padding: 0;
 }
@@ -83,7 +85,9 @@ const config = computed(() => headerConfig.value)
   }
 
   .breadcrumb {
-    font-size: 17px;
+    @include respond-to(sm) {
+      display: none;
+    }
   }
 
   .trigger {
