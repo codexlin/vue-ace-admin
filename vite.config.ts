@@ -9,7 +9,7 @@ export default defineConfig(({ command, mode }) => {
   return {
     // 移除所有console+debugger,使用默认的esbuild,比 terser 快 20-40倍,压缩率只差 1%-2%。
     esbuild: {
-      drop: env.VITE_BUILD_DROP_CONSOLE === 'true' ? ['console', 'debugger'] : undefined
+      drop: env.VITE_BUILD_DROP_CONSOLE === 'true' ? ['console', 'debugger'] : []
     },
     // 插件配置
     plugins: loadPlugins(env, isBuildCommand),
