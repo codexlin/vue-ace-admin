@@ -22,7 +22,7 @@ const globalConfig: any = {
       // color: 'rgba(0,0,0,.15)',
       fontWeight: 'bold'
     },
-    content: ['Ace Admin', 'By AceLin'],
+    content: ['Ace Admin', 'By CodexLin'],
     zIndex: 11,
     rotate: -22,
     gap: [100, 100] as [number, number],

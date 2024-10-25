@@ -6,22 +6,18 @@ import { useAppStore } from '@/stores/modules/app'
 
 const { setHeaderConfig } = useConfig()
 const app = useAppStore()
-
+const layout = ref()
 function handleLayoutChange(newVal: string) {
   const isDefault = newVal === 'default'
+  layout.value = isDefault ? DefaultLayout : HorizonLayout
   setHeaderConfig({
     showBreadcrumb: isDefault,
     showLogo: true,
     mode: isDefault ? 'inline' : 'horizontal'
   })
 }
-
-watch(() => app.getLayout, handleLayoutChange, { immediate: true })
-const layouts: { [key: string]: any } = {
-  horizon: HorizonLayout,
-  default: DefaultLayout
-}
+watchEffect(() => handleLayoutChange(app.getLayout))
 </script>
 <template>
-  <component :is="layouts[app.getLayout]" />
+  <component :is="layout" />
 </template>

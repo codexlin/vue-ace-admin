@@ -4,9 +4,9 @@
     <a-typography-text>
       © 2023-Present Ace Admin. All Rights Reserved. Made with love by<a
         target="_blank"
-        href="https://github.com/look4u-ovo/vue-ace-admin"
+        href="https://github.com/codexlin/vue-ace-admin"
         style="margin-inline: 2px"
-        >Ace Lin!</a
+        >CodexLin!</a
       >
     </a-typography-text>
   </a-layout-footer>
