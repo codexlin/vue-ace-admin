@@ -152,6 +152,6 @@ Git 提交规范，包含了常见的提交类型，方便开发者追踪和管�
 
 ## 📄 License
 
-本项目采用 [MIT](./LICENSE) 许可协议，版权归 [AceLin](https://github.com/look4u-ovo)所有。
+本项目采用 [MIT](./LICENSE) 许可协议，版权归 [codexlin](https://github.com/look4u-ovo)所有。
 
-Copyright (c) 2023-Present [AceLin](https://github.com/look4u-ovo)
+Copyright (c) 2023-Present [codexlin](https://github.com/look4u-ovo)
