@@ -46,7 +46,7 @@ Ace Admin is a free and open-source backend management system solution built usi
 ## 📔 Features
 
 - [x] **User Management**: Login, logout demonstration
-- [ ] **Permission Management**: Built-in page permissions (dynamic routes), route guards, directive permissions, permission functions (coding)
+- [x] **Permission Management**: Built-in page permissions (dynamic routes), route guards, directive permissions, permission functions (coding)
 - [x] **Hooks**: Commonly used hooks encapsulation
 - [x] **Multi-environment**: Support for development, pre-release, and production environments.
 - [x] **Multiple Themes**: Built-in normal, dark, and custom theme modes.
@@ -153,6 +153,6 @@ If you like this project, please don’t hesitate to give a ⭐star as a token o
 
 ## 📄 License
 
-This project is licensed under the [MIT](./LICENSE) License. Copyright belongs to [AceLin](https://github.com/xoxosos).
+This project is licensed under the [MIT](./LICENSE) License. Copyright belongs to [CodexLin](https://github.com/codexlin).
 
-Copyright (c) 2023-Present [AceLin](https://github.com/xoxosos)
+Copyright (c) 2023-Present [CodexLin](https://github.com/codexlin)
