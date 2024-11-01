@@ -25,12 +25,12 @@ const reset = () => {
     <a-button type="primary" @click="reset">
       {{ tt('reset_all') }}
     </a-button>
-    <div>
-      <p class="setting-title" :data-label="tt('customize_theme_color')" />
-      <input v-model="color" class="color-picker" type="color" @change="handleChange(color)" />
+    <div class="setting-drawer__section">
+      <p class="setting-drawer__title" :data-label="tt('customize_theme_color')" />
+      <input v-model="color" class="setting-drawer__color-picker" type="color" @change="handleChange(color)" />
     </div>
-    <div>
-      <p class="setting-title" :data-label="tt('preset_theme_colors')" />
+    <div class="setting-drawer__section">
+      <p class="setting-drawer__title" :data-label="tt('preset_theme_colors')" />
       <a-space wrap>
         <template v-for="(variable, name) in variables" :key="name">
           <a-button :style="{ background: variable }" @click="handleChange(variable)">
@@ -39,55 +39,55 @@ const reset = () => {
         </template>
       </a-space>
     </div>
-    <div>
-      <p class="setting-title" :data-label="tt('layout_settings')" />
-      <div class="setting-item">
-        <label> {{ tt('overall_layout') }} </label>
+    <div class="setting-drawer__section">
+      <p class="setting-drawer__title" :data-label="tt('layout_settings')" />
+      <div class="setting-drawer__item">
+        <label>{{ tt('overall_layout') }}</label>
         <a-radio-group v-model:value="app.appConfig.layout">
           <a-radio-button value="default">{{ tt('default') }}</a-radio-button>
           <a-radio-button value="horizon">{{ tt('horizontal') }}</a-radio-button>
         </a-radio-group>
       </div>
-      <div class="setting-item">
-        <label> {{ tt('component_direction') }} </label>
+      <div class="setting-drawer__item">
+        <label>{{ tt('component_direction') }}</label>
         <a-radio-group v-model:value="app.appConfig.direction">
           <a-radio-button value="ltr">{{ tt('ltr') }}</a-radio-button>
           <a-radio-button value="rtl">{{ tt('rtl') }}</a-radio-button>
         </a-radio-group>
       </div>
     </div>
-    <div>
-      <p class="setting-title" data-label="Layout" />
-      <div class="setting-item">
-        <label> {{ tt('text_size') }} </label>
+    <div class="setting-drawer__section">
+      <p class="setting-drawer__title" :data-label="tt('layout_settings')" />
+      <div class="setting-drawer__item">
+        <label>{{ tt('text_size') }}</label>
         <a-input-number v-model:value="app.appConfig.token.fontSize" />
       </div>
-      <div class="setting-item">
-        <label> {{ tt('corner_setting') }} </label>
+      <div class="setting-drawer__item">
+        <label>{{ tt('corner_setting') }}</label>
         <a-input-number v-model:value="app.appConfig.token.borderRadius" />
       </div>
-      <div class="setting-item">
-        <label> {{ tt('frame_style') }} </label>
+      <div class="setting-drawer__item">
+        <label>{{ tt('frame_style') }}</label>
         <a-switch v-model:checked="app.appConfig.token.wireframe" checked-children="开" un-checked-children="关" />
       </div>
-      <div class="setting-item">
-        <label> {{ tt('compact_mode') }} </label>
+      <div class="setting-drawer__item">
+        <label>{{ tt('compact_mode') }}</label>
         <a-switch v-model:checked="app.appConfig.compactAlgorithm" checked-children="开" un-checked-children="关" />
       </div>
-      <div class="setting-item">
-        <label> {{ tt('watermark_toggle') }} </label>
+      <div class="setting-drawer__item">
+        <label>{{ tt('watermark_toggle') }}</label>
         <a-switch v-model:checked="app.appConfig.watermark.isShow" checked-children="开" un-checked-children="关" />
       </div>
-      <div class="setting-item">
-        <label> {{ tt('show_breadCrumb') }} </label>
+      <div class="setting-drawer__item">
+        <label>{{ tt('show_breadCrumb') }}</label>
         <a-switch v-model:checked="app.appConfig.showBreadCrumb" checked-children="开" un-checked-children="关" />
       </div>
-      <div class="setting-item">
-        <label> {{ tt('show_tabs') }} </label>
+      <div class="setting-drawer__item">
+        <label>{{ tt('show_tabs') }}</label>
         <a-switch v-model:checked="app.appConfig.showTabs" checked-children="开" un-checked-children="关" />
       </div>
-      <div v-if="app.appConfig.showTabs" class="setting-item">
-        <label> {{ tt('tabs_mode') }} </label>
+      <div v-if="app.appConfig.showTabs" class="setting-drawer__item">
+        <label>{{ tt('tabs_mode') }}</label>
         <a-radio-group v-model:value="app.appConfig.tabsMode">
           <a-radio-button value="default">{{ tt('default_mode') }}</a-radio-button>
           <a-radio-button value="antd">{{ tt('antd_mode') }}</a-radio-button>
@@ -102,7 +102,11 @@ const reset = () => {
   display: flex;
   flex-direction: column;
 
-  & :deep(.color-picker) {
+  &__section {
+    margin-bottom: 20px;
+  }
+
+  &__color-picker {
     width: 50px;
     height: 50px;
     appearance: none;
@@ -121,7 +125,7 @@ const reset = () => {
     }
   }
 
-  & :deep(.setting-title) {
+  &__title {
     position: relative;
     width: 100%;
     height: 1px;
@@ -141,7 +145,7 @@ const reset = () => {
     }
   }
 
-  & :deep(.setting-item) {
+  &__item {
     display: flex;
     align-items: center;
     justify-content: space-between;

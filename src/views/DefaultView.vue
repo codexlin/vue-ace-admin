@@ -1,7 +1,7 @@
 <template>
   <div class="default-component">
-    <h1>欢迎来到默认组件</h1>
-    <p>请根据组件路径：{{ currentPath }} 添加该组件 😊！</p>
+    <h1 class="default-component__title">欢迎来到默认组件</h1>
+    <p class="default-component__description">请根据组件路径：{{ currentPath }} 添加该组件 😊！</p>
   </div>
 </template>
 
@@ -25,12 +25,12 @@ onMounted(() => {
   border-radius: 10px;
   box-shadow: 0 0 10px rgb(0 0 0 / 10%);
 
-  p {
+  &__description {
     margin-bottom: 20px;
     color: #90a924;
   }
 
-  h1 {
+  &__title {
     color: #da2727;
     animation: pulse 2s infinite alternate;
   }

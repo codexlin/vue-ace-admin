@@ -20,7 +20,7 @@ provide(refreshKey, async () => {
 <template>
   <div>
     <TabsView v-show="showTabs" />
-    <div :style="{ padding: '20px', minHeight: '360px' }">
+    <div class="main-wrapper">
       <router-view v-slot="{ Component, route }">
         <transition mode="out-in" name="scale">
           <keep-alive :include="store.getCacheTabs as MatchPattern">
@@ -31,3 +31,9 @@ provide(refreshKey, async () => {
     </div>
   </div>
 </template>
+<style lang="scss" scoped>
+.main-wrapper {
+  min-height: 360px;
+  padding: 20px;
+}
+</style>

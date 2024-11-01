@@ -3,7 +3,7 @@ import { gsap } from 'gsap'
 import { useAppStore } from '@/stores/modules/app'
 
 onMounted(() => {
-  gsap.to('.logo-img', {
+  gsap.to('.logo__img', {
     scale: 1.2,
     duration: 0.5,
     repeat: -1,
@@ -17,7 +17,7 @@ const width = computed(() => (app.collapsed ? '80px' : '200px'))
 
 <template>
   <div class="logo">
-    <img alt="logo" class="logo-img" height="32" src="assets/images/logo.svg" width="32" />
+    <img alt="logo" class="logo__img" height="32" src="assets/images/logo.svg" width="32" />
     <span v-if="!app.collapsed">Vue Ace Admin</span>
   </div>
 </template>

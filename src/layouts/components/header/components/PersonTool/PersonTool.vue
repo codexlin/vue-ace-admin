@@ -12,9 +12,9 @@ const handleClick = (item: any) => {
 
 <template>
   <a-dropdown>
-    <div class="header-avatar">
+    <div class="person-tool">
       <a-avatar :src="avatar" />
-      <span style="padding: 0 4px 0 8px; font-size: 15px">{{ username }} </span>
+      <span class="person-tool__username">{{ username }} </span>
       <DownOutlined />
     </div>
     <template #overlay>
@@ -40,8 +40,13 @@ const handleClick = (item: any) => {
 </template>
 
 <style lang="scss" scoped>
-.header-avatar {
+.person-tool {
   display: flex;
   align-items: center;
+
+  &__username {
+    padding: 0 4px 0 8px;
+    font-size: 15px;
+  }
 }
 </style>

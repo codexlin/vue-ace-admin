@@ -14,14 +14,14 @@ const config = computed(() => headerConfig.value)
 </script>
 
 <template>
-  <a-layout-header class="custom-layout layout-header">
-    <div class="header-view">
-      <div class="header-view-left">
-        <div v-if="config.mode === 'inline'" class="header-view-item">
-          <menu-unfold-outlined v-if="app.collapsed" class="trigger" @click="app.toggleCollapsed" />
-          <menu-fold-outlined v-else class="trigger" @click="app.toggleCollapsed" />
+  <a-layout-header class="custom-drawer layout-header">
+    <div class="header">
+      <div class="header__left">
+        <div v-if="config.mode === 'inline'" class="header__item">
+          <menu-unfold-outlined v-if="app.collapsed" class="header__trigger" @click="app.toggleCollapsed" />
+          <menu-fold-outlined v-else class="header__trigger" @click="app.toggleCollapsed" />
         </div>
-        <div v-if="app.appConfig.showBreadCrumb && config.showBreadcrumb" class="header-view-item breadcrumb">
+        <div v-if="app.appConfig.showBreadCrumb && config.showBreadcrumb" class="header__item header__breadcrumb">
           <BreadcrumbView />
         </div>
         <template v-if="config.showLogo">
@@ -29,18 +29,18 @@ const config = computed(() => headerConfig.value)
         </template>
         <slot />
       </div>
-      <div class="header-view-right">
+      <div class="header__right">
         <!-- 全屏 -->
-        <div class="header-view-item">
+        <div class="header__item">
           <FullScreen />
         </div>
-        <div class="header-view-item">
+        <div class="header__item">
           <LangSelect />
         </div>
-        <div class="header-view-item">
+        <div class="header__item">
           <ThemeSwitch />
         </div>
-        <div class="header-view-item">
+        <div class="header__item">
           <PersonTool />
         </div>
       </div>
@@ -53,46 +53,46 @@ const config = computed(() => headerConfig.value)
 
 .layout-header {
   padding: 0;
-}
 
-.header-view {
-  display: flex;
-  justify-content: space-between;
-
-  &-left {
+  .header {
     display: flex;
-    gap: 10px;
-    align-items: center;
-    padding-left: 10px;
-    overflow: hidden;
-    white-space: nowrap;
-  }
+    justify-content: space-between;
 
-  &-right {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-    padding-right: 10px;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  &-item {
-    display: flex;
-    align-items: center;
-    font-size: 17px;
-    cursor: pointer;
-  }
-
-  .breadcrumb {
-    @include respond-to(sm) {
-      display: none;
+    &__left {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding-left: 10px;
+      overflow: hidden;
+      white-space: nowrap;
     }
-  }
 
-  .trigger {
-    font-size: 1.3em;
-    line-height: 1.3em;
+    &__right {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      padding-right: 10px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    &__item {
+      display: flex;
+      align-items: center;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    &__breadcrumb {
+      @include respond-to(sm) {
+        display: none;
+      }
+    }
+
+    &__trigger {
+      font-size: 1.3em;
+      line-height: 1.3em;
+    }
   }
 }
 </style>

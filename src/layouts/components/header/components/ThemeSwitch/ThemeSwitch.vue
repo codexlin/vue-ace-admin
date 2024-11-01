@@ -4,15 +4,7 @@ import { useAppStore } from '@/stores/modules/app'
 
 const app = useAppStore()
 const check = ref(false)
-watch(
-  () => app.darkModeComp,
-  (val) => {
-    check.value = val === 'dark'
-  },
-  {
-    immediate: true
-  }
-)
+watchEffect(() => (check.value = app.darkModeComp === 'dark'))
 const handleChange = () => {
   app.toggleDarkMode()
 }

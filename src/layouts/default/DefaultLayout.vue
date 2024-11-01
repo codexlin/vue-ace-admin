@@ -11,7 +11,7 @@ const app = useAppStore()
 </script>
 <template>
   <a-watermark v-bind="{ ...globalConfig.watermark, content: app.getWaterMarkContent }">
-    <a-layout style="min-width: 375px; height: 100vh">
+    <a-layout class="layout-main">
       <SidebarView />
       <a-layout>
         <HeaderView />

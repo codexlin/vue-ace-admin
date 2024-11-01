@@ -26,13 +26,8 @@ const initBreadcrumb = (path: string) => {
     return []
   }
 }
-watch(
-  () => router.currentRoute.value.path,
-  (path) => {
-    breadcrumbs.value = initBreadcrumb(path)
-  },
-  { immediate: true, deep: true }
-)
+
+watchEffect(() => (breadcrumbs.value = initBreadcrumb(router.currentRoute.value.path)))
 </script>
 
 <template>

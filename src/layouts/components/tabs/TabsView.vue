@@ -48,7 +48,7 @@ watch(
 )
 </script>
 <template>
-  <div :class="isDefault ? 'custom-tabs' : 'default-tabs'">
+  <div :class="isDefault ? 'tabs--custom' : 'tabs--default'">
     <a-tabs
       v-model:activeKey="activeKey"
       :tab-position="mode"
@@ -61,7 +61,7 @@ watch(
       <a-tab-pane v-for="i in tabList" :key="i.key" :closable="i.closable">
         <template #tab>
           <a-dropdown :trigger="['contextmenu']">
-            <span class="tab-name">{{ tt(i.title) }}</span>
+            <span class="tabs__tab-name">{{ tt(i.title) }}</span>
             <template #overlay>
               <a-menu>
                 <a-menu-item key="1" @click="onRefresh(i.content!)"> 刷新 </a-menu-item>
@@ -79,8 +79,9 @@ watch(
     </a-tabs>
   </div>
 </template>
+
 <style scoped lang="scss">
-.custom-tabs {
+.tabs--custom {
   :deep(.ant-tabs-nav) {
     height: 40px;
     padding: 5px 6px 5px 5px;
@@ -101,11 +102,15 @@ watch(
   }
 }
 
-.default-tabs,
-.custom-tabs {
+.tabs--default,
+.tabs--custom {
   position: sticky;
   top: 0;
   z-index: 10;
   backdrop-filter: blur(8px);
+}
+
+.tabs__tab-name {
+  /* 可以根据需要添加样式 */
 }
 </style>
