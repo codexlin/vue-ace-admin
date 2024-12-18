@@ -26,21 +26,21 @@ export function setupRouterHooks() {
         await addRoutes(routes)
         console.log(routes)
         flag = false
-        next({ path: to.path })
+        return next({ path: to.path })
       }
       // 页面刷新时，重新加载路由
       if (routes.length === 0) {
         console.log('routes.length === 0')
         await routerStore.setRoutes()
-        next({ path: to.path })
+        return next({ path: to.path })
       } else {
         console.log('routes.length === 0---else', to.path)
-        next()
+        return next()
       }
     } else if (to.path === '/login') {
-      next()
+      return next()
     } else {
-      next('/login')
+      return next('/login')
     }
   })
   // 当路由跳转结束后
