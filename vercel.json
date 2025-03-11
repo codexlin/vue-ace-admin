@@ -3,6 +3,10 @@
     {
       "source": "/api/(.*)",
       "destination": "http://look4u.top:8081/$1"
+    },
+    {
+      "source": "/((?!api\/.*).*)",
+      "destination": "/index.html"
     }
   ],
   "headers": [
