@@ -1,5 +1,5 @@
 name: Bug Report  # 问题报告模板名称
-description:(推荐使用Form模板进行描述) File a bug report use form.  # 描述：提交一个错误报告
+description: (推荐使用Form模板进行描述) File a bug report use form.  # 描述：提交一个错误报告
 title: "[Bug]: "  # 问题标题前缀
 labels: ["bug", "triage"]  # 自动添加的标签
 projects: ["octo-org/1", "octo-org/44"]  # 关联的项目
