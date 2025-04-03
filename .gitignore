@@ -19,7 +19,7 @@ coverage
 
 # Editor directories and files
 node_modules
-#.vscode/*
+.vscode/*
 .idea
 .fleet
 *.suo
