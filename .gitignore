@@ -19,8 +19,7 @@ coverage
 
 # Editor directories and files
 node_modules
-.vscode/*
-!.vscode/extensions.json
+#.vscode/*
 .idea
 .fleet
 *.suo
@@ -29,4 +28,3 @@ node_modules
 *.sln
 *.sw?
 *.yaml
-/.vscode/extensions.json
