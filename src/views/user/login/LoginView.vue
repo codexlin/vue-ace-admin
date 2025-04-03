@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { WechatOutlined } from '@ant-design/icons-vue'
+import { WechatOutlined, QqCircleFilled, GithubFilled } from '@ant-design/icons-vue'
 import { gsap } from 'gsap'
 import { getCaptcha, registerApi } from './api'
 import { useUserStore } from '@/stores/modules/user'
 import Motion from '@/components/functional/Motion'
-
 const user = useUserStore()
 // const { tt } = useLocalI18n()
 const state = reactive<ILoginForm>({
@@ -41,7 +40,21 @@ async function getImg() {
     console.trace(error)
   }
 }
-
+// 触发 QQ 登录
+const qqLogin = () => {
+  if (window.QC) {
+    window.QC.Login.showPopup() // 显示 QQ 登录窗口
+  } else {
+    console.error('QQ SDK 未加载')
+  }
+}
+// 触发 gitHub 登录
+const loginGithub = () => {
+  const authorize_uri = 'https://github.com/login/oauth/authorize'
+  const client_id = 'Ov23liKReLQSwNqVFcak'
+  const redirect_url = 'http://localhost:3005/login'
+  window.location.href = `${authorize_uri}?client_id=${client_id}&redirect_url=${redirect_url}`
+}
 onMounted(() => {
   gsap.to('.img', {
     rotation: 55, // 顺时针旋转90度
@@ -111,6 +124,8 @@ onMounted(() => {
             <div class="extra-login">
               <a>
                 <wechat-outlined style="font-size: 40px; color: #24bf24" />
+                <QqCircleFilled style="font-size: 38px; color: #4da4de; margin-left: 20px" @click="qqLogin" />
+                <GithubFilled style="font-size: 36px; color: #000; margin: 0px 0 0px 20px" @click="loginGithub" />
               </a>
             </div>
           </a-form-item>
@@ -301,8 +316,8 @@ onMounted(() => {
 
       h2 {
         text-align: center;
+        text-shadow: 0 1px 2px 0 rgb(135 76 255 / 30%);
         letter-spacing: 0.02em;
-        text-shadow: 0 1px 2px rgb(135 76 255 / 30%);
         background: linear-gradient(98deg, #741bfe 0%, #f224fd 54%, #fc4b34 100%);
         background-clip: text;
         -webkit-text-fill-color: transparent;
