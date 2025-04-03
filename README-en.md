@@ -113,6 +113,24 @@ pnpm build:test
 # Build for production environment
 pnpm build:prod
 ```
+## Contribute
+
+We are very welcome to have you participate in our open source project.
+
+
+**Pull Request:**
+
+1. Fork code!
+2. Create your own branch: `git checkout -b feat-xxxx`
+3. Submit your changes: `git commit -am 'feat(function): add xxxxx'`
+4. Push your branch: `git push origin feat-xxxx`
+5. submit`pull request`
+
+Thank you to all the people who already contributed to ace-admin!
+
+<a href="https://github.com/codexlin/vue-ace-admin/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=codexlin/vue-ace-admin&max=100&columns=15" />
+</a>
 
 ## ✒️ Git Commit Conventions Reference
 
