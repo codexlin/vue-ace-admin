@@ -114,6 +114,25 @@ pnpm build:test
 # 构建正式环境
 pnpm build:prod
 ```
+## 如何参与贡献
+
+我们非常欢迎您参与我们的开源项目！
+
+**提交 Pull Request:**
+
+1. Fork代码仓库
+2. 创建您的功能分支：`git checkout -b feat-xxxx`
+3. 提交代码变更：`git commit -am 'feat(功能): 新增xxxx功能'`
+4. 推送分支到远程仓库：`git push origin feat-xxxx`
+5. 提交 Pull Request
+
+**贡献者名单：**
+
+感谢所有已经为项目贡献的开发者们！
+
+<a href="https://github.com/codexlin/vue-ace-admin/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=codexlin/vue-ace-admin&max=100&columns=15" />
+</a>
 
 ## ✒️ Git 提交规范参考
 
