@@ -75,13 +75,13 @@
   height: 100px;
   padding: 3px;
   overflow-y: auto;
+  border-radius: 8px;
+  box-shadow: rgb(255 255 255 / 10%);
 
   //   box-shadow:  20px 20px 60px #bebebe,
   //              -20px -20px 60px #ffffff;
 
   backdrop-filter: saturate(180%) blur(20px);
-  border-radius: 8px;
-  box-shadow: rgb(255 255 255 / 10%);
 
   p {
     padding: 2px;

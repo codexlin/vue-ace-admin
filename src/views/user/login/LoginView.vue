@@ -217,7 +217,8 @@ onMounted(() => {
   height: 100vh;
   margin: 0;
   background-color: #abc6f8;
-  background-image: radial-gradient(closest-side, rgb(255 255 255), rgb(235 105 78 / 0%)),
+  background-image:
+    radial-gradient(closest-side, rgb(255 255 255), rgb(235 105 78 / 0%)),
     radial-gradient(closest-side, rgb(250 203 203), rgb(243 11 164 / 0%)),
     radial-gradient(closest-side, rgb(237 252 202), rgb(254 234 131 / 0%)),
     radial-gradient(closest-side, rgb(197 248 241), rgb(170 142 245 / 0%)),
@@ -300,8 +301,8 @@ onMounted(() => {
 
       h2 {
         text-align: center;
-        text-shadow: 0 1px 2px 0 rgb(135 76 255 / 30%);
         letter-spacing: 0.02em;
+        text-shadow: 0 1px 2px rgb(135 76 255 / 30%);
         background: linear-gradient(98deg, #741bfe 0%, #f224fd 54%, #fc4b34 100%);
         background-clip: text;
         -webkit-text-fill-color: transparent;
