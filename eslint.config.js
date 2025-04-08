@@ -41,7 +41,7 @@ export default [
     files: ['src/**/*.{js,ts,jsx,tsx,vue}'],
     rules: {
       // 0 off 1 warn 2 error 强制标签执行自动关闭
-      'vue/script-setup-uses-vars': 2,
+      // 'vue/script-setup-uses-vars': 2,
       'vue/v-on-event-hyphenation': [
         1,
         'always',

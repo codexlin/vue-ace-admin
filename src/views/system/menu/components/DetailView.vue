@@ -15,8 +15,8 @@ interface IItem {
 }
 const formState = ref<Record<string, any>>({})
 interface State {
-  type: 'add' | 'edit' | 'detail' | 'delete'
-  id: number | null
+  type?: 'add' | 'edit' | 'detail' | 'delete'
+  id?: number | null
 }
 const { type = 'add', id = null } = defineProps<State>()
 const { tt } = useLocalI18n()

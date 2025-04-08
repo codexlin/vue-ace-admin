@@ -1,19 +1,23 @@
 <template>
   <div class="default-component">
-    <h1 class="default-component__title">欢迎来到默认组件</h1>
-    <p class="default-component__description">请根据组件路径：{{ currentPath }} 添加该组件 😊！</p>
+    <h1 class="default-component__title">欢迎来到默认组件😊！</h1>
+    <p>
+      <a-typography-text type="secondary">您还需要按照以下说明在代码中添加您的组件😊！</a-typography-text>
+    </p>
+    <p class="default-component__description"
+      >该组件完整路径为:<a-typography-text code>{{ `src/views${fullPath}/${name}.vue` }}</a-typography-text
+      >,请添加您的组件 😊！</p
+    >
+    <p class="default-component__description"
+      >请在国际化目录: <a-typography-text code>src/locales/lang</a-typography-text>中配置{{
+        meta.title
+      }}的中文和英文名称😊！</p
+    >
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-
-const currentPath = ref<string>('')
-
-onMounted(() => {
-  // 获取当前页面路径
-  currentPath.value = window.location.pathname
-})
+const { name, fullPath, meta } = useRoute()
 </script>
 
 <style scoped lang="scss">
