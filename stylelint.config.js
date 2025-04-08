@@ -12,6 +12,10 @@ export default {
   // 忽略所有文件，除了 src 目录下的文件，并且忽略 src 目录下的 JavaScript 和 TypeScript 文件。
   ignoreFiles: ['**/*', '!src/**/*', 'src/**/*.{js,jsx,ts,tsx}'],
   rules: {
+    'scss/at-rule-no-unknown': true,
+    'function-no-unknown': null,
+    'value-no-vendor-prefix': null,
+    'property-no-vendor-prefix': null,
     // 忽略以 get- 和 v- 开头的函数
     // 'function-no-unknown': [true, { ignoreFunctions: ['/^get-/', '/^v-/'] }],
     // 强制类名遵循特定的命名模式，支持 BEM 命名法和 Mui 前缀的类名。
@@ -92,13 +96,6 @@ export default {
       ],
       { severity: 'warning' }
     ],
-    // 忽视 -webkit-xxxx 等兼容写法
-    'property-no-vendor-prefix': [
-      true,
-      {
-        ignoreProperties: ['box-shadow']
-      }
-    ]
   },
   overrides: [
     {

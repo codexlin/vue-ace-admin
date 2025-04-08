@@ -6,16 +6,17 @@
   "editor.formatOnPaste": true,
   "editor.dragAndDrop": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll": "always",
     "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
   },
+  "stylelint.validate": ["css", "scss", "vue"],
   "eslint.enable": true,
   "eslint.useFlatConfig": true,
   "eslint.codeActionsOnSave.mode": "problems",
   "eslint.validate": [
     "typescript",
     "javascript",
-    "javascriptreact",
+    "javascript react",
     "vue"
   ],
   "eslint.options": {
@@ -30,5 +31,5 @@
   "[vue]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
+  }
 }
