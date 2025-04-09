@@ -49,7 +49,7 @@ const config = computed(() => headerConfig.value)
 </template>
 
 <style lang="scss" scoped>
-@import '@/styles/theme';
+@use '@/styles/theme';
 
 .layout-header {
   padding: 0;
@@ -84,7 +84,7 @@ const config = computed(() => headerConfig.value)
     }
 
     &__breadcrumb {
-      @include respond-to(sm) {
+      @include theme.respond-to(sm) {
         display: none;
       }
     }

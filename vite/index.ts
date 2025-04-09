@@ -9,7 +9,7 @@ const loadInitLog = () => {
     fg: '\x1b[35m',
     bg: '\x1b[43m'
   }
-  const LINK = 'https://github.com/xoxosos/vue-ace-admin#readme'
+  const LINK = 'https://github.com/codexlin/vue-ace-admin#readme'
   console.log(`${colors.fg} 😊如果您喜欢Ace Admin，不妨点个小⭐ ⭐  ==>:🔗${colors.bg}${LINK}${colors.reset}`)
 }
 export default { loadPlugins, loadViteResolve, loadViteServer, loadViteBuild, loadInitLog }

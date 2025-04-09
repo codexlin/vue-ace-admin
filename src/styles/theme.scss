@@ -1,5 +1,5 @@
 @use 'sass:map';
-@import './variables.module';
+@use 'variables.module';
 
 // 定义字体
 
@@ -35,8 +35,8 @@ $modes: (
 
 // 用户自定义颜色
 $custom-colors: (
-  primary: $primary,
-  info: $info
+  primary: variables.$primary,
+  info: variables.$info
 );
 
 // 设置当前模式和主题

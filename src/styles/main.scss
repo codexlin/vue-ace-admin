@@ -1,6 +1,7 @@
-@import './theme';
-@import './animation';
-@import './antd';
+@use 'theme';
+@use 'animation';
+@use 'antd';
+@use 'variables.module';
 
 $padding: 8px;
 
@@ -16,15 +17,15 @@ $padding: 8px;
 // }
 
 body {
+  position: relative;
+  font-family: theme.$font-family, Consolas, Menlo, Monaco, 'Courier New', 'PingFang SC', 'Microsoft YaHei', monospace;
+
   // 样式规则，使用混合应用当前模式和主题的样式
 
-  @include use-theme {
-    color: get-mode-var('infoColor');
-    background: get-mode-var('bgColor');
+  @include theme.use-theme {
+    color: theme.get-mode-var('infoColor');
+    background: theme.get-mode-var('bgColor');
   }
-
-  position: relative;
-  font-family: $font-family, Consolas, Menlo, Monaco, 'Courier New', 'PingFang SC', 'Microsoft YaHei', monospace;
 }
 
 .layout-main {
@@ -90,45 +91,45 @@ body {
 }
 
 .custom-drawer {
-  @include use-theme {
-    background: get-mode-var('bgColor');
+  @include theme.use-theme {
+    background: theme.get-mode-var('bgColor');
   }
 
   .ant-drawer-body {
-    @include use-theme {
-      background: get-mode-var('bgColor');
-    }
-
     padding: 0;
+
+    @include theme.use-theme {
+      background: theme.get-mode-var('bgColor');
+    }
   }
 }
 
 #nprogress .bar {
-  background: $primary; // 跟随主色
+  background: variables.$primary; // 跟随主色
 }
 
 .flex-card {
-  @include respond-to('lg') {
+  flex: 0 0 calc(25% - 2 * $padding);
+
+  @include theme.respond-to('lg') {
     flex: 0 0 calc(50% - #{$padding});
   }
 
-  @include respond-to('md') {
+  @include theme.respond-to('md') {
     flex: 0 0 calc(100% - #{$padding});
   }
-
-  flex: 0 0 calc(25% - 2 * $padding);
 }
 
 .flex-cards {
-  @include respond-to('md') {
-    flex-direction: column;
-  }
-
   display: flex;
   flex-wrap: wrap;
   gap: 2 * $padding;
   justify-content: space-between;
   padding: $padding;
+
+  @include theme.respond-to('md') {
+    flex-direction: column;
+  }
 
   &_left {
     width: calc(60% - $padding);
@@ -144,7 +145,7 @@ body {
 
   &_left,
   &_right {
-    @include respond-to('lg') {
+    @include theme.respond-to('lg') {
       width: 100%;
     }
   }

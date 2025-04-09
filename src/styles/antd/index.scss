@@ -1,14 +1,16 @@
+@use '../theme';
+
 // 设置ant样式
 .ant-drawer:has(.ant-layout-sider) {
-  @include respond-to('md') {
+  display: none;
+
+  @include theme.respond-to('md') {
     display: inline-block;
   }
-
-  display: none;
 }
 
 .ant-layout {
-  font-family: $font-family;
+  font-family: theme.$font-family;
 
   .ant-layout-header {
     height: var(--header-height);

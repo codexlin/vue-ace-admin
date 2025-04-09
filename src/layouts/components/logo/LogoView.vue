@@ -23,7 +23,7 @@ const width = computed(() => (app.collapsed ? '80px' : '200px'))
 </template>
 
 <style lang="scss" scoped>
-@import '@/styles/theme';
+@use '@/styles/theme';
 
 .logo {
   display: flex;
@@ -35,7 +35,7 @@ const width = computed(() => (app.collapsed ? '80px' : '200px'))
   span {
     font-size: 16px;
     font-weight: bold;
-    color: get-color('primary'); /* 也可用v-bind token */
+    color: theme.get-color('primary'); /* 也可用v-bind token */
     transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
   }
 }

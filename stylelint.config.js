@@ -78,24 +78,8 @@ export default {
     ],
     // 忽略 rpx 单位。
     'unit-no-unknown': [true, { ignoreUnits: ['rpx'] }],
-    'order/order': [
-      [
-        'dollar-variables',
-        'custom-properties',
-        'at-rules',
-        'declarations',
-        {
-          type: 'at-rule',
-          name: 'supports'
-        },
-        {
-          type: 'at-rule',
-          name: 'media'
-        },
-        'rules'
-      ],
-      { severity: 'warning' }
-    ],
+    'order/order': ['custom-properties', 'declarations'],
+    'order/properties-order': ['width', 'height']
   },
   overrides: [
     {
