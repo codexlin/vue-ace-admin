@@ -1,10 +1,22 @@
 <script lang="tsx" setup>
 import { useToggle } from '@vueuse/core'
+import type { TableColumnType } from 'ant-design-vue'
 import { addRole, deleteRole, getRoleList, getUserList, getUserRoleInfo, updateUserRole } from '../api'
 import { OperationButtons } from '@/components'
-import FormModal from '@/components/form/FormModal'
+import FormModal, { type IFormModal } from '@/components/form/FormModal'
 import useList from '@/hooks/useList'
 import useLocalI18n from '@/hooks/useLocalI18n'
+/** 表单项类型 */
+type FormItem = {
+  ui: string
+  name: string
+  label: string
+  allowClear?: boolean
+  placeholder?: string
+  defaultValue?: any
+  mode?: 'multiple'
+  options?: { value: number; label: string }[]
+}
 
 export interface IUser {
   avatar?: null
@@ -37,7 +49,7 @@ interface State {
   id: number | null
 }
 
-const formRef = ref(null)
+const formRef = ref<IFormModal>()
 const recordData = ref()
 const detailData = ref()
 
@@ -52,18 +64,27 @@ const handleOk = async () => {
 }
 const [value, toggle] = useToggle()
 const { tt } = useLocalI18n()
-const formItems = ref()
+// -- 弹窗表单项 --
+const formItems: Ref<FormItem[]> = ref([])
 
 const clickType = ref('add')
+// -- 根据操作类型初始化数据 --
 const initWithClickType = async (record: IUser) => {
   if (clickType.value === 'delete') {
-    return await deleteRole(record?.id)
+    await deleteRole(record.id)
+    await loadData()
+    return
   }
   if (clickType.value !== 'add') {
-    const res = await getUserRoleInfo(record?.userId)
-    const roleIds = res.data?.roles?.map((i) => i.roleId) || []
-    detailData.value = { ...res.data, roleIds }
+    const res = await getUserRoleInfo<Record<string, any>>(record.userId)
+    detailData.value = {
+      ...res.data,
+      roleIds: res.data?.roles?.map((i: Record<string, any>) => i.roleId) || []
+    }
+  } else {
+    detailData.value = null
   }
+  await initFormItems()
 }
 const handleClick = async (record: IUser, type: State['type']) => {
   console.log(record)
@@ -81,10 +102,11 @@ const title = computed(() => {
   } as Record<string, string>
   return text[clickType.value]
 })
+// -- 初始化表单项 --
 const initFormItems = async () => {
   const res = await getRoleList<any[]>()
   const options = res.data?.map((i) => ({ value: i.roleId, label: i.roleName })) || []
-  const initialFormItems = [
+  const base: FormItem[] = [
     {
       ui: 'a-select',
       name: 'roleIds',
@@ -96,20 +118,18 @@ const initFormItems = async () => {
       options
     }
   ]
-  // 更新表单项默认值，如果有详细数据存在
-  if (detailData.value) {
-    formItems.value = initialFormItems.map((item) => ({
+  if (detailData.value?.roleIds) {
+    formItems.value = base.map((item) => ({
       ...item,
-      defaultValue: detailData.value[item.name] ?? item.defaultValue
+      defaultValue: detailData.value?.[item.name] ?? item.defaultValue
     }))
-    console.log(formItems.value)
   } else {
-    formItems.value = initialFormItems
+    formItems.value = base
   }
 }
 
 const { dataSource, loadData, loading } = useList({ listRequestFn: getUserList })
-const columns = [
+const columns: TableColumnType<IUser>[] = [
   {
     title: '用户ID',
     dataIndex: 'id'
@@ -176,7 +196,13 @@ const columns = [
     }
   }
 ]
-const fields = ref([
+interface FieldItem {
+  name: string
+  label: string
+  component: string
+  props?: Record<string, any>
+}
+const fields = reactive<FieldItem[]>([
   { name: 'name', label: '姓名', component: 'a-input', props: { placeholder: '请输入姓名' } },
   { name: 'age', label: '年龄', component: 'a-input-number', props: { placeholder: '请输入年龄' } },
   {
@@ -192,13 +218,17 @@ const fields = ref([
   }
 ])
 
-const defaultValues = ref({
+const defaultValues = {
   name: '默认姓名',
   age: 25,
   gender: 'male'
-})
-
-const handleSearch = (formState) => {
+}
+interface SearchFormState {
+  name?: string
+  age?: number
+  gender?: string
+}
+const handleSearch = (formState: SearchFormState) => {
   console.log('搜索条件:', formState)
   // 执行检索操作
 }

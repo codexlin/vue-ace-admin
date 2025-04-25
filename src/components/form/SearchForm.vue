@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useEmitOrDefault } from '@/hooks/useEmitOrDefault'
+
 interface Field {
   name: string
   label: string
@@ -9,42 +11,30 @@ interface IProps {
   fields: Array<Field>
   defaultValues: Record<string, any>
 }
-
+function resetFormState() {
+  Object.keys(defaultValues).forEach((key) => {
+    formState[key] = structuredClone(defaultValues[key]) ?? ''
+  })
+}
 const { fields, defaultValues } = defineProps<IProps>()
 
-const emits = defineEmits(['submit', 'reset'])
-// 获取当前组件实例
-const instance = getCurrentInstance()
+const emits = defineEmits<{
+  (e: 'submit', formState: typeof defaultValues): void
+  (e: 'reset'): void
+}>()
+
 // 表单状态管理
 const formState = reactive({ ...defaultValues })
-// 提交表单
-const handleSubmit = () => {
-  if (instance?.vnode.props?.onSubmit) {
-    emits('submit', formState)
-  } else {
-    console.log('默认提交行为:', formState)
-    // 执行默认提交行为
-  }
-}
+const { emitOrDefault: handleSubmit } = useEmitOrDefault(
+  'submit',
+  (payload) => emits('submit', payload),
+  () => console.log('默认提交逻辑:', formState)
+)
 
-// 重置表单
-const handleReset = () => {
-  for (const key in formState) {
-    formState[key] = defaultValues[key] || ''
-  }
-  if (instance?.vnode.props?.onReset) {
-    emits('reset')
-  } else {
-    console.log('默认重置行为')
-    // 执行默认重置行为
-  }
-}
-
+const { emitOrDefault: handleReset } = useEmitOrDefault('reset', () => emits('reset'), resetFormState)
 // 监听默认值的变化以更新表单状态
 watchEffect(() => {
-  for (const key in defaultValues) {
-    formState[key] = defaultValues[key]
-  }
+  resetFormState()
 })
 </script>
 
