@@ -28,7 +28,6 @@ const handleClick = (record?: any, btnType?: State['type']) => {
     const isDelete = btnType === 'delete'
     title.value = isAdd ? tt('common.add') : tt('common.edit')
     state.id = record?.id ? record.id : null
-    // 可加modal确认
     if (isDelete) {
       const onOk = async () => {
         await deleteMenu(record.id)
