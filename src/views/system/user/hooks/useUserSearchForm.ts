@@ -9,11 +9,11 @@ interface SearchFormState {
 
 export default function useUserSearchForm(onSearch: (form: SearchFormState) => void, onResetCallback?: () => void) {
   // 默认表单值
-  const defaultValues: SearchFormState = {
+  const state: Ref<SearchFormState> = ref({
     name: '默认姓名',
     age: 25,
     gender: 'male'
-  }
+  })
 
   // 表单字段配置
   const fields = ref([
@@ -45,7 +45,7 @@ export default function useUserSearchForm(onSearch: (form: SearchFormState) => v
 
   return {
     fields,
-    defaultValues,
+    state,
     handleSearch,
     handleReset
   }

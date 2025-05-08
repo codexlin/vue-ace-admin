@@ -72,7 +72,9 @@ declare global {
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useDebounces: typeof import('../src/hooks/useDebouncedRef')['useDebounces']
+  const useEmitOrDefault: typeof import('../src/hooks/useEmitOrDefault')['useEmitOrDefault']
   const useFetchWithStream: typeof import('../src/hooks/useFetchWithStream')['useFetchWithStream']
+  const useHasEventListener: typeof import('../src/hooks/useHasEventListener')['useHasEventListener']
   const useId: typeof import('vue')['useId']
   const useIndexedDB: typeof import('../src/hooks/useIndexedDB')['useIndexedDB']
   const useLink: typeof import('vue-router')['useLink']
@@ -95,7 +97,7 @@ declare global {
 // for type re-export
 declare global {
   // @ts-ignore
-  export type { Component, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
+  export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
   export type { MessageType, OptionsType } from '../src/hooks/useList'

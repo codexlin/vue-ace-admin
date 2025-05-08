@@ -1,48 +1,61 @@
 <script setup lang="ts">
-import { useEmitOrDefault } from '@/hooks/useEmitOrDefault'
+import { reactive, computed, watchEffect } from 'vue'
 
 interface Field {
   name: string
   label: string
   component?: string
-  props?: any
+  props?: Record<string, any>
 }
-interface IProps {
-  fields: Array<Field>
-  defaultValues: Record<string, any>
-}
-function resetFormState() {
-  Object.keys(defaultValues).forEach((key) => {
-    formState[key] = structuredClone(defaultValues[key]) ?? ''
-  })
-}
-const { fields, defaultValues } = defineProps<IProps>()
 
-const emits = defineEmits<{
-  (e: 'submit', formState: typeof defaultValues): void
+interface IProps {
+  fields: Field[]
+  defaultValues?: Record<string, any>
+  modelValue?: Record<string, any>
+}
+
+const props = defineProps<IProps>()
+const emit = defineEmits<{
+  (e: 'update:modelValue', val: Record<string, any>): void
+  (e: 'submit', val: Record<string, any>): void
   (e: 'reset'): void
 }>()
 
-// 表单状态管理
-const formState = reactive({ ...defaultValues })
-const { emitOrDefault: handleSubmit } = useEmitOrDefault(
-  'submit',
-  (payload) => emits('submit', payload),
-  () => console.log('默认提交逻辑:', formState)
-)
+// 本地状态（当没有 v-model 控制时使用）
+const internalFormState = reactive({ ...structuredClone(props.defaultValues) })
 
-const { emitOrDefault: handleReset } = useEmitOrDefault('reset', () => emits('reset'), resetFormState)
-// 监听默认值的变化以更新表单状态
-watchEffect(() => {
-  resetFormState()
+// 统一的 formState 绑定（自动根据是否传入 modelValue 决定使用哪一个）
+const formState = computed({
+  get: () => props.modelValue ?? internalFormState,
+  set: (val) => {
+    if (props.modelValue) emit('update:modelValue', val)
+    else Object.assign(internalFormState, val)
+  }
 })
+
+// 提交事件
+const handleSubmit = () => {
+  emit('submit', formState.value)
+}
+
+// 重置事件
+const handleReset = () => {
+  const resetData: Record<string, any> = structuredClone(props.defaultValues)
+  formState.value = resetData
+  emit('reset')
+}
+
+// 监听 defaultValues 变化时重新初始化
+// watchEffect(() => {
+//   const resetData: Record<string, any> = structuredClone(props.defaultValues)
+//   formState.value = resetData
+// })
 </script>
 
 <template>
   <div class="search-container">
-    <a-form @submit.prevent="handleSubmit">
+    <a-form :model="formState" @submit.prevent="handleSubmit">
       <a-row :gutter="16">
-        <!-- 动态生成表单字段 -->
         <a-col v-for="field in fields" :key="field.name" :span="8">
           <a-form-item :label="field.label">
             <component :is="field.component || 'a-input'" v-model:value="formState[field.name]" v-bind="field.props" />
