@@ -1,4 +1,5 @@
 <script setup lang="tsx">
+import { ProTable } from '@ace-admin/ui'
 import useUserList from './hooks/useUserList'
 import useUserModal from './hooks/useUserModal'
 import useUserSearchForm from './hooks/useUserSearchForm'
@@ -27,7 +28,7 @@ onMounted(loadData)
   <div>
     <h1>User View</h1>
     <SearchForm v-model:modelValue="state" :fields @submit="handleSearch" @reset="handleReset" />
-    <CommonTable :table-props="{ columns, dataSource, loading }" />
+    <ProTable :table-props="{ columns, dataSource, loading }" />
     <a-modal v-model:open="visible" :title="title" :destroy-on-close="true" @ok="handleOk">
       <FormModal ref="formRef" :form-items="formItems" />
     </a-modal>

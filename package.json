@@ -18,6 +18,11 @@
     "dev": "vite",
     "build": "vite build",
     "build:prod": "vite build  --mode production",
+    "deploy": "node scripts/deploy.js",
+    "deploy:vercel": "node scripts/deploy.js vercel",
+    "deploy:netlify": "node scripts/deploy.js netlify",
+    "deploy:github": "node scripts/deploy.js github",
+    "deploy:docker": "node scripts/deploy.js docker",
     "build:test": "vite build  --mode test",
     "preview": "vite preview",
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
@@ -28,7 +33,11 @@
     "lint:lint-staged": "lint-staged",
     "preinstall": "npx only-allow pnpm",
     "postinstall": "npx simple-git-hooks",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "dev:docs": "pnpm -C docs dev",
+    "build:docs": "pnpm -C docs build",
+    "dev:ui": "pnpm -C packages/ui dev",
+    "build:ui": "pnpm -C packages/ui build"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",

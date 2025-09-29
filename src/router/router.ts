@@ -23,7 +23,16 @@ export const basicRoutes: RouteRecordRaw[] = [
       requiresAuth: true // 在这里设置，表示layout下边的子路由全部需要登录才能访问
     },
     redirect: '/dashboard',
-    children: []
+    children: [
+      {
+        path: '/test-components/antv',
+        name: 'antv-test',
+        component: () => import('@/views/testComponents/AntvTest.vue'),
+        meta: {
+          title: '组件库测试'
+        }
+      }
+    ]
   },
   {
     path: '/:pathMatch(.*)',

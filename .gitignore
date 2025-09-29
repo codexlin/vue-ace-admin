@@ -31,3 +31,4 @@ node_modules
 *.sln
 *.sw?
 *.yaml
+docs/.vitepress/cache/

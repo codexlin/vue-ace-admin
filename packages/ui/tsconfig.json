@@ -1,0 +1,26 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "jsx": "preserve",
+    "jsxFactory": "VueTsx",
+    "jsxFragmentFactory": "VueTsx.Fragment",
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "isolatedModules": false,
+    "noEmitOnError": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "types": ["vite/client", "node"],
+    "paths": {
+      "@ace-admin/ui": ["./src/index.ts"]
+    }
+  },
+  "include": ["src/**/*", "src/**/*.vue"],
+  "exclude": ["node_modules", "dist", "**/*.test.*", "**/__tests__/*"]
+}

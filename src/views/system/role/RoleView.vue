@@ -1,4 +1,5 @@
 <script lang="tsx" setup>
+import { ProTable } from '@ace-admin/ui'
 import { useToggle } from '@vueuse/core'
 import useRoleForm from './hooks/useRoleForm'
 import useRoleList from './hooks/useRoleList.tsx'
@@ -21,13 +22,13 @@ onMounted(() => {
 
 <template>
   <div>
-    <CommonTable :table-props="{ rowKey: 'id', columns, dataSource, loading }">
+    <ProTable :table-props="{ rowKey: 'id', columns, dataSource, loading }">
       <template #toolbar>
         <a-space>
           <a-button type="primary" @click="() => handleClick(null, 'add').then(toggleModal)"> 新增 </a-button>
         </a-space>
       </template>
-    </CommonTable>
+    </ProTable>
     <a-modal v-model:open="modalOpen" :destroy-on-close="true" title="角色设置" @ok="onOk">
       <FormModal ref="formRef" :form-items="formItems" />
     </a-modal>
