@@ -1,8 +1,8 @@
+import { useList } from '@ace-admin/ui'
 import type { IUser } from './useUserModal'
 import { getUserList } from '../../api'
 import { OperationButtons } from '@/components'
 
-import useList from '@/hooks/useList'
 import useLocalI18n from '@/hooks/useLocalI18n'
 
 type HandleClick = (record: IUser, type: 'add' | 'edit' | 'delete') => void | Promise<void>

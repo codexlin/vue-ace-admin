@@ -101,9 +101,6 @@ declare global {
   export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
-  export type { MessageType, OptionsType } from '../src/hooks/useList'
-  import('../src/hooks/useList')
-  // @ts-ignore
   export type { RequestOptions } from '../src/hooks/useRequest'
   import('../src/hooks/useRequest')
 }

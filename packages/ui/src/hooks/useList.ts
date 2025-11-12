@@ -11,7 +11,7 @@ export type OptionsType<
   FilterOption extends Record<string, any> = Record<string, any>
 > = UseListOptions<ItemType, Response, FilterOption>
 
-interface Props<
+interface UseListProps<
   ItemType extends object = Record<string, any>,
   FilterOption extends object = Record<string, any>,
   Response = any
@@ -37,11 +37,11 @@ export function infoMessage(message: string) {
   AntMessage.info(message)
 }
 
-export default function useList<
+export function useList<
   ItemType extends object = Record<string, any>,
   FilterOption extends object = Record<string, any>,
   Response = any
->({ listRequestFn, filterOption, options }: Props<ItemType, FilterOption, Response>): UseListResult<
+>({ listRequestFn, filterOption, options }: UseListProps<ItemType, FilterOption, Response>): UseListResult<
   ItemType,
   FilterOption,
   Response
@@ -49,7 +49,7 @@ export default function useList<
   return useCoreList<ItemType, FilterOption, Response>({
     request: listRequestFn,
     filters: filterOption,
-  options
+    options
   })
 }
 

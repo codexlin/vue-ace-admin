@@ -1,8 +1,8 @@
 <script lang="tsx" setup>
 import { onMounted, ref } from 'vue'
+import { useList } from '@ace-admin/ui'
 import DetailView from './components/DetailView.vue'
 import { useConfig } from './hooks/useConfig'
-import useList from '@/hooks/useList'
 import useLocalI18n from '@/hooks/useLocalI18n'
 import { useUserStore } from '@/stores/modules/user'
 import { showModalConfirm } from '@/utils/common'

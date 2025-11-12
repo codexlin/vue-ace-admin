@@ -15,7 +15,7 @@ export type { ProTableProps, IData as ProTableData } from './pro-table/type'
 export type { ProSearchFormProps, Field as SearchField } from './pro-search-form/type'
 
 // 导出 Hooks
-export { default as useList, message, errorMessage, warningMessage, infoMessage } from './hooks/useList'
+export { useList, message, errorMessage, warningMessage, infoMessage } from './hooks/useList'
 export type { OptionsType, UseListResult, UseListOptions, UseListParams } from './hooks/useList'
 
 // 导出 Hooks

@@ -42,7 +42,6 @@ declare module 'vue' {
     ASpace: typeof import('ant-design-vue/es')['Space']
     ASpin: typeof import('ant-design-vue/es')['Spin']
     AssistantBlock: typeof import('./../src/components/Ai/components/AssistantBlock.vue')['default']
-    AStatistic: typeof import('ant-design-vue/es')['Statistic']
     ASwitch: typeof import('ant-design-vue/es')['Switch']
     ATable: typeof import('ant-design-vue/es')['Table']
     ATabPane: typeof import('ant-design-vue/es')['TabPane']
@@ -52,14 +51,10 @@ declare module 'vue' {
     AWatermark: typeof import('ant-design-vue/es')['Watermark']
     BaseUpload: typeof import('./../src/components/upload/BaseUpload.vue')['default']
     BasicButton: typeof import('./../src/components/button/components/BasicButton.vue')['default']
-    FormModal: typeof import('./../src/components/form/FormModal.tsx')['default']
-    Motion: typeof import('./../src/components/functional/Motion.tsx')['default']
     OperationButtons: typeof import('./../src/components/button/OperationButtons.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchForm: typeof import('./../src/components/form/SearchForm.vue')['default']
-    StatisticCard: typeof import('./../src/components/statistic/StatisticCard.vue')['default']
     SvgIcon: typeof import('./../src/components/svgIcon/SvgIcon.vue')['default']
-    TinymceEditor: typeof import('./../src/components/tinymce/TinymceEditor.vue')['default']
   }
 }

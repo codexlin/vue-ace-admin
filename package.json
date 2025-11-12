@@ -12,12 +12,13 @@
     "vue3",
     "typescript",
     "pinia",
-    "vite"
+    "vite",
+    "monorepo"
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "build:prod": "vite build --mode production",
+    "build": "pnpm run build:hooks && pnpm run build:ui && vite build",
+    "build:prod": "pnpm run build:hooks && pnpm run build:ui && vite build --mode production",
     "deploy": "node scripts/deploy.js",
     "deploy:vercel": "node scripts/deploy.js vercel",
     "deploy:netlify": "node scripts/deploy.js netlify",
@@ -36,6 +37,7 @@
     "commit": "git-cz",
     "dev:docs": "pnpm -C docs dev",
     "build:docs": "pnpm -C docs build",
+    "build:hooks": "pnpm -C packages/hooks build",
     "dev:ui": "pnpm -C packages/ui dev",
     "build:ui": "pnpm -C packages/ui build"
   },
