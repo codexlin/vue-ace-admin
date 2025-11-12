@@ -1,7 +1,17 @@
 import { getCurrentInstance } from 'vue'
 
-export function useEmitOrDefault<T = any>(eventName: string, emitFn: (payload?: T) => void, fallbackFn: () => void) {
-  // 可访问当前组件实例（proxy、props、attrs、slots）
+/**
+ * 事件发射或执行默认行为
+ * @param eventName 事件名称
+ * @param emitFn 发射函数
+ * @param fallbackFn 默认行为函数
+ * @returns 发射或默认行为函数
+ */
+export function useEmitOrDefault<T = any>(
+  eventName: string,
+  emitFn: (payload?: T) => void,
+  fallbackFn: () => void
+) {
   const instance = getCurrentInstance()
 
   const emitOrDefault = (payload?: T) => {
@@ -22,3 +32,5 @@ export function useEmitOrDefault<T = any>(eventName: string, emitFn: (payload?: 
 
   return { emitOrDefault }
 }
+
+export type UseEmitOrDefault = ReturnType<typeof useEmitOrDefault>

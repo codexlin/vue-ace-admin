@@ -13,14 +13,18 @@
     "skipDefaultLibCheck": true,
     "isolatedModules": false,
     "noEmitOnError": false,
-    "suppressImplicitAnyIndexErrors": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "types": ["vite/client", "node"],
     "paths": {
-      "@ace-admin/ui": ["./src/index.ts"]
+      "vue-ace-admin-ui": ["./src/index.ts"]
     }
   },
   "include": ["src/**/*", "src/**/*.vue"],
-  "exclude": ["node_modules", "dist", "**/*.test.*", "**/__tests__/*"]
+  "exclude": ["node_modules", "dist", "**/*.test.*", "**/__tests__/*"],
+  "references": [
+    {
+      "path": "../hooks/tsconfig.json"
+    }
+  ]
 }

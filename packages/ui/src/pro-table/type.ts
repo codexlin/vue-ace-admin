@@ -1,13 +1,12 @@
 import type { VNode } from 'vue'
+import type { TableProps as AntTableProps } from 'ant-design-vue'
 
-// ======================
-// ProTable 扩展类型
-// ======================
+export type { AntTableProps }
 
 /**
  * ProTable 组件属性定义（只包含扩展属性）
  */
-export interface IProps {
+export type ProTableProps<RecordType extends Record<string, any> = Record<string, any>> = AntTableProps<RecordType> & {
   /** 斑马纹模式 */
   isZebra?: 'even' | 'odd' | 'none'
   /** 是否使用卡片包装 */
@@ -51,24 +50,4 @@ export type Item = {
  */
 export interface Items {
   items: Item[]
-}
-
-// ======================
-// 类型别名
-// ======================
-
-/**
- * ProTable 属性类型别名
- */
-export type ProTableProps = IProps
-
-// ======================
-// 工具函数
-// ======================
-
-/**
- * 检查是否为函数
- */
-export function isFunction(value: any): value is Function {
-  return typeof value === 'function'
 }

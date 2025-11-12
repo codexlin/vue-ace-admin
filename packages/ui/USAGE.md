@@ -676,7 +676,7 @@ const toggleZebra = () => {
 ## TypeScript 支持
 
 ```typescript
-import type { ProButtonProps, ProTableProps } from '@ace-admin/ui'
+import type { ProButtonProps, ProTableProps } from 'vue-ace-admin-ui'
 
 // ProButton 类型
 const buttonProps: ProButtonProps = {

@@ -7,7 +7,6 @@ import { CanvasRenderer } from 'echarts/renderers'
 import { h } from 'vue'
 import VChart from 'vue-echarts'
 import type { EChartsOption } from 'echarts'
-import StatisticCard from '@/components/statistic/StatisticCard.vue'
 
 use([CanvasRenderer, BarChart, LineChart, PieChart, TitleComponent, TooltipComponent, GridComponent, LegendComponent])
 

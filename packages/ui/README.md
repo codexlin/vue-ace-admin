@@ -1,10 +1,10 @@
-# @ace-admin/ui
+# vue-ace-admin-ui
 
 > Vue 3 组件库，基于 Ant Design Vue 构建
 
 ## 介绍
 
-`@ace-admin/ui` 是一个基于 Vue 3 和 Ant Design Vue 的组件库，提供了常用的增强型 UI 组件，帮助开发者快速构建企业级应用。
+`vue-ace-admin-ui` 是一个基于 Vue 3 和 Ant Design Vue 的组件库，提供了常用的增强型 UI 组件，帮助开发者快速构建企业级应用。
 
 ## 特性
 
@@ -19,13 +19,13 @@
 
 ```bash
 # npm
-npm install @ace-admin/ui ant-design-vue vue
+npm install vue-ace-admin-ui ant-design-vue vue
 
 # yarn
-yarn add @ace-admin/ui ant-design-vue vue
+yarn add vue-ace-admin-ui ant-design-vue vue
 
 # pnpm
-pnpm add @ace-admin/ui ant-design-vue vue
+pnpm add vue-ace-admin-ui ant-design-vue vue
 ```
 
 ## 快速开始
@@ -35,8 +35,8 @@ pnpm add @ace-admin/ui ant-design-vue vue
 ```js
 // main.js
 import { createApp } from 'vue'
-import AceAdminUI from '@ace-admin/ui'
-import '@ace-admin/ui/style.css'
+import AceAdminUI from 'vue-ace-admin-ui'
+import 'vue-ace-admin-ui/style.css'
 import 'ant-design-vue/dist/antd.css' // 或者使用你的主题样式
 
 const app = createApp(App)
@@ -58,8 +58,8 @@ app.mount('#app')
 </template>
 
 <script setup>
-import { ProButton } from '@ace-admin/ui'
-import '@ace-admin/ui/style.css'
+import { ProButton } from 'vue-ace-admin-ui'
+import 'vue-ace-admin-ui/style.css'
 
 const handleSubmit = async () => {
   // 返回 Promise，按钮会自动显示 loading 状态
@@ -206,7 +206,7 @@ const columns = [
 ## TypeScript 支持
 
 ```typescript
-import type { ProButtonProps, ProTableProps } from '@ace-admin/ui'
+import type { ProButtonProps, ProTableProps } from 'vue-ace-admin-ui'
 
 const buttonProps: ProButtonProps = {
   autoLoading: true,

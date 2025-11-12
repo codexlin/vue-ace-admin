@@ -48,10 +48,10 @@ export default defineConfig({
         },
         exports: 'named', // 解决命名和默认导出的警告
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name.endsWith('.css')) {
+          if (assetInfo.name && assetInfo.name.endsWith('.css')) {
             return 'ace-admin-ui.css'
           }
-          return assetInfo.name
+          return assetInfo.name || 'assets/[name][extname]'
         }
       }
     }

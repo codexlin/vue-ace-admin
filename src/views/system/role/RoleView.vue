@@ -22,7 +22,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <ProTable :table-props="{ rowKey: 'id', columns, dataSource, loading }">
+    <ProTable row-key="id" :columns="columns" :dataSource="dataSource" :loading="loading">
       <template #toolbar>
         <a-space>
           <a-button type="primary" @click="() => handleClick(null, 'add').then(toggleModal)"> 新增 </a-button>

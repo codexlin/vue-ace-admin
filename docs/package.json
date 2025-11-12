@@ -9,11 +9,13 @@
     "preview": "vitepress preview"
   },
   "devDependencies": {
-    "@ace-admin/ui": "workspace:*",
+    "ant-design-vue": "~4.2.6",
     "lodash-es": "^4.17.21",
-    "vitepress": "^1.5.0"
+    "vitepress": "^1.5.0",
+    "vue-ace-admin-ui": "latest"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^7.0.1",
     "@vitepress-code-preview/container": "^1.0.8",
     "@vitepress-code-preview/plugin": "^1.0.6"
   }

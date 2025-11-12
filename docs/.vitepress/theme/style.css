@@ -1,0 +1,86 @@
+/* Color Base */
+:root {
+  --vp-c-purple: #c77dff;
+  --vp-c-purple-light: #e0aaff;
+  --vp-c-purple-lighter: #c19ee0;
+  --vp-c-purple-dark: #9d4edd;
+  --vp-c-purple-darker: #7b2cbf;
+
+  /* 设置字体颜色 */
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #bd34fe 30%, #41d1ff);
+
+  /* 设置右图像渐变 */
+  --vp-home-hero-image-background-image: linear-gradient(-45deg, #7b2cbf 50%, #47caff 50%);
+  --vp-home-hero-image-filter: blur(45px);
+  --vp-custom-block-tip-bg: var(--vp-c-green-soft);
+}
+
+/* Color Theme */
+:root {
+  --vp-c-brand-1: #9d4edd;
+  --vp-c-brand-2: #e0aaff;
+  --vp-c-brand-3: #c77dff;
+  --vp-c-brand: var(--vp-c-purple);
+  --vp-c-brand-light: var(--vp-c-purple-light);
+  --vp-c-brand-lighter: var(--vp-c-purple-lighter);
+  --vp-c-brand-dark: var(--vp-c-purple-dark);
+  --vp-c-brand-darker: var(--vp-c-purple-darker);
+}
+
+/* 表格自适应占满容器 */
+.ant-table-wrapper {
+  width: 100%;
+}
+
+.ant-table {
+  width: 100%;
+}
+
+/* Demo 区域的表格和表单优化 */
+.vp-demo-preview .ant-table-wrapper,
+.demo-preview .ant-table-wrapper {
+  margin: 16px 0;
+  width: 100%;
+}
+
+.vp-demo-preview .ant-card,
+.demo-preview .ant-card {
+  width: 100%;
+}
+
+.vp-demo-preview .search-container,
+.demo-preview .search-container {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+/* 确保 Demo 容器不限制宽度 */
+.vp-demo-preview,
+.demo-preview {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* 移动端表格横向滚动 */
+@media (max-width: 768px) {
+  .ant-table-wrapper {
+    overflow-x: auto;
+  }
+}
+/* 提示框 */
+.custom-block.tip {
+  border-color: var(--vp-c-green-2);
+}
+
+/* 警告框 */
+.custom-block.warning {
+  /* border-color: #d97706; */
+  border-color: var(--vp-c-yellow-2);
+}
+
+/* 危险框 */
+.custom-block.danger {
+  /* border-color: #f43f5e; */
+  border-color: var(--vp-c-red-2);
+}

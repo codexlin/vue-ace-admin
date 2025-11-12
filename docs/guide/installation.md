@@ -11,32 +11,32 @@
 ### 使用 pnpm（推荐）
 
 ```bash
-pnpm add @codexlin/antv
+pnpm add vue-ace-admin-ui ant-design-vue
 ```
 
 ### 使用 npm
 
 ```bash
-npm install @codexlin/antv
+npm install vue-ace-admin-ui ant-design-vue
 ```
 
 ### 使用 yarn
 
 ```bash
-yarn add @codexlin/antv
+yarn add vue-ace-admin-ui ant-design-vue
 ```
 
 ## 版本说明
 
-- `@codexlin/antv` - 组件库核心包
-- `ant-design-vue` - 基础组件依赖
-- `vue` - Vue 3 框架
+- `vue-ace-admin-ui` - 组件库核心包
+- `ant-design-vue` - 基础组件依赖（必需）
+- `vue` - Vue 3 框架（必需）
 
 ## 兼容性
 
-| Vue | @codexlin/antv |
-|-----|---------------|
-| 3.3+ | 0.1.0+ |
+| Vue | Ant Design Vue | vue-ace-admin-ui |
+|-----|----------------|------------------|
+| 3.4+ | 4.0+ | 0.1.0+ |
 
 ## 开发环境
 

@@ -17,13 +17,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:prod": "vite build  --mode production",
+    "build:prod": "vite build --mode production",
     "deploy": "node scripts/deploy.js",
     "deploy:vercel": "node scripts/deploy.js vercel",
     "deploy:netlify": "node scripts/deploy.js netlify",
     "deploy:github": "node scripts/deploy.js github",
     "deploy:docker": "node scripts/deploy.js docker",
-    "build:test": "vite build  --mode test",
+    "build:test": "vite build --mode test",
     "preview": "vite preview",
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
     "lint:eslint": "eslint --fix ./src",
@@ -40,6 +40,8 @@
     "build:ui": "pnpm -C packages/ui build"
   },
   "dependencies": {
+    "@ace-admin/ui": "workspace:*",
+    "@ace-admin/hooks": "workspace:*",
     "@ant-design/icons-vue": "^7.0.1",
     "@tinymce/tinymce-vue": "^6.1.0",
     "@vueuse/core": "^13.0.0",

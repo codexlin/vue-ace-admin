@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { computed, ref, useAttrs, useSlots } from 'vue'
-import type { Props } from './type'
-import { isPromise } from './type'
+import type { ProButtonProps } from './type'
+import { isPromise } from 'radash'
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<ProButtonProps>(), {
   autoLoading: false,
   enableConfirm: false,
   popConfig: () => ({
@@ -29,16 +29,29 @@ const propsData = computed(() => ({
 
 const loadingStatus = ref<boolean>(false)
 
+function runClickHandlers(e: MouseEvent) {
+  const handler = props.onClick
+  if (!handler) return undefined
+  if (Array.isArray(handler)) {
+    let result: unknown
+    handler.forEach((fn) => {
+      result = fn?.(e)
+    })
+    return result
+  }
+  return handler?.(e)
+}
+
 const handleClick = async (e: MouseEvent) => {
   if (props.autoLoading) {
     loadingStatus.value = true
   }
 
-  const res = props.onClick?.(e)
+  const res = runClickHandlers(e)
 
   if (props.autoLoading) {
     if (isPromise(res)) {
-      handlePromiseCallBack(res)
+      await handlePromiseCallBack(res)
     } else {
       hideLoading()
     }
@@ -50,7 +63,7 @@ const hideLoading = (): void => {
   loadingStatus.value = false
 }
 
-const handlePromiseCallBack = async (res: Promise<any>) => {
+const handlePromiseCallBack = async (res: Promise<unknown>) => {
   try {
     await res.finally(() => {
       hideLoading()

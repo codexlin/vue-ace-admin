@@ -94,6 +94,27 @@ export default [
     }
   },
   {
+    files: ['docs/**/*.{js,ts,jsx,tsx,vue}'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 0 // docs 目录只警告
+    }
+  },
+  {
+    // 组件库
+    files: ['packages/ui/**/*.{js,ts,jsx,tsx,vue}'],
+    rules: {
+      'vue/attribute-hyphenation': 0,
+      'vue/singleline-html-element-content-newline': 0,
+      'vue/multi-word-component-names': [
+        2,
+        {
+          ignores: ['index'] // 忽略 index 命名，一般表示页面
+        }
+      ],
+      '@typescript-eslint/no-explicit-any': 1
+    }
+  },
+  {
     ignores: ['node_modules/', 'dist/', 'public/', 'src/assets/', 'tests/']
   }
 ]

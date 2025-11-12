@@ -8,28 +8,34 @@ export default defineConfig({
   description: 'Ace Admin 文档与组件库',
   themeConfig: {
     nav: [
-      { text: '指南', link: '/guide/quick-start' },
-      { text: '组件', link: '/components/button/' }
+      { text: '指南', link: '/guide/' },
+      { text: '组件', link: '/components/' },
+      { text: 'Hooks', link: '/hooks/useList' },
+      { text: '场景示例', link: '/scenarios/search-table' }
     ],
     sidebar: {
       '/guide/': [
         { text: '介绍', link: '/guide/' },
         { text: '快速开始', link: '/guide/quick-start' },
         { text: '安装', link: '/guide/installation' },
-        { text: '主题定制', link: '/guide/theme' },
-        { text: '设计指南', link: '/guide/design' }
+        { text: '主题定制', link: '/guide/theme' }
       ],
       '/components/': [
+        { text: '组件总览', link: '/components/' },
         {
           text: '基础组件',
+          items: [{ text: 'ProButton 按钮', link: '/components/pro-button/' }]
+        },
+        {
+          text: '业务组件',
           items: [
-            { text: 'Button 按钮', link: '/components/button/' },
-            { text: 'Input 输入框', link: '/components/input/' },
-            { text: 'Select 选择器', link: '/components/select/' },
-            { text: 'Switch 开关', link: '/components/switch/' }
+            { text: 'ProSearchForm 搜索表单', link: '/components/pro-search-form/' },
+            { text: 'ProTable 表格', link: '/components/pro-table/' }
           ]
         }
-      ]
+      ],
+      '/hooks/': [{ text: 'useList 列表管理', link: '/hooks/useList' }],
+      '/scenarios/': [{ text: '搜索表单+表格', link: '/scenarios/search-table' }]
     }
   },
   vite: {

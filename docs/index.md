@@ -1,33 +1,48 @@
 ---
 layout: home
-title: Ace Admin
+title: Vue Ace Admin UI
 hero:
-  name: Ace Admin Doc
-  text: Monorepo + 文档 + 组件库
+  name: Vue Ace Admin UI
+  text: 生产级 Vue 3 组件库
+  tagline: 基于 Ant Design Vue 增强的业务组件，为管理系统而生
   image:
     src: /logo.svg
-    alt: VitePress
+    alt: Vue Ace Admin UI
   actions:
     - theme: brand
       text: 快速开始
-      link: /guide/
+      link: /guide/quick-start
     - theme: alt
-      text: 组件
+      text: 查看组件
       link: /components/
+    - theme: alt
+      text: 场景示例
+      link: /scenarios/search-table
 
-# 按钮下方的描述
 features:
-  - icon: 🤹
-    title: 前端部分
-    details: 大厂Coder，国内某互联网厂搬砖。
-    link: /column/views/guide
-  - icon: 👩
-    title: 后端部分
-    details: 热爱一切美学，喜欢用各种设计工具造图。
-    link: /column/views/guide
-  - icon: 🧩
-    title: 关于作者
-    details: 一个帅气又爱玩游戏的码农🤹。
-    link: /column/views/guide
+  - icon: 🚀
+    title: 开箱即用
+    details: 提供 ProButton、ProTable、ProSearchForm 等常用业务组件，专为后台管理系统设计
+  - icon: 💎
+    title: TypeScript 支持
+    details: 完整的类型定义，优秀的开发体验，智能的代码提示
+  - icon: 🎨
+    title: 基于 Ant Design Vue
+    details: 继承 Ant Design Vue 的设计体系，保持一致的视觉风格和使用习惯
+  - icon: ⚡
+    title: 自动 Loading
+    details: ProButton 支持异步操作自动显示 loading，无需手动管理状态
+  - icon: 📋
+    title: 配置化表单
+    details: ProSearchForm 通过配置快速生成搜索表单，支持动态字段和插槽扩展
+  - icon: 🔧
+    title: 高度可定制
+    details: 所有组件支持插槽和属性透传，灵活适配各种业务场景
+  - icon: 🌙
+    title: 主题适配
+    details: 自动适配亮色/暗色主题，提供优雅的视觉体验
+  - icon: 🎯
+    title: 最佳搭配
+    details: 与 vue-ace-admin 完美配合，快速构建企业级管理系统
 lastUpdated: true
 ---

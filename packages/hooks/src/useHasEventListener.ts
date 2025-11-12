@@ -25,3 +25,5 @@ export function useHasEventListener<T extends string>(eventName: T): () => boole
     return key in instance.vnode.props
   }
 }
+
+export type UseHasEventListener = ReturnType<typeof useHasEventListener>

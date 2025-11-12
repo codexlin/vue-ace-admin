@@ -1,11 +1,14 @@
+import type { IUser } from './useUserModal'
 import { getUserList } from '../../api'
 import { OperationButtons } from '@/components'
 
 import useList from '@/hooks/useList'
 import useLocalI18n from '@/hooks/useLocalI18n'
 
+type HandleClick = (record: IUser, type: 'add' | 'edit' | 'delete') => void | Promise<void>
+
 // 职责：获取用户列表 提供 columns 配置 控制 loading、数据源等
-export default function useUserList(handleClick: (record: any, type: string) => void) {
+export default function useUserList(handleClick: HandleClick) {
   const { dataSource, loadData, loading } = useList({ listRequestFn: getUserList })
   const { tt } = useLocalI18n()
 

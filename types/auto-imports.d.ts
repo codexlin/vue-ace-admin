@@ -12,6 +12,7 @@ declare global {
   const createApp: typeof import('vue')['createApp']
   const createPinia: typeof import('pinia')['createPinia']
   const customRef: typeof import('vue')['customRef']
+  const default: typeof import('../src/hooks/useList')['default']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
   const defineStore: typeof import('pinia')['defineStore']

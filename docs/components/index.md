@@ -1,188 +1,156 @@
----
-title: 组件总览
-description: Ace Admin 组件库总览
+# Vue Ace Admin 组件库说明
+
+Ace Admin 是一套基于 Vue 3 和 Ant Design Vue 的企业级组件库，帮助开发者高效构建现代化管理系统和后台应用。
+
 ---
 
+## 快速开始
+
+### 安装
+
+Ace Admin 组件库依赖 [Vue 3](https://vuejs.org/) 和 [Ant Design Vue](https://www.antdv.com/)。在使用本组件库前，请确保已安装并正确配置这两个依赖。
+
+```bash
+pnpm install vue ant-design-vue vue-ace-admin-ui
+```
+
+> ⚠️ 使用前必须安装并正确注册 `ant-design-vue` 和 `vue`，否则组件无法正常工作。
+
+### 在项目中使用
+
+```ts
+// main.ts
+import { createApp } from 'vue'
+import App from './App.vue'
+import Antd from 'ant-design-vue'
+import 'ant-design-vue/dist/antd.css'
+import 'vue-ace-admin-ui/style.css'
+
+const app = createApp(App)
+app.use(Antd)
+// 你的其他全局配置...
+app.mount('#app')
+```
+
+---
+
+## 按需引入
+
+Ace Admin 组件库支持按需引入组件，无需全量注册，可以只导入和使用你需要的组件，从而减小打包体积。
+
+### 按需引入示例
+
+```vue
 <script setup>
-import ProButton from '@codexlin/antv/pro-button/ProButton.vue'
+import { ProButton } from 'vue-ace-admin-ui'
+// 只引入 ProButton，不会引入其他组件
 </script>
 
-# 组件总览
-
-Ace Admin 提供了一套基于 Vue 3 和 Ant Design Vue 的组件库，帮助开发者快速构建企业级应用。
-
-## 设计理念
-
-### 一致性
-所有组件都遵循统一的设计规范，确保用户体验的一致性。
-
-### 易用性
-组件 API 设计简洁明了，降低学习成本。
-
-### 可扩展性
-组件支持主题定制和样式覆盖，满足不同业务需求。
-
-### 无障碍性
-组件支持键盘导航和屏幕阅读器，确保无障碍访问。
-
-## 基础组件展示
-
-<div title="按钮组件">
+<template>
   <ProButton type="primary">主要按钮</ProButton>
-  <ProButton type="default">默认按钮</ProButton>
-  <ProButton type="dashed">虚线按钮</ProButton>
-  <ProButton type="link">链接按钮</ProButton>
-  <ProButton type="text">文本按钮</ProButton>
-</div>
+</template>
+```
 
-<div title="表格组件" style="margin-top: 24px;">
-  <div>
-    <h4>ProTable 组件示例</h4>
-    <p>增强版表格组件，支持斑马纹和卡片包装器</p>
-  </div>
-</div>
+你也可以在同一个文件中只引入所需的多个组件：
 
-## 组件分类
+```vue
+<script setup>
+import { ProButton, ProTable } from 'vue-ace-admin-ui'
+</script>
+
+<template>
+  <ProButton type="primary">主要按钮</ProButton>
+  <ProTable :columns="columns" :dataSource="data" />
+</template>
+```
+
+### 按需引入的优势
+
+- **减小包体积**：只打包实际用到的组件
+- **提升性能**：减少无用代码加载
+- **灵活扩展**：可自由组合所需组件
+
+> 按需引入无需额外配置，直接通过 ES Module 语法导入即可。
+
+
+### 在 SFC/Playground 中使用
+
+如果你在 [Vue SFC Playground](https://play.vuejs.org/) 或类似在线编辑器中体验组件库：
+
+1. 在 Import Map 添加：
+   ```json
+   {
+     "imports": {
+       "vue-ace-admin-ui": "https://unpkg.com/vue-ace-admin-ui/dist/ace-admin-ui.es.js",
+       "ant-design-vue": "https://unpkg.com/ant-design-vue/dist/ant-design-vue.esm.js"
+     }
+   }
+   ```
+2. 在 HTML/CSS tab 或 `<style>` 中引入样式：
+   ```html
+   <link rel="stylesheet" href="https://unpkg.com/ant-design-vue/dist/antd.css">
+   <link rel="stylesheet" href="https://unpkg.com/vue-ace-admin-ui/dist/ace-admin-ui.css">
+   ```
+3. 在 SFC 中直接使用组件：
+   ```vue
+   <script setup>
+   import { ProButton } from 'vue-ace-admin-ui'
+   </script>
+   <template>
+     <ProButton type="primary">主要按钮</ProButton>
+   </template>
+   ```
+
+**前提：**
+- 项目需安装并正确注册 `ant-design-vue`
+- 样式需全局引入
+- CDN/Import Map 路径需指向 ES Module 构建版本
+
+---
+
+## 组件一览
 
 ### 基础组件
 
-#### Button 按钮
-用于触发一个操作，如提交表单、打开对话框等。
+- **ProButton 按钮**
+  多类型、多状态、自动 loading、确认弹窗，完全兼容原生 a-button 属性和插槽。
+- **ProTable 表格**
+  支持斑马纹、卡片包装、工具栏插槽，继承 Ant Design Vue Table 全部功能。
 
-**特性：**
-- 支持多种类型：主要、默认、虚线、链接、文本
-- 支持多种尺寸：大、默认、小
-- 支持多种状态：正常、加载中、禁用
-- 额外功能：自动加载、确认弹窗
+---
 
-#### Table 表格
-用于展示大量结构化数据。
+## 设计理念
 
-**特性：**
-- 支持斑马纹样式（奇数行/偶数行着色）
-- 支持卡片包装器
-- 继承 Ant Design Vue Table 的所有功能
-- 支持工具栏插槽
+- **一致性**：统一设计规范，风格高度一致
+- **易用性**：API 简洁，文档完善
+- **可扩展性**：支持主题定制和样式覆盖
+- **无障碍性**：支持键盘导航和屏幕阅读器
 
-## 设计规范
-
-### 颜色规范
-
-#### 主色调
-- **品牌色**：#1890ff
-- **成功色**：#52c41a
-- **警告色**：#faad14
-- **错误色**：#ff4d4f
-- **信息色**：#1890ff
-
-#### 中性色
-- **标题色**：#262626
-- **正文色**：#595959
-- **辅助色**：#8c8c8c
-- **占位色**：#bfbfbf
-- **边框色**：#d9d9d9
-- **分割色**：#f0f0f0
-- **背景色**：#fafafa
-
-### 字体规范
-
-#### 字体大小
-- **标题1**：38px
-- **标题2**：30px
-- **标题3**：24px
-- **标题4**：20px
-- **正文**：14px
-- **小字**：12px
-
-#### 字体行高
-- **标题1**：1.2
-- **标题2**：1.3
-- **标题3**：1.4
-- **标题4**：1.5
-- **正文**：1.5
-- **小字**：1.5
-
-### 间距规范
-
-#### 基础间距
-- **4px**：最小间距
-- **8px**：小间距
-- **16px**：中间距
-- **24px**：大间距
-- **32px**：最大间距
-
-#### 组件间距
-- **按钮间距**：8px
-
-### 圆角规范
-
-#### 基础圆角
-- **2px**：小圆角
-- **4px**：默认圆角
-- **6px**：大圆角
-- **8px**：最大圆角
-
-#### 组件圆角
-- **按钮**：4px
-
-## 无障碍支持
-
-### 键盘导航
-所有组件都支持键盘导航，用户可以使用 Tab 键在组件间切换。
-
-### 屏幕阅读器
-所有组件都支持屏幕阅读器，确保视障用户能够正常使用。
-
-### 焦点管理
-所有组件都有明确的焦点状态，帮助用户了解当前操作位置。
-
-### 语义化标签
-所有组件都使用语义化的 HTML 标签，提高可访问性。
+---
 
 ## 最佳实践
 
-### 组件使用
-1. **选择合适的组件**：根据使用场景选择合适的组件
-2. **保持一致性**：在同一个应用中使用相同的组件风格
-3. **合理布局**：合理安排组件的位置和间距
-4. **响应式设计**：考虑不同屏幕尺寸下的显示效果
+- 按需引入组件，减少包体积
+- 全局注册依赖库（如 Ant Design Vue）
+- 遵循设计规范，保持一致性
+- 合理布局与响应式设计
 
-### 样式定制
-1. **使用主题变量**：优先使用主题变量进行样式定制
-2. **避免内联样式**：避免使用内联样式，保持代码整洁
-3. **遵循设计规范**：遵循统一的设计规范
-4. **测试兼容性**：确保样式在不同浏览器中的兼容性
+---
 
-### 性能优化
-1. **按需引入**：只引入需要的组件，减少包体积
-2. **懒加载**：对大型组件使用懒加载
-3. **缓存优化**：合理使用缓存，提高加载速度
-4. **代码分割**：使用代码分割，提高首屏加载速度
+## 贡献与反馈
+
+- 克隆项目并安装依赖：`pnpm install`
+- 启动开发环境：`pnpm run dev`
+- 通过 GitHub Issues 反馈问题，建议附上详细描述和复现步骤
+
+---
 
 ## 更新日志
 
 ### v1.0.0
-- 初始版本发布
-- 支持基础组件：Button, Table
-- 支持主题定制
-- 支持无障碍访问
+- 发布基础组件：ProButton、ProTable
+- 支持主题定制与无障碍访问
 
-## 贡献指南
+---
 
-### 开发环境
-1. 克隆项目
-2. 安装依赖：`npm install`
-3. 启动开发服务器：`npm run dev`
-4. 运行测试：`npm run test`
-
-### 提交规范
-- 使用语义化的提交信息
-- 遵循代码规范
-- 添加必要的测试
-- 更新文档
-
-### 问题反馈
-- 使用 GitHub Issues 反馈问题
-- 提供详细的问题描述
-- 提供复现步骤
-- 提供环境信息
+如需详细组件用法、API 说明，请查阅对应组件文档。

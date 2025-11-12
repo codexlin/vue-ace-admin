@@ -1,26 +1,35 @@
 {
-  "name": "vue-ace-admin-ui",
-  "version": "0.1.0",
+  "name": "@ace-admin/ui",
+  "version": "0.3.0",
   "private": false,
-  "description": "A Vue 3 component library based on Ant Design Vue with enhanced features",
+  "description": "Production-ready Vue 3 component library for admin systems. Enhanced Ant Design Vue components with TypeScript support, auto-loading, smart forms, and advanced tables. Works seamlessly with vue-ace-admin",
   "keywords": [
     "vue",
     "vue3",
     "ant-design-vue",
+    "antdv",
     "components",
     "ui",
-    "typescript"
+    "typescript",
+    "admin",
+    "dashboard",
+    "pro-components",
+    "form",
+    "table",
+    "business-components",
+    "vue-ace-admin",
+    "ace-admin"
   ],
-  "author": "Your Name <your.email@example.com>",
+  "author": "codexlin",
   "license": "MIT",
-  "homepage": "https://github.com/yourusername/vue-ace-admin#readme",
+  "homepage": "https://github.com/codexlin/vue-ace-admin#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/vue-ace-admin.git",
+    "url": "git+https://github.com/codexlin/vue-ace-admin.git",
     "directory": "packages/ui"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/vue-ace-admin/issues"
+    "url": "https://github.com/codexlin/vue-ace-admin/issues"
   },
   "publishConfig": {
     "access": "public"
@@ -38,6 +47,11 @@
     "./style.css": {
       "import": "./dist/ace-admin-ui.css",
       "require": "./dist/ace-admin-ui.css"
+    },
+    "./hooks": {
+      "types": "./dist/types/hooks/index.d.ts",
+      "import": "./dist/hooks/index.js",
+      "require": "./dist/hooks/index.js"
     }
   },
   "types": "./dist/types/index.d.ts",
@@ -55,7 +69,11 @@
   },
   "peerDependencies": {
     "ant-design-vue": ">=4.0.0",
-    "vue": ">=3.3.0"
+    "vue": ">=3.4.0",
+    "@tinymce/tinymce-vue": "^6.1.0",
+    "tinymce": "^7.7.2",
+    "tinymce-i18n": "^25.3.17",
+    "axios": "^1.8.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.3",
@@ -65,6 +83,10 @@
     "vite": "^6.2.5",
     "vite-plugin-dts": "^4.5.4",
     "vue": "^3.5.13",
-    "vue-tsc": "^2.2.8"
+    "vue-tsc": "^2.2.8",
+    "radash": "^12.1.0"
+  },
+  "dependencies": {
+    "@ace-admin/hooks": "workspace:*"
   }
 }

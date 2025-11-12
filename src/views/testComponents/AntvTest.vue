@@ -1,6 +1,6 @@
 <template>
   <div class="p-4">
-    <h1 class="text-xl mb-4">@ace-admin/ui 组件测试页面</h1>
+    <h1 class="text-xl mb-4">vue-ace-admin-ui 组件测试页面</h1>
 
     <div class="card">
       <h2 class="text-lg font-semibold mb-2">ProButton</h2>
@@ -14,9 +14,9 @@
     </div>
 
     <div class="card mt-4">
-      <h2 class="text-lg font-semibold mb-2">ProInput</h2>
+      <h2 class="text-lg font-semibold mb-2">ProInput (暂未实现)</h2>
       <div class="w-1/3">
-        <ProInput v-model:value="inputValue" placeholder="请输入..." />
+        <a-input v-model:value="inputValue" placeholder="请输入..." />
         <p class="mt-2">输入的值: {{ inputValue }}</p>
       </div>
     </div>
@@ -25,7 +25,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { ProButton, ProInput } from '@ace-admin/ui'
+import { ProButton } from '@ace-admin/ui'
 
 const inputValue = ref('')
 </script>
