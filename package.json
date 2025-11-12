@@ -7,7 +7,7 @@
   "engines": {
     "node": "20.x"
   },
-  "packageManager": "pnpm@10",
+  "packageManager": "pnpm@10.14.0",
   "keywords": [
     "vue3",
     "typescript",
