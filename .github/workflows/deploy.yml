@@ -24,9 +24,8 @@ jobs:
           cache: 'pnpm'
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: ${{ env.PNPM_VERSION }}
+        run: |
+          corepack prepare pnpm@${{ env.PNPM_VERSION }} --activate
 
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
@@ -59,9 +58,8 @@ jobs:
           cache: 'pnpm'
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: ${{ env.PNPM_VERSION }}
+        run: |
+          corepack prepare pnpm@${{ env.PNPM_VERSION }} --activate
 
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
@@ -90,9 +88,8 @@ jobs:
           cache: 'pnpm'
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: ${{ env.PNPM_VERSION }}
+        run: |
+          corepack prepare pnpm@${{ env.PNPM_VERSION }} --activate
 
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
