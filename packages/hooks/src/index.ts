@@ -1,4 +1,8 @@
 // 纯 Vue 3 Composition API Hooks
+if (typeof console !== 'undefined') {
+  console.info(`@ace-admin/hooks loaded [${Math.random().toString(36).slice(2, 8)}]`)
+}
+
 export { useDebouncedRef } from './useDebouncedRef'
 export { useLoading } from './useLoading'
 export { useHasEventListener } from './useHasEventListener'

@@ -28,7 +28,14 @@ onMounted(loadData)
   <div>
     <h1>User View</h1>
     <SearchForm v-model:modelValue="state" :fields="fields" @submit="handleSearch" @reset="handleReset" />
-    <ProTable :columns="columns" :dataSource="dataSource" :loading="loading" row-key="id" />
+    <ProTable
+      is-zebra="even"
+      :columns="columns"
+      :dataSource="dataSource"
+      :loading="loading"
+      row-key="id"
+      :show-header="true"
+    />
     <a-modal v-model:open="visible" :title="title" :destroy-on-close="true" @ok="handleOk">
       <FormModal ref="formRef" :form-items="formItems" />
     </a-modal>

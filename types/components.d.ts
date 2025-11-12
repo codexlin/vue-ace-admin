@@ -51,6 +51,8 @@ declare module 'vue' {
     AWatermark: typeof import('ant-design-vue/es')['Watermark']
     BaseUpload: typeof import('./../src/components/upload/BaseUpload.vue')['default']
     BasicButton: typeof import('./../src/components/button/components/BasicButton.vue')['default']
+    FormModal: typeof import('./../src/components/form/FormModal.tsx')['default']
+    Motion: typeof import('./../src/components/functional/Motion.tsx')['default']
     OperationButtons: typeof import('./../src/components/button/OperationButtons.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

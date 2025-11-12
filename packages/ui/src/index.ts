@@ -6,6 +6,10 @@ import StatisticCard from './statistic/StatisticCard.vue'
 import TinymceEditor from './tinymce/TinymceEditor.vue'
 import BaseUpload from './upload/BaseUpload.vue'
 
+if (typeof console !== 'undefined') {
+  console.info(`@ace-admin/ui loaded [${Math.random().toString(36).slice(2, 8)}]`)
+}
+
 // 导出组件
 export { ProButton, ProTable, ProSearchForm, StatisticCard, TinymceEditor, BaseUpload }
 
