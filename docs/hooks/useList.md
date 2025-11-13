@@ -69,12 +69,17 @@ const {
   loadData,
   reset
 } = useList<User, SearchFilter>({
-  listRequestFn: fetchTableData,
-  filterOption: searchForm,
-  options: {
+  request: fetchTableData,
+  filters: {
+    state: searchForm,
+    autoWatch: true,
+    resetPageOnChange: true,
+    debounce: 300
+  },
+  extra: {
+    immediate: true,
     onSuccess: () => message('数据加载成功'),
-    onError: handleLoadError,
-    throwOnError: false
+    onError: handleLoadError
   }
 })
 
@@ -90,10 +95,7 @@ const columns = [
   { title: '年龄', dataIndex: 'age' }
 ]
 
-// 组件挂载时加载初始数据
-onMounted(() => {
-  loadData()
-})
+// 使用 extra.immediate: true 自动加载，无需 onMounted
 </script>
 
 <template>
@@ -116,20 +118,36 @@ onMounted(() => {
 
 | 参数名         | 类型                                         | 说明                       |
 | -------------- | -------------------------------------------- | -------------------------- |
-| listRequestFn  | `ListRequestFnType<ItemType, FilterOption>`  | 列表数据请求方法，返回带 data/total 的对象 |
-| filterOption   | `Ref<FilterOption>`                          | 筛选条件                   |
-| options        | `UseListOptions`                             | 表单、分页、消息、生命周期等增强配置       |
+| request        | `ListRequestFnType<ItemType, FilterOption>`  | 列表数据请求方法，返回带 data/total 的对象 |
+| filters        | `UseListFiltersConfig<FilterOption>`         | 筛选配置（可选）           |
+| pagination     | `UseListPaginationConfig`                   | 分页配置（可选）           |
+| extra          | `UseListExtraOptions<ItemType, FilterOption, Response>` | 其他配置（可选）       |
 
-### options 可用配置
+### filters 配置
+
+| 字段名                  | 类型/默认值                      | 说明                                                                 |
+| ----------------------- | -------------------------------- | -------------------------------------------------------------------- |
+| `state`                 | `Ref<FilterOption>`              | 筛选条件状态（响应式）                                               |
+| `autoWatch`             | `boolean` (默认 `false`)         | 是否自动监听筛选条件变化并触发请求                                   |
+| `resetPageOnChange`     | `boolean` (默认 `true`)          | 筛选条件变化时是否重置到第一页                                       |
+| `debounce`              | `number` (默认 `0`)               | 筛选条件变化的防抖延迟（毫秒），仅在 `autoWatch: true` 时生效        |
+
+### pagination 配置
+
+| 字段名                  | 类型/默认值                      | 说明                                                                 |
+| ----------------------- | -------------------------------- | -------------------------------------------------------------------- |
+| `state`                 | `{ current?: Ref<number>; pageSize?: Ref<number> }` | 分页状态（可选，默认内部管理）                     |
+| `autoWatch`             | `boolean` (默认 `true`)          | 是否自动监听分页变化并触发请求                                       |
+| `initialCurrent`        | `number` (默认 `1`)              | 初始页码                                                             |
+| `initialPageSize`       | `number` (默认 `10`)             | 初始页大小                                                           |
+
+### extra 配置
 
 | 字段名              | 类型/默认值                      | 说明                                                                 |
 | ------------------- | -------------------------------- | -------------------------------------------------------------------- |
+| `immediate`         | `boolean` (默认 `false`)         | 是否在初始化时立即执行一次 `loadData`                               |
 | `onSuccess`         | `(ctx) => void`                  | 请求成功回调，携带响应、数据、总数、请求参数                         |
 | `onError`           | `(error) => void`                | 请求失败回调                                                         |
-| `throwOnError`      | `boolean` (默认 `false`)         | 是否在请求失败时抛出异常，适合主动 `try/catch` 场景                 |
-| `immediate`         | `boolean` (默认 `false`)         | 是否在初始化时立即执行一次 `loadData`                               |
-| `autoWatchPagination` | `boolean` (默认 `true`)        | 是否监听 `curPage/pageSize` 变化自动触发 `loadData`                 |
-| `pagination`        | `{ current?: number; pageSize?: number }` | 分页初始化配置                                                  |
 | `transform`         | `(response) => { items; total }` | 自定义响应转换逻辑，适配非标准接口                                  |
 | `buildParams`       | `(ctx) => Record<string, any>`   | 自定义请求参数构建（可结合筛选项、分页、额外参数）                 |
 | `resetFilters`      | `(filtersRef) => void`           | 自定义筛选项重置逻辑（默认回退到初始表单状态）                      |

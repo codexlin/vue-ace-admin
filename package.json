@@ -42,8 +42,8 @@
     "build:ui": "pnpm -C packages/ui build"
   },
   "dependencies": {
-    "@ace-admin/ui": "workspace:*",
     "@ace-admin/hooks": "workspace:*",
+    "@ace-admin/ui": "workspace:*",
     "@ant-design/icons-vue": "^7.0.1",
     "@tinymce/tinymce-vue": "^6.1.0",
     "@vueuse/core": "^13.0.0",
@@ -53,9 +53,9 @@
     "dayjs": "^1.11.13",
     "dompurify": "^3.2.5",
     "echarts": "^5.6.0",
-    "gsap": "^3.12.5",
     "highlight.js": "^11.10.0",
     "marked": "^13.0.2",
+    "motion-v": "^1.7.4",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "pinia": "^3.0.1",

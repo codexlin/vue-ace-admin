@@ -12,6 +12,11 @@ export {
   useList,
   type UseListParams,
   type UseListOptions,
+  type UseListLegacyParams,
+  type UseListModernParams,
+  type UseListFiltersConfig,
+  type UseListPaginationConfig,
+  type UseListExtraOptions,
   type UseListResult,
   type UseListSuccessContext,
   type UseListRequestFn

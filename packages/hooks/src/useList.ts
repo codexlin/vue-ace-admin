@@ -1,10 +1,11 @@
-import { isRef, nextTick, ref, unref, watch } from 'vue'
+import { isRef, nextTick, onScopeDispose, ref, unref, watch } from 'vue'
 import type { ComputedRef, Ref } from 'vue'
 
 type MaybeRef<T> = T | Ref<T> | ComputedRef<T>
 
-export type UseListRequestFn<Response = any, Params extends Record<string, any> = Record<string, any>> =
-  MaybeRef<(params?: Params) => Promise<Response> | Response>
+export type UseListRequestFn<Response = any, Params extends Record<string, any> = Record<string, any>> = MaybeRef<
+  (params?: Params) => Promise<Response> | Response
+>
 
 export interface UseListBuildParamsContext<FilterOption extends Record<string, any>> {
   page: number
@@ -13,11 +14,7 @@ export interface UseListBuildParamsContext<FilterOption extends Record<string, a
   extra: Record<string, any>
 }
 
-export interface UseListSuccessContext<
-  ItemType,
-  Response,
-  FilterOption extends Record<string, any>
-> {
+export interface UseListSuccessContext<ItemType, Response, FilterOption extends Record<string, any>> {
   response: Response
   items: ItemType[]
   total: number
@@ -69,9 +66,50 @@ export interface UseListOptions<
    * 自定义筛选项重置逻辑
    */
   resetFilters?: (filters: Ref<FilterOption>) => void
+  /**
+   * 是否监听筛选条件变化自动触发请求，默认 true
+   */
+  watchFilters?: boolean
+  /**
+   * 筛选条件变化时是否自动重置页码为 1，默认 true
+   */
+  resetPageOnFilterChange?: boolean
+  /**
+   * 筛选条件变化自动请求时的防抖时长，单位 ms，默认 0（不防抖）
+   */
+  filterDebounce?: number
 }
 
-export interface UseListParams<
+export interface UseListFiltersConfig<FilterOption extends Record<string, any> = Record<string, any>> {
+  state: Ref<FilterOption>
+  autoWatch?: boolean
+  resetPageOnChange?: boolean
+  debounce?: number
+}
+
+export interface UseListPaginationConfig {
+  state?: {
+    current?: number | Ref<number>
+    pageSize?: number | Ref<number>
+  }
+  autoWatch?: boolean
+}
+
+export interface UseListExtraOptions<
+  ItemType extends Record<string, any> = Record<string, any>,
+  Response = any,
+  FilterOption extends Record<string, any> = Record<string, any>
+> {
+  immediate?: boolean
+  onSuccess?: (context: UseListSuccessContext<ItemType, Response, FilterOption>) => void
+  onError?: (error: unknown) => void
+  throwOnError?: boolean
+  transform?: (response: Response) => { items: ItemType[]; total?: number }
+  buildParams?: (context: UseListBuildParamsContext<FilterOption>) => Record<string, any>
+  resetFilters?: (filters: Ref<FilterOption>) => void
+}
+
+export interface UseListLegacyParams<
   ItemType extends Record<string, any> = Record<string, any>,
   FilterOption extends Record<string, any> = Record<string, any>,
   Response = any
@@ -80,6 +118,23 @@ export interface UseListParams<
   filters?: Ref<FilterOption>
   options?: UseListOptions<ItemType, Response, FilterOption>
 }
+
+export interface UseListModernParams<
+  ItemType extends Record<string, any> = Record<string, any>,
+  FilterOption extends Record<string, any> = Record<string, any>,
+  Response = any
+> {
+  request: UseListRequestFn<Response>
+  filters?: UseListFiltersConfig<FilterOption>
+  pagination?: UseListPaginationConfig
+  extra?: UseListExtraOptions<ItemType, Response, FilterOption>
+}
+
+export type UseListParams<
+  ItemType extends Record<string, any> = Record<string, any>,
+  FilterOption extends Record<string, any> = Record<string, any>,
+  Response = any
+> = UseListLegacyParams<ItemType, FilterOption, Response> | UseListModernParams<ItemType, FilterOption, Response>
 
 export interface UseListResult<
   ItemType extends Record<string, any>,
@@ -113,9 +168,7 @@ const cloneDeep = <T>(value: T): T => {
   return value
 }
 
-const resolveRequest = <Response, Params extends Record<string, any>>(
-  request: UseListRequestFn<Response, Params>
-) => {
+const resolveRequest = <Response, Params extends Record<string, any>>(request: UseListRequestFn<Response, Params>) => {
   const resolved = isRef(request) ? request.value : request
   return resolved as (params?: Params) => Promise<Response> | Response
 }
@@ -134,22 +187,84 @@ export function useList<
   ItemType extends Record<string, any> = Record<string, any>,
   FilterOption extends Record<string, any> = Record<string, any>,
   Response = any
->({
-  request,
-  filters,
-  options
-}: UseListParams<ItemType, FilterOption, Response>): UseListResult<ItemType, FilterOption, Response> {
-  const mergedOptions = options ?? {}
-  const pagination = mergedOptions.pagination ?? {}
+>(params: UseListParams<ItemType, FilterOption, Response>): UseListResult<ItemType, FilterOption, Response> {
+  const isFiltersConfig = (value: unknown): value is UseListFiltersConfig<FilterOption> =>
+    !!value && typeof value === 'object' && 'state' in (value as Record<string, any>)
 
-  const curPage = ref(pagination.current ?? 1)
-  const pageSize = ref(pagination.pageSize ?? 10)
+  const isModernParams = (
+    value: UseListParams<ItemType, FilterOption, Response>
+  ): value is UseListModernParams<ItemType, FilterOption, Response> =>
+    'pagination' in value || 'extra' in value || (value.filters !== undefined && isFiltersConfig(value.filters))
+
+  const modern = isModernParams(params) ? params : undefined
+  const legacy = modern ? undefined : (params as UseListLegacyParams<ItemType, FilterOption, Response>)
+
+  const extraOptions = (modern?.extra ?? legacy?.options ?? {}) as UseListExtraOptions<
+    ItemType,
+    Response,
+    FilterOption
+  > &
+    Partial<UseListOptions<ItemType, Response, FilterOption>>
+
+  let filtersRef: Ref<FilterOption> | undefined
+  let watchFilters = false
+  let resetPageOnFilterChange = true
+  let filterDebounce = 0
+
+  let paginationAutoWatch = true
+  let initialCurrent = 1
+  let initialPageSize = 10
+  let externalCurPageRef: Ref<number> | undefined
+  let externalPageSizeRef: Ref<number> | undefined
+  let filterDebounceTimer: ReturnType<typeof setTimeout> | null = null
+
+  if (modern) {
+    const filtersConfig = modern.filters
+    if (filtersConfig) {
+      filtersRef = filtersConfig.state
+      watchFilters = filtersConfig.autoWatch === true
+      resetPageOnFilterChange = filtersConfig.resetPageOnChange !== false
+      filterDebounce = watchFilters ? (filtersConfig.debounce ?? 0) : 0
+    }
+
+    const paginationConfig = modern.pagination ?? {}
+    if (paginationConfig.state?.current !== undefined) {
+      if (isRef(paginationConfig.state.current)) {
+        externalCurPageRef = paginationConfig.state.current
+        initialCurrent = externalCurPageRef.value ?? 1
+      } else {
+        initialCurrent = paginationConfig.state.current ?? 1
+      }
+    }
+    if (paginationConfig.state?.pageSize !== undefined) {
+      if (isRef(paginationConfig.state.pageSize)) {
+        externalPageSizeRef = paginationConfig.state.pageSize
+        initialPageSize = externalPageSizeRef.value ?? 10
+      } else {
+        initialPageSize = paginationConfig.state.pageSize ?? 10
+      }
+    }
+    paginationAutoWatch = paginationConfig.autoWatch !== false
+  } else if (legacy) {
+    filtersRef = legacy.filters
+    watchFilters = !!filtersRef && legacy.options?.watchFilters === true
+    resetPageOnFilterChange = legacy.options?.resetPageOnFilterChange !== false
+    filterDebounce = watchFilters ? (legacy.options?.filterDebounce ?? 0) : 0
+
+    const pagination = legacy.options?.pagination ?? {}
+    initialCurrent = pagination.current ?? 1
+    initialPageSize = pagination.pageSize ?? 10
+    paginationAutoWatch = legacy.options?.autoWatchPagination !== false
+  }
+
+  const curPage = ref(initialCurrent)
+  const pageSize = ref(initialPageSize)
   const loading = ref(false)
   const total = ref(0)
   const errorState = ref<unknown>(null)
   const dataSource = ref<ItemType[]>([]) as Ref<ItemType[]>
 
-  const initialFilters = filters ? cloneDeep(unref(filters) ?? ({} as FilterOption)) : null
+  const initialFilters = filtersRef ? cloneDeep(unref(filtersRef) ?? ({} as FilterOption)) : null
 
   let suppressWatch = false
 
@@ -162,45 +277,49 @@ export function useList<
   }
 
   const loadData = async (page = curPage.value, extra: Record<string, any> = {}) => {
-    const executor = resolveRequest<Response, Record<string, any>>(request)
-    const filterState = filters ? unref(filters) : undefined
+    if (filterDebounceTimer) {
+      clearTimeout(filterDebounceTimer)
+      filterDebounceTimer = null
+    }
 
-    const params =
-      mergedOptions.buildParams?.({
-        page,
-        pageSize: pageSize.value,
-        filters: filterState as FilterOption | undefined,
-        extra
-      }) ?? {
-        pageNum: page,
-        pageSize: pageSize.value,
-        ...(filterState as Record<string, any>),
-        ...extra
-      }
+    const executor = resolveRequest<Response, Record<string, any>>(params.request)
+    const filterState = filtersRef ? unref(filtersRef) : undefined
+
+    const paramsPayload = extraOptions.buildParams?.({
+      page,
+      pageSize: pageSize.value,
+      filters: filterState as FilterOption | undefined,
+      extra
+    }) ?? {
+      pageNum: page,
+      pageSize: pageSize.value,
+      ...(filterState as Record<string, any>),
+      ...extra
+    }
 
     loading.value = true
     errorState.value = null
     try {
-      const response = await executor(params)
+      const response = await executor(paramsPayload)
       const { items, total: resolvedTotal } =
-        mergedOptions.transform?.(response) ?? defaultTransform<ItemType, Response>(response)
+        extraOptions.transform?.(response) ?? defaultTransform<ItemType, Response>(response)
 
       dataSource.value = items
       total.value = Number.isFinite(resolvedTotal) ? Number(resolvedTotal) : items.length
 
-      mergedOptions.onSuccess?.({
+      extraOptions.onSuccess?.({
         response,
         items,
         total: total.value,
-        params,
+        params: paramsPayload,
         filters: filterState as FilterOption | undefined
       })
 
       return response
     } catch (error) {
       errorState.value = error
-      mergedOptions.onError?.(error)
-      if (mergedOptions.throwOnError) {
+      extraOptions.onError?.(error)
+      if (extraOptions.throwOnError) {
         throw error
       }
       return undefined
@@ -213,7 +332,7 @@ export function useList<
     if (page === curPage.value) return
     if (emitLoad) {
       curPage.value = page
-      if (mergedOptions.autoWatchPagination === false) {
+      if (!paginationAutoWatch) {
         void loadData(page)
       }
       return
@@ -228,7 +347,7 @@ export function useList<
     if (size === pageSize.value) return
     if (emitLoad) {
       pageSize.value = size
-      if (mergedOptions.autoWatchPagination === false) {
+      if (!paginationAutoWatch) {
         void loadData(curPage.value)
       }
       return
@@ -239,30 +358,87 @@ export function useList<
     })
   }
 
-  const reset = () => {
-    if (!filters) return
+  if (externalCurPageRef) {
+    watch(curPage, (val) => {
+      if (externalCurPageRef && externalCurPageRef.value !== val) {
+        externalCurPageRef.value = val
+      }
+    })
+    watch(externalCurPageRef, (val) => {
+      if (val === undefined || val === curPage.value) return
+      setCurPage(val, { emitLoad: false })
+    })
+  }
 
-    if (mergedOptions.resetFilters) {
-      mergedOptions.resetFilters(filters)
+  if (externalPageSizeRef) {
+    watch(pageSize, (val) => {
+      if (externalPageSizeRef && externalPageSizeRef.value !== val) {
+        externalPageSizeRef.value = val
+      }
+    })
+    watch(externalPageSizeRef, (val) => {
+      if (val === undefined || val === pageSize.value) return
+      setPageSize(val, { emitLoad: false })
+    })
+  }
+
+  const reset = () => {
+    if (!filtersRef) return
+
+    if (extraOptions.resetFilters) {
+      extraOptions.resetFilters(filtersRef)
     } else {
       if (initialFilters) {
-        filters.value = cloneDeep(initialFilters) as FilterOption
+        filtersRef.value = cloneDeep(initialFilters) as FilterOption
       } else {
-        filters.value = {} as FilterOption
+        filtersRef.value = {} as FilterOption
       }
     }
 
     return loadData()
   }
 
-  if (mergedOptions.autoWatchPagination !== false) {
+  if (paginationAutoWatch) {
     watch([curPage, pageSize], () => {
       if (suppressWatch) return
       void loadData(curPage.value)
     })
   }
 
-  if (mergedOptions.immediate) {
+  if (filtersRef && watchFilters) {
+    const triggerFilterLoad = () => {
+      const targetPage = resetPageOnFilterChange ? 1 : curPage.value
+      if (resetPageOnFilterChange && curPage.value !== 1) {
+        setCurPage(1, { emitLoad: false })
+      }
+      void loadData(targetPage)
+    }
+
+    watch(
+      filtersRef,
+      () => {
+        if (suppressWatch) return
+        if (filterDebounce > 0) {
+          if (filterDebounceTimer) clearTimeout(filterDebounceTimer)
+          filterDebounceTimer = setTimeout(triggerFilterLoad, filterDebounce)
+        } else {
+          triggerFilterLoad()
+        }
+      },
+      { deep: true }
+    )
+
+    if (filterDebounce > 0) {
+      onScopeDispose(() => {
+        if (filterDebounceTimer) {
+          clearTimeout(filterDebounceTimer)
+          filterDebounceTimer = null
+        }
+      })
+    }
+  }
+
+  if (extraOptions.immediate) {
     void loadData()
   }
 
@@ -279,4 +455,3 @@ export function useList<
     setPageSize
   }
 }
-

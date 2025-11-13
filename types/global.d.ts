@@ -21,3 +21,16 @@ declare interface IUser {
 
   [property: string]: any
 }
+
+// QQ SDK 类型声明
+interface QC {
+  Login: {
+    showPopup: () => void
+  }
+}
+
+declare global {
+  interface Window {
+    QC?: QC
+  }
+}

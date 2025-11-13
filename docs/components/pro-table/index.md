@@ -50,6 +50,34 @@ const data = [
 ```
 :::
 
+#### 自定义斑马纹配色
+
+ProTable 内置两个 CSS 变量用于控制斑马纹颜色，业务可在全局样式中覆盖：
+
+- `--ace-pro-table-zebra-bg-light`（默认 `#f6f6f6`）：亮色主题下的背景色
+- `--ace-pro-table-zebra-bg-dark`（默认 `rgb(29 29 29)`）：暗色主题下的背景色
+
+```vue
+<template>
+  <ProTable :columns="columns" :dataSource="data" isZebra="even" />
+</template>
+
+<style scoped>
+:root {
+  --ace-pro-table-zebra-bg-light: #fff7e6;
+  --ace-pro-table-zebra-bg-dark: #2a1f15;
+}
+</style>
+```
+
+如果项目存在暗色主题容器，也可以单独覆盖：
+
+```css
+[data-theme='dark'] {
+  --ace-pro-table-zebra-bg-dark: rgba(255, 255, 255, 0.08);
+}
+```
+
 ---
 
 ### 卡片包装器
@@ -172,7 +200,7 @@ const {
   error,
   loadData
 } = useList({
-  listRequestFn: async (params) => {
+  request: async (params) => {
     const query = new URLSearchParams({
       pageNum: params.pageNum,
       pageSize: params.pageSize
@@ -186,7 +214,8 @@ const {
       total: data.total || 0
     }
   },
-  options: {
+  extra: {
+    immediate: true,
     onSuccess: () => message('列表数据加载成功'),
     onError: (err) => errorMessage(err instanceof Error ? err.message : '获取列表失败')
   }
@@ -210,9 +239,7 @@ async function handleDelete(record) {
   await loadData()
 }
 
-onMounted(() => {
-  loadData()
-})
+// 使用 extra.immediate: true 自动加载，无需 onMounted
 </script>
 ```
 
@@ -298,9 +325,12 @@ onMounted(() => {
 ```vue
 <script setup>
 const { dataSource, loading, curPage, pageSize, total } = useList({
-  listRequestFn: async (params) => {
+  request: async (params) => {
     // API 请求
     return { data: [...], total: 100 }
+  },
+  extra: {
+    immediate: true
   }
 })
 </script>

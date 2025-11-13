@@ -4,7 +4,8 @@ import type { IData, ProTableProps, TableSlotsType } from './type'
 
 const props = withDefaults(defineProps<ProTableProps>(), {
   isZebra: 'none',
-  useCardWrapper: true
+  useCardWrapper: true,
+  showHeader: true
 })
 
 defineOptions({
@@ -28,9 +29,22 @@ const tableProps = computed(() => {
 const initWrapper = computed(() => (props.useCardWrapper ? 'a-card' : 'div'))
 
 const getZebraClass = (index: number) => {
-  const isEven = index % 2 === 0
+  // 如果 isZebra 为 'none'，不应用样式
+  if (props.isZebra === 'none') {
+    return ''
+  }
+
+  // index 从 0 开始：0, 1, 2, 3, 4...
+  // 视觉上的行号：1, 2, 3, 4, 5...
+  // 所以 index % 2 === 0 对应视觉上的奇数行（第 1, 3, 5... 行）
+  // index % 2 === 1 对应视觉上的偶数行（第 2, 4, 6... 行）
+  const isVisualOdd = index % 2 === 0 // 视觉上的奇数行（第 1, 3, 5... 行）
+  const isVisualEven = index % 2 === 1 // 视觉上的偶数行（第 2, 4, 6... 行）
+
   const shouldApply =
-    (props.isZebra === 'even' && isEven) || (props.isZebra === 'odd' && !isEven)
+    (props.isZebra === 'even' && isVisualEven) ||
+    (props.isZebra === 'odd' && isVisualOdd)
+
   return shouldApply ? 'table-striped' : ''
 }
 
@@ -72,13 +86,3 @@ defineExpose({
     </a-flex>
   </component>
 </template>
-
-<style scoped>
-[data-theme='light'] .ant-table-striped :deep(.table-striped) td {
-  background-color: #f6f6f6;
-}
-
-[data-theme='dark'] .ant-table-striped :deep(.table-striped) td {
-  background-color: rgb(29 29 29);
-}
-</style>

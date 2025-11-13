@@ -1,6 +1,6 @@
 <script lang="tsx" setup>
-import { onMounted, ref } from 'vue'
-import { useList } from '@ace-admin/ui'
+import { onMounted, ref, shallowRef, shallowReactive } from 'vue'
+import { ProTable, useList } from '@ace-admin/ui'
 import DetailView from './components/DetailView.vue'
 import { useConfig } from './hooks/useConfig'
 import useLocalI18n from '@/hooks/useLocalI18n'
@@ -19,7 +19,12 @@ const state = shallowReactive<State>({
   id: null
 })
 const formRef = ref<InstanceType<typeof DetailView>>()
-const { dataSource, loadData, loading } = useList({ listRequestFn: getMenuTreeList })
+const { dataSource, loadData, loading } = useList({
+  request: getMenuTreeList,
+  extra: {
+    immediate: true
+  }
+})
 
 const handleClick = (record?: any, btnType?: State['type']) => {
   if (btnType) {
@@ -73,20 +78,18 @@ const handleRequest = async (cb: (...args: any[]) => any) => {
     console.log(e)
   }
 }
-onMounted(async () => await loadData())
+// 使用 immediate: true 自动加载，无需 onMounted
 </script>
 <template>
   <div>
-    <CommonTable
-      :tableProps="{
-        columns,
-        dataSource,
-        loading,
-        rowKey: 'id',
-        scroll: { x: 2000 }
-      }"
-      isZebra="even"
-      useCardWrapper
+    <ProTable
+      :columns="columns"
+      :dataSource="dataSource"
+      :loading="loading"
+      row-key="id"
+      :scroll="{ x: 2000 }"
+      is-zebra="even"
+      use-card-wrapper
       class="scroll-table"
     >
       <template #toolbar>
@@ -96,8 +99,8 @@ onMounted(async () => await loadData())
           </a-button>
         </a-space>
       </template>
-    </CommonTable>
-    <a-modal v-model:open="open" :title destroy-on-close @ok="handleOk">
+    </ProTable>
+    <a-modal v-model:open="open" :title="title" destroy-on-close @ok="handleOk">
       <DetailView ref="formRef" v-bind="state" />
     </a-modal>
   </div>

@@ -1,9 +1,16 @@
 import { getRoleList } from '../../api'
 import { OperationButtons } from '@/components'
+import { useList } from '@ace-admin/ui'
+import useLocalI18n from '@/hooks/useLocalI18n'
 
 export default function useRoleList(handleClick: any) {
   const { tt } = useLocalI18n()
-  const { dataSource, loadData, loading } = useList({ listRequestFn: getRoleList })
+  const { dataSource, loadData, loading } = useList({
+    request: getRoleList,
+    extra: {
+      immediate: true
+    }
+  })
   const columns = [
     { title: '角色ID', dataIndex: 'id' },
     { title: '角色名称', dataIndex: 'roleName' },

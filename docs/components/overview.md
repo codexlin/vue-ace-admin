@@ -111,15 +111,21 @@ import { useList, message, errorMessage } from 'vue-ace-admin-ui'
 const searchForm = ref({})
 
 const { dataSource, loading, curPage, total, loadData, error } = useList({
-  listRequestFn: async (params) => {
+  request: async (params) => {
     const res = await fetch('/api/users', {
       method: 'POST',
       body: JSON.stringify(params)
     })
     return res.json()
   },
-  filterOption: searchForm,
-  options: {
+  filters: {
+    state: searchForm,
+    autoWatch: true,
+    resetPageOnChange: true,
+    debounce: 300
+  },
+  extra: {
+    immediate: true,
     onSuccess: () => message('列表加载成功'),
     onError: (err) => errorMessage(err instanceof Error ? err.message : '获取数据失败')
   }
@@ -145,9 +151,15 @@ import { ProSearchForm, ProTable, useList, message, errorMessage } from 'vue-ace
 
 const searchForm = ref({})
 const { dataSource, loading, error, loadData } = useList({
-  listRequestFn: fetchData,
-  filterOption: searchForm,
-  options: {
+  request: fetchData,
+  filters: {
+    state: searchForm,
+    autoWatch: true,
+    resetPageOnChange: true,
+    debounce: 300
+  },
+  extra: {
+    immediate: true,
     onSuccess: () => message('数据加载成功'),
     onError: (err) => errorMessage(err instanceof Error ? err.message : '数据加载失败')
   }

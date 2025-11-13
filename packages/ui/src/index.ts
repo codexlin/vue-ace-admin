@@ -6,6 +6,9 @@ import StatisticCard from './statistic/StatisticCard.vue'
 import TinymceEditor from './tinymce/TinymceEditor.vue'
 import BaseUpload from './upload/BaseUpload.vue'
 
+// 导入样式
+import './pro-table/style.css'
+
 if (typeof console !== 'undefined') {
   console.info(`@ace-admin/ui loaded [${Math.random().toString(36).slice(2, 8)}]`)
 }
@@ -21,6 +24,9 @@ export type { ProSearchFormProps, Field as SearchField } from './pro-search-form
 // 导出 Hooks
 export { useList, message, errorMessage, warningMessage, infoMessage } from './hooks/useList'
 export type { OptionsType, UseListResult, UseListOptions, UseListParams } from './hooks/useList'
+
+// 导出工具
+export { useDebouncedRef } from '@ace-admin/hooks'
 
 // 导出 Hooks
 export { usePagination } from './hooks/usePagination'

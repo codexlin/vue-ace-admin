@@ -1,0 +1,22 @@
+/* ProTable 斑马纹样式 - 使用 CSS 变量支持自定义颜色 */
+
+/* 定义默认变量值 */
+:root {
+  --ace-pro-table-zebra-bg-light: #f6f6f6;
+  --ace-pro-table-zebra-bg-dark: rgb(29 29 29);
+}
+
+/* 亮色主题下的斑马纹样式 */
+.ant-table-striped .ant-table-tbody > tr.table-striped > td,
+.ant-table-striped .ant-table-tbody tr.table-striped td {
+  background-color: var(--ace-pro-table-zebra-bg-light, #f6f6f6) !important;
+}
+
+/* 暗色主题下的斑马纹样式 */
+html[data-theme='dark'] .ant-table-striped .ant-table-tbody > tr.table-striped > td,
+html[data-theme='dark'] .ant-table-striped .ant-table-tbody tr.table-striped td,
+[data-theme='dark'] .ant-table-striped .ant-table-tbody > tr.table-striped > td,
+[data-theme='dark'] .ant-table-striped .ant-table-tbody tr.table-striped td {
+  background-color: var(--ace-pro-table-zebra-bg-dark, rgb(29 29 29)) !important;
+}
+

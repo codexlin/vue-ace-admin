@@ -1,23 +1,30 @@
 <script lang="ts" setup>
-import { gsap } from 'gsap'
 import { useAppStore } from '@/stores/modules/app'
+import { motion } from 'motion-v'
+import logoImg from '@/assets/images/logo.svg'
 
-onMounted(() => {
-  gsap.to('.logo__img', {
-    scale: 1.2,
-    duration: 0.5,
-    repeat: -1,
-    yoyo: true,
-    ease: 'power1.inOut'
-  })
-})
 const app = useAppStore()
 const width = computed(() => (app.collapsed ? '80px' : '200px'))
+const MotionImg = motion.img
+const logoAnimation = {
+  initial: { scale: 1 },
+  animate: { scale: 1.12 },
+  transition: { duration: 1.2, repeat: Infinity, repeatType: 'reverse' as const, ease: 'easeInOut' as const }
+}
 </script>
 
 <template>
   <div class="logo">
-    <img alt="logo" class="logo__img" height="32" src="assets/images/logo.svg" width="32" />
+    <MotionImg
+      alt="logo"
+      class="logo__img"
+      height="32"
+      :src="logoImg"
+      width="32"
+      :initial="logoAnimation.initial"
+      :animate="logoAnimation.animate"
+      :transition="logoAnimation.transition"
+    />
     <span v-if="!app.collapsed">Vue Ace Admin</span>
   </div>
 </template>

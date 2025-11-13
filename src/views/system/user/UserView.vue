@@ -7,21 +7,22 @@ import FormModal from '@/components/form/FormModal'
 
 const { visible, title, formItems, formRef, handleOk, openModal } = useUserModal()
 
-const { columns, dataSource, loadData, loading } = useUserList(openModal)
-
 const { fields, state, handleSearch, handleReset } = useUserSearchForm(
   (formState) => {
-    // 你可以在这里调用 API 或 filter 数据
     console.log('实际发起查询:', formState)
+    // 由于 filters.autoWatch 已开启，会自动刷新，这里可以手动触发确保立即响应
+    void loadData(1, formState)
   },
   () => {
-    // 重置后可能要重新加载数据
     console.log('重置回调触发')
-    loadData()
+    // 重置后自动刷新会触发，这里手动触发确保立即响应
+    void loadData(1, state.value)
   }
 )
 
-onMounted(loadData)
+const { columns, dataSource, loadData, loading } = useUserList(openModal, state)
+
+// 使用 extra.immediate: true 自动加载，无需 onMounted
 </script>
 
 <template>
@@ -34,7 +35,6 @@ onMounted(loadData)
       :dataSource="dataSource"
       :loading="loading"
       row-key="id"
-      :show-header="true"
     />
     <a-modal v-model:open="visible" :title="title" :destroy-on-close="true" @ok="handleOk">
       <FormModal ref="formRef" :form-items="formItems" />

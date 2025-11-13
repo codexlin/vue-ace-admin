@@ -45,14 +45,3 @@ export type Item = {
 export interface Items {
   items: Item[]
 }
-
-export const DEFAULT_PRO_BUTTON_PROPS = {
-  autoLoading: false,
-  enableConfirm: false,
-  popConfig: () => ({
-    title: '提示',
-    description: '确定删除吗？',
-    okText: '确定',
-    cancelText: '取消'
-  })
-}

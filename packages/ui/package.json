@@ -44,6 +44,10 @@
       "import": "./dist/ace-admin-ui.es.js",
       "require": "./dist/ace-admin-ui.umd.js"
     },
+    "./dist/ace-admin-ui.css": {
+      "import": "./dist/ace-admin-ui.css",
+      "require": "./dist/ace-admin-ui.css"
+    },
     "./style.css": {
       "import": "./dist/ace-admin-ui.css",
       "require": "./dist/ace-admin-ui.css"

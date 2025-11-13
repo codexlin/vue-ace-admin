@@ -209,7 +209,7 @@ const {
   loadData,
   reset
 } = useList({
-  listRequestFn: async (params) => {
+  request: async (params) => {
     const query = new URLSearchParams({
       pageNum: params.pageNum,
       pageSize: params.pageSize,
@@ -224,8 +224,14 @@ const {
       total: data.total || 0
     };
   },
-  filterOption: searchForm,
-  options: {
+  filters: {
+    state: searchForm,
+    autoWatch: true,
+    resetPageOnChange: true,
+    debounce: 300
+  },
+  extra: {
+    immediate: true,
     onSuccess: () => message('✅ 数据加载成功'),
     onError: (err) => errorMessage(err instanceof Error ? err.message : '❌ 数据加载失败')
   }
@@ -394,7 +400,7 @@ function handleSizeChange(current, size) {
 async function handleReset() {
   curPage.value = 1  // 重置到第一页
   await reset()      // useList 的 reset 方法
-  // ✅ reset() 内部会清空 filterOption 并调用 loadData()
+  // ✅ reset() 内部会清空 filters.state 并调用 loadData()
 }
 ```
 
@@ -439,7 +445,7 @@ async function handleDelete(record) {
 └──────────────────────────────────┘
   ↓
 ┌──────────────────────────────────┐
-│ 4. 调用 listRequestFn(params)    │
+│ 4. 调用 request(params)          │
 │    → fetch API                   │
 │    → 返回第 3 页数据             │
 └──────────────────────────────────┘
@@ -467,7 +473,7 @@ async function handleDelete(record) {
 
 2. **参数自动合并**
    ```typescript
-   { pageNum, pageSize, ...filterOption }
+   { pageNum, pageSize, ...filters.state.value }
    // 自动合并筛选条件和分页参数
    ```
 

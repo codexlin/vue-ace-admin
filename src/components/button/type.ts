@@ -1,8 +1,10 @@
 export interface Item {
-  key: string
-  label: string
-  onClick?: () => void
-  disabled?: boolean
+  auth: string
+  text: string
+  type?: string
+  cb: () => void | Promise<void>
+  btnName?: string
+  btn?: string
 }
 
 export interface Items {

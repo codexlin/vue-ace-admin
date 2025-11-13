@@ -1,4 +1,5 @@
 import { useList } from '@ace-admin/ui'
+import type { Ref } from 'vue'
 import type { IUser } from './useUserModal'
 import { getUserList } from '../../api'
 import { OperationButtons } from '@/components'
@@ -8,8 +9,19 @@ import useLocalI18n from '@/hooks/useLocalI18n'
 type HandleClick = (record: IUser, type: 'add' | 'edit' | 'delete') => void | Promise<void>
 
 // 职责：获取用户列表 提供 columns 配置 控制 loading、数据源等
-export default function useUserList(handleClick: HandleClick) {
-  const { dataSource, loadData, loading } = useList({ listRequestFn: getUserList })
+export default function useUserList(handleClick: HandleClick, filters: Ref<Record<string, any>>) {
+  const { dataSource, loadData, loading } = useList({
+    request: getUserList,
+    filters: {
+      state: filters,
+      autoWatch: true,
+      resetPageOnChange: true,
+      debounce: 500
+    },
+    extra: {
+      immediate: true
+    }
+  })
   const { tt } = useLocalI18n()
 
   const columns = [

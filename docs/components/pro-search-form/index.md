@@ -97,7 +97,7 @@ import { ProSearchForm, ProTable, useList } from 'vue-ace-admin-ui'
 const searchForm = ref({ name: '' })
 
 const { dataSource, loading, curPage, pageSize, total, loadData, reset } = useList({
-  listRequestFn: async (params) => {
+  request: async (params) => {
     // 真实 API 请求
     const query = new URLSearchParams({
       pageNum: params.pageNum,
@@ -113,7 +113,15 @@ const { dataSource, loading, curPage, pageSize, total, loadData, reset } = useLi
       total: data.total || 0
     }
   },
-  filterOption: searchForm
+  filters: {
+    state: searchForm,
+    autoWatch: true,
+    resetPageOnChange: true,
+    debounce: 300
+  },
+  extra: {
+    immediate: true
+  }
 })
 
 const fields = [
@@ -393,7 +401,16 @@ function handleCustomReset() {
 4. **与 useList 配合**
    ```typescript
    const { loadData, reset } = useList({
-     filterOption: searchForm
+     request: fetchData,
+     filters: {
+       state: searchForm,
+       autoWatch: true,
+       resetPageOnChange: true,
+       debounce: 300
+     },
+     extra: {
+       immediate: true
+     }
    })
 
    <ProSearchForm

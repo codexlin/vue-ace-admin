@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { WechatOutlined, QqCircleFilled, GithubFilled } from '@ant-design/icons-vue'
-import { gsap } from 'gsap'
 import { getCaptcha, registerApi } from './api'
 import { useUserStore } from '@/stores/modules/user'
 import Motion from '@/components/functional/Motion'
+import { motion } from 'motion-v'
 const user = useUserStore()
 // const { tt } = useLocalI18n()
 const state = reactive<ILoginForm>({
@@ -14,10 +14,26 @@ const state = reactive<ILoginForm>({
 const src = ref()
 const onFinish = async (values: ILoginForm) => {
   try {
-    Object.values(values).length === 3 ? await user.login(values) : await registerApi(values)
+    if (Object.values(values).length === 3) {
+      await user.login(values)
+    } else {
+      await registerApi(values)
+    }
   } catch (error) {
     await getImg()
   }
+}
+
+const MotionImg = motion.img
+const moonAnimation = {
+  initial: { rotate: -20 },
+  animate: { rotate: 20 },
+  transition: { duration: 4, repeat: Infinity, repeatType: 'reverse' as const, ease: 'easeInOut' as const }
+}
+const astronautAnimation = {
+  initial: { rotate: 12 },
+  animate: { rotate: -12 },
+  transition: { duration: 4, repeat: Infinity, repeatType: 'reverse' as const, ease: 'easeInOut' as const, delay: 0.5 }
 }
 
 function transformArrayBufferToBase64(buffer: any) {
@@ -42,8 +58,8 @@ async function getImg() {
 }
 // 触发 QQ 登录
 const qqLogin = () => {
-  if (window.QC) {
-    window.QC.Login.showPopup() // 显示 QQ 登录窗口
+  if ((window as any).QC) {
+    ;(window as any).QC.Login.showPopup() // 显示 QQ 登录窗口
   } else {
     console.error('QQ SDK 未加载')
   }
@@ -56,21 +72,6 @@ const loginGithub = () => {
   window.location.href = `${authorize_uri}?client_id=${client_id}&redirect_url=${redirect_url}`
 }
 onMounted(() => {
-  gsap.to('.img', {
-    rotation: 55, // 顺时针旋转90度
-    duration: 1.5, // 动画持续时间
-    onComplete: () => {
-      // 在第一个动画完成后执行第二个动画
-      gsap.to('.img', {
-        rotation: -100, // 逆时针旋转180度
-        duration: 1.5,
-        ease: 'back.in',
-        repeat: -1, // 无限循环
-        yoyo: true // 反复播放
-      })
-    },
-    ease: 'elastic'
-  })
   getImg()
 })
 </script>
@@ -81,13 +82,27 @@ onMounted(() => {
       <div class="login-box_left">
         <a-avatar :size="{ xs: 200, sm: 250, md: 350, lg: 450, xl: 550, xxl: 650 }" style="background: transparent">
           <template #icon>
-            <img alt="logo" class="img" src="https://cdn.jsdelivr.net/gh/xoxosos/jsDelivr/assets/images/moon.png" />
+            <MotionImg
+              alt="logo"
+              class="img"
+              src="https://cdn.jsdelivr.net/gh/codexlin/jsDelivr/assets/images/moon.png"
+              :initial="moonAnimation.initial"
+              :animate="moonAnimation.animate"
+              :transition="moonAnimation.transition"
+            />
           </template>
         </a-avatar>
         <div>
           <a-avatar :size="{ xs: 150, sm: 200, md: 300, lg: 350, xl: 450, xxl: 550 }" style="background: transparent">
             <template #icon>
-              <img alt="logo" class="img" src="https://cdn.jsdelivr.net/gh/xoxosos/jsDelivr/assets/images/man.png" />
+              <MotionImg
+                alt="logo"
+                class="img"
+                src="https://cdn.jsdelivr.net/gh/xoxosos/jsDelivr/assets/images/man.png"
+                :initial="astronautAnimation.initial"
+                :animate="astronautAnimation.animate"
+                :transition="astronautAnimation.transition"
+              />
             </template>
           </a-avatar>
         </div>

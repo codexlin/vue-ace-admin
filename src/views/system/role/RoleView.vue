@@ -1,7 +1,6 @@
 <script lang="tsx" setup>
 import { ProTable } from '@ace-admin/ui'
 import { useToggle } from '@vueuse/core'
-import { useList } from '@ace-admin/ui'
 import useRoleForm from './hooks/useRoleForm'
 import useRoleList from './hooks/useRoleList.tsx'
 import FormModal from '@/components/form/FormModal'
@@ -11,13 +10,25 @@ const [modalOpen, toggleModal] = useToggle()
 const { tt } = useLocalI18n()
 const { formRef, formItems, handleClick, handleOk } = useRoleForm()
 const { dataSource, loadData, loading, columns } = useRoleList(handleClick)
+
+// 处理新增按钮点击
+const handleAdd = async () => {
+  try {
+    await handleClick(null, 'add')
+    toggleModal()
+  } catch (error) {
+    console.error('初始化表单失败:', error)
+  }
+}
+
 async function onOk() {
   const res = await handleOk()
-  if (res?.code === '0') toggleModal()
+  if (res?.code === '0') {
+    toggleModal()
+    await loadData() // 保存成功后刷新列表
+  }
 }
-onMounted(() => {
-  loadData()
-})
+// 使用 extra.immediate: true 自动加载，无需 onMounted
 </script>
 
 <template>
@@ -25,7 +36,7 @@ onMounted(() => {
     <ProTable row-key="id" :columns="columns" :dataSource="dataSource" :loading="loading">
       <template #toolbar>
         <a-space>
-          <a-button type="primary" @click="() => handleClick(null, 'add').then(toggleModal)"> 新增 </a-button>
+          <a-button type="primary" @click="handleAdd"> 新增 </a-button>
         </a-space>
       </template>
     </ProTable>

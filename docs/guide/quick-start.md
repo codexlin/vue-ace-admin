@@ -199,7 +199,7 @@ const dataSource = ref([
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useList, ProTable, ProSearchForm, message, errorMessage } from 'vue-ace-admin-ui'
 
 const searchForm = ref({})
@@ -213,7 +213,7 @@ const {
   error,
   loadData
 } = useList({
-  listRequestFn: async (params) => {
+  request: async (params) => {
     // 真实 API 请求
     const query = new URLSearchParams({
       pageNum: params.pageNum,
@@ -229,8 +229,14 @@ const {
       total: data.total || 0
     }
   },
-  filterOption: searchForm,
-  options: {
+  filters: {
+    state: searchForm,
+    autoWatch: true,
+    resetPageOnChange: true,
+    debounce: 300
+  },
+  extra: {
+    immediate: true,
     onSuccess: () => message('数据加载成功'),
     onError: (err) => errorMessage(err instanceof Error ? err.message : '数据加载失败')
   }
@@ -248,10 +254,7 @@ const columns = [
   { title: '年龄', dataIndex: 'age' }
 ]
 
-// 组件挂载时加载初始数据
-onMounted(() => {
-  loadData()
-})
+// 使用 extra.immediate: true 自动加载，无需 onMounted
 </script>
 ```
 
@@ -319,7 +322,7 @@ import { message } from 'ant-design-vue'
 const searchForm = ref({ name: '', status: '' })
 
 const { dataSource, loading, curPage, pageSize, total, loadData } = useList({
-  listRequestFn: async (params) => {
+  request: async (params) => {
     // 真实 API 请求
     const query = new URLSearchParams({
       pageNum: params.pageNum,
@@ -336,7 +339,15 @@ const { dataSource, loading, curPage, pageSize, total, loadData } = useList({
       total: data.total || 0
     }
   },
-  filterOption: searchForm
+  filters: {
+    state: searchForm,
+    autoWatch: true,
+    resetPageOnChange: true,
+    debounce: 300
+  },
+  extra: {
+    immediate: true
+  }
 })
 
 const fields = [
