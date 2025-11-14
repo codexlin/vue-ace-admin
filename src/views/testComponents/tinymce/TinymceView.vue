@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { TinymceEditor } from '@codexlin/ace-admin-ui'
+import TinymceEditor from '@/components/tinymce/TinymceEditor.vue'
 import { useAppStore } from '@/stores/modules/app'
 
 const appStore = useAppStore()

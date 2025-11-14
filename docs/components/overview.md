@@ -1,11 +1,11 @@
 ---
 title: 组件总览
-description: Vue Ace Admin UI 所有组件一览
+description: Vue Ace Admin 组件库所有组件一览
 ---
 
 # 组件总览
 
-Vue Ace Admin UI 提供了一套完整的业务组件，帮助你快速构建企业级管理系统。
+Vue Ace Admin 组件库提供了一套完整的业务组件，帮助你快速构建企业级管理系统。
 
 ## 📦 组件分类
 

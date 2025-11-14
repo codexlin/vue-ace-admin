@@ -50,13 +50,11 @@ declare module 'vue' {
     ATypographyText: typeof import('ant-design-vue/es')['TypographyText']
     AWatermark: typeof import('ant-design-vue/es')['Watermark']
     BaseUpload: typeof import('./../src/components/upload/BaseUpload.vue')['default']
-    BasicButton: typeof import('./../src/components/button/components/BasicButton.vue')['default']
-    FormModal: typeof import('./../src/components/form/FormModal.tsx')['default']
-    Motion: typeof import('./../src/components/functional/Motion.tsx')['default']
     OperationButtons: typeof import('./../src/components/button/OperationButtons.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchForm: typeof import('./../src/components/form/SearchForm.vue')['default']
     SvgIcon: typeof import('./../src/components/svgIcon/SvgIcon.vue')['default']
+    TinymceEditor: typeof import('./../src/components/tinymce/TinymceEditor.vue')['default']
   }
 }

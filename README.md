@@ -10,6 +10,11 @@
 
 Ace Admin 是一个基于 Vue3.5、TypeScript5.x、Antd-Vue4.x、Pinia2.x 及 Vite5.x 等前沿技术栈构建的免费开源中后台管理系统解决方案(后端服务通过`Springboot3 + Java17 `实现。)。在 Antd4 精美的主题基础上，我构建了一个清晰且高效的项目逻辑架构，整合了最新的技术框架。欢迎大家使用！
 
+## 📚 文档与预览
+
+- 📖 **使用文档**: [在线文档](https://codexlin.github.io/vue-ace-admin/)
+- 👀 **在线预览**: [Demo](https://vue-ace-admin.vercel.app/) (账号: `xoxosos666@gmail.com` / 密码: `admin666`)
+
 ## 🏗️ Monorepo 架构
 
 Ace Admin 采用 **Monorepo** 架构设计，使用 `pnpm workspace` 管理多个包，实现代码共享和统一构建。
@@ -112,15 +117,6 @@ pnpm build:ui
 pnpm dev:ui
 ```
 
-## 📚 文档
-
-- 使用文档：[doc](https://ace-admin-doc.vercel.app/)
-
-## 📺 在线预览
-
-| 位置   | 账号                 | 密码     | 链接                                                                 |
-| ------ | -------------------- | -------- | -------------------------------------------------------------------- |
-| vercel | xoxosos666@gmail.com | admin666 | <a href="https://vue-ace-admin.vercel.app/" target="_blank">链接</a> |
 
 ## ❤️ 用爱发电
 

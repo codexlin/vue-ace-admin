@@ -1,6 +1,6 @@
 # Vue Ace Admin 组件库说明
 
-Ace Admin 是一套基于 Vue 3 和 Ant Design Vue 的企业级组件库，帮助开发者高效构建现代化管理系统和后台应用。
+Vue Ace Admin 组件库是一套基于 Vue 3 和 Ant Design Vue 的企业级组件库，帮助开发者高效构建现代化管理系统和后台应用。
 
 ---
 
@@ -8,7 +8,7 @@ Ace Admin 是一套基于 Vue 3 和 Ant Design Vue 的企业级组件库，帮�
 
 ### 安装
 
-Ace Admin 组件库依赖 [Vue 3](https://vuejs.org/) 和 [Ant Design Vue](https://www.antdv.com/)。在使用本组件库前，请确保已安装并正确配置这两个依赖。
+Vue Ace Admin 组件库依赖 [Vue 3](https://vuejs.org/) 和 [Ant Design Vue](https://www.antdv.com/)。在使用本组件库前，请确保已安装并正确配置这两个依赖。
 
 ```bash
 pnpm install vue ant-design-vue @codexlin/ace-admin-ui
@@ -23,7 +23,7 @@ pnpm install vue ant-design-vue @codexlin/ace-admin-ui
 import { createApp } from 'vue'
 import App from './App.vue'
 import Antd from 'ant-design-vue'
-import 'ant-design-vue/dist/antd.css'
+import 'ant-design-vue/dist/reset.css'
 import '@codexlin/ace-admin-ui/dist/ace-admin-ui.css'
 
 const app = createApp(App)
@@ -36,7 +36,7 @@ app.mount('#app')
 
 ## 按需引入
 
-Ace Admin 组件库支持按需引入组件，无需全量注册，可以只导入和使用你需要的组件，从而减小打包体积。
+Vue Ace Admin 组件库支持按需引入组件，无需全量注册，可以只导入和使用你需要的组件，从而减小打包体积。
 
 ### 按需引入示例
 

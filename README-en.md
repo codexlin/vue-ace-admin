@@ -10,6 +10,11 @@
 
 Ace Admin is a free and open-source backend management system solution built using cutting-edge technology stacks like Vue3.5, TypeScript5.x, Antd-Vue4.x, Pinia2.x, and Vite5.x. The project data is implemented via ApiFox simulation. Based on the exquisite theme of Antd4, I have constructed a clear and efficient project logic structure, integrating the latest technology frameworks. Welcome to use!
 
+## 📚 Documentation & Demo
+
+- 📖 **Documentation**: [Online Docs](https://codexlin.github.io/vue-ace-admin/)
+- 👀 **Online Demo**: [Demo](https://vue-ace-admin.vercel.app/) (Account: `xoxosos666@gmail.com` / Password: `admin666`)
+
 ## 🏗️ Monorepo Architecture
 
 Ace Admin uses a **Monorepo** architecture design, managed with `pnpm workspace` to enable code sharing and unified builds across multiple packages.
@@ -112,15 +117,6 @@ pnpm build:ui
 pnpm dev:ui
 ```
 
-## 📚 Documentation
-
-- User Documentation: [doc](https://ace-admin-doc.vercel.app/)
-
-## 📺 Online Demo
-
-| Location | Account              | Password | Link                                                                 |
-| -------- | -------------------- | -------- | -------------------------------------------------------------------- |
-| vercel   | xoxosos666@gmail.com | admin666 | <a href="https://vue-ace-admin.vercel.app/" target="_blank">Link</a> |
 
 ## ❤️ Powered by Love
 

@@ -15,10 +15,7 @@
     "noEmitOnError": false,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "types": ["vite/client", "node"],
-    "paths": {
-      "@codexlin/ace-admin-ui": ["./src/index.ts"]
-    }
+    "types": ["vite/client", "node"]
   },
   "include": ["src/**/*", "src/**/*.vue"],
   "exclude": ["node_modules", "dist", "**/*.test.*", "**/__tests__/*"],

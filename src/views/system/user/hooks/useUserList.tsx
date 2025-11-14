@@ -1,4 +1,4 @@
-import { useList } from '@codexlin/ace-admin-ui'
+import { useList } from '@codexlin/ace-admin-hooks'
 import type { Ref } from 'vue'
 import type { IUser } from './useUserModal'
 import { getUserList } from '../../api'
