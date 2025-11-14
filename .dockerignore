@@ -59,8 +59,9 @@ temp
 .editorconfig
 .prettierrc
 .eslintrc*
-tsconfig.json
-tsconfig.*.json
+# 注意：tsconfig.json 文件需要被包含，因为构建时需要它们
+# tsconfig.json
+# tsconfig.*.json
 stylelint.config.js
 commitlint.config.js
 turbo.json
