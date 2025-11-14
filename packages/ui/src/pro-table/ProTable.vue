@@ -21,8 +21,8 @@ const slotNames = Object.keys(slots) as string[]
 const tableProps = computed(() => {
   const { isZebra, useCardWrapper, rowClassName, ...rest } = props
   return {
-    ...(attrs as Record<string, unknown>),
-    ...rest
+    ...rest,
+    ...(attrs as Record<string, unknown>)
   }
 })
 

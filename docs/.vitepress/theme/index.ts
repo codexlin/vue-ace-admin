@@ -6,10 +6,12 @@ import '@codexlin/ace-admin-ui/dist/ace-admin-ui.css'
 import DemoPreview, { useComponents } from '@vitepress-code-preview/container'
 import '@vitepress-code-preview/container/dist/style.css'
 import Antd from 'ant-design-vue'
+import Layout from './Layout.vue'
 import './style.css'
 
 export default {
   extends: DefaultTheme,
+  Layout,
   enhanceApp(ctx) {
     ctx.app.use(Antd)
     useComponents(ctx.app, DemoPreview)

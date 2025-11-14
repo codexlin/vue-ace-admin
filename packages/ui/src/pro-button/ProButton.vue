@@ -22,10 +22,20 @@ const attrs = useAttrs()
 const slots = useSlots()
 const slotNames = Object.keys(slots) as string[]
 
-const propsData = computed(() => ({
-  ...attrs,
-  loading: attrs.loading || loadingStatus.value
-}))
+const propsData = computed(() => {
+  const {
+    autoLoading: _autoLoading,
+    enableConfirm: _enableConfirm,
+    popConfig: _popConfig,
+    onClick: _onClick,
+    ...rest
+  } = props
+  return {
+    ...rest,
+    ...attrs,
+    loading: rest.loading ?? attrs.loading ?? loadingStatus.value
+  }
+})
 
 const loadingStatus = ref<boolean>(false)
 
