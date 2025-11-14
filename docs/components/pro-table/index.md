@@ -189,7 +189,8 @@ const data = [
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import { ProTable, ProButton, useList, message, errorMessage } from '@codexlin/ace-admin-ui'
+import { ProTable, ProButton, message, errorMessage } from '@codexlin/ace-admin-ui'
+import { useList } from '@codexlin/ace-admin-hooks'
 
 const {
   dataSource,

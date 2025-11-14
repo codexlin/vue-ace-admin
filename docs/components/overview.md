@@ -106,7 +106,8 @@ const fields = [
 ```vue
 <script setup>
 import { ref } from 'vue'
-import { useList, message, errorMessage } from '@codexlin/ace-admin-ui'
+import { message, errorMessage } from '@codexlin/ace-admin-ui'
+import { useList } from '@codexlin/ace-admin-hooks'
 
 const searchForm = ref({})
 
@@ -147,7 +148,8 @@ const { dataSource, loading, curPage, total, loadData, error } = useList({
 ```vue
 <script setup>
 import { ref, computed } from 'vue'
-import { ProSearchForm, ProTable, useList, message, errorMessage } from '@codexlin/ace-admin-ui'
+import { ProSearchForm, ProTable, message, errorMessage } from '@codexlin/ace-admin-ui'
+import { useList } from '@codexlin/ace-admin-hooks'
 
 const searchForm = ref({})
 const { dataSource, loading, error, loadData } = useList({

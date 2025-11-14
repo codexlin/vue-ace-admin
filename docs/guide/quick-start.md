@@ -200,7 +200,8 @@ const dataSource = ref([
 
 <script setup>
 import { ref, computed } from 'vue'
-import { useList, ProTable, ProSearchForm, message, errorMessage } from '@codexlin/ace-admin-ui'
+import { ProTable, ProSearchForm, message, errorMessage } from '@codexlin/ace-admin-ui'
+import { useList } from '@codexlin/ace-admin-hooks'
 
 const searchForm = ref({})
 
@@ -316,7 +317,8 @@ const columns = [
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { ProButton, ProSearchForm, ProTable, useList } from '@codexlin/ace-admin-ui'
+import { ProButton, ProSearchForm, ProTable } from '@codexlin/ace-admin-ui'
+import { useList } from '@codexlin/ace-admin-hooks'
 import { message } from 'ant-design-vue'
 
 const searchForm = ref({ name: '', status: '' })

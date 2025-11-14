@@ -192,7 +192,8 @@ async function handleSearch(formData) {
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import { ProSearchForm, ProTable, ProButton, useList, message, errorMessage } from '@codexlin/ace-admin-ui'
+import { ProSearchForm, ProTable, ProButton, message, errorMessage } from '@codexlin/ace-admin-ui'
+import { useList } from '@codexlin/ace-admin-hooks'
 import { PlusOutlined, DownloadOutlined } from '@ant-design/icons-vue'
 
 // 模拟用户数据库

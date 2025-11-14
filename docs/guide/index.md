@@ -149,7 +149,8 @@ pnpm add @codexlin/ace-admin-ui
 **使用方式：**
 ```typescript
 // 导入组件和 Hooks
-import { ProTable, ProButton, useList } from '@codexlin/ace-admin-ui'
+import { ProTable, ProButton } from '@codexlin/ace-admin-ui'
+import { useList } from '@codexlin/ace-admin-hooks'
 import '@codexlin/ace-admin-ui/dist/ace-admin-ui.css'
 ```
 
@@ -174,7 +175,8 @@ yarn add @codexlin/ace-admin-ui
 **使用方式（完全一致）：**
 ```typescript
 // 导入组件和 Hooks（与本地开发完全一样）
-import { ProTable, ProButton, useList } from '@codexlin/ace-admin-ui'
+import { ProTable, ProButton } from '@codexlin/ace-admin-ui'
+import { useList } from '@codexlin/ace-admin-hooks'
 import '@codexlin/ace-admin-ui/dist/ace-admin-ui.css'
 ```
 

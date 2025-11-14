@@ -25,7 +25,8 @@ description: 通用列表数据获取、分页、筛选、重置 hooks
 ```vue
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import { useList, ProTable, ProSearchForm, message, errorMessage } from '@codexlin/ace-admin-ui'
+import { ProTable, ProSearchForm, message, errorMessage } from '@codexlin/ace-admin-ui'
+import { useList } from '@codexlin/ace-admin-hooks'
 
 interface User {
   name: string;

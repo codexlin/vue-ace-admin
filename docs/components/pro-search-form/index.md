@@ -92,7 +92,8 @@ function handleReset() {
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { ProSearchForm, ProTable, useList } from '@codexlin/ace-admin-ui'
+import { ProSearchForm, ProTable } from '@codexlin/ace-admin-ui'
+import { useList } from '@codexlin/ace-admin-hooks'
 
 const searchForm = ref({ name: '' })
 

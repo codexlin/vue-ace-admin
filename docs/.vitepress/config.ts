@@ -54,12 +54,24 @@ export default defineConfig({
   },
   vite: {
     resolve: {
-      alias: {
-        '@': fileURLToPath(new URL('../../', import.meta.url)),
-        '@codexlin/ace-admin-ui': fileURLToPath(new URL('../../packages/ui/src/index.ts', import.meta.url)),
-        '@codexlin/ace-admin-ui/style.css': fileURLToPath(new URL('../../packages/ui/dist/ace-admin-ui.css', import.meta.url)),
-        '@codexlin/ace-admin-hooks': fileURLToPath(new URL('../../packages/hooks/src/index.ts', import.meta.url))
-      }
+      alias: [
+        {
+          find: '@codexlin/ace-admin-ui/dist/ace-admin-ui.css',
+          replacement: fileURLToPath(new URL('../../packages/ui/dist/ace-admin-ui.css', import.meta.url))
+        },
+        {
+          find: '@codexlin/ace-admin-ui',
+          replacement: fileURLToPath(new URL('../../packages/ui/src/index.ts', import.meta.url))
+        },
+        {
+          find: '@codexlin/ace-admin-hooks',
+          replacement: fileURLToPath(new URL('../../packages/hooks/src/index.ts', import.meta.url))
+        },
+        {
+          find: '@',
+          replacement: fileURLToPath(new URL('../../', import.meta.url))
+        }
+      ]
     },
     ssr: {
       noExternal: [/^ant-design-vue/, /^@ant-design/, /^scroll-into-view-if-needed/]
