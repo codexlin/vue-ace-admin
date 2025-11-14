@@ -38,7 +38,7 @@ description: 典型后台筛选与展示场景
 
 <script setup>
 import { ref } from 'vue'
-import { ProSearchForm, ProTable } from 'vue-ace-admin-ui'
+import { ProSearchForm, ProTable } from '@ace-admin/ui'
 
 const searchForm = ref({ name: '' })
 const loading = ref(false)
@@ -192,7 +192,7 @@ async function handleSearch(formData) {
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import { ProSearchForm, ProTable, ProButton, useList, message, errorMessage } from 'vue-ace-admin-ui'
+import { ProSearchForm, ProTable, ProButton, useList, message, errorMessage } from '@ace-admin/ui'
 import { PlusOutlined, DownloadOutlined } from '@ant-design/icons-vue'
 
 // 模拟用户数据库
