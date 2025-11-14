@@ -77,7 +77,9 @@ provide(refreshKey, async () => {
 // 淡入缩放
 .fade-scale-enter-active,
 .fade-scale-leave-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
 .fade-scale-enter-from,
@@ -89,7 +91,9 @@ provide(refreshKey, async () => {
 // 淡入滑动
 .fade-slide-enter-active,
 .fade-slide-leave-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
 .fade-slide-enter-from {

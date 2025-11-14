@@ -12,8 +12,7 @@ export const getDetail = <T>(param: number) => request.get<T>(`${MENU_PREFIX}/ge
 export const getUserInfoAndPermission = <T>(param: number) =>
   request.get<T>(`${USER_PREFIX}/getUserInfoAndPermission/${param}`)
 export const getUserRoleInfo = <T>(param: number) => request.get<T>(`${USER_PREFIX}/getUserRoleInfo/${param}`)
-export const getUserList = <T>(params?: Record<string, any>) =>
-  request.get<T>(`${USER_PREFIX}/list`, { params })
+export const getUserList = <T>(params?: Record<string, any>) => request.get<T>(`${USER_PREFIX}/list`, { params })
 export const addUser = <T, V>(data: V) => request.post<T, V>(`${USER_PREFIX}/save`, data)
 export const updateUser = <T, V>(data: V) => request.put<T, V>(`${USER_PREFIX}/update`, data)
 export const getRoleList = <T>() => request.get<T>(`${ROLE_PREFIX}/list`)
@@ -24,4 +23,3 @@ export const updateRole = <T, V>(data: V) => request.put<T, V>(`${ROLE_PREFIX}/u
 export const deleteRole = <T>(param: number) => request.delete<T>(`${ROLE_PREFIX}/remove/${param}`)
 export const saveUserRole = <T, V>(data: V) => request.post<T, V>(`userRoleEntity/save`, data)
 export const updateUserRole = <T, V>(data: V) => request.put<T, V>(`userRoleEntity/update`, data)
-

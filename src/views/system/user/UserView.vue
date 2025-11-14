@@ -29,13 +29,7 @@ const { columns, dataSource, loadData, loading } = useUserList(openModal, state)
   <div>
     <h1>User View</h1>
     <SearchForm v-model:modelValue="state" :fields="fields" @submit="handleSearch" @reset="handleReset" />
-    <ProTable
-      is-zebra="even"
-      :columns="columns"
-      :dataSource="dataSource"
-      :loading="loading"
-      row-key="id"
-    />
+    <ProTable is-zebra="even" :columns="columns" :dataSource="dataSource" :loading="loading" row-key="id" />
     <a-modal v-model:open="visible" :title="title" :destroy-on-close="true" @ok="handleOk">
       <FormModal ref="formRef" :form-items="formItems" />
     </a-modal>

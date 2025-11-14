@@ -6,9 +6,111 @@
 
 ## ⚡ Introduction
 
-> Ace (no need to say more-.-) aims to build a free and open-source mid-small size backend management system, based on the latest Vue3.4 ecosystem and other mainstream technologies.(: Ready to use out of the box, no complex packaging, supports secondary development. (Currently writing Java backend, other language versions may be written later.)
+> Ace Admin aims to build a free and open-source mid-small size backend management system, based on the latest Vue3.5 ecosystem and other mainstream technologies. Ready to use out of the box, no complex packaging, supports secondary development. (Currently writing Java backend, other language versions may be written later.)
 
-Ace Admin is a free and open-source backend management system solution built using cutting-edge technology stacks like Vue3.4, TypeScript5.x, Antd-Vue4.x, Pinia2.x, and Vite5.x. The project data is implemented via ApiFox simulation. Based on the exquisite theme of Antd4, I have constructed a clear and efficient project logic structure, integrating the latest technology frameworks. Welcome to use!
+Ace Admin is a free and open-source backend management system solution built using cutting-edge technology stacks like Vue3.5, TypeScript5.x, Antd-Vue4.x, Pinia2.x, and Vite5.x. The project data is implemented via ApiFox simulation. Based on the exquisite theme of Antd4, I have constructed a clear and efficient project logic structure, integrating the latest technology frameworks. Welcome to use!
+
+## 🏗️ Monorepo Architecture
+
+Ace Admin uses a **Monorepo** architecture design, managed with `pnpm workspace` to enable code sharing and unified builds across multiple packages.
+
+### 📦 Project Structure
+
+```
+vue-ace-admin/
+├── packages/
+│   ├── hooks/          # @ace-admin/hooks - Pure logic Hooks package
+│   │   ├── src/
+│   │   │   ├── useList.ts         # List data management Hook
+│   │   │   ├── usePagination.ts   # Pagination management Hook
+│   │   │   ├── useDebouncedRef.ts # Debounced Ref Hook
+│   │   │   └── ...
+│   │   └── package.json
+│   │
+│   └── ui/             # @ace-admin/ui - UI component library
+│       ├── src/
+│       │   ├── pro-table/         # ProTable component
+│       │   ├── pro-button/        # ProButton component
+│       │   ├── pro-search-form/   # ProSearchForm component
+│       │   ├── hooks/             # UI-related Hooks
+│       │   └── ...
+│       └── package.json
+│
+├── src/                # Main application code
+├── docs/               # Documentation site
+└── package.json        # Root package.json (workspace config)
+```
+
+### 🎯 Benefits of Monorepo
+
+1. **Code Sharing**: Hooks and UI components can be shared across multiple projects
+2. **Unified Toolchain**: Shared ESLint, Prettier, TypeScript configurations
+3. **Atomic Publishing**: Can independently publish `@ace-admin/hooks` and `@ace-admin/ui` packages
+4. **Type Safety**: Cross-package type checking through TypeScript project references
+5. **Development Efficiency**: Direct use of workspace packages in local development without npm publishing
+
+### 📚 Package Overview
+
+#### `@ace-admin/hooks` - Pure Logic Hooks Package
+
+Provides generic Hooks with no business dependencies, usable in any Vue 3 project:
+
+- `useList` - List data management (supports pagination, filtering, auto-refresh)
+- `usePagination` - Pagination management
+- `useDebouncedRef` - Debounced Ref
+- `useLoading` - Loading state management
+- And more...
+
+#### `@ace-admin/ui` - UI Component Library
+
+Enhanced component library based on Ant Design Vue, providing enterprise-grade UI components:
+
+- `ProTable` - Enhanced table component (supports zebra striping, toolbar, etc.)
+- `ProButton` - Enhanced button component (supports auto-loading, confirmation popup)
+- `ProSearchForm` - Search form component
+- `useList` - UI version of useList (integrated with Ant Design Vue message notifications)
+- And more...
+
+### 🚀 Development Workflow
+
+#### Local Development
+
+When developing locally, directly use workspace packages without publishing to npm:
+
+```typescript
+// Main application directly uses workspace packages
+import { useList, ProTable } from '@ace-admin/ui'
+```
+
+#### Publishing to npm
+
+If you need to use in other projects, you can publish to npm:
+
+```bash
+# Publish hooks package
+cd packages/hooks
+pnpm publish
+
+# Publish ui package
+cd packages/ui
+pnpm publish
+```
+
+### 🔧 Build Commands
+
+```bash
+# Build all packages
+pnpm build
+
+# Build hooks package
+pnpm build:hooks
+
+# Build ui package
+pnpm build:ui
+
+# Develop ui package
+pnpm dev:ui
+```
 
 ## 📚 Documentation
 
@@ -60,12 +162,12 @@ Ace Admin is a free and open-source backend management system solution built usi
 ### Pre-configuration
 
 1. Environment Setup
-2. Recommended node version 18+/20+
-3. Recommended pnpm version 8.x+
+2. Recommended node version 20.x
+3. Recommended pnpm version 10.x+ (Project uses pnpm@10.14.0)
 
 ```shell
 # Clone the project
-git clone https://github.com/xoxosos/vue-ace-admin.git
+git clone https://github.com/codexlin/vue-ace-admin.git
 ```
 
 
