@@ -126,12 +126,15 @@
     "pre-push": "pnpm lint:prettier"
   },
   "lint-staged": {
-    "src/**/*.{ts,vue,js,tsx,jsx,json}": [
-      "pnpm lint:eslint",
-      "pnpm lint:prettier"
+    "src/**/*.{ts,vue,js,tsx,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "src/**/*.json": [
+      "prettier --write"
     ],
     "*.{scss,vue}": [
-      "pnpm stylelint:fix"
+      "stylelint --fix"
     ],
     "package.json": [
       "prettier --write"
