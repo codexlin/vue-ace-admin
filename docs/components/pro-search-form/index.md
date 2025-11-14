@@ -28,7 +28,7 @@ description: 动态搜索表单组件，支持配置驱动、插槽自定义和�
 ```vue
 <script setup>
 import { ref } from 'vue'
-import { ProSearchForm } from '@ace-admin/ui'
+import { ProSearchForm } from '@codexlin/ace-admin-ui'
 
 const searchForm = ref({
   name: '',
@@ -92,7 +92,7 @@ function handleReset() {
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { ProSearchForm, ProTable, useList } from '@ace-admin/ui'
+import { ProSearchForm, ProTable, useList } from '@codexlin/ace-admin-ui'
 
 const searchForm = ref({ name: '' })
 
@@ -166,7 +166,7 @@ onMounted(() => {
 
 <script setup>
 import { ref } from 'vue'
-import { ProSearchForm } from '@ace-admin/ui'
+import { ProSearchForm } from '@codexlin/ace-admin-ui'
 
 const searchForm = ref({
   name: '',
@@ -214,7 +214,7 @@ function handleSubmit(data) {
 
 <script setup>
 import { ref } from 'vue'
-import { ProSearchForm } from '@ace-admin/ui'
+import { ProSearchForm } from '@codexlin/ace-admin-ui'
 import { message } from 'ant-design-vue'
 
 const searchForm = ref({

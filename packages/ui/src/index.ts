@@ -10,7 +10,7 @@ import BaseUpload from './upload/BaseUpload.vue'
 import './pro-table/style.css'
 
 if (typeof console !== 'undefined') {
-  console.info(`@ace-admin/ui loaded [${Math.random().toString(36).slice(2, 8)}]`)
+  console.info(`@codexlin/ace-admin-ui loaded [${Math.random().toString(36).slice(2, 8)}]`)
 }
 
 // 导出组件
@@ -26,7 +26,7 @@ export { useList, message, errorMessage, warningMessage, infoMessage } from './h
 export type { OptionsType, UseListResult, UseListOptions, UseListParams } from './hooks/useList'
 
 // 导出工具
-export { useDebouncedRef } from '@ace-admin/hooks'
+export { useDebouncedRef } from '@codexlin/ace-admin-hooks'
 
 // 导出 Hooks
 export { usePagination } from './hooks/usePagination'

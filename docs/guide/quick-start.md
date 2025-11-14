@@ -1,11 +1,11 @@
 ---
 title: 快速开始
-description: 快速上手 @ace-admin/ui 组件库
+description: 快速上手 @codexlin/ace-admin-ui 组件库
 ---
 
 # 快速开始
 
-本指南将帮助你快速开始使用 @ace-admin/ui 组件库。
+本指南将帮助你快速开始使用 @codexlin/ace-admin-ui 组件库。
 
 ## 安装
 
@@ -14,15 +14,15 @@ description: 快速上手 @ace-admin/ui 组件库
 ::: code-group
 
 ```bash [pnpm]
-pnpm add @ace-admin/ui
+pnpm add @codexlin/ace-admin-ui
 ```
 
 ```bash [npm]
-npm install @ace-admin/ui
+npm install @codexlin/ace-admin-ui
 ```
 
 ```bash [yarn]
-yarn add @ace-admin/ui
+yarn add @codexlin/ace-admin-ui
 ```
 
 :::
@@ -34,8 +34,8 @@ yarn add @ace-admin/ui
 ```typescript
 import { createApp } from 'vue'
 import App from './App.vue'
-import AceAdminUI from '@ace-admin/ui'
-import '@ace-admin/ui/dist/ace-admin-ui.css'
+import AceAdminUI from '@codexlin/ace-admin-ui'
+import '@codexlin/ace-admin-ui/dist/ace-admin-ui.css'
 
 const app = createApp(App)
 app.use(AceAdminUI)
@@ -48,8 +48,8 @@ app.mount('#app')
 
 ```vue
 <script setup lang="ts">
-import { ProButton, ProTable, ProSearchForm } from '@ace-admin/ui'
-import '@ace-admin/ui/dist/ace-admin-ui.css'
+import { ProButton, ProTable, ProSearchForm } from '@codexlin/ace-admin-ui'
+import '@codexlin/ace-admin-ui/dist/ace-admin-ui.css'
 </script>
 
 <template>
@@ -73,7 +73,7 @@ ProButton 支持自动 loading 和确认弹窗功能。
 </template>
 
 <script setup>
-import { ProButton } from '@ace-admin/ui'
+import { ProButton } from '@codexlin/ace-admin-ui'
 
 const handleClick = async () => {
   // 异步操作，按钮会自动显示 loading
@@ -102,7 +102,7 @@ const handleClick = async () => {
 
 <script setup>
 import { ref } from 'vue'
-import { ProSearchForm } from '@ace-admin/ui'
+import { ProSearchForm } from '@codexlin/ace-admin-ui'
 
 const searchForm = ref({
   username: '',
@@ -160,7 +160,7 @@ const handleSearch = (values) => {
 
 <script setup>
 import { ref } from 'vue'
-import { ProTable } from '@ace-admin/ui'
+import { ProTable } from '@codexlin/ace-admin-ui'
 
 const columns = [
   { title: '姓名', dataIndex: 'name' },
@@ -200,7 +200,7 @@ const dataSource = ref([
 
 <script setup>
 import { ref, computed } from 'vue'
-import { useList, ProTable, ProSearchForm, message, errorMessage } from '@ace-admin/ui'
+import { useList, ProTable, ProSearchForm, message, errorMessage } from '@codexlin/ace-admin-ui'
 
 const searchForm = ref({})
 
@@ -316,7 +316,7 @@ const columns = [
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { ProButton, ProSearchForm, ProTable, useList } from '@ace-admin/ui'
+import { ProButton, ProSearchForm, ProTable, useList } from '@codexlin/ace-admin-ui'
 import { message } from 'ant-design-vue'
 
 const searchForm = ref({ name: '', status: '' })
@@ -410,7 +410,7 @@ import type {
   ProSearchFormProps,
   SearchField,
   UseListProps
-} from '@ace-admin/ui'
+} from '@codexlin/ace-admin-ui'
 
 // 完整的类型提示和检查
 const fields: SearchField[] = [
@@ -424,8 +424,8 @@ const fields: SearchField[] = [
 
 ```typescript
 // main.ts
-import AceAdminUI from '@ace-admin/ui'
-import '@ace-admin/ui/dist/ace-admin-ui.css'
+import AceAdminUI from '@codexlin/ace-admin-ui'
+import '@codexlin/ace-admin-ui/dist/ace-admin-ui.css'
 
 app.use(AceAdminUI)
 ```
@@ -436,7 +436,7 @@ app.use(AceAdminUI)
 
 ### 是否需要单独引入 Ant Design Vue？
 
-需要。`@ace-admin/ui` 将 `ant-design-vue` 作为 peer dependency，你需要在项目中安装：
+需要。`@codexlin/ace-admin-ui` 将 `ant-design-vue` 作为 peer dependency，你需要在项目中安装：
 
 ```bash
 pnpm add ant-design-vue

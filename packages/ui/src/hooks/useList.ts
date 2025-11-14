@@ -1,7 +1,7 @@
 import { message as AntMessage } from 'ant-design-vue'
 import type { Ref } from 'vue'
-import { useList as useCoreList } from '@ace-admin/hooks'
-import type { UseListRequestFn, UseListOptions, UseListResult, UseListModernParams } from '@ace-admin/hooks'
+import { useList as useCoreList } from '@codexlin/ace-admin-hooks'
+import type { UseListRequestFn, UseListOptions, UseListResult, UseListModernParams } from '@codexlin/ace-admin-hooks'
 
 type ListRequestFnType<Response = any> = UseListRequestFn<Response>
 
@@ -41,4 +41,4 @@ export function useList<
   return useCoreList<ItemType, FilterOption, Response>(props)
 }
 
-export type { UseListResult, UseListOptions, UseListParams, UseListSuccessContext } from '@ace-admin/hooks'
+export type { UseListResult, UseListOptions, UseListParams, UseListSuccessContext } from '@codexlin/ace-admin-hooks'

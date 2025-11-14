@@ -106,7 +106,7 @@ const fields = [
 ```vue
 <script setup>
 import { ref } from 'vue'
-import { useList, message, errorMessage } from '@ace-admin/ui'
+import { useList, message, errorMessage } from '@codexlin/ace-admin-ui'
 
 const searchForm = ref({})
 
@@ -147,7 +147,7 @@ const { dataSource, loading, curPage, total, loadData, error } = useList({
 ```vue
 <script setup>
 import { ref, computed } from 'vue'
-import { ProSearchForm, ProTable, useList, message, errorMessage } from '@ace-admin/ui'
+import { ProSearchForm, ProTable, useList, message, errorMessage } from '@codexlin/ace-admin-ui'
 
 const searchForm = ref({})
 const { dataSource, loading, error, loadData } = useList({
@@ -194,13 +194,13 @@ const loadErrorMessage = computed(() => (error?.value instanceof Error ? error.v
 
 1. **安装**
    ```bash
-   pnpm add @ace-admin/ui ant-design-vue
+   pnpm add @codexlin/ace-admin-ui ant-design-vue
    ```
 
 2. **引入**
    ```typescript
-   import { ProButton, ProTable, ProSearchForm } from '@ace-admin/ui'
-   import '@ace-admin/ui/dist/ace-admin-ui.css'
+   import { ProButton, ProTable, ProSearchForm } from '@codexlin/ace-admin-ui'
+   import '@codexlin/ace-admin-ui/dist/ace-admin-ui.css'
    ```
 
 3. **使用**

@@ -25,7 +25,7 @@ description: 通用列表数据获取、分页、筛选、重置 hooks
 ```vue
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import { useList, ProTable, ProSearchForm, message, errorMessage } from '@ace-admin/ui'
+import { useList, ProTable, ProSearchForm, message, errorMessage } from '@codexlin/ace-admin-ui'
 
 interface User {
   name: string;
@@ -152,7 +152,7 @@ const columns = [
 | `buildParams`       | `(ctx) => Record<string, any>`   | 自定义请求参数构建（可结合筛选项、分页、额外参数）                 |
 | `resetFilters`      | `(filtersRef) => void`           | 自定义筛选项重置逻辑（默认回退到初始表单状态）                      |
 
-> 💡 如需结合 UI 组件显示提示，可在传入 `options.onSuccess` / `options.onError` 时调用 `@ace-admin/ui` 导出的 `message`、`errorMessage` 等工具函数，或直接使用你项目中已有的消息体系。
+> 💡 如需结合 UI 组件显示提示，可在传入 `options.onSuccess` / `options.onError` 时调用 `@codexlin/ace-admin-ui` 导出的 `message`、`errorMessage` 等工具函数，或直接使用你项目中已有的消息体系。
 
 ---
 

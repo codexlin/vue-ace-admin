@@ -1,6 +1,6 @@
 <script lang="tsx" setup>
 import { onMounted, ref, shallowRef, shallowReactive } from 'vue'
-import { ProTable, useList } from '@ace-admin/ui'
+import { ProTable, useList } from '@codexlin/ace-admin-ui'
 import DetailView from './components/DetailView.vue'
 import { useConfig } from './hooks/useConfig'
 import useLocalI18n from '@/hooks/useLocalI18n'

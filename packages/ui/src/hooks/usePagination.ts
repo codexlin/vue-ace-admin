@@ -1,1 +1,1 @@
-export { usePagination } from '@ace-admin/hooks'
+export { usePagination } from '@codexlin/ace-admin-hooks'

@@ -1,5 +1,5 @@
 <script lang="tsx" setup>
-import { ProTable } from '@ace-admin/ui'
+import { ProTable } from '@codexlin/ace-admin-ui'
 import { useToggle } from '@vueuse/core'
 import useRoleForm from './hooks/useRoleForm'
 import useRoleList from './hooks/useRoleList.tsx'

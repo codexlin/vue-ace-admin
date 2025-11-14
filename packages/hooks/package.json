@@ -1,5 +1,5 @@
 {
-  "name": "@ace-admin/hooks",
+  "name": "@codexlin/ace-admin-hooks",
   "version": "1.0.0",
   "description": "Pure Vue 3 Composition API Hooks",
   "type": "module",

@@ -11,7 +11,7 @@ Ace Admin 是一套基于 Vue 3 和 Ant Design Vue 的企业级组件库，帮�
 Ace Admin 组件库依赖 [Vue 3](https://vuejs.org/) 和 [Ant Design Vue](https://www.antdv.com/)。在使用本组件库前，请确保已安装并正确配置这两个依赖。
 
 ```bash
-pnpm install vue ant-design-vue @ace-admin/ui
+pnpm install vue ant-design-vue @codexlin/ace-admin-ui
 ```
 
 > ⚠️ 使用前必须安装并正确注册 `ant-design-vue` 和 `vue`，否则组件无法正常工作。
@@ -24,7 +24,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
-import '@ace-admin/ui/dist/ace-admin-ui.css'
+import '@codexlin/ace-admin-ui/dist/ace-admin-ui.css'
 
 const app = createApp(App)
 app.use(Antd)
@@ -42,7 +42,7 @@ Ace Admin 组件库支持按需引入组件，无需全量注册，可以只导�
 
 ```vue
 <script setup>
-import { ProButton } from '@ace-admin/ui'
+import { ProButton } from '@codexlin/ace-admin-ui'
 // 只引入 ProButton，不会引入其他组件
 </script>
 
@@ -55,7 +55,7 @@ import { ProButton } from '@ace-admin/ui'
 
 ```vue
 <script setup>
-import { ProButton, ProTable } from '@ace-admin/ui'
+import { ProButton, ProTable } from '@codexlin/ace-admin-ui'
 </script>
 
 <template>
@@ -81,7 +81,7 @@ import { ProButton, ProTable } from '@ace-admin/ui'
    ```json
    {
      "imports": {
-       "@ace-admin/ui": "https://unpkg.com/@ace-admin/ui/dist/ace-admin-ui.es.js",
+       "@codexlin/ace-admin-ui": "https://unpkg.com/@codexlin/ace-admin-ui/dist/ace-admin-ui.es.js",
        "ant-design-vue": "https://unpkg.com/ant-design-vue/dist/ant-design-vue.esm.js"
      }
    }
@@ -89,12 +89,12 @@ import { ProButton, ProTable } from '@ace-admin/ui'
 2. 在 HTML/CSS tab 或 `<style>` 中引入样式：
    ```html
    <link rel="stylesheet" href="https://unpkg.com/ant-design-vue/dist/antd.css">
-   <link rel="stylesheet" href="https://unpkg.com/@ace-admin/ui/dist/ace-admin-ui.css">
+   <link rel="stylesheet" href="https://unpkg.com/@codexlin/ace-admin-ui/dist/ace-admin-ui.css">
    ```
 3. 在 SFC 中直接使用组件：
    ```vue
    <script setup>
-   import { ProButton } from '@ace-admin/ui'
+   import { ProButton } from '@codexlin/ace-admin-ui'
    </script>
    <template>
      <ProButton type="primary">主要按钮</ProButton>

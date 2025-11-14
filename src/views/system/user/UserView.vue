@@ -1,5 +1,5 @@
 <script setup lang="tsx">
-import { ProTable } from '@ace-admin/ui'
+import { ProTable } from '@codexlin/ace-admin-ui'
 import useUserList from './hooks/useUserList'
 import useUserModal from './hooks/useUserModal'
 import useUserSearchForm from './hooks/useUserSearchForm'

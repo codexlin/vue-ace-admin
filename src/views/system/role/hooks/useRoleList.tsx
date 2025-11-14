@@ -1,6 +1,6 @@
 import { getRoleList } from '../../api'
 import { OperationButtons } from '@/components'
-import { useList } from '@ace-admin/ui'
+import { useList } from '@codexlin/ace-admin-ui'
 import useLocalI18n from '@/hooks/useLocalI18n'
 
 export default function useRoleList(handleClick: any) {

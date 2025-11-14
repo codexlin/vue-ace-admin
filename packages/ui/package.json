@@ -1,5 +1,5 @@
 {
-  "name": "@ace-admin/ui",
+  "name": "@codexlin/ace-admin-ui",
   "version": "0.3.0",
   "private": false,
   "description": "Production-ready Vue 3 component library for admin systems. Enhanced Ant Design Vue components with TypeScript support, auto-loading, smart forms, and advanced tables. Works seamlessly with vue-ace-admin",
@@ -91,6 +91,6 @@
     "radash": "^12.1.0"
   },
   "dependencies": {
-    "@ace-admin/hooks": "workspace:*"
+    "@codexlin/ace-admin-hooks": "workspace:*"
   }
 }

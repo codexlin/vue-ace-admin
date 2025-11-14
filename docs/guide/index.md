@@ -7,14 +7,14 @@ Ace Admin 采用 **Monorepo** 架构设计，使用 `pnpm workspace` 管理多�
 ```
 vue-ace-admin/
 ├── packages/
-│   ├── hooks/          # @ace-admin/hooks - 纯逻辑 Hooks 包
+│   ├── hooks/          # @codexlin/ace-admin-hooks - 纯逻辑 Hooks 包
 │   │   └── src/
 │   │       ├── useList.ts         # 列表数据管理 Hook
 │   │       ├── usePagination.ts   # 分页管理 Hook
 │   │       ├── useDebouncedRef.ts # 防抖 Ref Hook
 │   │       └── ...
 │   │
-│   └── ui/             # @ace-admin/ui - UI 组件库
+│   └── ui/             # @codexlin/ace-admin-ui - UI 组件库
 │       └── src/
 │           ├── pro-table/         # ProTable 组件
 │           ├── pro-button/        # ProButton 组件
@@ -31,13 +31,13 @@ vue-ace-admin/
 
 1. **代码共享**：Hooks 和 UI 组件可以在多个项目间共享
 2. **统一工具链**：共享 ESLint、Prettier、TypeScript 配置
-3. **原子化发布**：可以独立发布 `@ace-admin/hooks` 和 `@ace-admin/ui` 包
+3. **原子化发布**：可以独立发布 `@codexlin/ace-admin-hooks` 和 `@codexlin/ace-admin-ui` 包
 4. **类型安全**：通过 TypeScript 项目引用实现跨包类型检查
 5. **开发效率**：本地开发时直接使用 workspace 包，无需发布到 npm
 
 ## 📚 包说明
 
-### `@ace-admin/hooks` - 纯逻辑 Hooks 包
+### `@codexlin/ace-admin-hooks` - 纯逻辑 Hooks 包
 
 提供无业务依赖的通用 Hooks，可在任何 Vue 3 项目中使用：
 
@@ -47,7 +47,7 @@ vue-ace-admin/
 - `useLoading` - 加载状态管理
 - 更多...
 
-### `@ace-admin/ui` - UI 组件库
+### `@codexlin/ace-admin-ui` - UI 组件库
 
 基于 Ant Design Vue 的增强组件库，提供企业级 UI 组件：
 
@@ -65,7 +65,7 @@ vue-ace-admin/
 
 ```typescript
 // 主应用直接使用 workspace 包
-import { useList, ProTable } from '@ace-admin/ui'
+import { useList, ProTable } from '@codexlin/ace-admin-ui'
 ```
 
 ### 发布到 npm

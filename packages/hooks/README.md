@@ -1,13 +1,13 @@
 # 纯 Hooks 包使用示例
 
-## 🎯 **@ace-admin/hooks**
+## 🎯 **@codexlin/ace-admin-hooks**
 
 这是一个**纯 Vue 3 Composition API Hooks** 包，包含无业务依赖的通用 Hooks。
 
 ### **安装**
 
 ```bash
-pnpm add @ace-admin/hooks
+pnpm add @codexlin/ace-admin-hooks
 ```
 
 ### **使用示例**
@@ -24,7 +24,7 @@ pnpm add @ace-admin/hooks
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useDebouncedRef } from '@ace-admin/hooks'
+import { useDebouncedRef } from '@codexlin/ace-admin-hooks'
 
 const searchText = ref('')
 const debouncedSearch = useDebouncedRef(searchText, 500) // 500ms 防抖
@@ -43,7 +43,7 @@ const debouncedSearch = useDebouncedRef(searchText, 500) // 500ms 防抖
 </template>
 
 <script setup lang="ts">
-import { useLoading } from '@ace-admin/hooks'
+import { useLoading } from '@codexlin/ace-admin-hooks'
 
 const { loading, setLoading, toggle } = useLoading()
 
@@ -69,7 +69,7 @@ const handleSubmit = async () => {
 </template>
 
 <script setup lang="ts">
-import { useHasEventListener } from '@ace-admin/hooks'
+import { useHasEventListener } from '@codexlin/ace-admin-hooks'
 
 const hasClick = useHasEventListener('click')
 
@@ -89,7 +89,7 @@ const handleClick = () => {
 </template>
 
 <script setup lang="ts">
-import { useEmitOrDefault } from '@ace-admin/hooks'
+import { useEmitOrDefault } from '@codexlin/ace-admin-hooks'
 
 const { emitOrDefault } = useEmitOrDefault(
   'custom-action',

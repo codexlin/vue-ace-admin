@@ -12,7 +12,7 @@
     "ant-design-vue": "~4.2.6",
     "lodash-es": "^4.17.21",
     "vitepress": "^1.5.0",
-    "@ace-admin/ui": "workspace:*"
+    "@codexlin/ace-admin-ui": "workspace:*"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",

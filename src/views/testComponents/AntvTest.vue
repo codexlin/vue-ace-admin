@@ -25,7 +25,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { ProButton } from '@ace-admin/ui'
+import { ProButton } from '@codexlin/ace-admin-ui'
 
 const inputValue = ref('')
 </script>

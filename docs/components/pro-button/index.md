@@ -33,7 +33,7 @@ ProButton 是基于 Ant Design Vue 的 Button 组件扩展的增强版按钮，�
 </template>
 
 <script setup>
-import { ProButton } from '@ace-admin/ui'
+import { ProButton } from '@codexlin/ace-admin-ui'
 </script>
 
 <style scoped>
@@ -67,7 +67,7 @@ div {
 </template>
 
 <script setup>
-import { ProButton, message } from '@ace-admin/ui'
+import { ProButton, message } from '@codexlin/ace-admin-ui'
 
 async function handleSaveData() {
   // 真实 API 请求
@@ -134,7 +134,7 @@ function handleSimulateAsync() {
 </template>
 
 <script setup>
-import { ProButton, message } from '@ace-admin/ui'
+import { ProButton, message } from '@codexlin/ace-admin-ui'
 
 async function handleDelete() {
   // 模拟删除 API
@@ -166,7 +166,7 @@ async function handleReset() {
 </template>
 
 <script setup>
-import { ProButton } from '@ace-admin/ui'
+import { ProButton } from '@codexlin/ace-admin-ui'
 import { PoweroffOutlined } from '@ant-design/icons-vue';
 </script>
 ```

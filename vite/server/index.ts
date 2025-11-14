@@ -3,7 +3,7 @@ import { ServerOptions } from 'vite'
 // 开发服务器配置
 export default function (env: Record<string, string>) {
   const { VITE_APP_PORT = '3000', VITE_APP_BASE_API = '/api', VITE_API_URL = 'http://localhost:8080' } = env
-  
+
   const server: ServerOptions = {
     // 服务器主机名，如果允许外部访问，可设置为"0.0.0.0"
     host: '0.0.0.0',

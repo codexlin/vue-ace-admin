@@ -19,7 +19,7 @@ Ace Admin uses a **Monorepo** architecture design, managed with `pnpm workspace`
 ```
 vue-ace-admin/
 ├── packages/
-│   ├── hooks/          # @ace-admin/hooks - Pure logic Hooks package
+│   ├── hooks/          # @codexlin/ace-admin-hooks - Pure logic Hooks package
 │   │   ├── src/
 │   │   │   ├── useList.ts         # List data management Hook
 │   │   │   ├── usePagination.ts   # Pagination management Hook
@@ -27,7 +27,7 @@ vue-ace-admin/
 │   │   │   └── ...
 │   │   └── package.json
 │   │
-│   └── ui/             # @ace-admin/ui - UI component library
+│   └── ui/             # @codexlin/ace-admin-ui - UI component library
 │       ├── src/
 │       │   ├── pro-table/         # ProTable component
 │       │   ├── pro-button/        # ProButton component
@@ -45,13 +45,13 @@ vue-ace-admin/
 
 1. **Code Sharing**: Hooks and UI components can be shared across multiple projects
 2. **Unified Toolchain**: Shared ESLint, Prettier, TypeScript configurations
-3. **Atomic Publishing**: Can independently publish `@ace-admin/hooks` and `@ace-admin/ui` packages
+3. **Atomic Publishing**: Can independently publish `@codexlin/ace-admin-hooks` and `@codexlin/ace-admin-ui` packages
 4. **Type Safety**: Cross-package type checking through TypeScript project references
 5. **Development Efficiency**: Direct use of workspace packages in local development without npm publishing
 
 ### 📚 Package Overview
 
-#### `@ace-admin/hooks` - Pure Logic Hooks Package
+#### `@codexlin/ace-admin-hooks` - Pure Logic Hooks Package
 
 Provides generic Hooks with no business dependencies, usable in any Vue 3 project:
 
@@ -61,7 +61,7 @@ Provides generic Hooks with no business dependencies, usable in any Vue 3 projec
 - `useLoading` - Loading state management
 - And more...
 
-#### `@ace-admin/ui` - UI Component Library
+#### `@codexlin/ace-admin-ui` - UI Component Library
 
 Enhanced component library based on Ant Design Vue, providing enterprise-grade UI components:
 
@@ -79,7 +79,7 @@ When developing locally, directly use workspace packages without publishing to n
 
 ```typescript
 // Main application directly uses workspace packages
-import { useList, ProTable } from '@ace-admin/ui'
+import { useList, ProTable } from '@codexlin/ace-admin-ui'
 ```
 
 #### Publishing to npm

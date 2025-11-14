@@ -21,7 +21,7 @@ ProTable 是基于 Ant Design Vue Table 组件扩展的增强型表格，支持�
 </template>
 
 <script setup>
-import { ProTable } from '@ace-admin/ui'
+import { ProTable } from '@codexlin/ace-admin-ui'
 
 const columns = [
   { title: '姓名', dataIndex: 'name' },
@@ -115,7 +115,7 @@ ProTable 内置两个 CSS 变量用于控制斑马纹颜色，业务可在全局
 </template>
 
 <script setup>
-import { ProTable, ProButton } from '@ace-admin/ui'
+import { ProTable, ProButton } from '@codexlin/ace-admin-ui'
 
 const columns = [
   { title: 'ID', dataIndex: 'id', width: 60 },
@@ -189,7 +189,7 @@ const data = [
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import { ProTable, ProButton, useList, message, errorMessage } from '@ace-admin/ui'
+import { ProTable, ProButton, useList, message, errorMessage } from '@codexlin/ace-admin-ui'
 
 const {
   dataSource,
