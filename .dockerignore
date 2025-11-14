@@ -1,0 +1,82 @@
+# Node
+node_modules
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# 构建输出
+dist
+dist-*
+build
+*.local
+
+# 开发文件
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# 测试
+coverage
+.nyc_output
+*.test.js
+*.test.ts
+*.spec.js
+*.spec.ts
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# 文档
+docs
+*.md
+!README.md
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.travis.yml
+
+# 环境变量
+.env
+.env.*
+!.env.example
+
+# 日志
+logs
+*.log
+
+# 临时文件
+tmp
+temp
+.cache
+
+# 其他
+.editorconfig
+.prettierrc
+.eslintrc*
+tsconfig.json
+tsconfig.*.json
+stylelint.config.js
+commitlint.config.js
+turbo.json
+
+# 部署脚本
+scripts
+deploy.sh
+one-click-deploy.sh
+
+# Vercel
+vercel.json
+
+# Docker
+Dockerfile
+.dockerignore
+docker-compose.yml
+docker-compose.*.yml
+
+# 注意：nginx.conf 需要被包含在镜像中，所以不忽略它
