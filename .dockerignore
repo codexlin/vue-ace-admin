@@ -42,8 +42,10 @@ docs
 .travis.yml
 
 # 环境变量
+# 注意：.env.production 需要被包含，因为构建时需要它（不包含敏感信息）
 .env
 .env.*
+!.env.production
 !.env.example
 
 # 日志
