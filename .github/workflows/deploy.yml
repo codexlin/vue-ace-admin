@@ -35,8 +35,17 @@ jobs:
         env:
           NODE_ENV: production
 
+      - name: Check if Vercel credentials exist
+        id: vercel-check
+        run: |
+          if [ -n "${{ secrets.VERCEL_TOKEN }}" ] && [ -n "${{ secrets.VERCEL_ORG_ID }}" ] && [ -n "${{ secrets.VERCEL_PROJECT_ID }}" ]; then
+            echo "has_creds=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_creds=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Deploy to Vercel
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && steps.vercel-check.outputs.has_creds == 'true'
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
