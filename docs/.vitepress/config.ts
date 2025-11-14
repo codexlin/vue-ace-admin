@@ -57,6 +57,7 @@ export default defineConfig({
       alias: {
         '@': fileURLToPath(new URL('../../', import.meta.url)),
         '@codexlin/ace-admin-ui': fileURLToPath(new URL('../../packages/ui/src/index.ts', import.meta.url)),
+        '@codexlin/ace-admin-ui/style.css': fileURLToPath(new URL('../../packages/ui/dist/ace-admin-ui.css', import.meta.url)),
         '@codexlin/ace-admin-hooks': fileURLToPath(new URL('../../packages/hooks/src/index.ts', import.meta.url))
       }
     },

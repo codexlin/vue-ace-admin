@@ -36,7 +36,7 @@
     "postinstall": "npx simple-git-hooks",
     "commit": "git-cz",
     "dev:docs": "pnpm -C docs dev",
-    "build:docs": "pnpm -C docs build",
+    "build:docs": "pnpm run build:hooks && pnpm run build:ui && pnpm -C docs build",
     "build:hooks": "pnpm -C packages/hooks build",
     "dev:ui": "pnpm -C packages/ui dev",
     "build:ui": "pnpm -C packages/ui build"
