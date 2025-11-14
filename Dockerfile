@@ -8,11 +8,12 @@ WORKDIR /app
 RUN corepack enable && corepack prepare pnpm@10.14.0 --activate
 
 # 复制 package 文件（利用 Docker 缓存层）
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+# 注意：不复制 pnpm-lock.yaml，因为使用 --no-frozen-lockfile 安装
+COPY package.json pnpm-workspace.yaml ./
 COPY packages/hooks/package.json ./packages/hooks/
 COPY packages/ui/package.json ./packages/ui/
 
-# 安装依赖
+# 安装依赖（使用 --no-frozen-lockfile 允许在没有 lockfile 时安装）
 RUN pnpm install --no-frozen-lockfile
 
 # 复制源代码
