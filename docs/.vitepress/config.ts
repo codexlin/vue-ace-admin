@@ -42,7 +42,9 @@ export default defineConfig({
   vite: {
     resolve: {
       alias: {
-        '@': fileURLToPath(new URL('../../', import.meta.url))
+        '@': fileURLToPath(new URL('../../', import.meta.url)),
+        // 将 vue-ace-admin-ui 别名映射到 workspace 包 @ace-admin/ui
+        'vue-ace-admin-ui': fileURLToPath(new URL('../../packages/ui/src/index.ts', import.meta.url))
       }
     }
   },
