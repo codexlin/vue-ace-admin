@@ -4,6 +4,7 @@ import { fileURLToPath, URL } from 'node:url'
 import { demoPreviewPlugin } from '@vitepress-code-preview/plugin'
 
 export default defineConfig({
+  base: '/vue-ace-admin/',
   title: 'Ace Admin',
   description: 'Ace Admin 文档与组件库',
   themeConfig: {

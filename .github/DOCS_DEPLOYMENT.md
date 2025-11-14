@@ -9,6 +9,16 @@
 **主要访问地址：**
 - `https://codexlin.github.io/vue-ace-admin/`
 
+**⚠️ 重要：首次部署需要配置 GitHub Pages Source**
+
+1. 访问 GitHub 仓库设置：https://github.com/codexlin/vue-ace-admin/settings/pages
+2. 在 **Build and deployment** → **Source** 部分：
+   - 选择 **"Deploy from a branch"**
+   - 在 **Branch** 下拉菜单中选择 **`gh-pages`** 分支
+   - 点击 **Save** 按钮
+3. 等待几分钟，GitHub Pages 会自动构建和部署
+4. 部署完成后，访问地址会显示在页面顶部
+
 **如何确认你的文档地址：**
 
 1. 访问 GitHub 仓库：https://github.com/codexlin/vue-ace-admin
