@@ -6,7 +6,9 @@
     "composite": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@codexlin/ace-admin-ui": ["./packages/ui/src/index.ts"],
+      "@codexlin/ace-admin-hooks": ["./packages/hooks/src/index.ts"]
     },
     "moduleResolution": "node",
     "lib": ["ESNext", "DOM"]

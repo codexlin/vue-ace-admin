@@ -17,7 +17,7 @@
     "esModuleInterop": true,
     "types": ["vite/client", "node"],
     "paths": {
-      "vue-ace-admin-ui": ["./src/index.ts"]
+      "@codexlin/ace-admin-ui": ["./src/index.ts"]
     }
   },
   "include": ["src/**/*", "src/**/*.vue"],
