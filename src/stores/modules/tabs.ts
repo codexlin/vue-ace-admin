@@ -19,36 +19,22 @@ export const useTabsStore = defineStore('tabs', () => {
   const activeKey = ref('/dashboard')
   const getTabList = computed<Props[]>(() => tabList.value)
   const router = useRouter()
+  // 存放组件name用于缓存
+  const cacheTabs = ref<Array<string>>([])
+  const getCacheTabs = computed(() => cacheTabs.value)
 
-  // 优化：使用 computed 自动管理缓存列表
-  const getCacheTabs = computed<string[]>(() => {
-    return router
-      .getRoutes()
-      .filter((route) => route.meta.isCache)
-      .map((route) => route.name as string)
-  })
-
-  /**
-   * 刷新标签页时临时移除缓存
-   * @param name 组件名称
-   * @param cb 刷新回调
-   */
-  async function refreshTab(name: string, cb: () => Promise<void>): Promise<void> {
-    // 临时存储需要排除的组件
-    const excludeCache = ref<string[]>([name])
-
-    // 执行刷新回调
+  // 刷新tab时先清除后添加
+  async function refreshTab(name: string, cb: () => Promise<void>) {
+    const index = cacheTabs.value.findIndex((i) => i === name)
+    cacheTabs.value.splice(index, 1)
     await cb()
-
-    // 清空排除列表，恢复缓存
-    excludeCache.value = []
+    cacheTabs.value.push(name)
   }
 
-  /**
-   * @deprecated 使用 computed 的 getCacheTabs 自动管理，无需手动调用
-   */
-  function setCacheTabs(): void {
-    // 保留此方法用于向后兼容，但已不需要手动调用
+  // 初始化时设置需要缓存的Tabs
+  function setCacheTabs() {
+    cacheTabs.value = []
+    router.getRoutes().forEach((i) => i.meta.isCache && cacheTabs.value.push(i.name as string))
   }
 
   function clickTab(key: Key) {

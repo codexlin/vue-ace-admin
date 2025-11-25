@@ -6,7 +6,7 @@ import { useAppStore } from '@/stores/modules/app'
 
 const { setHeaderConfig } = useConfig()
 const app = useAppStore()
-const layout = ref()
+const layout = shallowRef()
 function handleLayoutChange(newVal: string) {
   const isDefault = newVal === 'default'
   layout.value = isDefault ? DefaultLayout : HorizonLayout
