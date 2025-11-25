@@ -133,9 +133,6 @@
     "src/**/*.json": [
       "prettier --write"
     ],
-    "*.{scss,vue}": [
-      "stylelint --fix"
-    ],
     "package.json": [
       "prettier --write"
     ],
