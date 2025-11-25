@@ -115,16 +115,42 @@ async function deployToNetlify() {
 }
 
 async function deployToGitHubPages() {
-  log('🌐 部署到 GitHub Pages...', 'blue')
+  log('🌐 部署文档到 GitHub Pages (gh-pages 分支)...', 'blue')
 
-  // 检查是否有 gh-pages 分支脚本
-  if (!fs.existsSync('scripts/gh-pages.js')) {
-    log('📝 创建 GitHub Pages 部署脚本...', 'yellow')
-    createGitHubPagesScript()
+  try {
+    // 1. 构建文档
+    log('📚 构建 VitePress 文档...', 'yellow')
+    exec('pnpm build:docs')
+
+    // 2. 检查文档构建产物
+    if (!fs.existsSync('docs/.vitepress/dist')) {
+      throw new Error('文档构建失败，docs/.vitepress/dist 目录不存在')
+    }
+
+    // 3. 进入文档构建目录
+    const docsDistPath = path.join(process.cwd(), 'docs/.vitepress/dist')
+    
+    // 4. 初始化 git 并推送到 gh-pages
+    log('📤 推送到 gh-pages 分支...', 'yellow')
+    process.chdir(docsDistPath)
+    
+    exec('git init')
+    exec('git add -A')
+    exec('git commit -m "docs: deploy documentation"')
+    exec('git branch -M gh-pages')
+    exec('git remote add origin https://github.com/codexlin/vue-ace-admin.git || true')
+    exec('git push -f origin gh-pages')
+
+    // 5. 返回项目根目录
+    process.chdir(path.join(__dirname, '..'))
+    
+    log('🎉 文档已部署到 GitHub Pages!', 'green')
+    log('📖 访问地址: https://codexlin.github.io/vue-ace-admin/', 'cyan')
+
+  } catch (error) {
+    log(`❌ GitHub Pages 部署失败: ${error.message}`, 'red')
+    process.exit(1)
   }
-
-  exec('node scripts/gh-pages.js')
-  log('🎉 GitHub Pages 部署完成!', 'green')
 }
 
 async function buildDockerImage() {
