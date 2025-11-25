@@ -6,19 +6,39 @@ export default {
     'stylelint-config-recommended-vue/scss'
   ],
   plugins: ['stylelint-scss'],
-  ignoreFiles: ['**/*', '!src/**/*', 'src/**/*.{js,jsx,ts,tsx}'],
+  ignoreFiles: [
+    'dist/**/*',
+    'node_modules/**/*',
+    'coverage/**/*',
+    '*.min.css',
+    'public/**/*'
+  ],
   rules: {
+    // SCSS相关
     'scss/at-rule-no-unknown': true,
-    'function-no-unknown': null,
+    'scss/dollar-variable-pattern': null,
+
+    // 函数相关（清理重复配置）
+    'function-no-unknown': [true, {
+      ignoreFunctions: ['/^get-/', '/^v-/']
+    }],
+
+    // 供应商前缀
     'value-no-vendor-prefix': null,
     'property-no-vendor-prefix': null,
-    'function-no-unknown': [true, { ignoreFunctions: ['/^get-/', '/^v-/'] }],
+
+    // 类名模式
     'selector-class-pattern':
       '^[a-z]([a-z0-9-]+)?(__([a-z0-9]+-?)+)?(__([a-z0-9]+-?)+)?(--([a-z0-9]+-?)+){0,2}$|^Mui.*$|^([a-z][a-z0-9]*)(_[a-z0-9]+)*$',
+
+    // 字体相关
     'font-family-no-missing-generic-family-keyword': null,
-    'scss/dollar-variable-pattern': null,
+
+    // 空规则和源文件
     'block-no-empty': null,
     'no-empty-source': null,
+
+    // 未知属性和选择器
     'property-no-unknown': null,
     'no-descending-specificity': null,
     'selector-pseudo-class-no-unknown': [
@@ -27,6 +47,8 @@ export default {
         ignorePseudoClasses: ['export', 'deep', 'global', 'import']
       }
     ],
+
+    // 空行规则
     'rule-empty-line-before': [
       'always',
       {
@@ -46,6 +68,8 @@ export default {
         except: ['after-declaration', 'first-nested']
       }
     ],
+
+    // At规则
     'at-rule-no-unknown': [
       true,
       {
@@ -65,22 +89,22 @@ export default {
         ]
       }
     ],
+
+    // 单位
     'unit-no-unknown': [true, { ignoreUnits: ['rpx'] }]
   },
   overrides: [
     {
       files: ['src/**/*.vue'],
       rules: {
+        // Vue文件特定的规则
         'declaration-property-value-no-unknown': null,
-        'scss/dollar-variable-pattern': null,
-        'block-no-empty': null,
-        'comment-empty-line-before': null,
-        'no-empty-source': null,
         'property-no-unknown': null,
         'selector-pseudo-class-no-unknown': [
           true,
           {
-            ignorePseudoClasses: ['deep', 'v-deep']
+            // 合并全局和Vue特定的忽略伪类
+            ignorePseudoClasses: ['export', 'deep', 'global', 'import', 'v-deep']
           }
         ]
       }

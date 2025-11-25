@@ -7,44 +7,54 @@ import { useRouteStore } from './route'
 import { useTabsStore } from './tabs'
 import router from '@/router'
 import { loginApi } from '@/views/user/login/api'
-import { addRoutes } from '@/router/routerHelp'
+import { addRoutes, resetRouterState } from '@/router/routerHelp'
 
 export const useUserStore = defineStore('user', () => {
   const token = ref('')
   const userInfo = ref<ILoginData>({ token: '', menus: [] })
   const getToken = computed(() => token.value)
-  // const { openDB, put, deleteData } = useIndexedDB()
 
-  // 初始化
-  function init() {
+  /**
+   * 初始化用户状态
+   */
+  function init(): void {
     token.value = ''
     userInfo.value = { menus: [], token: '' }
     useRouteStore().init()
     useTabsStore().init()
-    // await openDB('my-database', 1, 'routes')
-    // await deleteData('routes', 'backendRoutes')
   }
 
-  // 登录
-  async function login(form: ILoginForm) {
+  /**
+   * 用户登录
+   * @param form 登录表单数据
+   */
+  async function login(form: ILoginForm): Promise<void> {
     const res = await loginApi<ILoginData, ILoginForm>(form)
-    console.log('res', res)
-    if (!res.data) return
+
+    if (!res.data) {
+      throw new Error('登录失败，未获取到用户数据')
+    }
+
     token.value = res.data.token
-    userInfo.value = res.data || {}
-    // 转换后端路由信息并添加到路由实例
-    // await useRouteStore().setRoutes()
+    userInfo.value = res.data
+
+    // 设置路由并添加到路由实例
     useRouteStore().routes = userInfo.value.menus
     await addRoutes(useRouteStore().routes)
-    // 打开数据库并保存路由信息到 IndexedDB
-    // await openDB('my-database', 1, 'routes')
-    // await put('routes', 'backendRoutes', useRouteStore().getRoutes)
+
+    // 跳转到首页
     await router.push('/dashboard')
   }
 
-  // 退出登录
-  async function logout() {
+  /**
+   * 用户登出
+   */
+  async function logout(): Promise<void> {
+    // 重置路由状态
+    resetRouterState()
+    // 跳转登录页
     await router.push({ name: 'login', replace: true })
+    // 清空用户状态
     init()
   }
 

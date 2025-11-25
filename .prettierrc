@@ -9,5 +9,7 @@
   "htmlWhitespaceSensitivity": "strict",
   "endOfLine": "auto",
   "arrowParens": "always",
-  "bracketSpacing": true
+  "bracketSpacing": true,
+  "vueIndentScriptAndStyle": false,
+  "singleAttributePerLine": false
 }

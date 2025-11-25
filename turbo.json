@@ -9,20 +9,52 @@
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", ".vitepress/dist/**"],
-      "env": ["NODE_ENV", "VITE_*"]
+      "env": ["NODE_ENV", "VITE_*"],
+      "inputs": [
+        "src/**",
+        "packages/*/src/**",
+        "!**/*.md",
+        "!**/*.spec.ts",
+        "!**/*.test.ts"
+      ]
+    },
+    "build:hooks": {
+      "outputs": ["packages/hooks/dist/**"],
+      "inputs": ["packages/hooks/src/**", "packages/hooks/tsconfig.json"],
+      "cache": true
+    },
+    "build:ui": {
+      "dependsOn": ["build:hooks"],
+      "outputs": ["packages/ui/dist/**"],
+      "inputs": ["packages/ui/src/**", "packages/ui/tsconfig.json"],
+      "cache": true
     },
     "dev": {
       "cache": false,
       "persistent": true
     },
+    "dev:ui": {
+      "cache": false,
+      "persistent": true
+    },
     "lint": {
+      "outputs": [],
+      "inputs": ["src/**", "packages/*/src/**", "eslint.config.js"]
+    },
+    "lint:eslint": {
+      "outputs": [],
+      "cache": true
+    },
+    "type-check": {
       "dependsOn": ["^build"],
-      "outputs": []
+      "outputs": ["*.tsbuildinfo"],
+      "inputs": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tsconfig.json"]
     },
     "test": {
       "dependsOn": ["^build"],
       "outputs": ["coverage/**"],
-      "inputs": ["src/**/*.tsx", "src/**/*.ts", "src/**/*.vue", "test/**/*.ts"]
+      "inputs": ["src/**/*.tsx", "src/**/*.ts", "src/**/*.vue", "test/**/*.ts"],
+      "cache": true
     },
     "clean": {
       "cache": false

@@ -54,13 +54,13 @@ export const useAppStore = defineStore('app', () => {
     collapsed.value = !collapsed.value
   }
 
-  function resetDefault() {
-    // appConfig.value.token = cloneDeep(systemConfig.token)
-    // appConfig.value.compactAlgorithm = systemConfig.compactAlgorithm
+  /**
+   * 重置为默认配置
+   */
+  function resetDefault(): void {
     appConfig.value = {
       ...structuredClone(allConfig)
     }
-    console.log('resetDefault', appConfig.value)
   }
 
   return {

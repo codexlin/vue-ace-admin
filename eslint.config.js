@@ -69,8 +69,14 @@ export default [
           ignores: ['index'] // 忽略 index 命名，一般表示页面
         }
       ],
-      '@typescript-eslint/no-explicit-any': 0, // 允许使用 any 类型
-      '@typescript-eslint/no-unused-vars': 0,
+      '@typescript-eslint/no-explicit-any': 1, // 警告使用 any 类型，但不阻止构建
+      '@typescript-eslint/no-unused-vars': [
+        1,
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_'
+        }
+      ],
       '@typescript-eslint/no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
       'array-callback-return': 'error',
       'sort-imports': 'off',
