@@ -31,6 +31,26 @@ export const basicRoutes: RouteRecordRaw[] = [
         meta: {
           title: '组件库测试'
         }
+      },
+      // 模板演示页面
+      {
+        path: '/example/template-demo',
+        name: 'template-demo',
+        component: () => import('@/views/example/TemplateDemo.vue'),
+        meta: {
+          title: '模板组件演示',
+          isCache: true
+        }
+      },
+      // 用户管理（新版模板）
+      {
+        path: '/system/user-new',
+        name: 'user-new',
+        component: () => import('@/views/system/user/UserViewNew.vue'),
+        meta: {
+          title: '用户管理（新版）',
+          isCache: true
+        }
       }
     ]
   },

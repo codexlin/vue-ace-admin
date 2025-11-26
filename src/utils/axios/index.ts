@@ -210,6 +210,11 @@ export class Request {
 
     if (retryCount >= maxRetries) return false
 
+    // 不重试连接被拒绝的错误（后端服务未启动）
+    if (error.code === 'ECONNREFUSED' || error.message.includes('ECONNREFUSED')) {
+      return false
+    }
+
     // 只重试网络错误和 5xx 错误
     if (!error.response) return true
     if (error.response.status >= 500 && error.response.status < 600) return true

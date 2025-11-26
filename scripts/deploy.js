@@ -129,11 +129,11 @@ async function deployToGitHubPages() {
 
     // 3. 进入文档构建目录
     const docsDistPath = path.join(process.cwd(), 'docs/.vitepress/dist')
-    
+
     // 4. 初始化 git 并推送到 gh-pages
     log('📤 推送到 gh-pages 分支...', 'yellow')
     process.chdir(docsDistPath)
-    
+
     exec('git init')
     exec('git add -A')
     exec('git commit -m "docs: deploy documentation"')
@@ -143,7 +143,7 @@ async function deployToGitHubPages() {
 
     // 5. 返回项目根目录
     process.chdir(path.join(__dirname, '..'))
-    
+
     log('🎉 文档已部署到 GitHub Pages!', 'green')
     log('📖 访问地址: https://codexlin.github.io/vue-ace-admin/', 'cyan')
 

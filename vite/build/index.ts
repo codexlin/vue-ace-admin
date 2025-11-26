@@ -28,30 +28,30 @@ export default function (env: Record<string, string>, mode: string): BuildOption
         // 代码分割策略
         manualChunks: (id) => {
           // Vue 核心库（避免分割，可能导致循环依赖）
-          if (id.includes('node_modules/vue/') || 
+          if (id.includes('node_modules/vue/') ||
               id.includes('node_modules/@vue/') ||
-              id.includes('node_modules/vue-router/') || 
+              id.includes('node_modules/vue-router/') ||
               id.includes('node_modules/pinia/')) {
             return 'vue-vendor'
           }
           // Ant Design Vue 及其图标
-          if (id.includes('node_modules/ant-design-vue/') || 
+          if (id.includes('node_modules/ant-design-vue/') ||
               id.includes('node_modules/@ant-design/')) {
             return 'antd-vendor'
           }
           // 图表库
-          if (id.includes('node_modules/echarts/') || 
+          if (id.includes('node_modules/echarts/') ||
               id.includes('node_modules/vue-echarts/')) {
             return 'charts'
           }
           // 工具库
-          if (id.includes('node_modules/dayjs/') || 
-              id.includes('node_modules/axios/') || 
+          if (id.includes('node_modules/dayjs/') ||
+              id.includes('node_modules/axios/') ||
               id.includes('node_modules/radash/')) {
             return 'utils'
           }
           // 富文本编辑器（单独处理，避免和 Vue 冲突）
-          if (id.includes('node_modules/tinymce/') || 
+          if (id.includes('node_modules/tinymce/') ||
               id.includes('node_modules/@tinymce/')) {
             return 'vendor' // 暂时合并到 vendor，避免循环依赖
           }

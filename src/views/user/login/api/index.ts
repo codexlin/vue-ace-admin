@@ -18,12 +18,12 @@ export const getCaptcha = <T>() =>
   })
 
 /**
- * 获取后端路由 - 自动重试 3 次
+ * 获取后端路由 - 仅重试 1 次（避免连接拒绝时过度重试）
  */
 export const backendRoutesApi = () =>
   request.get(`${USER_PREFIX}/getMenu`, {
-    retry: 3,
-    retryDelay: 1000
+    retry: 1,
+    retryDelay: 500
   })
 
 /**
