@@ -31,7 +31,8 @@ export const backendRoutesApi = () =>
  * @param data - 登录数据 { email, password, captcha }
  * @returns 返回用户信息和 token
  */
-export const loginApi = <TData = any>(data: TData) => request.post<unknown, TData>(`${USER_PREFIX}/login`, data)
+export const loginApi = <TData = any, TResponse = any>(data: TData) =>
+  request.post<TResponse, TData>(`${USER_PREFIX}/login`, data)
 
 /**
  * 注册接口 - 不重试，避免重复提交
@@ -39,6 +40,6 @@ export const loginApi = <TData = any>(data: TData) => request.post<unknown, TDat
  * @returns 返回结果
  */
 export const registerApi = <TData = any>(data: TData) => request.post<unknown, TData>(`${USER_PREFIX}/register`, data)
-export const getDetail = <T>(param: number) => request.get<T>(`${USER_PREFIX}/getInfo${param}`)
-export const deleteUser = <T>(param: number) => request.delete<T>(`${USER_PREFIX}/delete${param}`)
+export const getDetail = <T>(param: number) => request.get<T>(`${USER_PREFIX}/getInfo/${param}`)
+export const deleteUser = <T>(param: number) => request.delete<T>(`${USER_PREFIX}/delete/${param}`)
 export const updateUser = <T>(data: T) => request.put<T>(`${USER_PREFIX}/update`, data)

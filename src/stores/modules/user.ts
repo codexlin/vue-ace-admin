@@ -7,7 +7,6 @@ import { useRouteStore } from './route'
 import { useTabsStore } from './tabs'
 import router from '@/router'
 import { loginApi } from '@/views/user/login/api'
-import { addRoutes } from '@/router/routerHelp'
 
 export const useUserStore = defineStore('user', () => {
   // 状态定义
@@ -35,8 +34,7 @@ export const useUserStore = defineStore('user', () => {
    */
   async function login(form: ILoginForm): Promise<void> {
     try {
-      const res = await loginApi<ILoginData, ILoginForm>(form)
-      console.log('登录响应:', res)
+      const res = await loginApi<ILoginForm, ILoginData>(form)
 
       // 验证响应数据
       if (!res.data) {
@@ -47,9 +45,8 @@ export const useUserStore = defineStore('user', () => {
       token.value = res.data.token
       userInfo.value = res.data
 
-      // 设置路由并添加到路由实例
-      useRouteStore().routes = userInfo.value.menus
-      await addRoutes(useRouteStore().routes)
+      // 重新获取最新路由配置（确保获取最新权限）
+      await useRouteStore().setRoutes()
 
       // 跳转到首页
       await router.push('/dashboard')
@@ -65,6 +62,10 @@ export const useUserStore = defineStore('user', () => {
    */
   async function logout(): Promise<void> {
     try {
+      // 取消所有进行中的请求
+      const { default: request } = await import('@/utils/axios')
+      request.cancelAllRequests('用户退出登录')
+
       // 跳转到登录页
       await router.push({ name: 'login', replace: true })
       // 清空用户状态

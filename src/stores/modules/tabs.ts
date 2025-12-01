@@ -1,7 +1,7 @@
 /*
  * @Author: LinRenJie xoxosos666@gmail.com
  * @Date: 2023-10-25 21:53:39
- * @Description:
+ * @Description: 标签页状态管理
  */
 interface Props {
   title: string
@@ -46,8 +46,15 @@ export const useTabsStore = defineStore('tabs', () => {
   }
 
   const gotoLastPage = async () => {
-    activeKey.value = tabList.value?.at(-1)?.key as string
-    await router.push(activeKey.value)
+    const lastTab = tabList.value?.at(-1)
+    if (lastTab?.key) {
+      activeKey.value = lastTab.key
+      await router.push(activeKey.value)
+    } else {
+      // 如果没有标签页，默认跳转到首页
+      activeKey.value = '/dashboard'
+      await router.push(activeKey.value)
+    }
   }
 
   async function deleteTab(type: TypeProps, key: string) {
@@ -68,8 +75,14 @@ export const useTabsStore = defineStore('tabs', () => {
     }
   }
 
+  /**
+   * 初始化标签页状态
+   * @description 清空所有标签页、缓存和激活键
+   */
   function init() {
     tabList.value = []
+    cacheTabs.value = []
+    activeKey.value = '/dashboard' // 与默认值保持一致
   }
 
   return {
