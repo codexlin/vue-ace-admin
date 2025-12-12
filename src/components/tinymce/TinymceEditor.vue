@@ -73,14 +73,13 @@ const props = defineProps({
 
 const isDark = toRef(props, 'darkMode')
 
-watch(isDark, () => {
+watch(isDark, async () => {
   const instance = tinymce.get(uuid)
   console.log('切换主题', instance)
   instance?.destroy()
   switching.value = true
-  nextTick(() => {
-    switching.value = false
-  })
+  await nextTick()
+  switching.value = false
 })
 
 const initOptions = computed(() => ({
@@ -142,8 +141,8 @@ onMounted(() => {
  * */
 function getImageOption() {
   return {
-    images_upload_handler: (blobInfo: any, _progress: any) =>
-      new Promise(async (resolve, reject) => {
+    images_upload_handler: (blobInfo: any, _progress: any) => {
+      return new Promise((resolve, reject) => {
         const formData = new FormData()
         formData.append('file', blobInfo.blob(), blobInfo.filename())
         // 模拟调用图片上传接口之后的结果，返回的数据如下格式
@@ -159,6 +158,7 @@ function getImageOption() {
           reject(new Error('上传图片失败'))
         }
       })
+    }
   }
 }
 
@@ -176,11 +176,11 @@ function getPasteOption() {
   }
 }
 // 设置编辑器只读模式
-watchEffect(async () => {
-  if (props.readonly) {
-    await nextTick()
-    tinymce && tinymce.activeEditor && tinymce.activeEditor.mode.set(props.readonly ? 'readonly' : 'design')
-  }
+watchEffect(() => {
+  void nextTick().then(() => {
+    const editor = tinymce?.activeEditor
+    editor?.mode.set(props.readonly ? 'readonly' : 'design')
+  })
 })
 
 // 设置值

@@ -1,4 +1,5 @@
 import type { App } from 'vue'
+
 import { useUserStore } from '@/stores/modules/user'
 
 /**

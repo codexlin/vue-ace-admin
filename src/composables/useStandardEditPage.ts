@@ -1,7 +1,8 @@
 import { ref, computed } from 'vue'
 import { useLoading } from '@codexlin/ace-admin-hooks'
 import { message, errorMessage } from '@codexlin/ace-admin-ui'
-import type { EditPageConfig, FormField, StepConfig } from '@/types/template'
+
+import type { EditPageConfig } from '@/types/template'
 
 export function useStandardEditPage(config: EditPageConfig) {
   const { loading, setLoading } = useLoading()
@@ -172,7 +173,7 @@ export function useStandardEditPage(config: EditPageConfig) {
   })
 
   // 初始化
-  initFormData()
+  void initFormData()
 
   return {
     // 数据状态

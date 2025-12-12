@@ -52,6 +52,7 @@
 <script setup lang="ts">
 import { BulbOutlined, CloseOutlined } from '@ant-design/icons-vue'
 import dayjs from 'dayjs'
+
 import AssistantBlock from '@/components/Ai/components/AssistantBlock.vue'
 
 // import { Request } from '@/utils/axios'
@@ -84,7 +85,7 @@ async function useFetch({ data, cb, url, signal = null }) {
 
       buffer += decoder.decode(value, { stream: true })
 
-      let lines = buffer.split('\n')
+      const lines = buffer.split('\n')
       buffer = lines.pop() ?? '' // 保留未完成的行
 
       for (let line of lines) {
@@ -163,7 +164,7 @@ const sendMessage = async () => {
       await nextTick()
       chatBody.scrollTop = chatBody.scrollHeight
     }
-  } catch (e) {
+  } catch (_e) {
     messageList.value.at(-1)!.content = '出现了一些错误，请稍后再试。'
   }
 }

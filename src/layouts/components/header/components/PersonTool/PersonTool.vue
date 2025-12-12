@@ -1,12 +1,15 @@
 <script lang="ts" setup>
 import { DownOutlined, LockOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons-vue'
+
 import { useUserStore } from '@/stores/modules/user'
 
 const username = 'username'
 const avatar = 'https://xsgames.co/randomusers/avatar.php?g=pixel&key=1'
 const user = useUserStore()
-const handleClick = (item: any) => {
-  item.key === 'logout' && user.logout()
+const handleClick = async (item: any) => {
+  if (item.key === 'logout') {
+    await user.logout()
+  }
 }
 </script>
 

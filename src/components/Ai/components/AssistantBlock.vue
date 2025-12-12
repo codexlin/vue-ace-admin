@@ -38,5 +38,5 @@ const html = computed(() => {
 </script>
 
 <template>
-  <div class="markdown" v-html="html" />
+  <div class="markdown" v-html="html"></div>
 </template>

@@ -1,8 +1,10 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import { ProTable } from '@codexlin/ace-admin-ui'
+
 import useUserList from './hooks/useUserList'
 import useUserModal from './hooks/useUserModal'
 import useUserSearchForm from './hooks/useUserSearchForm'
+
 import FormModal from '@/components/form/FormModal'
 
 const { visible, title, formItems, formRef, handleOk, openModal } = useUserModal()

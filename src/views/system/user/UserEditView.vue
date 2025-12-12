@@ -15,6 +15,7 @@
 
 <script setup lang="ts">
 import type { FormField, StepConfig } from '@/types/template'
+
 import { userApi } from './api'
 
 const route = useRoute()
@@ -93,10 +94,10 @@ const formFields: FormField[] = [
     rules: [
       { required: mode.value === 'create', message: '请确认密码' },
       {
-        validator: (rule, value) => {
+        validator: (rule: any, value: any) => {
           const password = formData.value.password
           if (value && password && value !== password) {
-            return Promise.reject('两次输入的密码不一致')
+            return Promise.reject(new Error('两次输入的密码不一致'))
           }
           return Promise.resolve()
         }
@@ -188,7 +189,7 @@ const saveUser = async (data: any) => {
 // 成功回调
 const handleSuccess = (data: any) => {
   message.success(mode.value === 'create' ? '用户创建成功' : '用户保存成功')
-  router.push('/system/user')
+  void router.push('/system/user')
 }
 
 // 取消回调

@@ -7,7 +7,7 @@ import setupSvgIcon from './svg-icon'
 
 // 插件配置
 export default function (viteEnv: Record<string, string>, isBuild: boolean) {
-  const { VITE_BUILD_COMPRESS = '' } = viteEnv
+  const { VITE_BUILD_COMPRESS: _VITE_BUILD_COMPRESS = '' } = viteEnv
   const plugins: PluginOption[] = [
     ...setupCommonPlugins(),
     setupAutoImport(),
@@ -15,9 +15,9 @@ export default function (viteEnv: Record<string, string>, isBuild: boolean) {
     setupIcons(),
     setupSvgIcon(isBuild)
   ]
-  if (isBuild && VITE_BUILD_COMPRESS) {
-    const compressList = VITE_BUILD_COMPRESS.split(',')
-    // if (compressList.includes('gzip') || compressList.includes('brotli')) plugins.push(...setupCompression(viteEnv))
-  }
+  // if (isBuild && VITE_BUILD_COMPRESS) {
+  // const compressList = VITE_BUILD_COMPRESS.split(',')
+  // if (compressList.includes('gzip') || compressList.includes('brotli')) plugins.push(...setupCompression(viteEnv))
+  // }
   return plugins
 }

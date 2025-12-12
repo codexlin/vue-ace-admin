@@ -13,6 +13,7 @@
 
 <script setup lang="ts">
 import type { DetailField, StatisticConfig, TabConfig } from '@/types/template'
+
 import { userApi } from './api'
 
 const route = useRoute()

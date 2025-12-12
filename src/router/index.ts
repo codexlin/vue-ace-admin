@@ -4,8 +4,11 @@
  * @Description:
  */
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
+
 import type { App } from 'vue'
+
 import { setupRouterHooks } from './routerHelp'
+
 import { basicRoutes } from '@/router/router'
 
 const history = import.meta.env.VITE_HASH_ROUTE === 'true' ? createWebHashHistory : createWebHistory

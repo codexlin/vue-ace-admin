@@ -75,7 +75,6 @@ async function deployMain() {
         showUsage()
         process.exit(1)
     }
-
   } catch (error) {
     log(`❌ 部署失败: ${error.message}`, 'red')
     process.exit(1)
@@ -146,7 +145,6 @@ async function deployToGitHubPages() {
 
     log('🎉 文档已部署到 GitHub Pages!', 'green')
     log('📖 访问地址: https://codexlin.github.io/vue-ace-admin/', 'cyan')
-
   } catch (error) {
     log(`❌ GitHub Pages 部署失败: ${error.message}`, 'red')
     process.exit(1)
@@ -173,7 +171,7 @@ async function buildDockerImage() {
   log('🚀 启动容器: docker run -p 3000:80 ' + imageName, 'cyan')
 }
 
-function createGitHubPagesScript() {
+function _createGitHubPagesScript() {
   const script = `#!/usr/bin/env node
 
 const { execSync } = require('child_process')

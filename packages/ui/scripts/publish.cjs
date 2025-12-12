@@ -122,6 +122,7 @@ function validateDistDirectory() {
     })
   } catch (error) {
     // 忽略统计失败的情况
+    console.warn('⚠️  无法获取构建产物大小统计', error)
   }
 }
 

@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { WechatOutlined, QqCircleFilled, GithubFilled } from '@ant-design/icons-vue'
+import { motion } from 'motion-v'
 import { getCaptcha, registerApi } from './api'
 import { useUserStore } from '@/stores/modules/user'
 import Motion from '@/components/functional/Motion'
-import { motion } from 'motion-v'
 const user = useUserStore()
 // const { tt } = useLocalI18n()
 const state = reactive<ILoginForm>({
@@ -72,7 +72,7 @@ const loginGithub = () => {
   window.location.href = `${authorize_uri}?client_id=${client_id}&redirect_url=${redirect_url}`
 }
 onMounted(() => {
-  getImg()
+  void getImg() // 显式忽略 Promise
 })
 </script>
 
@@ -140,7 +140,7 @@ onMounted(() => {
               <a>
                 <wechat-outlined style="font-size: 40px; color: #24bf24" />
                 <QqCircleFilled style="font-size: 38px; color: #4da4de; margin-left: 20px" @click="qqLogin" />
-                <GithubFilled style="font-size: 36px; color: #000; margin: 0px 0 0px 20px" @click="loginGithub" />
+                <GithubFilled style="font-size: 36px; color: #000; margin: 0 0 0 20px" @click="loginGithub" />
               </a>
             </div>
           </a-form-item>

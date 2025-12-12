@@ -1,9 +1,11 @@
 import { useList } from '@codexlin/ace-admin-hooks'
+
 import type { Ref } from 'vue'
 import type { IUser } from './useUserModal'
-import { getUserList } from '../../api'
-import { OperationButtons } from '@/components'
 
+import { getUserList } from '../../api'
+
+import { OperationButtons } from '@/components'
 import useLocalI18n from '@/hooks/useLocalI18n'
 
 type HandleClick = (record: IUser, type: 'add' | 'edit' | 'delete') => void | Promise<void>

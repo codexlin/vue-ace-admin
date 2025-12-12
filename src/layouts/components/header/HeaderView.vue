@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
+
 import BreadcrumbView from '@/layouts/components/header/components/Breadcrumb/BreadCrumb.vue'
 import FullScreen from '@/layouts/components/header/components/FullScreen/FullScreen.vue'
 import LangSelect from '@/layouts/components/header/components/LangSelect/LangSelect.vue'
@@ -25,9 +26,9 @@ const config = computed(() => headerConfig.value)
           <BreadcrumbView />
         </div>
         <template v-if="config.showLogo">
-          <slot name="logo" />
+          <slot name="logo"></slot>
         </template>
-        <slot />
+        <slot></slot>
       </div>
       <div class="header__right">
         <!-- 全屏 -->

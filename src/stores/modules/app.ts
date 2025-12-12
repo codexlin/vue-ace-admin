@@ -1,5 +1,7 @@
 import { theme } from 'ant-design-vue'
+
 import type { MenuTheme } from 'ant-design-vue'
+
 import allConfig from '@/config/system/index'
 
 /**

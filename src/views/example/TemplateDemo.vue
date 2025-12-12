@@ -22,6 +22,7 @@ import type { SearchField, ColumnConfig, ActionConfig } from '@/types/template'
 const demoApi = {
   getList: async (params: any) => {
     // 模拟数据
+    await new Promise((resolve) => setTimeout(resolve, 100)) // 模拟网络延迟
     return {
       data: Array.from({ length: 10 }, (_, i) => ({
         id: i + 1,

@@ -11,7 +11,7 @@
           <h2 class="page-title">{{ title || '详情页面' }}</h2>
         </div>
         <div class="header-actions">
-          <slot name="header-actions" />
+          <slot name="header-actions"></slot>
         </div>
       </div>
     </div>
@@ -73,7 +73,7 @@
 
       <!-- 自定义内容区域 -->
       <div class="custom-section">
-        <slot />
+        <slot></slot>
       </div>
     </a-spin>
   </div>
@@ -82,7 +82,9 @@
 <script setup lang="ts">
 import { ArrowLeftOutlined } from '@ant-design/icons-vue'
 import { StatisticCard } from '@codexlin/ace-admin-ui'
+
 import type { DetailPageConfig } from '@/types/template'
+
 import { useStandardDetailPage } from '@/composables/useStandardDetailPage'
 
 interface Props {

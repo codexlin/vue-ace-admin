@@ -1,11 +1,9 @@
 {
   "recommendations": [
+    "Vue.volar",
     "dbaeumer.vscode-eslint",
-    "stylelint.vscode-stylelint",
-    "esbenp.prettier-vscode",
-    "gencer.html-slim-scss-css-class-completion",
-    "syler.sass-indented",
-    "eamodio.gitlens",
-    "donjayamanne.githistory"
+    "EditorConfig.EditorConfig",
+    "oxc.oxc-vscode",
+    "esbenp.prettier-vscode"
   ]
 }

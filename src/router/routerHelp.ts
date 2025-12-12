@@ -96,12 +96,18 @@ export async function addRoutes(menu: RouteRecordRaw[]): Promise<void> {
 
     // 只将叶子节点（页面）添加到路由中
     if (!children || children.length === 0) {
+      // 仅当 component 为字符串路径时拼接视图 key，避免对象被隐式字符串化
+      const viewKey = typeof component === 'string' ? `../views/${component as string}.vue` : null
+      const viewImporter = viewKey ? loadView[viewKey] : undefined
+      // 保证组件始终为可用的异步导入函数，避免 TS 选择需要 redirect 的重载
+      const componentImporter = (viewImporter ?? loadView['../views/DefaultView.vue'])!
+
       router.addRoute('layout', {
         name,
         path,
         meta,
         // 动态加载组件，如果组件不存在则使用默认视图
-        component: loadView[`../views${component}.vue`] || loadView['../views/DefaultView.vue']
+        component: componentImporter as () => Promise<unknown>
       })
     } else {
       // 递归处理子路由

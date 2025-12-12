@@ -26,11 +26,11 @@ const reset = () => {
       {{ tt('reset_all') }}
     </a-button>
     <div class="setting-drawer__section">
-      <p class="setting-drawer__title" :data-label="tt('customize_theme_color')" />
+      <p class="setting-drawer__title" :data-label="tt('customize_theme_color')"></p>
       <input v-model="color" class="setting-drawer__color-picker" type="color" @change="handleChange(color)" />
     </div>
     <div class="setting-drawer__section">
-      <p class="setting-drawer__title" :data-label="tt('preset_theme_colors')" />
+      <p class="setting-drawer__title" :data-label="tt('preset_theme_colors')"></p>
       <a-space wrap>
         <template v-for="(variable, name) in variables" :key="name">
           <a-button :style="{ background: variable }" @click="handleChange(variable)">
@@ -40,7 +40,7 @@ const reset = () => {
       </a-space>
     </div>
     <div class="setting-drawer__section">
-      <p class="setting-drawer__title" :data-label="tt('layout_settings')" />
+      <p class="setting-drawer__title" :data-label="tt('layout_settings')"></p>
       <div class="setting-drawer__item">
         <label>{{ tt('overall_layout') }}</label>
         <a-radio-group v-model:value="app.appConfig.layout">
@@ -57,7 +57,7 @@ const reset = () => {
       </div>
     </div>
     <div class="setting-drawer__section">
-      <p class="setting-drawer__title" :data-label="tt('layout_settings')" />
+      <p class="setting-drawer__title" :data-label="tt('layout_settings')"></p>
       <div class="setting-drawer__item">
         <label>{{ tt('text_size') }}</label>
         <a-input-number v-model:value="app.appConfig.token.fontSize" />

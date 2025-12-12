@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { omit } from 'radash'
 import { getDetail } from '../../api'
-import useLocalI18n from '@/hooks/useLocalI18n'
 import { buildTreeDataSelect } from '@/utils/common/treeUtil'
-
 interface IItem {
   label: string
   name: string
@@ -19,7 +17,7 @@ interface State {
   id?: number | null
 }
 const { type = 'add', id = null } = defineProps<State>()
-const { tt } = useLocalI18n()
+// const { tt } = useLocalI18n()
 const formItems = ref<IItem[]>([])
 // 初始化ui组件相关属性
 const initUi = (item: IItem) => {
@@ -130,7 +128,9 @@ const initFormItems = async () => {
     }
   ]
   if (type === 'add' && id) {
-    detailFormItems.value[1].defaultValue = id
+    if (detailFormItems.value[1]) {
+      detailFormItems.value[1].defaultValue = id
+    }
   }
   if (['edit', 'detail'].includes(type)) {
     if (id) {

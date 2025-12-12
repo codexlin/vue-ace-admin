@@ -5,7 +5,7 @@
       <a-typography-text type="secondary">您还需要按照以下说明在代码中添加您的组件😊！</a-typography-text>
     </p>
     <p class="default-component__description"
-      >该组件完整路径为:<a-typography-text code>{{ `src/views${fullPath}/${name}.vue` }}</a-typography-text
+      >该组件完整路径为:<a-typography-text code>{{ `src/views${fullPath}/${String(name)}.vue` }}</a-typography-text
       >,请添加您的组件 😊！</p
     >
     <p class="default-component__description"

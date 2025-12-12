@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { DownOutlined } from '@ant-design/icons-vue'
+
 import type { Items, Item } from '@/components/button/type'
+
 import useLocalI18n from '@/hooks/useLocalI18n'
 const { items } = defineProps<Items>()
 const menuArray = computed<Item[]>(() => (items.length > 2 ? items.slice(1) : items))

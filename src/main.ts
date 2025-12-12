@@ -4,6 +4,7 @@ import 'ant-design-vue/dist/reset.css'
 import 'normalize.css/normalize.css'
 import '@codexlin/ace-admin-ui/dist/ace-admin-ui.css'
 import { createApp } from 'vue'
+
 import App from './App.vue'
 import directives from './directives'
 import setupI18n from './locales'

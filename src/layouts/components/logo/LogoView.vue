@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { useAppStore } from '@/stores/modules/app'
 import { motion } from 'motion-v'
+
+import { useAppStore } from '@/stores/modules/app'
 import logoImg from '@/assets/images/logo.svg'
 
 const app = useAppStore()

@@ -7,10 +7,15 @@ interface FetchWithStreamParams {
   signal?: AbortSignal | null
 }
 
-export async function useFetchWithStream({ data, cb, url, signal = null }: FetchWithStreamParams): Promise<void> {
+export async function useFetchWithStream({
+  data,
+  cb,
+  url,
+  signal: _signal = null
+}: FetchWithStreamParams): Promise<void> {
   const body = JSON.stringify(data)
   const {
-    data: resData,
+    data: _resData,
     response: responseData,
     error,
     execute

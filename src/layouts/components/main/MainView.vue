@@ -1,9 +1,11 @@
 <script lang="ts" setup>
+import { useRoute } from 'vue-router'
+
 import { refreshKey, type MatchPattern } from '../../type'
+
 import TabsView from '@/layouts/components/tabs/TabsView.vue'
 import { useTabsStore } from '@/stores/modules/tabs'
 import { useAppStore } from '@/stores/modules/app'
-import { useRoute } from 'vue-router'
 
 const app = useAppStore()
 const store = useTabsStore()
@@ -25,7 +27,7 @@ const transitionName = ref(transitionNames[0])
 // 随机选择一个动画
 const getRandomTransition = (): string => {
   const randomIndex = Math.floor(Math.random() * transitionNames.length)
-  return transitionNames[randomIndex]
+  return transitionNames[randomIndex] as string
 }
 
 // 监听路由变化，每次切换时随机选择动画
@@ -37,10 +39,11 @@ watch(
   { immediate: true }
 )
 
-provide(refreshKey, async () => {
+provide(refreshKey, () => {
   isAlive.value = false
-  await nextTick()
-  isAlive.value = true
+  void nextTick().then(() => {
+    isAlive.value = true
+  })
 })
 </script>
 <template>

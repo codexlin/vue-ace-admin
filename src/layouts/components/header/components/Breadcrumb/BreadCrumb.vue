@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { HomeFilled } from '@ant-design/icons-vue'
+
 import useLocalI18n from '@/hooks/useLocalI18n'
 import router from '@/router'
 import { useRouteStore } from '@/stores/modules/route'

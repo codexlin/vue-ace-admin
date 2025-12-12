@@ -6,6 +6,7 @@ import axios, {
   type InternalAxiosRequestConfig,
   type CancelTokenSource
 } from 'axios'
+
 import { handleChangeRequestHeader, handleConfigureAuth, handleNetworkError, handleResponseData } from './config'
 
 /**
@@ -130,7 +131,7 @@ export class Request {
         if (import.meta.env.DEV) {
           console.error('请求配置错误：', error)
         }
-        return Promise.reject(error)
+        return Promise.reject(new Error(String(error)))
       }
     )
 
@@ -191,7 +192,7 @@ export class Request {
         // 处理网络错误
         if (error.response) {
           handleNetworkError(error.response.status)
-          return Promise.reject(error)
+          return Promise.reject(new Error(String(error)))
         } else if (error.request) {
           return Promise.reject(new Error(`无响应：${error.message}`))
         } else {

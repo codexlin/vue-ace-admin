@@ -1,12 +1,13 @@
-const toString = Object.prototype.toString
-const hasOwnProperty = Object.prototype.hasOwnProperty
+// 以安全方式封装原型方法，避免 `unbound-method` 的 this 绑定问题
+const toString = (value: unknown) => Object.prototype.toString.call(value)
+const hasOwnProperty = (obj: object, key: PropertyKey) => Object.prototype.hasOwnProperty.call(obj, key)
 
 export function is(value: unknown, type: string) {
-  return toString.call(value) === `[object ${type}]`
+  return toString(value) === `[object ${type}]`
 }
 
 export function has(value: Record<string, any>, key: string | symbol): key is keyof typeof value {
-  return hasOwnProperty.call(value, key)
+  return hasOwnProperty(value, key)
 }
 
 export function isDefined<T = unknown>(value: T | undefined | null): value is T {
@@ -22,7 +23,7 @@ export function isNumber(value: unknown): value is number {
 }
 
 export function isNaN(value: unknown): value is number {
-  return Number.isNaN(value)
+  return typeof value === 'number' && Number.isNaN(value)
 }
 
 export function isString(value: unknown): value is string {

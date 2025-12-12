@@ -7,6 +7,7 @@ import { CanvasRenderer } from 'echarts/renderers'
 import { h } from 'vue'
 import { StatisticCard } from '@codexlin/ace-admin-ui'
 import VChart from 'vue-echarts'
+
 import type { EChartsOption } from 'echarts'
 
 use([CanvasRenderer, BarChart, LineChart, PieChart, TitleComponent, TooltipComponent, GridComponent, LegendComponent])

@@ -1,7 +1,10 @@
 import { createI18n } from 'vue-i18n'
+
 import type { App } from 'vue'
+
 import enUS from './lang/enUS'
 import zhCN from './lang/zhCN'
+
 import { useAppStore } from '@/stores/modules/app'
 
 const messages = { enUS, zhCN }

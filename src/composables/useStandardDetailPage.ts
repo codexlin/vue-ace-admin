@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 import { useLoading } from '@codexlin/ace-admin-hooks'
-import { StatisticCard } from '@codexlin/ace-admin-ui'
+
 import type { DetailPageConfig, DetailField } from '@/types/template'
 
 export function useStandardDetailPage(config: DetailPageConfig) {

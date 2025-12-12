@@ -1,6 +1,7 @@
 import { ref, computed, h } from 'vue'
 import { useList, useLoading } from '@codexlin/ace-admin-hooks'
 import { ProButton } from '@codexlin/ace-admin-ui'
+
 import type { ListPageConfig, ActionConfig, TableAction } from '@/types/template'
 
 export function useStandardListPage<T = any>(config: ListPageConfig) {

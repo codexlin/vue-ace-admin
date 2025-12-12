@@ -1,15 +1,17 @@
-<script lang="tsx" setup>
+<script lang="ts" setup>
 import { onMounted, ref, shallowRef, shallowReactive } from 'vue'
 import { ProTable } from '@codexlin/ace-admin-ui'
 import { useList } from '@codexlin/ace-admin-hooks'
+
 import DetailView from './components/DetailView.vue'
 import { useConfig } from './hooks/useConfig'
+
 import useLocalI18n from '@/hooks/useLocalI18n'
 import { useUserStore } from '@/stores/modules/user'
 import { showModalConfirm } from '@/utils/common'
 import { addMenu, deleteMenu, getMenuTreeList, updateMenu } from '@/views/system/api'
 
-const { tt } = useLocalI18n()
+const { tt: _tt } = useLocalI18n()
 const title = shallowRef('')
 interface State {
   type: 'add' | 'edit' | 'detail' | 'delete'

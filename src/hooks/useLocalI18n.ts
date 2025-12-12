@@ -1,4 +1,5 @@
 import { useI18n } from 'vue-i18n'
+
 import { useAppStore } from '@/stores/modules/app'
 
 /**

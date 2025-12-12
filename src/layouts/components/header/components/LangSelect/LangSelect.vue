@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { TranslationOutlined } from '@ant-design/icons-vue'
+
 import useLocalI18n from '@/hooks/useLocalI18n'
 
 const { changeLanguage, getLanguage } = useLocalI18n()

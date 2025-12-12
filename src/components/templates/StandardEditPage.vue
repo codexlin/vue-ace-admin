@@ -79,7 +79,9 @@
 <script setup lang="ts">
 import { ArrowLeftOutlined } from '@ant-design/icons-vue'
 import { ProButton } from '@codexlin/ace-admin-ui'
+
 import type { EditPageConfig } from '@/types/template'
+
 import { useStandardEditPage } from '@/composables/useStandardEditPage'
 
 interface Props {
@@ -191,7 +193,7 @@ defineExpose({
   save: handleSave,
   reset: () => {
     formData.value = {}
-    initFormData()
+    void initFormData()
   },
   getData: () => formData.value,
   validate: () => formRef.value?.validate(),

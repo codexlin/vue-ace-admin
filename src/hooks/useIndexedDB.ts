@@ -26,15 +26,20 @@ export function useIndexedDB(): UseIndexedDBReturn {
         resolve(db.value)
       }
 
-      openRequest.onerror = function (e: Event) {
-        reject(e)
+      openRequest.onerror = function () {
+        const err = openRequest.error
+        reject(err ?? new Error('IndexedDB open failed'))
       }
     })
   }
 
   function get(objectStoreName: string, key: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      const transaction = db.value!.transaction(objectStoreName, 'readonly')
+      if (!db.value) {
+        reject(new Error('IndexedDB is not opened'))
+        return
+      }
+      const transaction = db.value.transaction(objectStoreName, 'readonly')
       const store = transaction.objectStore(objectStoreName)
       const getRequest = store.get(key)
 
@@ -42,8 +47,9 @@ export function useIndexedDB(): UseIndexedDBReturn {
         resolve((e.target as IDBRequest).result)
       }
 
-      getRequest.onerror = function (e: Event) {
-        reject(e)
+      getRequest.onerror = function () {
+        const err = getRequest.error
+        reject(err ?? new Error('IndexedDB get failed'))
       }
     })
   }
@@ -52,7 +58,11 @@ export function useIndexedDB(): UseIndexedDBReturn {
     console.log(value)
 
     return new Promise((resolve, reject) => {
-      const transaction = db.value!.transaction(objectStoreName, 'readwrite')
+      if (!db.value) {
+        reject(new Error('IndexedDB is not opened'))
+        return
+      }
+      const transaction = db.value.transaction(objectStoreName, 'readwrite')
       const store = transaction.objectStore(objectStoreName)
       const cleanedValue = JSON.parse(JSON.stringify(value)) // 移除不能被克隆的数据类型
       const putRequest = store.put(cleanedValue, key)
@@ -61,8 +71,9 @@ export function useIndexedDB(): UseIndexedDBReturn {
         resolve((e.target as IDBRequest).result)
       }
 
-      putRequest.onerror = function (e: Event) {
-        reject(e)
+      putRequest.onerror = function () {
+        const err = putRequest.error
+        reject(err ?? new Error('IndexedDB put failed'))
       }
     })
   }
@@ -70,7 +81,11 @@ export function useIndexedDB(): UseIndexedDBReturn {
   function deleteData(objectStoreName: string, key: string): Promise<any> {
     return new Promise((resolve, reject) => {
       console.log(objectStoreName, key, db.value)
-      const transaction = db.value!.transaction(objectStoreName, 'readwrite')
+      if (!db.value) {
+        reject(new Error('IndexedDB is not opened'))
+        return
+      }
+      const transaction = db.value.transaction(objectStoreName, 'readwrite')
       console.log(transaction)
       const store = transaction.objectStore(objectStoreName)
       console.log(store)
@@ -81,8 +96,9 @@ export function useIndexedDB(): UseIndexedDBReturn {
         resolve((e.target as IDBRequest).result)
       }
 
-      deleteRequest.onerror = function (e: Event) {
-        reject(e)
+      deleteRequest.onerror = function () {
+        const err = deleteRequest.error
+        reject(err ?? new Error('IndexedDB delete failed'))
       }
     })
   }

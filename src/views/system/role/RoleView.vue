@@ -1,13 +1,15 @@
-<script lang="tsx" setup>
+<script lang="ts" setup>
 import { ProTable } from '@codexlin/ace-admin-ui'
 import { useToggle } from '@vueuse/core'
+
 import useRoleForm from './hooks/useRoleForm'
 import useRoleList from './hooks/useRoleList.tsx'
+
 import FormModal from '@/components/form/FormModal'
 import useLocalI18n from '@/hooks/useLocalI18n'
 
 const [modalOpen, toggleModal] = useToggle()
-const { tt } = useLocalI18n()
+const { tt: _tt } = useLocalI18n()
 const { formRef, formItems, handleClick, handleOk } = useRoleForm()
 const { dataSource, loadData, loading, columns } = useRoleList(handleClick)
 

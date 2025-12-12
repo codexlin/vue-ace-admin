@@ -68,7 +68,9 @@
 
 <script setup lang="ts">
 import { ProTable, ProSearchForm } from '@codexlin/ace-admin-ui'
+
 import type { ListPageConfig } from '@/types/template'
+
 import { useStandardListPage } from '@/composables/useStandardListPage'
 
 interface Props {

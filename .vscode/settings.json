@@ -1,33 +1,17 @@
 {
-  "files.autoSave": "onFocusChange",
-  "prettier.prettierPath": "./node_modules/prettier",
-  "prettier.requireConfig": true,
-  "editor.formatOnSave": true,
-  "editor.formatOnPaste": true,
-  "editor.dragAndDrop": false,
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "tsconfig.json": "tsconfig.*.json, env.d.ts",
+    "vite.config.*": "jsconfig*, vitest.config.*, cypress.config.*, playwright.config.*",
+    "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .eslint*, eslint*, .oxlint*, oxlint*, .prettier*, prettier*, .editorconfig"
+  },
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.fixAll.stylelint": "explicit"
+    "source.fixAll": "explicit"
   },
-  "stylelint.validate": ["css", "scss", "vue"],
-  "eslint.enable": true,
-  "eslint.useFlatConfig": true,
-  "eslint.codeActionsOnSave.mode": "problems",
-  "eslint.validate": [
-    "typescript",
-    "javascript",
-    "javascript react",
-    "vue"
-  ],
-  "eslint.options": {
-    "extensions": [
-      ".js",
-      ".ts",
-      ".jsx",
-      ".tsx",
-      ".vue"
-    ]
-  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSaveMode": "file",
+  "vue.format.enable": false,
   "[vue]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"

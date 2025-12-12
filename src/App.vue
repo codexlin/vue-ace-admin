@@ -2,8 +2,8 @@
 import enUS from 'ant-design-vue/es/locale/en_US'
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
 import dayjs from 'dayjs'
-import { useAppStore } from '@/stores/modules/app'
 import 'dayjs/locale/zh-cn'
+import { useAppStore } from '@/stores/modules/app'
 
 dayjs.locale('zh-cn')
 const app = useAppStore()

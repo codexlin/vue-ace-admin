@@ -1,8 +1,3 @@
-/*
- * @Author: LinRenJie xoxosos666@gmail.com
- * @Date: 2023-04-20 17:41:06
- * @Description: 配置处理
- */
 import { message as antMsg } from 'ant-design-vue'
 import type { AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 import type { IResponse } from '../axios'
@@ -21,6 +16,13 @@ export enum BusinessErrorCode {
   NO_EMPLOYEE_BINDING = '10036',
   ACCOUNT_INVALID = '10037',
   ACCOUNT_NOT_FOUND = '10038'
+}
+
+/**
+ * 判断值是否为业务错误码枚举中的成员
+ */
+function isBusinessCode(x: unknown): x is BusinessErrorCode {
+  return Object.values<BusinessErrorCode>(BusinessErrorCode).includes(x as BusinessErrorCode)
 }
 
 /**
@@ -112,13 +114,13 @@ const AUTH_ERROR_MESSAGES: Record<BusinessErrorCode, string> = {
  * @param code 业务错误码
  * @returns 是否为授权错误
  */
-const handleAuthError = (code: string): boolean => {
-  const errorCode = code as BusinessErrorCode
-  const errMessage = AUTH_ERROR_MESSAGES[errorCode]
+const handleAuthError = (code: string | number): boolean => {
+  const normalized: BusinessErrorCode = isBusinessCode(code) ? code : (String(code) as BusinessErrorCode)
+  const errMessage = AUTH_ERROR_MESSAGES[normalized]
 
   if (errMessage) {
     antMsg.error(errMessage)
-    useUserStore().logout()
+    void useUserStore().logout()
     return false
   }
   return true
@@ -137,8 +139,10 @@ const handleGeneralError = <T>(response: AxiosResponse<IResponse<T>>): boolean =
     return !!data
   }
 
-  // 业务成功
-  if (data.code === BusinessErrorCode.SUCCESS) {
+  // 业务成功（通过类型守卫收窄为枚举后再比较，兼容数字/字符串）
+  const rawCode = data.code
+  const normalizedCode = isBusinessCode(rawCode) ? rawCode : String(rawCode)
+  if (isBusinessCode(normalizedCode) && normalizedCode === BusinessErrorCode.SUCCESS) {
     return true
   }
 

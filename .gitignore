@@ -35,3 +35,4 @@ docs/.vitepress/cache/
 docs/.vitepress/.temp/
 .turbo
 *.tsbuildinfo
+.eslintcache

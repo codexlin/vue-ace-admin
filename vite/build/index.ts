@@ -25,40 +25,40 @@ export default function (env: Record<string, string>, mode: string): BuildOption
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',
         assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
-        // 代码分割策略
-        manualChunks: (id) => {
-          // Vue 核心库（避免分割，可能导致循环依赖）
-          if (id.includes('node_modules/vue/') ||
-              id.includes('node_modules/@vue/') ||
-              id.includes('node_modules/vue-router/') ||
-              id.includes('node_modules/pinia/')) {
-            return 'vue-vendor'
-          }
-          // Ant Design Vue 及其图标
-          if (id.includes('node_modules/ant-design-vue/') ||
-              id.includes('node_modules/@ant-design/')) {
-            return 'antd-vendor'
-          }
-          // 图表库
-          if (id.includes('node_modules/echarts/') ||
-              id.includes('node_modules/vue-echarts/')) {
-            return 'charts'
-          }
-          // 工具库
-          if (id.includes('node_modules/dayjs/') ||
-              id.includes('node_modules/axios/') ||
-              id.includes('node_modules/radash/')) {
-            return 'utils'
-          }
-          // 富文本编辑器（单独处理，避免和 Vue 冲突）
-          if (id.includes('node_modules/tinymce/') ||
-              id.includes('node_modules/@tinymce/')) {
-            return 'vendor' // 暂时合并到 vendor，避免循环依赖
-          }
-          // 其他较大的第三方库
-          if (id.includes('node_modules/')) {
-            return 'vendor'
-          }
+        // Rolldown 代码分割策略 (使用 advancedChunks 替代 manualChunks)
+        advancedChunks: {
+          groups: [
+            // Vue 核心库
+            {
+              name: 'vue-vendor',
+              test: /\/node_modules\/(vue|@vue|vue-router|pinia)\//
+            },
+            // Ant Design Vue 及其图标
+            {
+              name: 'antd-vendor',
+              test: /\/node_modules\/(ant-design-vue|@ant-design)\//
+            },
+            // 图表库
+            {
+              name: 'charts',
+              test: /\/node_modules\/(echarts|vue-echarts)\//
+            },
+            // 工具库
+            {
+              name: 'utils',
+              test: /\/node_modules\/(dayjs|axios|radash)\//
+            },
+            // 富文本编辑器
+            {
+              name: 'vendor',
+              test: /\/node_modules\/(tinymce|@tinymce)\//
+            },
+            // 其他第三方库
+            {
+              name: 'vendor',
+              test: /\/node_modules\//
+            }
+          ]
         }
       }
     }
