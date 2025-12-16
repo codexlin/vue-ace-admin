@@ -1,12 +1,13 @@
 {
   "extends": "@tsconfig/node24/tsconfig.json",
   "include": [
+    "vite/**/*.ts",
     "vite.config.*",
     "vitest.config.*",
     "cypress.config.*",
     "nightwatch.conf.*",
     "playwright.config.*",
-    "vite/**/*.ts"
+    "eslint.config.*"
   ],
   "compilerOptions": {
     "noEmit": true,

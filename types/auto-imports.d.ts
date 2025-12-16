@@ -76,6 +76,7 @@ declare global {
   const useLink: typeof import('vue-router').useLink
   const useLocalI18n: typeof import('../src/hooks/useLocalI18n').default
   const useModel: typeof import('vue').useModel
+  const usePagination: typeof import('../src/hooks/usePagination').usePagination
   const useRequest: typeof import('../src/hooks/useRequest').default
   const useRoute: typeof import('vue-router').useRoute
   const useRouter: typeof import('vue-router').useRouter
@@ -91,6 +92,9 @@ declare global {
   // @ts-ignore
   export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, ShallowRef, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
+  // @ts-ignore
+  export type { UsePaginationOptions, UsePaginationReturn } from '../src/hooks/usePagination'
+  import('../src/hooks/usePagination')
   // @ts-ignore
   export type { RequestOptions } from '../src/hooks/useRequest'
   import('../src/hooks/useRequest')
