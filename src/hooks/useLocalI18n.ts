@@ -29,9 +29,11 @@ export default function useLocalI18n(prefix?: string) {
     )
   }
 
-  function changeLanguage(lang: string) {
+  async function changeLanguage(lang: string) {
     const useAppConfig = useAppStore()
-    i18n.locale.value = lang
+    // 按需加载语言包
+    const { setI18nLanguage } = await import('@/locales')
+    await setI18nLanguage(lang)
     useAppConfig.appConfig.defaultLanguage = lang
   }
 

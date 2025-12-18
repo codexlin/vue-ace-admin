@@ -1,11 +1,5 @@
-/*
- * @Author: LinRenJie xoxosos666@gmail.com
- * @Date: 2023-10-30 20:49:23
- * @Description: 用户状态管理
- */
 import { useRouteStore } from './route'
 import { useTabsStore } from './tabs'
-
 import router from '@/router'
 import { loginApi } from '@/views/user/login/api'
 
@@ -46,7 +40,7 @@ export const useUserStore = defineStore('user', () => {
       token.value = res.data.token
       userInfo.value = res.data
 
-      // 重新获取最新路由配置（确保获取最新权限）
+      // 获取路由数据（实际添加由路由守卫处理）
       await useRouteStore().setRoutes()
 
       // 跳转到首页

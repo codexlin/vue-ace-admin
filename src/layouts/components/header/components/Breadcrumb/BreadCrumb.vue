@@ -38,12 +38,8 @@ watchEffect(() => (breadcrumbs.value = initBreadcrumb(router.currentRoute.value.
         <HomeFilled />
       </div>
     </a-breadcrumb-item>
-    <template v-if="breadcrumbs.length > 0">
-      <TransitionGroup name="slide-fadein-right">
-        <a-breadcrumb-item v-for="item in breadcrumbs" :key="item.path" href="">
-          <span class="breadcrumb-title">{{ tt(`${item.meta?.title}`) }}</span>
-        </a-breadcrumb-item>
-      </TransitionGroup>
-    </template>
+    <a-breadcrumb-item v-for="item in breadcrumbs" :key="item.path" href="">
+      <span class="breadcrumb-title">{{ tt(`${item.meta?.title}`) }}</span>
+    </a-breadcrumb-item>
   </a-breadcrumb>
 </template>

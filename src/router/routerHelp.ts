@@ -21,11 +21,11 @@ export const setPageTitleTxt = (meta: RouteLocationNormalized['meta']): void => 
 
 /**
  * 设置路由守卫
- * - 使用函数作用域的 flag 变量，确保每次应用初始化时状态独立
+ * - isFirstNavigation 变量，函数作用域标识，标记是否为首次导航（每次应用初始化时重置为 true）
  * - 处理登录状态验证、动态路由加载、页面刷新等场景
  */
 export function setupRouterHooks(): void {
-  let flag = true // 函数作用域标识，记录路由是否已添加（每次调用独立）
+  let isFirstNavigation = true // 标记是否为首次导航，用于判断是否需要添加动态路由
 
   router.beforeEach(async (to, from, next) => {
     Nprogress.start()
@@ -34,37 +34,46 @@ export function setupRouterHooks(): void {
     const userStore = useUserStore()
     const routes = routeStore.getRoutes
 
-    // 未登录处理
+    // 白名单优先处理：登录页、404页等直接放行，不再执行后续逻辑
+    const whiteList = ['/login', '/404', '/403']
+    if (whiteList.includes(to.path)) {
+      console.log(`📋 白名单页面，直接放行: ${to.path}`)
+      Nprogress.done()
+      return next()
+    }
+
+    // 未登录处理：跳转到登录页
     if (!userStore.getToken) {
-      // 白名单：登录页直接放行
-      if (to.path === '/login') {
-        Nprogress.done()
-        return next()
-      }
-      // 其他页面跳转到登录页
+      console.log(`🚫 未登录，跳转到登录页: ${to.path}`)
       Nprogress.done()
       return next('/login')
     }
 
-    // 已登录处理
+    // 已登录处理：只有在非白名单页面才处理路由逻辑
     try {
-      // 首次加载：路由已存储但未添加到路由实例
-      if (flag && routes.length > 0) {
-        await addRoutes(routes)
-        console.log('动态路由已添加:', routes)
-        flag = false
-        return next({ path: to.path })
-      }
+      console.log(
+        `🔍 路由守卫检查: isFirstNavigation=${isFirstNavigation}, routes.length=${routes.length}, path=${to.path}`
+      )
 
-      // 页面刷新：路由存储为空，需要重新加载
+      // 场景1：路由数据为空（页面刷新或直接访问URL）
       if (routes.length === 0) {
-        console.log('页面刷新，重新加载路由')
-        await routeStore.setRoutes()
+        console.log('📦 路由数据为空，重新加载...')
+        await routeStore.setRoutes() // 获取路由数据
+        await addRoutes(routeStore.getRoutes) // 添加到路由实例
+        isFirstNavigation = false
         return next({ path: to.path })
       }
 
-      // 正常导航
-      console.log('正常路由跳转:', to.path)
+      // 场景2：路由数据存在但未添加到路由实例（首次登录或刷新后的首次导航）
+      if (isFirstNavigation) {
+        console.log('🚀 首次导航，添加动态路由...')
+        await addRoutes(routes)
+        isFirstNavigation = false
+        return next({ path: to.path })
+      }
+
+      // 场景3：正常导航（路由已添加，isFirstNavigation=false）
+      console.log('✅ 正常路由跳转:', to.path)
       return next()
     } catch (error) {
       console.error('路由守卫错误:', error)
@@ -96,8 +105,15 @@ export async function addRoutes(menu: RouteRecordRaw[]): Promise<void> {
 
     // 只将叶子节点（页面）添加到路由中
     if (!children || children.length === 0) {
-      // 仅当 component 为字符串路径时拼接视图 key，避免对象被隐式字符串化
-      const viewKey = typeof component === 'string' ? `../views/${component as string}.vue` : null
+      // 检查路由是否已存在，避免重复添加
+      const existingRoute = router.hasRoute(name as string)
+      if (existingRoute) {
+        console.log(`⚠️  路由已存在，跳过: ${name}`)
+        continue
+      }
+
+      const cleanComponent = typeof component === 'string' ? component.replace(/^\//, '') : null
+      const viewKey = cleanComponent ? `../views/${cleanComponent}.vue` : null
       const viewImporter = viewKey ? loadView[viewKey] : undefined
       // 保证组件始终为可用的异步导入函数，避免 TS 选择需要 redirect 的重载
       const componentImporter = (viewImporter ?? loadView['../views/DefaultView.vue'])!
